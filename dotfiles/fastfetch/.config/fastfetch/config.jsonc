@@ -1,0 +1,79 @@
+{
+  "$schema": "https://github.com/fastfetch-cli/fastfetch/raw/dev/doc/json_schema.json",
+
+  // ==============================
+  // LOGO
+  // ==============================
+  "logo": {
+    "type": "auto",
+    "width": 20,
+    "height": 11,
+    "padding": {
+      "top": 1,
+      "left": 2,
+      "right": 4
+    }
+  },
+
+  // ==============================
+  // DISPLAY
+  // ==============================
+  "display": {
+    "separator": " 󰇘 ",
+    "color": {
+      "keys": "cyan",
+      "separator": "white"
+    }
+  },
+
+  // ==============================
+  // MODULES
+  // ==============================
+  "modules": [
+    {
+      "type": "custom",
+      "format": "\u001b[36m┌─────────────   SYSTEM ─────────────┐"
+    },
+
+    { "type": "os", "key": "󰌢 OS", "keyColor": "cyan" },
+    { "type": "kernel", "key": " Kernel", "keyColor": "cyan" },
+    { "type": "packages", "key": "󰏖 Packages", "keyColor": "cyan" },
+    { "type": "shell", "key": " Shell", "keyColor": "cyan" },
+    { "type": "terminal", "key": " Terminal", "keyColor": "cyan" },
+    { "type": "font", "key": " Font", "keyColor": "cyan" },
+
+    {
+      "type": "custom",
+      "format": "\u001b[90m├─────────────   HARDWARE ───────────┤"
+    },
+
+    { "type": "wm", "key": " WM", "keyColor": "green" },
+    { "type": "cpu", "key": " CPU", "keyColor": "green" },
+    { "type": "gpu", "key": "󰢮 GPU", "keyColor": "green" },
+    { "type": "memory", "key": "󰍛 Memory", "keyColor": "green" },
+    { "type": "disk", "key": " Disk", "keyColor": "green" },
+
+    {
+      "type": "custom",
+      "format": "\u001b[90m├───────────── 󰂄  STATUS ─────────────┤"
+    },
+
+    { "type": "uptime", "key": " Uptime", "keyColor": "yellow" },
+    { "type": "battery", "key": "󰁹 Battery", "keyColor": "yellow" },
+
+    {
+      "type": "custom",
+      "format": "\u001b[36m└──────────────────────────────────────┘"
+    },
+
+    // Espaço + paleta
+    "break",
+    {
+      "type": "colors",
+      "paddingLeft": 20,
+      "symbol": "circle",
+      "block": { "width": 8 }
+    }
+  ]
+}
+

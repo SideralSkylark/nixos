@@ -1,0 +1,228 @@
+/* ======================================================
+   Wofi CSS - Estilo Universal e Minimalista
+   Paleta Catppuccin Mocha
+   ====================================================== */
+
+@define-color base #1e1e2e;
+@define-color mantle #181825;
+@define-color crust #11111b;
+@define-color surface0 #313244;
+@define-color surface1 #45475a;
+@define-color surface2 #585b70;
+@define-color overlay0 #6c7086;
+@define-color overlay1 #7f849c;
+@define-color overlay2 #9399b2;
+@define-color subtext0 #a6adc8;
+@define-color subtext1 #bac2de;
+@define-color text #cdd6f4;
+@define-color lavender #b4befe;
+@define-color blue #89b4fa;
+@define-color sapphire #74c7ec;
+@define-color sky #89dceb;
+@define-color teal #94e2d5;
+@define-color green #a6e3a1;
+@define-color yellow #f9e2af;
+@define-color peach #fab387;
+@define-color maroon #eba0ac;
+@define-color red #f38ba8;
+@define-color mauve #cba6f7;
+@define-color pink #f5c2e7;
+@define-color flamingo #f2cdcd;
+@define-color rosewater #f5e0dc;
+
+/* ======================================================
+   BASE - Configurações globais
+   ====================================================== */
+* {
+    font-family: 'JetBrainsMono Nerd Font', monospace;
+    font-size: 13px;
+    font-weight: 500;
+    border: none;
+    outline: none;
+}
+
+/* ======================================================
+   JANELA PRINCIPAL
+   ====================================================== */
+window {
+    margin: 0px;
+    padding: 0px;
+    border-radius: 12px;
+    background-color: alpha(@base, 0.95);
+    border: 1px solid alpha(@surface1, 0.8);
+    box-shadow: 0 8px 32px alpha(@crust, 0.4);
+}
+
+/* ======================================================
+   CONTAINERS
+   ====================================================== */
+#outer-box {
+    margin: 0px;
+    padding: 12px;
+    border: none;
+    background-color: transparent;
+}
+
+#inner-box {
+    margin: 0px;
+    padding: 0px;
+    border: none;
+    background-color: transparent;
+}
+
+#scroll {
+    margin: 0px;
+    padding: 4px 8px;
+    border: none;
+    background-color: transparent;
+}
+
+/* ======================================================
+   INPUT/SEARCH BAR
+   ====================================================== */
+#input {
+    margin: 8px 12px 12px 12px;
+    padding: 12px 16px;
+    border-radius: 8px;
+    border: 1px solid alpha(@surface1, 0.6);
+    background-color: alpha(@mantle, 0.8);
+    color: @text;
+    font-size: 14px;
+    font-weight: 400;
+}
+
+#input:focus {
+    border-color: alpha(@lavender, 0.8);
+    background-color: @mantle;
+    box-shadow: 0 0 0 2px alpha(@lavender, 0.2);
+}
+
+/* Placeholder text */
+#input::placeholder {
+    color: @subtext0;
+    opacity: 0.8;
+}
+
+/* ======================================================
+   ENTRIES/ITEMS
+   ====================================================== */
+#entry {
+    margin: 2px 4px;
+    padding: 10px 12px;
+    border-radius: 6px;
+    border: 1px solid transparent;
+    background-color: transparent;
+    color: @text;
+}
+
+#entry:hover {
+    background-color: alpha(@surface0, 0.6);
+    border-color: alpha(@surface1, 0.4);
+}
+
+#entry:selected {
+    background-color: alpha(@lavender, 0.15);
+    border-color: alpha(@lavender, 0.4);
+    color: @text;
+}
+
+/* ======================================================
+   TEXTO DOS ENTRIES
+   ====================================================== */
+#text {
+    margin: 0px;
+    padding: 2px 4px;
+    border: none;
+    color: inherit;
+    font-weight: 500;
+}
+
+#entry:selected #text {
+    color: @lavender;
+    font-weight: 600;
+}
+
+#entry:hover #text {
+    color: @text;
+}
+
+/* ======================================================
+   ÍCONES E IMAGENS
+   ====================================================== */
+#img {
+    margin-right: 8px;
+    padding: 0px;
+    border: none;
+    border-radius: 4px;
+    background-color: transparent;
+}
+
+#entry image {
+    color: @blue;
+    margin-right: 8px;
+}
+
+#entry:selected image {
+    color: @lavender;
+}
+
+#entry:hover image {
+    color: @sapphire;
+}
+
+/* ======================================================
+   SCROLLBAR
+   ====================================================== */
+scrollbar {
+    min-width: 6px; /* corrigido */
+    background-color: transparent;
+}
+
+scrollbar thumb {
+    background-color: alpha(@surface1, 0.6);
+    border-radius: 3px;
+}
+
+scrollbar thumb:hover {
+    background-color: alpha(@surface2, 0.8);
+}
+
+scrollbar track {
+    background-color: transparent;
+}
+
+/* ======================================================
+   ESTADOS ESPECIAIS
+   ====================================================== */
+#entry.critical {
+    border-color: alpha(@red, 0.6);
+    background-color: alpha(@red, 0.1);
+}
+
+#entry.warning {
+    border-color: alpha(@yellow, 0.6);
+    background-color: alpha(@yellow, 0.1);
+}
+
+#entry.success {
+    border-color: alpha(@green, 0.6);
+    background-color: alpha(@green, 0.1);
+}
+
+/* ======================================================
+   CLASSES UTILITÁRIAS
+   ====================================================== */
+.important {
+    font-weight: 600;
+    color: @mauve;
+}
+
+.secondary {
+    color: @subtext1;
+    font-size: 12px;
+}
+
+.separator {
+    border-bottom: 1px solid alpha(@surface1, 0.3);
+    margin: 4px 0px;
+}

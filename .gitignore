@@ -1,0 +1,9 @@
+# Build artifacts
+result
+*.swp
+*.bak
+.cache/
+
+# Ignore wallpaper gallery
+dotfiles/Wallpapers/
+
