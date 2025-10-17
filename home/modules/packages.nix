@@ -17,7 +17,5 @@
         postman
         obsidian
         anki
-        jdk21_headless
-        nodejs_22
     ];
 }
