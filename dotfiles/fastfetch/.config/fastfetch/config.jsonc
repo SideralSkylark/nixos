@@ -70,7 +70,7 @@
     "break",
     {
       "type": "colors",
-      "paddingLeft": 20,
+      "paddingLeft": 13,
       "symbol": "circle",
       "block": { "width": 8 }
     }

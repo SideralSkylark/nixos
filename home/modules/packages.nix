@@ -14,7 +14,7 @@
         stow
         vscode
         lazydocker
-        postman
+        posting
         obsidian
         anki
     ];

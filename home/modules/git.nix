@@ -5,6 +5,6 @@
     enable = true;
 
     userName = "Skylark";
-    userEmail = "sidikebrahimserage@gmail.com";
+    userEmail = "152505167+SideralSkylark@users.noreply.github.com";
   };
 }
