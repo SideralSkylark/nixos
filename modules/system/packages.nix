@@ -2,8 +2,7 @@
 
 {
   environment.systemPackages = with pkgs; [
-    # Essenciais
-    neovim
+    neovim 
     git
     man-pages
     docker
@@ -56,7 +55,13 @@
     gtk3
     jdk21_headless
     nodejs_22
-    gcc
+    gcc # C compiler
+		ripgrep
+    fd
+    fzf
+    python3
+    jdt-language-server
+    lua-language-server
 
     (pkgs.writeShellScriptBin "java-stable" ''
       export JAVA_HOME=${pkgs.jdk21_headless}
