@@ -11,7 +11,7 @@
 
  users.users.skylark = {
   isNormalUser = true;
-  extraGroups = ["wheel" "audio" "video" "docker" ];
+  extraGroups = ["wheel" "audio" "video" "docker" "lpadmin"];
  };
 }
 
