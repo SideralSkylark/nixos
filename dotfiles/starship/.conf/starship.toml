@@ -1,12 +1,12 @@
 "$schema" = 'https://starship.rs/config-schema.json'
 
 format = """
-[](bg:surface0 fg:text)\
+[](bg:mantle fg:text)\
 $os\
 $username\
-[](bg:peach fg:mantle)\
+[](bg:accent1 fg:mantle)\
 $directory\
-[](fg:peach bg:green)\
+[](fg:accent1 bg:green)\
 $git_branch\
 $git_status\
 [](fg:green bg:teal)\
@@ -16,42 +16,42 @@ $golang\
 $python\
 [](fg:teal bg:blue)\
 $docker_context\
-[](fg:blue bg:rosewater)\
+[](fg:blue bg:accent2)\
 $time\
-[](fg:rosewater)\
+[](fg:accent2)\
 $line_break$character
 """
 
-palette = 'catppuccin_mocha'
+palette = 'kanagawa'
 
-[palettes.catppuccin_mocha]
-rosewater = "#f5e0dc"
-flamingo  = "#f2cdcd"
-pink      = "#f5c2e7"
-orange    = "#fab387"
-red       = "#f38ba8"
-peach     = "#fab387"
-green     = "#a6e3a1"
-teal      = "#94e2d5"
-blue      = "#89b4fa"
-purple    = "#b4befe"
-text      = "#cdd6f4"
-surface0  = "#313244"
-mantle    = "#0f1419"   # <- ajustado ao teu kitty
+[palettes.kanagawa]
+# Paleta ajustada ao fundo #0F1419
+text      = "#DCD7BA"
+mantle    = "#0F1419"
+surface0  = "#1F1F28"
+
+accent1   = "#DCA561" # dourado quente
+accent2   = "#7E9CD8" # azul Kanagawa
+red       = "#C34043"
+green     = "#98BB6C"
+teal      = "#7AA89F"
+blue      = "#7FB4CA"
+purple    = "#938AA9"
+orange    = "#E6C384"
 
 [os]
 disabled = false
-style = "bg:surface0 fg:text"
+style = "bg:mantle fg:text"
 format = "[$symbol ]($style)"
 
 [username]
 show_always = true
-style_user = "bg:surface0 fg:text"
-style_root = "bg:surface0 fg:red"
+style_user = "bg:mantle fg:text"
+style_root = "bg:mantle fg:red"
 format = '[ $user ]($style)'
 
 [directory]
-style = "fg:mantle bg:peach"
+style = "fg:mantle bg:accent1"
 format = "[ $path ]($style)"
 truncation_length = 3
 truncation_symbol = "…/"
@@ -93,8 +93,8 @@ only_with_files = true
 
 [time]
 time_format = "%R"
-style = "bg:rosewater"
-format = '[[  $time ](fg:mantle bg:rosewater)]($style)'
+style = "bg:accent2"
+format = '[[  $time ](fg:mantle bg:accent2)]($style)'
 
 [line_break]
 disabled = true

@@ -1,12 +1,12 @@
 {
   "$schema": "https://github.com/fastfetch-cli/fastfetch/raw/dev/doc/json_schema.json",
 
-  // ==============================
+  // ==========================================
   // LOGO
-  // ==============================
+  // ==========================================
   "logo": {
     "type": "auto",
-    "width": 20,
+    "width": 22,
     "height": 11,
     "padding": {
       "top": 1,
@@ -15,9 +15,9 @@
     }
   },
 
-  // ==============================
+  // ==========================================
   // DISPLAY
-  // ==============================
+  // ==========================================
   "display": {
     "separator": " 󰇘 ",
     "color": {
@@ -26,52 +26,55 @@
     }
   },
 
-  // ==============================
+  // ==========================================
   // MODULES
-  // ==============================
+  // ==========================================
   "modules": [
+    // ─────── HEADER
     {
       "type": "custom",
-      "format": "\u001b[36m┌─────────────   SYSTEM ─────────────┐"
+      "format": "\u001b[38;5;110m┌─────────────   SYSTEM ─────────────┐"
     },
 
-    { "type": "os", "key": "󰌢 OS", "keyColor": "cyan" },
-    { "type": "kernel", "key": " Kernel", "keyColor": "cyan" },
-    { "type": "packages", "key": "󰏖 Packages", "keyColor": "cyan" },
-    { "type": "shell", "key": " Shell", "keyColor": "cyan" },
-    { "type": "terminal", "key": " Terminal", "keyColor": "cyan" },
-    { "type": "font", "key": " Font", "keyColor": "cyan" },
+    { "type": "os", "key": "󰌢 OS", "keyColor": "38;5;110" },
+    { "type": "kernel", "key": " Kernel", "keyColor": "38;5;110" },
+    { "type": "packages", "key": "󰏖 Packages", "keyColor": "38;5;110" },
+    { "type": "shell", "key": " Shell", "keyColor": "38;5;110" },
+    { "type": "terminal", "key": " Terminal", "keyColor": "38;5;110" },
+    { "type": "font", "key": " Font", "keyColor": "38;5;110" },
 
+    // ─────── HARDWARE
     {
       "type": "custom",
-      "format": "\u001b[90m├─────────────   HARDWARE ───────────┤"
+      "format": "\u001b[38;5;108m├─────────────   HARDWARE ───────────┤"
     },
 
-    { "type": "wm", "key": " WM", "keyColor": "green" },
-    { "type": "cpu", "key": " CPU", "keyColor": "green" },
-    { "type": "gpu", "key": "󰢮 GPU", "keyColor": "green" },
-    { "type": "memory", "key": "󰍛 Memory", "keyColor": "green" },
-    { "type": "disk", "key": " Disk", "keyColor": "green" },
+    { "type": "wm", "key": " WM", "keyColor": "38;5;108" },
+    { "type": "cpu", "key": " CPU", "keyColor": "38;5;108" },
+    { "type": "gpu", "key": "󰢮 GPU", "keyColor": "38;5;108" },
+    { "type": "memory", "key": "󰍛 Memory", "keyColor": "38;5;108" },
+    { "type": "disk", "key": " Disk", "keyColor": "38;5;108" },
 
+    // ─────── STATUS
     {
       "type": "custom",
-      "format": "\u001b[90m├───────────── 󰂄  STATUS ─────────────┤"
+      "format": "\u001b[38;5;180m├───────────── 󰂄  STATUS ─────────────┤"
     },
 
-    { "type": "uptime", "key": " Uptime", "keyColor": "yellow" },
-    { "type": "battery", "key": "󰁹 Battery", "keyColor": "yellow" },
+    { "type": "uptime", "key": " Uptime", "keyColor": "38;5;180" },
+    { "type": "battery", "key": "󰁹 Battery", "keyColor": "38;5;180" },
 
+    // ─────── FOOTER
     {
       "type": "custom",
-      "format": "\u001b[36m└──────────────────────────────────────┘"
+      "format": "\u001b[38;5;110m└──────────────────────────────────────┘"
     },
 
-    // Espaço + paleta
+    // ─────── PALETA
     "break",
     {
       "type": "colors",
-      "paddingLeft": 13,
-      "symbol": "circle",
+      "symbol": "●",
       "block": { "width": 8 }
     }
   ]

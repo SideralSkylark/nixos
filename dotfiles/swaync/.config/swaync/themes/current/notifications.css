@@ -1,14 +1,14 @@
-/* SwayNC - Notificações Minimalistas */
+/* SwayNC - Notificações Kanagawa */
 
-@define-color text            @foreground;
-@define-color background-alt  @color1;
-@define-color selected        @color3;
-@define-color hover           @color5;
-@define-color urgent          @color2;
+@define-color text            #DCD7BA;
+@define-color background-alt  #2A2A37;
+@define-color selected        #7AA89F;
+@define-color hover           #E6C384;
+@define-color urgent          #C4746E;
 
 * {
-  color: @text;
   all: unset;
+  color: @text;
   font-size: 13px;
   font-family: "JetBrains Mono Nerd Font", "Roboto", sans-serif;
   transition: 150ms ease;
@@ -16,51 +16,56 @@
 
 /* Notification Row */
 .notification-row {
-  outline: none;
   margin: 0;
   padding: 0px;
 }
 
-.floating-notifications.background .notification-row .notification-background:hover {
-    border: 1px solid rgba(255, 255, 255, 0.12);
-    box-shadow: 0 6px 24px rgba(0, 0, 0, 0.4);
-}
-
-.floating-notifications.background .notification-row .notification-background .notification {
-  padding: 4px;
+.floating-notifications.background .notification-row .notification-background {
+  background: rgba(31, 31, 40, 0.92);
   border-radius: 12px;
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  box-shadow: 0px 3px 8px rgba(0, 0, 0, 0.3);
+  transition: all 0.2s ease;
+}
+
+.floating-notifications.background .notification-row .notification-background:hover {
+  border: 1px solid @hover;
+  box-shadow: 0 6px 24px rgba(0, 0, 0, 0.45);
+}
+
+/* Conteúdo */
+.notification {
   background: transparent;
+  padding: 6px;
+  border-radius: 10px;
 }
 
-/* Notificação Crítica */
-.floating-notifications.background .notification-row .notification-background .notification.critical {
-  border: none;
-  background: rgba(255, 99, 99, 0.08);
+.notification.critical {
+  background: rgba(196, 116, 110, 0.1);
+  border-left: 3px solid @urgent;
 }
 
-.floating-notifications.background .notification-row .notification-background .notification.critical::before {
-  content: "";
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 3px;
-  height: 100%;
-  background: #ff6363;
-  border-radius: 12px 0 0 12px;
+.summary {
+  font-weight: 600;
+  font-size: 13px;
+  color: @text;
+  margin-bottom: 4px;
 }
 
-/* Content da Notificação */
-.floating-notifications.background .notification-row .notification-background .notification .notification-content {
-  margin: 16px;
-  padding: 0;
+.body {
+  font-size: 12px;
+  color: #A6A69C;
+  line-height: 1.4;
+  opacity: 0.95;
 }
 
-.floating-notifications.background .notification-row .notification-background .notification > *:last-child > * {
-  min-height: 3.2em;
+.time {
+  font-size: 10px;
+  color: #7E7E7E;
 }
 
-/* Botões de Ação */
-.floating-notifications.background .notification-row .notification-background .notification > *:last-child > * .notification-action {
+/* Botões de ação */
+.notification-action {
   border-radius: 8px;
   background-color: rgba(255, 255, 255, 0.04);
   margin: 4px;
@@ -68,117 +73,42 @@
   padding: 8px 12px;
   font-size: 11px;
   font-weight: 500;
+  color: @text;
 }
 
-.floating-notifications.background .notification-row .notification-background .notification > *:last-child > * .notification-action:hover {
-  background-color: rgba(255, 255, 255, 0.1);
-  border: 1px solid rgba(255, 255, 255, 0.15);
-  transform: translateY(-1px);
+.notification-action:hover {
+  background-color: rgba(230, 195, 132, 0.15);
+  border-color: @hover;
 }
 
-.floating-notifications.background .notification-row .notification-background .notification > *:last-child > * .notification-action:active {
-  background-color: rgba(255, 255, 255, 0.15);
-  transform: translateY(0px);
-}
-
-/* Imagem da Notificação */
-.image {
-  margin: 12px 16px 12px 0px;
-  border-radius: 8px;
-  opacity: 0.9;
-}
-
-/* Texto da Notificação */
-.summary {
-  font-weight: 600;
-  font-size: 13px;
-  color: #ffffff;
-  margin-bottom: 4px;
-  line-height: 1.3;
-}
-
-.body {
-  font-size: 12px;
-  font-weight: 400;
-  color: #b8b8b8;
-  line-height: 1.4;
-  opacity: 0.9;
-}
-
-.time {
-  font-size: 10px;
-  color: #808080;
-  opacity: 0.7;
-  font-weight: 400;
-}
-
-/* Botão de Fechar - Minimalista */
-.floating-notifications.background .notification-row .notification-background .close-button {
+/* Botão fechar */
+.close-button {
   margin: 8px;
   padding: 6px;
   border-radius: 6px;
   background-color: rgba(255, 255, 255, 0.05);
-  border: none;
-  min-width: 20px;
-  min-height: 20px;
-  color: #a0a0a0;
+  color: #A6A69C;
 }
 
-.floating-notifications.background .notification-row .notification-background .close-button:hover {
-  background-color: rgba(255, 99, 99, 0.2);
-  color: #ffffff;
-  transform: scale(1.05);
+.close-button:hover {
+  background-color: rgba(196, 116, 110, 0.25);
+  color: #FFF;
 }
 
-.floating-notifications.background .notification-row .notification-background .close-button:active {
-  background-color: rgba(255, 99, 99, 0.3);
-  transform: scale(0.95);
-}
-
-/* Progress Bar para diferentes urgências */
-.notification.critical progress {
-  background-color: #ff6363;
+/* Progress */
+.notification progress {
+  background: @selected;
   border-radius: 2px;
   min-height: 2px;
 }
 
 .notification.low progress,
 .notification.normal progress {
-  background-color: #4a9eff;
-  border-radius: 2px;
-  min-height: 2px;
+  background-color: @hover;
 }
 
-/* Notification Window */
-.notification-window {
-  color: #e2e2e3;
-  background: transparent;
-  border-radius: 0px;
-  border: none;
-}
-
-/* Urgency Indicators - Sutil */
-.low {
-  border-left: 2px solid rgba(74, 158, 255, 0.5);
-}
-
-.normal {
-  /* Sem indicador visual extra para normal */
-}
-
-.critical {
-  border-left: 2px solid rgba(255, 99, 99, 0.8);
-  animation: subtle-pulse 2s infinite;
-}
-
-/* Animação sutil para críticas */
-@keyframes subtle-pulse {
-  0%, 100% { opacity: 1; }
-  50% { opacity: 0.95; }
-}
-
-/* Animação de entrada suave */
-@keyframes slide-in-minimal {
+/* Animações */
+@keyframes slide-in-kanagawa {
   from {
     opacity: 0;
     transform: translateX(20px) scale(0.98);
@@ -190,19 +120,6 @@
 }
 
 .notification {
-  animation: slide-in-minimal 0.2s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  animation: slide-in-kanagawa 0.25s ease;
 }
 
-/* Hover states minimalistas */
-.floating-notifications.background .notification-row .notification-background:hover {
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  box-shadow: 0 6px 25px rgba(0,0,0,0.4);
-}
-
-/* Remover elementos desnecessários no modo minimalista */
-.notification-default-action {
-  background: transparent;
-  border: none;
-  margin: 0;
-  padding: 0;
-}
