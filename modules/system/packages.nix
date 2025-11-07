@@ -56,7 +56,7 @@
     jdk21_headless
     nodejs_22
     gcc # C compiler
-		ripgrep
+	ripgrep
     fd
     fzf
     python3

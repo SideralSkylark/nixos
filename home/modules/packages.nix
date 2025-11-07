@@ -13,6 +13,7 @@
         hydralauncher
         stow
         vscode
+		zed-editor
         lazydocker
         posting
         obsidian
