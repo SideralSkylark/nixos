@@ -13,9 +13,14 @@
       url = "github:nix-community/stylix/release-25.05";
       inputs.nixpkgs.follows = "nixpkgs";
   };
+
+  nixvim = {
+      url = "github:nix-community/nixvim";
+      inputs.nixpkgs.follows = "nixpkgs";
+  };
  };
 
- outputs = { self, nixpkgs, home-manager, ... }@inputs: {
+ outputs = { self, nixpkgs, home-manager, nixvim, ... }@inputs: {
   nixosConfigurations.nixos = nixpkgs.lib.nixosSystem {
    system = "x86_64-linux";
 
@@ -28,6 +33,7 @@
       useUserPackages = true;
       users.skylark = import ./home/skylark.nix;
       backupFileExtension = "backup";
+	  extraSpecialArgs = { inherit nixvim; };
      };
     }
    ];
