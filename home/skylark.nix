@@ -1,4 +1,4 @@
-{ config, pkgs, ... }:
+{ config, pkgs, nixvim, ... }:
 
 {
   home.username = "skylark";
@@ -7,7 +7,14 @@
 
   imports = [
     ./modules    # any home-manager modules you define later
+    nixvim.homeManagerModules.nixvim
   ];
+
+  programs.nixvim = {
+    enable = true;
+    imports = [ ./modules/nixvim.nix ];
+  };
+
 
   xdg.configFile = {
     # Hyprland
