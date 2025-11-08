@@ -2,6 +2,124 @@
 {
   config = {
     plugins.lsp.enable = true;
+	
+	# === LSP SERVERS ===
+    plugins.lsp.servers = {
+      # Lua (para editar Neovim configs e Lua em geral)
+      lua_ls = {
+        enable = true;
+        package = pkgs.lua-language-server;
+        settings = {
+          Lua = {
+            runtime = { version = "LuaJIT"; };
+            diagnostics = { globals = [ "vim" ]; };
+            workspace = { checkThirdParty = false; };
+            telemetry = { enable = false; };
+          };
+        };
+      };
+
+      # TypeScript / JavaScript
+      ts_ls = {
+        enable = true;
+        package = pkgs.typescript-language-server;
+        filetypes = [ "typescript" "typescriptreact" "javascript" "javascriptreact" "vue" ];
+        rootMarkers = [ "package.json" "tsconfig.json" "jsconfig.json" ".git" ];
+      };
+
+      # Vue (Volar)
+      volar = {
+        enable = true;
+        package = pkgs.vue-language-server;
+        filetypes = [ "vue" ];
+        settings = {
+          typescript = { tsdk = "node_modules/typescript/lib"; };
+        };
+      };
+
+      # Python
+      pyright = {
+        enable = true;
+        package = pkgs.pyright;
+      };
+
+      # C/C++
+      clangd = {
+        enable = true;
+        package = pkgs.clang-tools;
+      };
+
+      # Java
+      jdtls = {
+        enable = true;
+        package = pkgs.jdt-language-server;
+      };
+
+      # Nix
+      nil_ls = {
+        enable = true;
+        package = pkgs.nil;
+      };
+
+      # Rust
+      rust_analyzer = {
+        enable = true;
+        package = pkgs.rust-analyzer;
+      };
+    };
+
+    # === LSP KEYMAPS ===
+    # CORRIGIDO: keymaps agora usa atributos ao invés de lista
+    plugins.lsp.keymaps = {
+      diagnostic = {
+        "[d" = {
+          action = "goto_prev";
+          desc = "Prev diagnostic";
+        };
+        "]d" = {
+          action = "goto_next";
+          desc = "Next diagnostic";
+        };
+      };
+      lspBuf = {
+        "gd" = {
+          action = "definition";
+          desc = "Go to definition";
+        };
+        "gD" = {
+          action = "references";
+          desc = "Show references";
+        };
+        "gi" = {
+          action = "implementation";
+          desc = "Go to implementation";
+        };
+        "gt" = {
+          action = "type_definition";
+          desc = "Type definition";
+        };
+        "K" = {
+          action = "hover";
+          desc = "Hover docs";
+        };
+        "<leader>rn" = {
+          action = "rename";
+          desc = "Rename symbol";
+        };
+        "<leader>ca" = {
+          action = "code_action";
+          desc = "Code actions";
+        };
+      };
+    };
+
+    plugins.lsp.onAttach = ''
+      -- LSP on_attach hook
+      vim.api.nvim_buf_set_option(bufnr, "omnifunc", "v:lua.vim.lsp.omnifunc")
+      local opts = { noremap = true, silent = true, buffer = bufnr }
+      vim.keymap.set("n", "<leader>f", function() vim.lsp.buf.format({ async = true }) end, opts)
+    '';
+
     extraPlugins = with pkgs.vimPlugins; [
       kanagawa-nvim
       neo-tree-nvim
@@ -15,12 +133,10 @@
     ];
     # === Kanagawa Colorscheme ===
     colorschemes.kanagawa.enable = true;
-    colorschemes.kanagawa.autoLoad = true;
     colorschemes.kanagawa.settings = {
       theme = "wave";                                
       background = { dark = "wave"; light = "lotus"; };
       transparent = false;                          
-      #colors = { theme = { all = { ui = {  }; }; }; };
       commentStyle = { italic = true; };
       keywordStyle = { italic = true; };
       statementStyle = { bold = true; };
@@ -51,10 +167,20 @@
 
       # Save all buffers
       { mode = "n"; key = "<leader>w"; action = ":wa<CR>"; options = { desc = "Save all buffers"; silent = true; }; }
+      
+      # LSP management keymaps
+      { mode = "n"; key = "<leader>ls"; action = "<CMD>LspStart<CR>"; options = { desc = "Start LSP"; silent = true; }; }
+      { mode = "n"; key = "<leader>lr"; action = "<CMD>LspRestart<CR>"; options = { desc = "Restart LSP"; silent = true; }; }
+      { mode = "n"; key = "<leader>lx"; action = "<CMD>LspStop<CR>"; options = { desc = "Stop LSP"; silent = true; }; }
+      {
+        mode = "n";
+        key = "<leader>fd";
+        action = lib.nixvim.mkRaw "require('telescope.builtin').lsp_definitions";
+        options = { desc = "Find definitions (Telescope)"; silent = true; };
+      }
     ];
 
 	plugins.lualine.enable = true;
-    plugins.lualine.autoLoad = true;
     plugins.lualine.settings = {
       options = {
         section_separators = "";
@@ -86,7 +212,7 @@
               end
             '';
             color = { fg = "#ffffff"; };
-            icon = "";
+            icon = "";
           }
           "encoding"
           "fileformat"
@@ -108,7 +234,6 @@
 	# === Treesitter ===
     plugins.treesitter = {
       enable = true;
-      autoLoad = true;
       nixGrammars = true;
       nixvimInjections = true;
       settings = {
@@ -133,7 +258,7 @@
     extraConfigLua = ''
       -- Neo-tree setup
       require("neo-tree").setup({
-        nlose_if_last_window = true,
+        close_if_last_window = true,
         popup_border_style = "rounded",
         enable_git_status = true,
         enable_diagnostics = true,
@@ -187,7 +312,7 @@
       local actions = require("telescope.actions")
       telescope.setup{
         defaults = {
-          prompt_prefix = " ",
+          prompt_prefix = " ",
           selection_caret = "➤ ",
           sorting_strategy = "ascending",
           layout_strategy = "flex",
