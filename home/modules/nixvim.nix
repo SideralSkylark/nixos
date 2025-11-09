@@ -49,10 +49,80 @@
         package = pkgs.clang-tools;
       };
 
-      # Java
+	  # Java
       jdtls = {
         enable = true;
         package = pkgs.jdt-language-server;
+        extraOptions = {
+          cmd = lib.nixvim.mkRaw ''
+            (function()
+              local workspace_dir = vim.fn.stdpath("cache") .. "/jdtls-workspace/" .. vim.fn.fnamemodify(vim.fn.getcwd(), ":p:h:t")
+              vim.fn.mkdir(workspace_dir, "p")
+              
+              -- Função para encontrar JARs
+              local function find_jar(artifact_id, group_path)
+                local possible_paths = {
+                  vim.fn.expand("~/.m2/repository/" .. (group_path or "")),
+                  vim.fn.expand("~/.gradle/caches/modules-2/files-2.1/" .. (group_path or "")),
+                  "/usr/share/java",
+                  "/run/current-system/sw/share/java",
+                }
+                for _, base_path in ipairs(possible_paths) do
+                  if vim.fn.isdirectory(base_path) == 1 then
+                    local pattern = string.format("**/%s*.jar", artifact_id)
+                    local jars = vim.fn.globpath(base_path, pattern, true, true)
+                    if #jars > 0 then
+                      table.sort(jars)
+                      return jars[#jars]
+                    end
+                  end
+                end
+                return nil
+              end
+              
+              local lombok_jar = find_jar("lombok", "org/projectlombok/lombok")
+              local cmd = { "jdtls", "-data", workspace_dir }
+              
+              if lombok_jar then
+                table.insert(cmd, "--jvm-arg=-javaagent:" .. lombok_jar)
+              end
+              
+              return cmd
+            end)()
+          '';
+        };
+        settings = {
+          java = {
+            eclipse.downloadSources = true;
+            configuration.updateBuildConfiguration = "interactive";
+            maven.downloadSources = true;
+            implementationsCodeLens.enabled = true;
+            referencesCodeLens.enabled = true;
+            references.includeDecompiledSources = true;
+            format.enabled = true;
+            signatureHelp.enabled = true;
+            completion = {
+              favoriteStaticMembers = [
+                "org.hamcrest.MatcherAssert.assertThat"
+                "org.hamcrest.Matchers.*"
+                "org.hamcrest.CoreMatchers.*"
+                "org.junit.jupiter.api.Assertions.*"
+                "java.util.Objects.requireNonNull"
+                "java.util.Objects.requireNonNullElse"
+                "org.mockito.Mockito.*"
+              ];
+              importOrder = [ "java" "javax" "com" "org" ];
+            };
+            sources.organizeImports = {
+              starThreshold = 9999;
+              staticStarThreshold = 9999;
+            };
+            codeGeneration = {
+              toString.template = "\${object.className}{\${member.name()}=\${member.value}, \${otherMembers}}";
+              useBlocks = true;
+            };
+          };
+        };
       };
 
       # Nix
@@ -79,6 +149,10 @@
         "]d" = {
           action = "goto_next";
           desc = "Next diagnostic";
+        };
+		"gl" = {
+          action = "open_float";
+          desc = "Show line diagnostics";
         };
       };
       lspBuf = {
@@ -110,15 +184,44 @@
           action = "code_action";
           desc = "Code actions";
         };
+		"<leader>f" = {
+          action = "format";
+          desc = "Format buffer";
+        };
       };
     };
 
-    plugins.lsp.onAttach = ''
-      -- LSP on_attach hook
-      vim.api.nvim_buf_set_option(bufnr, "omnifunc", "v:lua.vim.lsp.omnifunc")
-      local opts = { noremap = true, silent = true, buffer = bufnr }
-      vim.keymap.set("n", "<leader>f", function() vim.lsp.buf.format({ async = true }) end, opts)
-    '';
+	# === AUTOCOMPLETION ===
+    plugins.cmp = {
+      enable = true;
+      settings = {
+        snippet.expand = "function(args) require('luasnip').lsp_expand(args.body) end";
+        mapping = {
+          "<C-n>" = "cmp.mapping.select_next_item()";
+          "<C-p>" = "cmp.mapping.select_prev_item()";
+          "<C-d>" = "cmp.mapping.scroll_docs(-4)";
+          "<C-f>" = "cmp.mapping.scroll_docs(4)";
+          "<C-Space>" = "cmp.mapping.complete()";
+          "<C-e>" = "cmp.mapping.abort()";
+          "<CR>" = "cmp.mapping.confirm({ select = true })";
+          "<Tab>" = "cmp.mapping(function(fallback) if cmp.visible() then cmp.select_next_item() elseif require('luasnip').expand_or_jumpable() then require('luasnip').expand_or_jump() else fallback() end end, {'i', 's'})";
+          "<S-Tab>" = "cmp.mapping(function(fallback) if cmp.visible() then cmp.select_prev_item() elseif require('luasnip').jumpable(-1) then require('luasnip').jump(-1) else fallback() end end, {'i', 's'})";
+        };
+        sources = [
+          { name = "nvim_lsp"; }
+          { name = "luasnip"; }
+          { name = "path"; }
+          { name = "buffer"; }
+        ];
+      };
+    };
+
+    plugins.cmp-nvim-lsp.enable = true;
+    plugins.cmp-buffer.enable = true;
+    plugins.cmp-path.enable = true;
+    plugins.luasnip.enable = true;
+    plugins.cmp_luasnip.enable = true;
+    plugins.friendly-snippets.enable = true;
 
     extraPlugins = with pkgs.vimPlugins; [
       kanagawa-nvim
@@ -172,7 +275,11 @@
       { mode = "n"; key = "<leader>ls"; action = "<CMD>LspStart<CR>"; options = { desc = "Start LSP"; silent = true; }; }
       { mode = "n"; key = "<leader>lr"; action = "<CMD>LspRestart<CR>"; options = { desc = "Restart LSP"; silent = true; }; }
       { mode = "n"; key = "<leader>lx"; action = "<CMD>LspStop<CR>"; options = { desc = "Stop LSP"; silent = true; }; }
-      {
+      
+	  # Diagnostics
+      { mode = "n"; key = "<leader>xx"; action = "<CMD>Telescope diagnostics<CR>"; options = { desc = "Show all diagnostics"; silent = true; }; }
+      { mode = "n"; key = "<leader>xb"; action = "<CMD>Telescope diagnostics bufnr=0<CR>"; options = { desc = "Buffer diagnostics"; silent = true; }; } 
+	  {
         mode = "n";
         key = "<leader>fd";
         action = lib.nixvim.mkRaw "require('telescope.builtin').lsp_definitions";
@@ -200,7 +307,7 @@
               function()
                 local msg = ""
                 local buf_ft = vim.api.nvim_buf_get_option(0, 'filetype')
-                local clients = vim.lsp.get_active_clients()
+                local clients = vim.lsp.get_clients()
                 if next(clients) == nil then return msg end
                 for _, client in ipairs(clients) do
                   local filetypes = client.config.filetypes
@@ -215,7 +322,6 @@
             icon = "";
           }
           "encoding"
-          "fileformat"
           "filetype"
         ];
         lualine_y = [ "progress" ];
@@ -256,6 +362,30 @@
     };
 
     extraConfigLua = ''
+	  -- Configurar diagnósticos
+      vim.diagnostic.config({
+        virtual_text = {
+          prefix = '●',
+          spacing = 4,
+        },
+        signs = true,
+        underline = true,
+        update_in_insert = false,
+        severity_sort = true,
+        float = {
+          border = 'rounded',
+          source = 'always',
+        },
+      })
+
+      -- Símbolos de diagnóstico
+      local signs = { Error = " ", Warn = " ", Hint = " ", Info = " " }
+      for type, icon in pairs(signs) do
+        local hl = "DiagnosticSign" .. type
+        vim.fn.sign_define(hl, { text = icon, texthl = hl, numhl = hl })
+      end
+	
+	
       -- Neo-tree setup
       require("neo-tree").setup({
         close_if_last_window = true,
@@ -298,14 +428,25 @@
           },
         },
       })
-      -- Highlight on yank
+
+	  -- LuaSnip setup
+      require("luasnip.loaders.from_vscode").lazy_load()
+      
+	  -- Highlight on yank
       vim.api.nvim_create_autocmd('TextYankPost', {
         desc = 'Highlight when yanking text',
         group = vim.api.nvim_create_augroup('highlight-yank', { clear = true }),
         callback = function() vim.hl.on_yank() end,
       })
+
 	  -- Nvim-autopairs setup
       require("nvim-autopairs").setup()
+
+	  -- Integrar autopairs com cmp
+      local cmp_autopairs = require('nvim-autopairs.completion.cmp')
+      local cmp = require('cmp')
+      cmp.event:on('confirm_done', cmp_autopairs.on_confirm_done())
+
 	  -- Telescope setup
       local telescope = require("telescope")
       local builtin = require("telescope.builtin")
