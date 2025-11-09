@@ -139,7 +139,6 @@
     };
 
     # === LSP KEYMAPS ===
-    # CORRIGIDO: keymaps agora usa atributos ao invés de lista
     plugins.lsp.keymaps = {
       diagnostic = {
         "[d" = {
@@ -195,6 +194,15 @@
     plugins.cmp = {
       enable = true;
       settings = {
+		window = {
+			completion = {
+				border = "rounded";
+				winhighlight = "Normal:Normal,FloatBorder:FloatBorder,CursorLine:Visual,Search:None";
+			};
+			documentation = {
+				border = "rounded";
+			};
+		};
         snippet.expand = "function(args) require('luasnip').lsp_expand(args.body) end";
         mapping = {
           "<C-n>" = "cmp.mapping.select_next_item()";
@@ -239,7 +247,7 @@
     colorschemes.kanagawa.settings = {
       theme = "wave";                                
       background = { dark = "wave"; light = "lotus"; };
-      transparent = false;                          
+      transparent = true;                          
       commentStyle = { italic = true; };
       keywordStyle = { italic = true; };
       statementStyle = { bold = true; };
@@ -285,6 +293,9 @@
         action = lib.nixvim.mkRaw "require('telescope.builtin').lsp_definitions";
         options = { desc = "Find definitions (Telescope)"; silent = true; };
       }
+      { mode = "n"; key = "<leader>ff"; action = "<cmd>Telescope find_files<cr>"; options.desc = "Find files"; }
+      { mode = "n"; key = "<leader>fg"; action = "<cmd>Telescope live_grep<cr>"; options.desc = "Live grep"; }
+      { mode = "n"; key = "<leader>q"; action = "<cmd>bd<cr>"; options.desc = "Close buffer"; }
     ];
 
 	plugins.lualine.enable = true;
@@ -324,11 +335,11 @@
           "encoding"
           "filetype"
         ];
-        lualine_y = [ "progress" ];
+        lualine_y = [];
         lualine_z = [ "location" ];
       };
       inactive_sections = {
-        lualine_a = [ "mode" ];
+        lualine_a = [];
         lualine_b = [ "branch" ];
         lualine_c = [ "filename" ];
         lualine_x = [ "location" ];
@@ -362,6 +373,9 @@
     };
 
     extraConfigLua = ''
+      vim.api.nvim_set_hl(0, "NormalFloat", { bg = "none" })
+      vim.api.nvim_set_hl(0, "FloatBorder", { fg = "#7e9cd8", bg = "none" })
+
 	  -- Configurar diagnósticos
       vim.diagnostic.config({
         virtual_text = {
@@ -379,7 +393,7 @@
       })
 
       -- Símbolos de diagnóstico
-      local signs = { Error = " ", Warn = " ", Hint = " ", Info = " " }
+      local signs = { Error = " ", Warn = " ", Hint = "󰌵", Info = "" }
       for type, icon in pairs(signs) do
         local hl = "DiagnosticSign" .. type
         vim.fn.sign_define(hl, { text = icon, texthl = hl, numhl = hl })
@@ -389,7 +403,7 @@
       -- Neo-tree setup
       require("neo-tree").setup({
         close_if_last_window = true,
-        popup_border_style = "rounded",
+        popup_border_style = "none",
         enable_git_status = true,
         enable_diagnostics = true,
         sort_case_insensitive = true,
@@ -448,29 +462,18 @@
       cmp.event:on('confirm_done', cmp_autopairs.on_confirm_done())
 
 	  -- Telescope setup
-      local telescope = require("telescope")
-      local builtin = require("telescope.builtin")
-      local actions = require("telescope.actions")
-      telescope.setup{
+      local telescope = require('telescope')
+      telescope.setup({
         defaults = {
-          prompt_prefix = " ",
+          prompt_prefix = " ",
           selection_caret = "➤ ",
           sorting_strategy = "ascending",
           layout_strategy = "flex",
-          preview = true,
-          mappings = {
-            i = {
-              ["<C-j>"] = actions.move_selection_next,
-              ["<C-k>"] = actions.move_selection_previous,
-            },
-          },
+          layout_config = { width = 0.8, preview_cutoff = 120 },
         },
-      }
-      vim.keymap.set('n', '<leader>ff', builtin.find_files, { desc = "Find files in cwd" })
-      vim.keymap.set('n', '<leader>fF', function() builtin.find_files({ cwd = "/" }) end, { desc = "Find files anywhere" })
-      vim.keymap.set('n', '<leader>fg', builtin.live_grep, { desc = "Live grep" })
-      vim.keymap.set('n', '<leader>fb', builtin.buffers, { desc = "Buffers" })
-      vim.keymap.set('n', '<leader>fh', builtin.help_tags, { desc = "Help tags" })
+      })
+
+
     '';
     # === Editor options ===
     opts = {
@@ -480,6 +483,11 @@
       tabstop = 4;
       softtabstop = 4;
       shiftwidth = 4;
+	  expandtab = true;
+      cursorline = true;
+      updatetime = 300;
+      termguicolors = true;
+      wrap = false;
       winborder = "rounded";
     };
   };
