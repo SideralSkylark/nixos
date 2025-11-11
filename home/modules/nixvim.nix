@@ -398,7 +398,15 @@
         local hl = "DiagnosticSign" .. type
         vim.fn.sign_define(hl, { text = icon, texthl = hl, numhl = hl })
       end
-	
+
+      vim.api.nvim_create_autocmd({"InsertLeave", "TextChanged"}, {
+        pattern = "*",
+        callback = function()
+          if vim.bo.modified and not vim.bo.readonly and vim.fn.expand("%") ~= "" and vim.bo.buftype == "" then
+            vim.cmd("silent! write")
+          end
+        end,
+      })
 	
       -- Neo-tree setup
       require("neo-tree").setup({
@@ -477,6 +485,11 @@
     '';
     # === Editor options ===
     opts = {
+      linespace = 4;
+      scrolloff = 8;
+      sidescrolloff = 8;
+      clipboard = "unnamedplus";
+
       number = true;
       relativenumber = true;
       signcolumn = "yes";
@@ -484,7 +497,6 @@
       softtabstop = 4;
       shiftwidth = 4;
 	  expandtab = true;
-      cursorline = true;
       updatetime = 300;
       termguicolors = true;
       wrap = false;
