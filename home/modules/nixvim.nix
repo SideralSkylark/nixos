@@ -175,6 +175,10 @@
           action = "hover";
           desc = "Hover docs";
         };
+        "C-s" = {
+          action = "signature_help";
+          desc = "signature help";
+        };
         "<leader>rn" = {
           action = "rename";
           desc = "Rename symbol";
@@ -194,15 +198,6 @@
     plugins.cmp = {
       enable = true;
       settings = {
-		window = {
-			completion = {
-				border = "rounded";
-				winhighlight = "Normal:Normal,FloatBorder:FloatBorder,CursorLine:Visual,Search:None";
-			};
-			documentation = {
-				border = "rounded";
-			};
-		};
         snippet.expand = "function(args) require('luasnip').lsp_expand(args.body) end";
         mapping = {
           "<C-n>" = "cmp.mapping.select_next_item()";
@@ -295,7 +290,10 @@
       }
       { mode = "n"; key = "<leader>ff"; action = "<cmd>Telescope find_files<cr>"; options.desc = "Find files"; }
       { mode = "n"; key = "<leader>fg"; action = "<cmd>Telescope live_grep<cr>"; options.desc = "Live grep"; }
+       
       { mode = "n"; key = "<leader>q"; action = "<cmd>bd<cr>"; options.desc = "Close buffer"; }
+      { mode = "n"; key = "<Tab>"; action = ":bnext<CR>"; options = { desc = "Next buffer"; silent = true; }; }
+      { mode = "n"; key = "<S-Tab>"; action = ":bprevious<CR>"; options = { desc = "Previous buffer"; silent = true; }; }
     ];
 
 	plugins.lualine.enable = true;
@@ -358,23 +356,12 @@
         sync_install = false;
 		parser_install_dir = "/home/skylark/.local/share/nvim/treesitter";
         ensure_installed = [ "lua" "python" "javascript" "typescript" "html" "css" "markdown" "java" "nix" "c" "rust" ];
-        highlight = { enable = true; additional_vim_regex_highlighting = false; };
+        highlight = { enable = true; };
         indent = { enable = true; };
-        incremental_selection = {
-          enable = true;
-          keymaps = {
-            init_selection = "gnn";
-            node_incremental = "grn";
-            node_decremental = "grm";
-            scope_incremental = "grc";
-          };
-        };
       };
     };
 
     extraConfigLua = ''
-      vim.api.nvim_set_hl(0, "NormalFloat", { bg = "none" })
-      vim.api.nvim_set_hl(0, "FloatBorder", { fg = "#7e9cd8", bg = "none" })
 
 	  -- Configurar diagnósticos
       vim.diagnostic.config({
@@ -382,22 +369,18 @@
           prefix = '●',
           spacing = 4,
         },
-        signs = true,
+        signs = {
+            text = {
+                [vim.diagnostic.severity.ERROR] = " ",
+                [vim.diagnostic.severity.WARN] = " ",
+                [vim.diagnostic.severity.HINT] = "󰌵",
+                [vim.diagnostic.severity.INFO] = "",
+              },
+        },
         underline = true,
         update_in_insert = false,
         severity_sort = true,
-        float = {
-          border = 'rounded',
-          source = 'always',
-        },
       })
-
-      -- Símbolos de diagnóstico
-      local signs = { Error = " ", Warn = " ", Hint = "󰌵", Info = "" }
-      for type, icon in pairs(signs) do
-        local hl = "DiagnosticSign" .. type
-        vim.fn.sign_define(hl, { text = icon, texthl = hl, numhl = hl })
-      end
 
       vim.api.nvim_create_autocmd({"InsertLeave", "TextChanged"}, {
         pattern = "*",
@@ -411,7 +394,6 @@
       -- Neo-tree setup
       require("neo-tree").setup({
         close_if_last_window = true,
-        popup_border_style = "none",
         enable_git_status = true,
         enable_diagnostics = true,
         sort_case_insensitive = true,
@@ -500,7 +482,6 @@
       updatetime = 300;
       termguicolors = true;
       wrap = false;
-      winborder = "rounded";
     };
   };
 }
