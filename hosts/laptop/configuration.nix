@@ -3,8 +3,9 @@
 {
     imports = [
         ./boot.nix
-        ./hardware-configuration.nix
         ../common.nix
+        ./hardware-configuration.nix
+        ../../modules/role/dev
     ];
 
     networking.hostName = "laptop";

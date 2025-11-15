@@ -5,8 +5,6 @@
     neovim 
     git
     man-pages
-    docker
-    docker-compose
     htop
     fastfetch
     # Rede e drivers
@@ -53,23 +51,11 @@
     qt5.qtwayland
     qt6.qtwayland
     gtk3
-    jdk21_headless
-    nodejs_22
     gcc # C compiler
 	ripgrep
     fd
     fzf
     python3
-    jdt-language-server
-    lua-language-server
-    rustc
-    cargo
-    rust-analyzer
-
-    (pkgs.writeShellScriptBin "java-stable" ''
-      export JAVA_HOME=${pkgs.jdk21_headless}
-      exec ${pkgs.jdk21_headless}/bin/java "$@"
-    '')
 
     # clamav
   ];
