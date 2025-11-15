@@ -10,7 +10,6 @@
         hyprsunset
         brave
         vlc
-        hydralauncher
         obsidian
         anki
     ];
