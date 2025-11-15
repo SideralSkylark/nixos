@@ -62,6 +62,9 @@
     python3
     jdt-language-server
     lua-language-server
+    rustc
+    cargo
+    rust-analyzer
 
     (pkgs.writeShellScriptBin "java-stable" ''
       export JAVA_HOME=${pkgs.jdk21_headless}

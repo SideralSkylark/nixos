@@ -2,7 +2,7 @@
 
 {
   imports = [
-    ./boot.nix
+        #./boot.nix
     ./gc.nix
     ./networking.nix
     ./timezone.nix
