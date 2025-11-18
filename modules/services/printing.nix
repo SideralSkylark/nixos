@@ -1,11 +1,12 @@
-{ config, pkgs, ... }:
+{ pkgs, ... }:
 
 {
-  services.printing = {
+    services.printing = {
 		enable = true;
 		drivers = [
-			pkgs.hplip
+		    pkgs.hplip
 			pkgs.epson-escpr
 		];
 	}; 
 }
+

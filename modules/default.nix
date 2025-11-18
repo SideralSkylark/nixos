@@ -1,7 +1,7 @@
 {
-  imports = [
-    ./desktop
-    ./services
-    ./system
-  ];
+    imports = [
+        ./desktop
+        ./services
+        ./system
+    ];
 }

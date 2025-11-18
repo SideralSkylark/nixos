@@ -1,5 +1,3 @@
-{ config, lib, pkgs, ... }:
-
 {
-  time.timeZone = "Africa/Maputo";
+    time.timeZone = "Africa/Maputo";
 }

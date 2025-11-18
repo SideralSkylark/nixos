@@ -240,7 +240,7 @@
     # === Kanagawa Colorscheme ===
     colorschemes.kanagawa.enable = true;
     colorschemes.kanagawa.settings = {
-      theme = "wave";                                
+      theme = "wave";
       background = { dark = "wave"; light = "lotus"; };
       transparent = true;                          
       commentStyle = { italic = true; };

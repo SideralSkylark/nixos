@@ -1,4 +1,4 @@
-{ config, pkgs, nixvim, ... }:
+{ nixvim, ... }:
 
 {
   home.username = "skylark";
@@ -6,7 +6,7 @@
   home.stateVersion = "25.05";
 
   imports = [
-    ./modules    # any home-manager modules you define later
+    ./modules   
     nixvim.homeManagerModules.nixvim
   ];
 

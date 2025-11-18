@@ -1,19 +1,17 @@
-{ config, pkgs, lib, ... }:
 {
-  # Desativa login direto como root
-  users.users.root.hashedPassword = "!";
+    # Disable login as root
+    users.users.root.hashedPassword = "!";
 
-  # Mantém sudo tradicional
-  security.sudo.enable = true;
+    security.sudo.enable = true;
 
-  #### Fail2ban (proteção SSH) ####
-  services.fail2ban = {
-    enable = true;
-  };
+    #### shh protection ####
+    services.fail2ban = {
+        enable = true;
+    };
 
-  security.polkit.enable = true;
+    security.polkit.enable = true;
 
-  #### ClamAV (antivírus) ####
+  #### ClamAV ####
 #   services.clamav = {
 #     daemon.enable = true;
 #     updater.enable = true;
@@ -26,7 +24,7 @@
 #     };
 #   };
 
-  #### Firejail (sandbox para apps) ####
+  #### Firejail (sandbox) ####
 #   programs.firejail = {
 #     enable = true;
 #     wrappedBinaries = {
@@ -37,3 +35,4 @@
 #     };
 #   };
 }
+

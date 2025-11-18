@@ -1,5 +1,3 @@
-{ config, pkgs, ... }:
-
 {
    imports = [
       ./audio.nix
@@ -10,3 +8,4 @@
       ./storage.nix
    ];
 }
+

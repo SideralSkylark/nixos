@@ -8,7 +8,7 @@
         vscode
 		zed-editor
         lazydocker
-        posting
+        posting 
         jdk21_headless
         nodejs_22
         jdt-language-server
