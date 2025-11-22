@@ -5,7 +5,7 @@
         neovim 
         git
         man-pages
-        htop
+        btop
         fastfetch
         iw # Network
         bluez # Bluethoot

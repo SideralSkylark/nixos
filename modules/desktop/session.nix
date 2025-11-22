@@ -1,5 +1,3 @@
-{ config, pkgs, ... }:
-
 {
     services.dbus.enable = true;
 
@@ -7,7 +5,7 @@
 
     services.udev.enable = true;
 
-    services.xserver.enable = true;
+    services.xserver.enable = false;
 
     services.xserver.displayManager.gdm.enable = true;
     services.xserver.displayManager.gdm.wayland = true;
