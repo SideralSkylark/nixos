@@ -1,0 +1,259 @@
+* {
+    font-family: "Roboto", "JetBrainsMono Nerd Font", "Noto Color Emoji", sans-serif;
+    font-size: 13px;
+    min-height: 0px;
+    border: none;
+}
+
+window#waybar {
+    color: #DCD7BA;
+    background: transparent;
+    transition: all 0.3s ease-in-out;
+}
+
+/* Ícone da distro - Material Card */
+#custom-distro-icon {
+    background: rgba(15, 20, 25, 0.9);
+    border-radius: 12px;
+    padding: 1px 10px 1px 4px;
+    margin: 4px 3px;
+    color: #e8eaed;
+    font-size: 14px;
+    transition: all 0.25s ease;
+    box-shadow: 0px 2px 6px rgba(0, 0, 0, 0.25);
+    border: 1px solid rgba(220, 215, 186, 0.08);
+    min-width: 16px;
+    min-height: 16px;
+}
+
+#custom-distro-icon:hover {
+    background: rgba(31, 31, 40, 0.95);
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.35);
+    border: 1px solid rgba(220, 215, 186, 0.15);
+}
+
+#workspaces {
+    background: rgba(15, 20, 25, 0.9);
+    border-radius: 16px;
+    padding: 8px 2px;
+    margin: 4px 3px;
+    box-shadow: 0px 2px 6px rgba(0, 0, 0, 0.3);
+    border: 1px solid rgba(220, 215, 186, 0.1);
+    transition: all 0.25s ease;
+}
+
+#workspaces:hover {
+    box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.25);
+    border: 1px solid rgba(255, 255, 255, 0.12);
+}
+
+#workspaces button {
+    background: rgba(124, 129, 134, 0.15);
+    color: #7E9CD8;
+    border-radius: 50%;
+    margin: 1px 6px;
+    padding: 6px;
+    min-width: 5px;
+    min-height: 5px;
+    transition: all 0.2s ease;
+    border: 1px solid transparent;
+}
+
+#workspaces button:hover {
+    background: rgba(124, 129, 134, 0.25);
+    color: #DCA561;
+    box-shadow: 0 1px 4px rgba(0, 0, 0, 0.15);
+    border: 1px solid rgba(220, 215, 186, 0.15);
+}
+
+#workspaces button.active {
+    background: rgba(220, 165, 97, 0.4);
+    color: #DCD7BA;
+    box-shadow: 0px 2px 8px rgba(220, 165, 97, 0.25);
+    border: 1px solid rgba(220, 165, 97, 0.3);
+}
+
+#workspaces button.urgent {
+    background: rgba(195, 64, 67, 0.5);
+    color: #FFFFFF;
+    box-shadow: 0px 2px 8px rgba(195, 64, 67, 0.3);
+    border: 1px solid rgba(195, 64, 67, 0.4);
+}
+
+#window,
+#custom-swaync,
+#clock,
+#tray,
+#pulseaudio,
+#bluetooth,
+#network,
+#backlight,
+#battery,
+#custom-power,
+#custom-powerprofile,
+#custom-brightness,
+#idle_inhibitor,
+#custom-volume,
+#custom-reading-mode,
+#group-audio-net,
+#group-power-batt {
+    font-family: "Roboto", "JetBrainsMono Nerd Font ", monospace;
+    background: rgba(15, 20, 25, 0.9);
+    border-radius: 12px;
+    padding: 6px 12px;
+    margin: 4px 3px;
+    color: #DCD7BA;
+    transition: all 0.25s ease;
+    box-shadow: 0px 2px 6px rgba(0, 0, 0, 0.25);
+    border: 1px solid rgba(220, 215, 186, 0.08);
+}
+
+#group-audio-net,
+#group-power-batt {
+    border-radius: 14px;
+    padding: 4px 8px;
+    margin: 4px 4px;
+    background: rgba(15, 20, 25, 0.92);
+    box-shadow: 0px 3px 8px rgba(0, 0, 0, 0.25);
+    border: 1px solid rgba(220, 215, 186, 0.1);
+}
+
+#clock {
+    font-weight: 500;
+    font-size: 13px;
+    padding: 8px 16px;
+    background: rgba(31, 31, 40, 0.92);
+    border: 1px solid rgba(126, 156, 216, 0.3);
+    font-family: "Roboto Mono", "JetBrainsMono Nerd Font", monospace;
+    box-shadow: 0px 3px 8px rgba(0, 0, 0, 0.25);
+    color: #7E9CD8;
+}
+
+#window {
+    font-weight: 400;
+    font-size: 12px;
+    color: #938AA9;
+    padding: 6px 14px;
+}
+
+#custom-brightness,
+#custom-volume {
+		background: rgba(15, 20, 25, 0.9);
+    color: #98BB6C;
+    border: 1px solid rgba(152, 187, 108, 0.2);
+    border-radius: 12px;
+    padding: 6px 10px;
+    font-size: 12px;
+    font-family: "Roboto", monospace;
+    transition: all 0.25s ease;
+    box-shadow: 0px 2px 6px rgba(0, 0, 0, 0.2);
+}
+
+#custom-powerprofile {
+		background: rgba(15, 20, 25, 0.9);
+    color: #DCA561;
+    border: 1px solid rgba(220, 165, 97, 0.2);
+    border-radius: 12px;
+    padding: 6px 12px;
+    font-size: 12px;
+    font-family: "Roboto", "JetBrainsMono Nerd Font", monospace;
+    transition: all 0.25s ease;
+    box-shadow: 0px 2px 6px rgba(0, 0, 0, 0.2);
+}
+
+#custom-power {
+		background: rgba(15, 20, 25, 0.9);
+    color: #DCD7BA;
+    border: 1px solid rgba(220, 215, 186, 0.1);
+    padding: 6px 10px;
+    font-size: 14px;
+    box-shadow: 0px 2px 6px rgba(0, 0, 0, 0.2);
+}
+
+#custom-power:hover {
+		color: #C34043;
+    border: 1px solid rgba(195, 64, 67, 0.3);
+    box-shadow: 0px 4px 10px rgba(195, 64, 67, 0.25);
+    background: rgba(31, 31, 40, 0.95);
+}
+
+#pulseaudio.muted,
+#network.disconnected,
+#bluetooth.off {
+    color: #7E9CD8;
+    opacity: 0.6;
+}
+
+/* Battery específico */
+#battery.warning {
+    color: #DCA561;
+    border: 1px solid rgba(220, 165, 97, 0.25);
+}
+
+#battery.critical {
+    color: #C34043;
+    border: 1px solid rgba(195, 64, 67, 0.25);
+    box-shadow: 0px 2px 8px rgba(195, 64, 67, 0.2);
+}
+
+#battery.charging {
+    color: #98BB6C;
+    border: 1px solid rgba(152, 187, 108, 0.25);
+}
+
+#custom-distro-icon:hover,
+#window:hover,
+#custom-swaync:hover,
+#clock:hover,
+#tray:hover,
+#pulseaudio:hover,
+#bluetooth:hover,
+#baklight:hover,
+#idle_inhibitor:hover,
+#network:hover,
+#battery:hover,
+#custom-brightness:hover,
+#custom-reading-mode:hover,
+#custom-volume:hover,
+#custom-powerprofile:hover {
+    background: rgba(31, 31, 40, 0.95);
+    border: 1px solid rgba(220, 215, 186, 0.15);
+    box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.35);
+}
+
+tooltip {
+		background: rgba(31, 31, 40, 0.95);
+    border: 1px solid rgba(220, 215, 186, 0.15);
+    border-radius: 10px;
+    color: #DCD7BA;
+    padding: 10px 14px;
+    font-family: "Roboto", monospace;
+    font-size: 11px;
+    font-weight: 400;
+    box-shadow: 0px 6px 14px rgba(0, 0, 0, 0.3);
+}
+
+tooltip label {
+    font-weight: 400;
+    color: #DCD7BA;
+}
+
+tooltip * {
+    color: #DCD7BA;
+    font-family: inherit;
+    font-weight: inherit;
+}
+
+#tray {
+    padding: 6px 10px;
+}
+
+#group-audio-net {
+    margin-right: 1px;
+}
+
+#group-power-batt {
+    margin-left: 1px;
+}
+
+

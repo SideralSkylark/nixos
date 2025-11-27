@@ -1,89 +1,83 @@
 * {
-    font-family: "Roboto", "JetBrainsMono Nerd Font", "Noto Color Emoji", sans-serif;
-    font-size: 13px;
+    font-family: "JetBrainsMono Nerd Font", monospace;
+    font-size: 12px;
     min-height: 0px;
     border: none;
 }
 
 window#waybar {
     color: #DCD7BA;
-    background: transparent;
-    transition: all 0.3s ease-in-out;
+    background: #16161D;
 }
 
-/* Ícone da distro - Material Card */
+/* === LEFT === */
+
 #custom-distro-icon {
-    background: rgba(15, 20, 25, 0.9);
-    border-radius: 12px;
-    padding: 1px 10px 1px 4px;
-    margin: 4px 3px;
-    color: #e8eaed;
-    font-size: 14px;
-    transition: all 0.25s ease;
-    box-shadow: 0px 2px 6px rgba(0, 0, 0, 0.25);
-    border: 1px solid rgba(220, 215, 186, 0.08);
-    min-width: 16px;
-    min-height: 16px;
+    background: transparent;
+    padding: 0px 14px 0px 12px;
+    margin: 0px;
+    color: #957FB8;
+    font-size: 18px;
 }
 
 #custom-distro-icon:hover {
-    background: rgba(31, 31, 40, 0.95);
-    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.35);
-    border: 1px solid rgba(220, 215, 186, 0.15);
+    color: #C8C093;
 }
 
 #workspaces {
-    background: rgba(15, 20, 25, 0.9);
-    border-radius: 16px;
-    padding: 8px 2px;
-    margin: 4px 3px;
-    box-shadow: 0px 2px 6px rgba(0, 0, 0, 0.3);
-    border: 1px solid rgba(220, 215, 186, 0.1);
-    transition: all 0.25s ease;
-}
-
-#workspaces:hover {
-    box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.25);
-    border: 1px solid rgba(255, 255, 255, 0.12);
+    background: transparent;
+    padding: 0px 12px;
+    margin: 0px;
 }
 
 #workspaces button {
-    background: rgba(124, 129, 134, 0.15);
-    color: #7E9CD8;
-    border-radius: 50%;
-    margin: 1px 6px;
-    padding: 6px;
-    min-width: 5px;
-    min-height: 5px;
-    transition: all 0.2s ease;
-    border: 1px solid transparent;
+    background: transparent;
+    color: #54546D;
+    font-size: 18px;
+    padding: 0px 6px;
+    margin: 0px;
 }
 
 #workspaces button:hover {
-    background: rgba(124, 129, 134, 0.25);
-    color: #DCA561;
-    box-shadow: 0 1px 4px rgba(0, 0, 0, 0.15);
-    border: 1px solid rgba(220, 215, 186, 0.15);
+    color: #727169;
 }
 
 #workspaces button.active {
-    background: rgba(220, 165, 97, 0.4);
-    color: #DCD7BA;
-    box-shadow: 0px 2px 8px rgba(220, 165, 97, 0.25);
-    border: 1px solid rgba(220, 165, 97, 0.3);
+    color: #DCA561;
 }
 
 #workspaces button.urgent {
-    background: rgba(195, 64, 67, 0.5);
-    color: #FFFFFF;
-    box-shadow: 0px 2px 8px rgba(195, 64, 67, 0.3);
-    border: 1px solid rgba(195, 64, 67, 0.4);
+    color: #C34043;
 }
 
-#window,
-#custom-swaync,
-#clock,
+#window {
+    background: transparent;
+    color: #938AA9;
+    font-size: 14px;
+    padding: 0px 14px;
+    margin: 0px 4px;
+    border-left: 1px solid #363646;
+}
+
+/* === CENTER === */
+
+#clock {
+    background: transparent;
+    font-size: 14px;
+    padding: 0px 20px;
+    margin: 0px;
+    color: #7E9CD8;
+    letter-spacing: 2px;
+}
+
+#clock:hover {
+    color: #A3D4D5;
+}
+
+/* === RIGHT === */
+
 #tray,
+#custom-swaync,
 #pulseaudio,
 #bluetooth,
 #network,
@@ -91,168 +85,135 @@ window#waybar {
 #battery,
 #custom-power,
 #custom-powerprofile,
-#custom-brightness,
 #idle_inhibitor,
 #custom-volume,
-#custom-reading-mode,
-#group-audio-net,
-#group-power-batt {
-    font-family: "Roboto", "JetBrainsMono Nerd Font ", monospace;
-    background: rgba(15, 20, 25, 0.9);
-    border-radius: 12px;
-    padding: 6px 12px;
-    margin: 4px 3px;
-    color: #DCD7BA;
-    transition: all 0.25s ease;
-    box-shadow: 0px 2px 6px rgba(0, 0, 0, 0.25);
-    border: 1px solid rgba(220, 215, 186, 0.08);
+#custom-reading-mode {
+    background: transparent;
+    padding: 0px 10px;
+    margin: 0px;
+    color: #727169;
+    font-size: 14px;
 }
 
 #group-audio-net,
 #group-power-batt {
-    border-radius: 14px;
-    padding: 4px 8px;
-    margin: 4px 4px;
-    background: rgba(15, 20, 25, 0.92);
-    box-shadow: 0px 3px 8px rgba(0, 0, 0, 0.25);
-    border: 1px solid rgba(220, 215, 186, 0.1);
+    background: transparent;
+    padding: 0px 4px;
+    margin: 0px 8px;
 }
 
-#clock {
-    font-weight: 500;
-    font-size: 13px;
-    padding: 8px 16px;
-    background: rgba(31, 31, 40, 0.92);
-    border: 1px solid rgba(126, 156, 216, 0.3);
-    font-family: "Roboto Mono", "JetBrainsMono Nerd Font", monospace;
-    box-shadow: 0px 3px 8px rgba(0, 0, 0, 0.25);
-    color: #7E9CD8;
+#tray {
+    padding: 0px 12px;
+    margin: 0px 4px;
 }
 
-#window {
-    font-weight: 400;
-    font-size: 12px;
-    color: #938AA9;
-    padding: 6px 14px;
+/* === SEPARATORS === */
+
+#group-audio-net {
+    border-left: 1px solid #2A2A37;
 }
 
-#custom-brightness,
-#custom-volume {
-		background: rgba(15, 20, 25, 0.9);
-    color: #98BB6C;
-    border: 1px solid rgba(152, 187, 108, 0.2);
-    border-radius: 12px;
-    padding: 6px 10px;
-    font-size: 12px;
-    font-family: "Roboto", monospace;
-    transition: all 0.25s ease;
-    box-shadow: 0px 2px 6px rgba(0, 0, 0, 0.2);
+#group-power-batt {
+    border-left: 1px solid #2A2A37;
+}
+
+/* === MODULE STATES === */
+
+#custom-swaync {
+    color: #727169;
+}
+
+#pulseaudio {
+    color: #727169;
+}
+
+#pulseaudio.muted {
+    color: #54546D;
+}
+
+#backlight {
+    color: #727169;
+}
+
+#bluetooth {
+    color: #727169;
+}
+
+#bluetooth.off {
+    color: #54546D;
+}
+
+#network {
+    color: #727169;
+}
+
+#network.disconnected {
+    color: #54546D;
+}
+
+#custom-reading-mode {
+    color: #727169;
+}
+
+#idle_inhibitor {
+    color: #727169;
 }
 
 #custom-powerprofile {
-		background: rgba(15, 20, 25, 0.9);
-    color: #DCA561;
-    border: 1px solid rgba(220, 165, 97, 0.2);
-    border-radius: 12px;
-    padding: 6px 12px;
-    font-size: 12px;
-    font-family: "Roboto", "JetBrainsMono Nerd Font", monospace;
-    transition: all 0.25s ease;
-    box-shadow: 0px 2px 6px rgba(0, 0, 0, 0.2);
+    color: #727169;
 }
 
-#custom-power {
-		background: rgba(15, 20, 25, 0.9);
-    color: #DCD7BA;
-    border: 1px solid rgba(220, 215, 186, 0.1);
-    padding: 6px 10px;
-    font-size: 14px;
-    box-shadow: 0px 2px 6px rgba(0, 0, 0, 0.2);
+#battery {
+    color: #727169;
 }
 
-#custom-power:hover {
-		color: #C34043;
-    border: 1px solid rgba(195, 64, 67, 0.3);
-    box-shadow: 0px 4px 10px rgba(195, 64, 67, 0.25);
-    background: rgba(31, 31, 40, 0.95);
-}
-
-#pulseaudio.muted,
-#network.disconnected,
-#bluetooth.off {
-    color: #7E9CD8;
-    opacity: 0.6;
-}
-
-/* Battery específico */
 #battery.warning {
     color: #DCA561;
-    border: 1px solid rgba(220, 165, 97, 0.25);
 }
 
 #battery.critical {
     color: #C34043;
-    border: 1px solid rgba(195, 64, 67, 0.25);
-    box-shadow: 0px 2px 8px rgba(195, 64, 67, 0.2);
 }
 
 #battery.charging {
     color: #98BB6C;
-    border: 1px solid rgba(152, 187, 108, 0.25);
 }
 
-#custom-distro-icon:hover,
-#window:hover,
+#custom-power {
+    color: #727169;
+    padding: 0px 12px 0px 8px;
+}
+
+/* === HOVER === */
+
 #custom-swaync:hover,
-#clock:hover,
-#tray:hover,
 #pulseaudio:hover,
 #bluetooth:hover,
-#baklight:hover,
+#backlight:hover,
 #idle_inhibitor:hover,
 #network:hover,
 #battery:hover,
-#custom-brightness:hover,
 #custom-reading-mode:hover,
 #custom-volume:hover,
 #custom-powerprofile:hover {
-    background: rgba(31, 31, 40, 0.95);
-    border: 1px solid rgba(220, 215, 186, 0.15);
-    box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.35);
+    color: #C8C093;
 }
+
+#custom-power:hover {
+    color: #C34043;
+}
+
+/* === TOOLTIP === */
 
 tooltip {
-		background: rgba(31, 31, 40, 0.95);
-    border: 1px solid rgba(220, 215, 186, 0.15);
-    border-radius: 10px;
-    color: #DCD7BA;
-    padding: 10px 14px;
-    font-family: "Roboto", monospace;
-    font-size: 11px;
-    font-weight: 400;
-    box-shadow: 0px 6px 14px rgba(0, 0, 0, 0.3);
+    background: #1F1F28;
+    border: 1px solid #2A2A37;
+    color: #C8C093;
+    padding: 8px 12px;
+    font-size: 14px;
 }
 
-tooltip label {
-    font-weight: 400;
-    color: #DCD7BA;
-}
-
+tooltip label,
 tooltip * {
-    color: #DCD7BA;
-    font-family: inherit;
-    font-weight: inherit;
+    color: #C8C093;
 }
-
-#tray {
-    padding: 6px 10px;
-}
-
-#group-audio-net {
-    margin-right: 1px;
-}
-
-#group-power-batt {
-    margin-left: 1px;
-}
-

@@ -23,7 +23,7 @@
     "disable-scroll": true,
     "all-outputs": true,
     "icon": true,
-    "format": "",
+    "format": " ",
     "persistent-workspaces": {
       "*": 5
     },
@@ -223,4 +223,5 @@
     ]
   }
 }
+
 
