@@ -7,13 +7,6 @@
         kitty.enable = false;
     };
 
-    gtk = {
-        enable = true;
-        iconTheme = {
-            package = pkgs.papirus-icon-theme;
-            name = "Papirus-Dark";
-        };
-    };
-
+    gtk.enable = true;
     qt.enable = true;
 }
