@@ -28,6 +28,9 @@
     # Hyprlock
     "hypr/hyprlock.conf".source = ../dotfiles/hyprlock/.config/hypr/hyprlock.conf;
 
+    #Hypridle
+    "hypr/hypridle.conf".source = ../dotfiles/hypridle/.config/hypr/hypridle.conf;
+
     # Hyprsunset
     "hypr/hyprsunset.conf".source = ../dotfiles/hyprsunset/.config/hypr/hyprsunset.conf;
 

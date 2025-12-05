@@ -5,5 +5,6 @@
         playerctl
         pamixer
         swww
+        nwg-displays
     ];
 }
