@@ -5,7 +5,6 @@
 	
 	# === LSP SERVERS ===
     plugins.lsp.servers = {
-      # Lua (para editar Neovim configs e Lua em geral)
       lua_ls = {
         enable = true;
         package = pkgs.lua-language-server;
@@ -59,7 +58,7 @@
               local workspace_dir = vim.fn.stdpath("cache") .. "/jdtls-workspace/" .. vim.fn.fnamemodify(vim.fn.getcwd(), ":p:h:t")
               vim.fn.mkdir(workspace_dir, "p")
               
-              -- Função para encontrar JARs
+              -- Find Jars
               local function find_jar(artifact_id, group_path)
                 local possible_paths = {
                   vim.fn.expand("~/.m2/repository/" .. (group_path or "")),
@@ -244,7 +243,7 @@
     colorschemes.kanagawa.settings = {
       theme = "wave";
       background = { dark = "wave"; light = "lotus"; };
-      transparent = true;                          
+      transparent = false;                          
       commentStyle = { italic = true; };
       keywordStyle = { italic = true; };
       statementStyle = { bold = true; };
@@ -324,7 +323,7 @@
                   local filetypes = client.config.filetypes
                   if filetypes and vim.fn.index(filetypes, buf_ft) ~= -1 then
                     return client.name
-                  end
+                  end 
                 end
                 return msg
               end
@@ -332,7 +331,6 @@
             color = { fg = "#ffffff"; };
             icon = "";
           }
-          "encoding"
           "filetype"
         ];
         lualine_y = [];
@@ -358,14 +356,16 @@
         sync_install = false;
 		parser_install_dir = "/home/skylark/.local/share/nvim/treesitter";
         ensure_installed = [ "lua" "python" "javascript" "typescript" "html" "css" "markdown" "java" "nix" "c" "rust" ];
-        highlight = { enable = true; };
+        highlight = { 
+            enable = true; 
+            additional_vim_regex_highlighting = false;
+        };
         indent = { enable = true; };
       };
     };
 
     extraConfigLua = ''
 
-	  -- Configurar diagnósticos
       vim.diagnostic.config({
         virtual_text = {
           prefix = '●',
@@ -448,7 +448,7 @@
 	  -- Nvim-autopairs setup
       require("nvim-autopairs").setup()
 
-	  -- Integrar autopairs com cmp
+	  -- Autopairs integration to cmp
       local cmp_autopairs = require('nvim-autopairs.completion.cmp')
       local cmp = require('cmp')
       cmp.event:on('confirm_done', cmp_autopairs.on_confirm_done())
