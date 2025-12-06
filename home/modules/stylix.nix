@@ -1,4 +1,3 @@
-{ pkgs, ... }:
 {
     stylix.targets = {
         gtk.enable = true;

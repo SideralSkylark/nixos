@@ -4,6 +4,7 @@
         ../common.nix
         ./hardware-configuration.nix
         ../../modules/role/dev
+        ../../modules/services/scanning.nix
     ];
 
     networking.hostName = "laptop";
