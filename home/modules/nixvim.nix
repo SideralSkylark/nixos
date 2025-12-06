@@ -27,8 +27,8 @@
         rootMarkers = [ "package.json" "tsconfig.json" "jsconfig.json" ".git" ];
       };
 
-      # Vue (Volar)
-      volar = {
+      # Vue 
+      vue_ls = {
         enable = true;
         package = pkgs.vue-language-server;
         filetypes = [ "vue" ];
@@ -135,6 +135,8 @@
       rust_analyzer = {
         enable = true;
         package = pkgs.rust-analyzer;
+        installCargo = false;
+        installRustc = false;
       };
     };
 
