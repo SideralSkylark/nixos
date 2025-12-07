@@ -47,6 +47,7 @@
         fzf
         python3
         # clamav
+        usbutils
     ];
 }
 
