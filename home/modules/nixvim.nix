@@ -2,18 +2,26 @@
 {
   config = {
     plugins.lsp.enable = true;
-	
-	# === LSP SERVERS ===
+
+    # === LSP SERVERS ===
     plugins.lsp.servers = {
       lua_ls = {
         enable = true;
         package = pkgs.lua-language-server;
         settings = {
           Lua = {
-            runtime = { version = "LuaJIT"; };
-            diagnostics = { globals = [ "vim" ]; };
-            workspace = { checkThirdParty = false; };
-            telemetry = { enable = false; };
+            runtime = {
+              version = "LuaJIT";
+            };
+            diagnostics = {
+              globals = [ "vim" ];
+            };
+            workspace = {
+              checkThirdParty = false;
+            };
+            telemetry = {
+              enable = false;
+            };
           };
         };
       };
@@ -22,17 +30,30 @@
       ts_ls = {
         enable = true;
         package = pkgs.typescript-language-server;
-        filetypes = [ "typescript" "typescriptreact" "javascript" "javascriptreact" "vue" ];
-        rootMarkers = [ "package.json" "tsconfig.json" "jsconfig.json" ".git" ];
+        filetypes = [
+          "typescript"
+          "typescriptreact"
+          "javascript"
+          "javascriptreact"
+          "vue"
+        ];
+        rootMarkers = [
+          "package.json"
+          "tsconfig.json"
+          "jsconfig.json"
+          ".git"
+        ];
       };
 
-      # Vue 
+      # Vue
       vue_ls = {
         enable = true;
         package = pkgs.vue-language-server;
         filetypes = [ "vue" ];
         settings = {
-          typescript = { tsdk = "node_modules/typescript/lib"; };
+          typescript = {
+            tsdk = "node_modules/typescript/lib";
+          };
         };
       };
 
@@ -48,7 +69,7 @@
         package = pkgs.clang-tools;
       };
 
-	  # Java
+      # Java
       jdtls = {
         enable = true;
         package = pkgs.jdt-language-server;
@@ -110,7 +131,12 @@
                 "java.util.Objects.requireNonNullElse"
                 "org.mockito.Mockito.*"
               ];
-              importOrder = [ "java" "javax" "com" "org" ];
+              importOrder = [
+                "java"
+                "javax"
+                "com"
+                "org"
+              ];
             };
             sources.organizeImports = {
               starThreshold = 9999;
@@ -150,7 +176,7 @@
           action = "goto_next";
           desc = "Next diagnostic";
         };
-		"gl" = {
+        "gl" = {
           action = "open_float";
           desc = "Show line diagnostics";
         };
@@ -188,14 +214,14 @@
           action = "code_action";
           desc = "Code actions";
         };
-		"<leader>f" = {
+        "<leader>f" = {
           action = "format";
           desc = "Format buffer";
         };
       };
     };
 
-	# === AUTOCOMPLETION ===
+    # === AUTOCOMPLETION ===
     plugins.cmp = {
       enable = true;
       settings = {
@@ -208,8 +234,10 @@
           "<C-Space>" = "cmp.mapping.complete()";
           "<C-e>" = "cmp.mapping.abort()";
           "<CR>" = "cmp.mapping.confirm({ select = true })";
-          "<Tab>" = "cmp.mapping(function(fallback) if cmp.visible() then cmp.select_next_item() elseif require('luasnip').expand_or_jumpable() then require('luasnip').expand_or_jump() else fallback() end end, {'i', 's'})";
-          "<S-Tab>" = "cmp.mapping(function(fallback) if cmp.visible() then cmp.select_prev_item() elseif require('luasnip').jumpable(-1) then require('luasnip').jump(-1) else fallback() end end, {'i', 's'})";
+          "<Tab>" =
+            "cmp.mapping(function(fallback) if cmp.visible() then cmp.select_next_item() elseif require('luasnip').expand_or_jumpable() then require('luasnip').expand_or_jump() else fallback() end end, {'i', 's'})";
+          "<S-Tab>" =
+            "cmp.mapping(function(fallback) if cmp.visible() then cmp.select_prev_item() elseif require('luasnip').jumpable(-1) then require('luasnip').jump(-1) else fallback() end end, {'i', 's'})";
         };
         sources = [
           { name = "nvim_lsp"; }
@@ -238,115 +266,298 @@
       plenary-nvim
       nui-nvim
     ];
+
     # === Kanagawa Colorscheme ===
-    colorschemes.kanagawa.enable = true;
-    colorschemes.kanagawa.settings = {
-      theme = "wave";
-      background = { dark = "wave"; light = "lotus"; };
-      transparent = false;                          
-      commentStyle = { italic = true; };
-      keywordStyle = { italic = true; };
-      statementStyle = { bold = true; };
-      undercurl = true;
-      terminalColors = true;
+    colorschemes.kanagawa = {
+      enable = true;
+
+      settings = {
+        theme = "dragon";
+
+        background = {
+          dark = "dragon";
+          light = "lotus";
+        };
+
+        compile = false;
+        transparent = false;
+        dimInactive = false;
+
+        commentStyle = {
+          italic = true;
+        };
+
+        keywordStyle = {
+          italic = false;
+        };
+
+        statementStyle = {
+          bold = false;
+        };
+
+        functionStyle = {
+          bold = false;
+        };
+
+        typeStyle = {
+          bold = false;
+        };
+
+        undercurl = true;
+        terminalColors = true;
+
+        colors = {
+          palette = {
+            lotusWhite0 = "#ffffff";
+            lotusWhite1 = "#f7f7f7";
+            lotusWhite2 = "#eeeeee";
+          };
+
+          theme = {
+            all = {
+              ui = {
+                bg_gutter = "none";
+              };
+            };
+
+            lotus = {
+              ui = {
+                bg = "#ffffff"; # true white background
+                bg_dim = "#f7f7f7"; # subtle inactive background
+                bg_p1 = "#eeeeee";
+                bg_p2 = "#e6e6e6";
+              };
+
+              syn = {
+                comment = "#6f6f6f"; # neutral gray comments
+              };
+            };
+
+            dragon = {
+              ui = {
+                bg = "#0f0f14"; # slightly calmer than default
+                bg_gutter = "none";
+              };
+            };
+
+            wave = {
+              ui = {
+                bg_gutter = "none";
+              };
+            };
+          };
+        };
+      };
     };
 
-	globals = {
+    globals = {
       mapleader = " ";
       maplocalleader = "\\";
     };
 
-	keymaps = [
+    keymaps = [
       {
         mode = "n";
         key = "<leader>e";
         action = "<cmd>Neotree toggle<cr>";
-        options = { desc = "Toggle Neo-tree"; silent = true; };
+        options = {
+          desc = "Toggle Neo-tree";
+          silent = true;
+        };
       }
-	  { mode = "n"; key = "<C-h>"; action = "<C-w>h"; options = { desc = "Window left"; silent = true; }; }
-      { mode = "n"; key = "<C-j>"; action = "<C-w>j"; options = { desc = "Window down"; silent = true; }; }
-      { mode = "n"; key = "<C-k>"; action = "<C-w>k"; options = { desc = "Window up"; silent = true; }; }
-      { mode = "n"; key = "<C-l>"; action = "<C-w>l"; options = { desc = "Window right"; silent = true; }; }
+      {
+        mode = "n";
+        key = "<C-h>";
+        action = "<C-w>h";
+        options = {
+          desc = "Window left";
+          silent = true;
+        };
+      }
+      {
+        mode = "n";
+        key = "<C-j>";
+        action = "<C-w>j";
+        options = {
+          desc = "Window down";
+          silent = true;
+        };
+      }
+      {
+        mode = "n";
+        key = "<C-k>";
+        action = "<C-w>k";
+        options = {
+          desc = "Window up";
+          silent = true;
+        };
+      }
+      {
+        mode = "n";
+        key = "<C-l>";
+        action = "<C-w>l";
+        options = {
+          desc = "Window right";
+          silent = true;
+        };
+      }
 
       # Scroll centering
-      { mode = "n"; key = "<C-d>"; action = "<C-d>zz"; options = { desc = "Scroll half page down and center"; silent = true; }; }
-      { mode = "n"; key = "<C-u>"; action = "<C-u>zz"; options = { desc = "Scroll half page up and center"; silent = true; }; }
+      {
+        mode = "n";
+        key = "<C-d>";
+        action = "<C-d>zz";
+        options = {
+          desc = "Scroll half page down and center";
+          silent = true;
+        };
+      }
+      {
+        mode = "n";
+        key = "<C-u>";
+        action = "<C-u>zz";
+        options = {
+          desc = "Scroll half page up and center";
+          silent = true;
+        };
+      }
 
       # Save all buffers
-      { mode = "n"; key = "<leader>w"; action = ":wa<CR>"; options = { desc = "Save all buffers"; silent = true; }; }
-      
-      # LSP management keymaps
-      { mode = "n"; key = "<leader>ls"; action = "<CMD>LspStart<CR>"; options = { desc = "Start LSP"; silent = true; }; }
-      { mode = "n"; key = "<leader>lr"; action = "<CMD>LspRestart<CR>"; options = { desc = "Restart LSP"; silent = true; }; }
-      { mode = "n"; key = "<leader>lx"; action = "<CMD>LspStop<CR>"; options = { desc = "Stop LSP"; silent = true; }; }
-      
-	  # Diagnostics
-      { mode = "n"; key = "<leader>xx"; action = "<CMD>Telescope diagnostics<CR>"; options = { desc = "Show all diagnostics"; silent = true; }; }
-      { mode = "n"; key = "<leader>xb"; action = "<CMD>Telescope diagnostics bufnr=0<CR>"; options = { desc = "Buffer diagnostics"; silent = true; }; } 
-	  {
+      {
         mode = "n";
-        key = "<leader>fd";
-        action = lib.nixvim.mkRaw "require('telescope.builtin').lsp_definitions";
-        options = { desc = "Find definitions (Telescope)"; silent = true; };
+        key = "<leader>w";
+        action = ":wa<CR>";
+        options = {
+          desc = "Save all buffers";
+          silent = true;
+        };
       }
-      { mode = "n"; key = "<leader>ff"; action = "<cmd>Telescope find_files<cr>"; options.desc = "Find files"; }
-      { mode = "n"; key = "<leader>fg"; action = "<cmd>Telescope live_grep<cr>"; options.desc = "Live grep"; }
-       
-      { mode = "n"; key = "<leader>q"; action = "<cmd>bd<cr>"; options.desc = "Close buffer"; }
-      { mode = "n"; key = "<Tab>"; action = ":bnext<CR>"; options = { desc = "Next buffer"; silent = true; }; }
-      { mode = "n"; key = "<S-Tab>"; action = ":bprevious<CR>"; options = { desc = "Previous buffer"; silent = true; }; }
+
+      # LSP management keymaps
+      {
+        mode = "n";
+        key = "<leader>ls";
+        action = "<CMD>LspStart<CR>";
+        options = {
+          desc = "Start LSP";
+          silent = true;
+        };
+      }
+      {
+        mode = "n";
+        key = "<leader>lr";
+        action = "<CMD>LspRestart<CR>";
+        options = {
+          desc = "Restart LSP";
+          silent = true;
+        };
+      }
+      {
+        mode = "n";
+        key = "<leader>lx";
+        action = "<CMD>LspStop<CR>";
+        options = {
+          desc = "Stop LSP";
+          silent = true;
+        };
+      }
+
+      # Diagnostics
+      {
+        mode = "n";
+        key = "<leader>xx";
+        action = "<CMD>Telescope diagnostics<CR>";
+        options = {
+          desc = "Show all diagnostics";
+          silent = true;
+        };
+      }
+      {
+        mode = "n";
+        key = "<leader>xb";
+        action = "<CMD>Telescope diagnostics bufnr=0<CR>";
+        options = {
+          desc = "Buffer diagnostics";
+          silent = true;
+        };
+      }
+      {
+        mode = "n";
+        key = "<leader>ff";
+        action = "<cmd>Telescope find_files<cr>";
+        options.desc = "Find files";
+      }
+      {
+        mode = "n";
+        key = "<leader>fg";
+        action = "<cmd>Telescope live_grep<cr>";
+        options.desc = "Live grep";
+      }
+
+      {
+        mode = "n";
+        key = "<leader>q";
+        action = "<cmd>bd<cr>";
+        options.desc = "Close buffer";
+      }
+      {
+        mode = "n";
+        key = "<Tab>";
+        action = ":bnext<CR>";
+        options = {
+          desc = "Next buffer";
+          silent = true;
+        };
+      }
+      {
+        mode = "n";
+        key = "<S-Tab>";
+        action = ":bprevious<CR>";
+        options = {
+          desc = "Previous buffer";
+          silent = true;
+        };
+      }
     ];
 
-	plugins.lualine.enable = true;
+    plugins.lualine.enable = true;
     plugins.lualine.settings = {
       options = {
         section_separators = "";
         component_separators = "";
         globalstatus = true;
-        disabled_filetypes = [ "neo-tree" "neo-tree-popup" "notify" ];
+        disabled_filetypes = [
+          "neo-tree"
+          "neo-tree-popup"
+          "notify"
+        ];
         icons_enabled = true;
       };
       sections = {
         lualine_a = [ "mode" ];
         lualine_b = [ "branch" ];
-        lualine_c = [ "filename" "diff" ];
+        lualine_c = [
+          "filename"
+          "diff"
+        ];
         lualine_x = [
           "diagnostics"
-          {
-            __raw = ''
-              function()
-                local msg = ""
-                local buf_ft = vim.api.nvim_buf_get_option(0, 'filetype')
-                local clients = vim.lsp.get_clients()
-                if next(clients) == nil then return msg end
-                for _, client in ipairs(clients) do
-                  local filetypes = client.config.filetypes
-                  if filetypes and vim.fn.index(filetypes, buf_ft) ~= -1 then
-                    return client.name
-                  end 
-                end
-                return msg
-              end
-            '';
-            color = { fg = "#ffffff"; };
-            icon = "";
-          }
           "filetype"
         ];
-        lualine_y = [];
+        lualine_y = [ ];
         lualine_z = [ "location" ];
       };
       inactive_sections = {
-        lualine_a = [];
+        lualine_a = [ ];
         lualine_b = [ "branch" ];
         lualine_c = [ "filename" ];
         lualine_x = [ "location" ];
-        lualine_y = [];
-        lualine_z = [];
+        lualine_y = [ ];
+        lualine_z = [ ];
       };
     };
 
-	# === Treesitter ===
+    # === Treesitter ===
     plugins.treesitter = {
       enable = true;
       nixGrammars = true;
@@ -354,133 +565,136 @@
       settings = {
         auto_install = false;
         sync_install = false;
-		parser_install_dir = "/home/skylark/.local/share/nvim/treesitter";
-        ensure_installed = [ "lua" "python" "javascript" "typescript" "html" "css" "markdown" "java" "nix" "c" "rust" ];
-        highlight = { 
-            enable = true; 
-            additional_vim_regex_highlighting = false;
+        parser_install_dir = "/home/skylark/.local/share/nvim/treesitter";
+        ensure_installed = [
+          "lua"
+          "python"
+          "javascript"
+          "typescript"
+          "html"
+          "css"
+          "markdown"
+          "java"
+          "nix"
+          "c"
+          "rust"
+        ];
+        highlight = {
+          enable = true;
+          additional_vim_regex_highlighting = false;
         };
-        indent = { enable = true; };
+        indent = {
+          enable = true;
+        };
       };
     };
 
     extraConfigLua = ''
+            vim.diagnostic.config({
+              virtual_text = false,
+              signs = true,
+              underline = true,
+              update_in_insert = false,
+              severity_sort = true,
+            })
 
-      vim.diagnostic.config({
-        virtual_text = {
-          prefix = '●',
-          spacing = 4,
-        },
-        signs = {
-            text = {
-                [vim.diagnostic.severity.ERROR] = " ",
-                [vim.diagnostic.severity.WARN] = " ",
-                [vim.diagnostic.severity.HINT] = "󰌵",
-                [vim.diagnostic.severity.INFO] = "",
+            vim.api.nvim_create_autocmd({"InsertLeave", "TextChanged"}, {
+              pattern = "*",
+              callback = function()
+                if vim.bo.modified and not vim.bo.readonly and vim.fn.expand("%") ~= "" and vim.bo.buftype == "" then
+                  vim.cmd("silent! write")
+                end
+              end,
+            })
+      	
+            -- Neo-tree setup
+            require("neo-tree").setup({
+              close_if_last_window = true,
+              enable_git_status = true,
+              enable_diagnostics = true,
+              sort_case_insensitive = true,
+              default_component_configs = {
+                icon = {
+                  folder_closed = "",
+                  folder_open = "",
+                  folder_empty = "ﰊ",
+                },
+                git_status = {
+                  symbols = { added = "+", modified = "~", deleted = "x" },
+                },
               },
-        },
-        underline = true,
-        update_in_insert = false,
-        severity_sort = true,
-      })
+              window = {
+                position = "right",
+                width = 35,
+                mappings = {
+                  ["o"] = "open",
+                  ["<CR>"] = "open",
+                  ["s"] = "split_with_window_picker",
+                  ["v"] = "vsplit_with_window_picker",
+                  ["t"] = "open_tabnew",
+                  ["h"] = "close_node",
+                  ["l"] = "open",
+                  ["R"] = "refresh",
+                  ["a"] = "add",
+                  ["d"] = "delete",
+                  ["r"] = "rename",
+                },
+              },
+              filesystem = {
+                filtered_items = {
+                  visible = true,
+                  hide_dotfiles = false,
+                  hide_gitignored = false,
+                },
+              },
+            })
 
-      vim.api.nvim_create_autocmd({"InsertLeave", "TextChanged"}, {
-        pattern = "*",
-        callback = function()
-          if vim.bo.modified and not vim.bo.readonly and vim.fn.expand("%") ~= "" and vim.bo.buftype == "" then
-            vim.cmd("silent! write")
-          end
-        end,
-      })
-	
-      -- Neo-tree setup
-      require("neo-tree").setup({
-        close_if_last_window = true,
-        enable_git_status = true,
-        enable_diagnostics = true,
-        sort_case_insensitive = true,
-        default_component_configs = {
-          icon = {
-            folder_closed = "",
-            folder_open = "",
-            folder_empty = "ﰊ",
-          },
-          git_status = {
-            symbols = { added = "+", modified = "~", deleted = "x" },
-          },
-        },
-        window = {
-          position = "right",
-          width = 35,
-          mappings = {
-            ["o"] = "open",
-            ["<CR>"] = "open",
-            ["s"] = "split_with_window_picker",
-            ["v"] = "vsplit_with_window_picker",
-            ["t"] = "open_tabnew",
-            ["h"] = "close_node",
-            ["l"] = "open",
-            ["R"] = "refresh",
-            ["a"] = "add",
-            ["d"] = "delete",
-            ["r"] = "rename",
-          },
-        },
-        filesystem = {
-          filtered_items = {
-            visible = true,
-            hide_dotfiles = false,
-            hide_gitignored = false,
-          },
-        },
-      })
+      	  -- LuaSnip setup
+            require("luasnip.loaders.from_vscode").lazy_load()
+            
+      	  -- Highlight on yank
+            vim.api.nvim_create_autocmd('TextYankPost', {
+              desc = 'Highlight when yanking text',
+              group = vim.api.nvim_create_augroup('highlight-yank', { clear = true }),
+              callback = function() vim.hl.on_yank() end,
+            })
 
-	  -- LuaSnip setup
-      require("luasnip.loaders.from_vscode").lazy_load()
-      
-	  -- Highlight on yank
-      vim.api.nvim_create_autocmd('TextYankPost', {
-        desc = 'Highlight when yanking text',
-        group = vim.api.nvim_create_augroup('highlight-yank', { clear = true }),
-        callback = function() vim.hl.on_yank() end,
-      })
+      	  -- Nvim-autopairs setup
+            require("nvim-autopairs").setup()
 
-	  -- Nvim-autopairs setup
-      require("nvim-autopairs").setup()
+      	  -- Autopairs integration to cmp
+            local cmp_autopairs = require('nvim-autopairs.completion.cmp')
+            local cmp = require('cmp')
+            cmp.event:on('confirm_done', cmp_autopairs.on_confirm_done())
 
-	  -- Autopairs integration to cmp
-      local cmp_autopairs = require('nvim-autopairs.completion.cmp')
-      local cmp = require('cmp')
-      cmp.event:on('confirm_done', cmp_autopairs.on_confirm_done())
-
-	  -- Telescope setup
-      local telescope = require('telescope')
-      telescope.setup({
-        defaults = {
-          prompt_prefix = " ",
-          selection_caret = "➤ ",
-          sorting_strategy = "ascending",
-          layout_strategy = "flex",
-          layout_config = { width = 0.8, preview_cutoff = 120 },
-        },
-      })
+      	  -- Telescope setup
+            local telescope = require('telescope')
+            telescope.setup({
+              defaults = {
+                prompt_prefix = " ",
+                selection_caret = "➤ ",
+                sorting_strategy = "ascending",
+                layout_strategy = "flex",
+                layout_config = { width = 0.85, height = 0.85, preview_cutoff = 120 },
+              },
+            })
 
 
     '';
     # === Editor options ===
     opts = {
-      linespace = 4;
+      linespace = 5;
       scrolloff = 8;
       sidescrolloff = 8;
       clipboard = "unnamedplus";
-
+      showmode = false;
       number = true;
       relativenumber = true;
       signcolumn = "yes";
       tabstop = 4;
       softtabstop = 4;
       shiftwidth = 4;
-	  expandtab = true;
+      expandtab = true;
       updatetime = 300;
       termguicolors = true;
       wrap = false;
