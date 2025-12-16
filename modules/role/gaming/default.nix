@@ -5,29 +5,24 @@
        ./packages.nix 
     ];
 
-    hardware.opengl = {
+    hardware.graphics = {
         enable = true;
-        driSupport = true;
-        driSupport32Bit = true;
+        enable32Bit = true;
 
-    extraPackages = with pkgs; [
-        mesa_drivers
-        vulkan-loader
-        vulkan-validation-layers
-        vaapiVdpau
-        libvdpau-va-gl
-    ];
+        extraPackages = with pkgs; [
+            mesa
+            vulkan-loader
+            vulkan-validation-layers
+            libva-vdpau-driver
+            libvdpau-va-gl
+        ];
+    };
 
-    extraPackages32 = with pkgs; [
-        mesa_drivers
-        vulkan-loader
-    ];
-  };
-
-  # --- Steam ---
     programs.steam = {
         enable = true;
         remotePlay.openFirewall = true;
     };
 
+    programs.gamemode.enable = true;
 }
+
