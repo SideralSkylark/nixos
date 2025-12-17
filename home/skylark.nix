@@ -1,4 +1,4 @@
-{ nixvim, ... }:
+{ config, nixvim, ... }:
 
 {
   home.username = "skylark";
@@ -15,6 +15,29 @@
     imports = [ ./modules/nixvim.nix ];
   };
 
+    xdg = {
+    enable = true;
+
+    userDirs = {
+      enable = true;
+      createDirectories = true;
+
+      download = "${config.home.homeDirectory}/Downloads";
+      documents = "${config.home.homeDirectory}/Documents";
+      pictures = "${config.home.homeDirectory}/Pictures";
+      videos = "${config.home.homeDirectory}/Videos";
+
+      # disable dirs you don't want
+      desktop = null;
+      music = null;
+      publicShare = null;
+      templates = null;
+
+      extraConfig = {
+        XDG_PROJECTS_DIR = "${config.home.homeDirectory}/Projects";
+      };
+    };
+  };
 
   xdg.configFile = {
     # Hyprland
