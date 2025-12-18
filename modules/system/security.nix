@@ -1,4 +1,4 @@
-{ pkgs, ... }:
+{ pkgs, lib, ... }:
 
 {
     # Disable login as root
@@ -13,5 +13,12 @@
 
     security.polkit.enable = true;
 
+    services.fprintd.enable = true;
+
+    security.pam.services = {
+        login.fprintAuth = lib.mkForce false;
+        sudo.fprintAuth = lib.mkForce true;
+        polkit-1.fprintAuth = lib.mkForce true;
+    };
 }
 
