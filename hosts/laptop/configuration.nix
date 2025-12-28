@@ -4,6 +4,7 @@
         ../common.nix
         ./hardware-configuration.nix
         ../../modules/role/dev
+        ../../modules/role/gaming
     ];
 
     networking.hostName = "laptop";
