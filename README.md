@@ -10,7 +10,7 @@ Personal NixOS setup using flakes and Home Manager, focused on a minimal Hyprlan
 ![Desktop](assets/screenshots/desktop.png)
 
 ### Terminal
-![Terminal](assets/screenshots/terminal.png)
+![Terminal](assets/screenshots/fetch.png)
 
 ### Editor (Neovim / nixvim)
 ![Editor](assets/screenshots/editor.png)
