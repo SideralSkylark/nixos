@@ -13,6 +13,5 @@
         vlc
         obsidian
         anki
-        tesseract # OCR(document validation)
     ];
 }
