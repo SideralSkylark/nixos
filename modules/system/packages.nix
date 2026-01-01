@@ -7,6 +7,7 @@
         man-pages
         btop
         fastfetch
+        nitch
         iw # Network
         bluez # Bluethoot
         blueman # Bluethooh
@@ -43,6 +44,7 @@
         gtk3
         gcc # C compiler
 	    ripgrep
+        zoxide
         fd
         fzf
         python3
