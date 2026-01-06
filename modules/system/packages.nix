@@ -44,7 +44,6 @@
         gtk3
         gcc # C compiler
 	    ripgrep
-        zoxide
         fd
         fzf
         python3
