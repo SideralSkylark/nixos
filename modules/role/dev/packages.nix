@@ -4,11 +4,10 @@
     environment.systemPackages = with pkgs; [
         docker
         docker-compose
-        stow
         vscode
 		zed-editor
         lazydocker
-        posting 
+        postman
         jdk21_headless
         nodejs_22
         jdt-language-server
