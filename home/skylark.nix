@@ -83,7 +83,7 @@
     "wofi/style.css".source = ../dotfiles/wofi/.config/wofi/style.css;
 
     # tofi
-    "tofi/config.ini".source = ../dotfiles/tofi/.config/tofi/config.ini;
+    "tofi/config".source = ../dotfiles/tofi/.config/tofi/config;
   };
 }
 

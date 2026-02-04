@@ -1,0 +1,25 @@
+font = "/home/skylark/.local/share/fonts/JetBrainsMonoNerdFont-Regular.ttf"
+font-size = 16        
+
+text-color = #DCD7BA
+background-color = #1F1F28
+selection-color = #938AA9
+
+outline-width = 0
+border-width = 0
+corner-radius = 8
+padding-left = 4%
+padding-top = 2%
+padding-right = 4%
+padding-bottom = 2%
+width = 40%          
+height = 400       
+result-spacing = 6 
+
+prompt-text = "Apps: "
+prompt-background = #1F1F28
+input-background = #2A2A37
+input-color = #DCD7BA
+
+hide-cursor = true
+text-cursor = false

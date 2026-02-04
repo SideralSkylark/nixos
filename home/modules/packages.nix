@@ -27,6 +27,5 @@
         btop
         fastfetch
         nitch
-        quickshell
     ];
 }
