@@ -81,6 +81,9 @@
     # Wofi
     "wofi/wofi.conf".source = ../dotfiles/wofi/.config/wofi/wofi.conf;
     "wofi/style.css".source = ../dotfiles/wofi/.config/wofi/style.css;
+
+    # tofi
+    "tofi/config.ini".source = ../dotfiles/tofi/.config/tofi/config.ini;
   };
 }
 

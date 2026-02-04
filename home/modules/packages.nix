@@ -14,6 +14,7 @@
         kitty
         waybar
         wofi
+        tofi
         swaynotificationcenter
         starship
         hyprlock

@@ -3,7 +3,7 @@
     environment.systemPackages = with pkgs; [
         iw # Network
         bluez blueman # Bluethooh
-         pamixer playerctl # Audio
+        pamixer playerctl # Audio
         xdg-utils
         xdg-user-dirs
         gvfs
