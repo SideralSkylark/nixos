@@ -13,7 +13,6 @@
         swaybg
         kitty
         waybar
-        wofi
         tofi
         swaynotificationcenter
         starship

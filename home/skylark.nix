@@ -78,12 +78,9 @@
     "waybar/style.css".source    = ../dotfiles/waybar/.config/waybar/style.css;
     "waybar/scripts".source      = ../dotfiles/waybar/.config/waybar/scripts;
 
-    # Wofi
-    "wofi/wofi.conf".source = ../dotfiles/wofi/.config/wofi/wofi.conf;
-    "wofi/style.css".source = ../dotfiles/wofi/.config/wofi/style.css;
-
     # tofi
     "tofi/config".source = ../dotfiles/tofi/.config/tofi/config;
+    "tofi/power.conf".source = ../dotfiles/tofi/.config/tofi/power.conf;
   };
 }
 
