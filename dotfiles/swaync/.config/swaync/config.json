@@ -1,29 +1,28 @@
 {
   "$schema": "/etc/xdg/swaync/configSchema.json",
-
   "positionX": "right",
   "positionY": "top",
   "cssPriority": "user",
   "layer": "overlay",
-
+  
   "control-center-width": 380,
   "control-center-height": 600,
-  "control-center-margin-top": 2,
-  "control-center-margin-bottom": 2,
-  "control-center-margin-right": 1,
+  "control-center-margin-top": 8,
+  "control-center-margin-bottom": 8,
+  "control-center-margin-right": 8,
   "control-center-margin-left": 0,
-
+  
   "notification-window-width": 400,
   "notification-icon-size": 48,
   "notification-body-image-height": 160,
   "notification-body-image-width": 200,
-  "notification-inline-replies": false,
-
+  
   "timeout": 5,
   "timeout-low": 3,
-  "timeout-critical": 8,
+  "timeout-critical": 10,
   "timeout-rate-limit": 2000,
-
+  
+  "notification-inline-replies": false,
   "fit-to-screen": false,
   "keyboard-shortcuts": true,
   "image-visibility": "when-available",
@@ -31,20 +30,7 @@
   "hide-on-clear": true,
   "hide-on-action": true,
   "script-fail-notify": true,
-
-  "external-commands": {
-    "volume-up": "pamixer -i 5",
-    "volume-down": "pamixer -d 5",
-    "volume-mute": "pamixer -t"
-  },
-
-  "scripts": {
-    "example-script": {
-      "exec": "echo 'Do something...'",
-      "urgency": "Normal"
-    }
-  },
-
+  
   "notification-visibility": {
     "spotify": {
       "state": "muted",
@@ -52,61 +38,49 @@
       "app-name": "Spotify"
     }
   },
-
+  
   "widgets": [
     "title",
     "dnd",
     "mpris",
-    "label",
     "buttons-grid",
     "notifications"
   ],
-
+  
   "widget-config": {
     "title": {
       "text": "Notifications",
       "clear-all-button": true,
-      "button-text": "󰎟 Clean"
+      "button-text": "󰎟 Clear All"
     },
     "dnd": {
-      "text": "Do Not Disturb",
-      "tooltip": "Silences all notifications"
-    },
-    "label": {
-      "max-lines": 1,
-      "text": " "
+      "text": "Do Not Disturb"
     },
     "mpris": {
       "image-size": 96,
-      "image-radius": 12,
-      "image-margin": 10
+      "image-radius": 12
     },
     "buttons-grid": {
       "actions": [
         {
-          "label": "",
-          "command": "pamixer -t",
-          "tooltip": "Mutar/Desmutar áudio"
+          "label": "󰕾",
+          "command": "pamixer -t"
         },
         {
-          "label": "",
-          "command": "pamixer --default-source -t",
-          "tooltip": "Mutar/Desmutar microfone"
+          "label": "󰍬",
+          "command": "pamixer --default-source -t"
         },
         {
-          "label": "",
-          "command": "nm-connection-editor",
-          "tooltip": "Gerenciar conexões"
+          "label": "󰖩",
+          "command": "nm-connection-editor"
         },
         {
           "label": "󰂯",
-          "command": "blueman-manager",
-          "tooltip": "Gerenciar Bluetooth"
+          "command": "blueman-manager"
         },
         {
           "label": "󰏘",
-          "command": "nwg-look",
-          "tooltip": "Configurar aparência"
+          "command": "nwg-look"
         }
       ]
     }
