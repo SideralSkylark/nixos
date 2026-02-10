@@ -165,6 +165,14 @@
       };
     };
 
+    diagnostic.settings = {
+      virtual_text = false;
+      signs = true;
+      underline = true;
+      update_in_insert = false;
+      severity_sort = true;
+    };
+
     # === LSP KEYMAPS ===
     plugins.lsp.keymaps = {
       diagnostic = {
@@ -186,7 +194,7 @@
           action = "definition";
           desc = "Go to definition";
         };
-        "gD" = {
+        "gr" = {
           action = "references";
           desc = "Show references";
         };
@@ -201,10 +209,6 @@
         "K" = {
           action = "hover";
           desc = "Hover docs";
-        };
-        "C-s" = {
-          action = "signature_help";
-          desc = "signature help";
         };
         "<leader>rn" = {
           action = "rename";
@@ -225,23 +229,14 @@
     plugins.cmp = {
       enable = true;
       settings = {
-        snippet.expand = "function(args) require('luasnip').lsp_expand(args.body) end";
         mapping = {
           "<C-n>" = "cmp.mapping.select_next_item()";
           "<C-p>" = "cmp.mapping.select_prev_item()";
-          "<C-d>" = "cmp.mapping.scroll_docs(-4)";
-          "<C-f>" = "cmp.mapping.scroll_docs(4)";
           "<C-Space>" = "cmp.mapping.complete()";
-          "<C-e>" = "cmp.mapping.abort()";
           "<CR>" = "cmp.mapping.confirm({ select = true })";
-          "<Tab>" =
-            "cmp.mapping(function(fallback) if cmp.visible() then cmp.select_next_item() elseif require('luasnip').expand_or_jumpable() then require('luasnip').expand_or_jump() else fallback() end end, {'i', 's'})";
-          "<S-Tab>" =
-            "cmp.mapping(function(fallback) if cmp.visible() then cmp.select_prev_item() elseif require('luasnip').jumpable(-1) then require('luasnip').jump(-1) else fallback() end end, {'i', 's'})";
         };
         sources = [
           { name = "nvim_lsp"; }
-          { name = "luasnip"; }
           { name = "path"; }
           { name = "buffer"; }
         ];
@@ -251,75 +246,50 @@
     plugins.cmp-nvim-lsp.enable = true;
     plugins.cmp-buffer.enable = true;
     plugins.cmp-path.enable = true;
-    plugins.luasnip.enable = true;
-    plugins.cmp_luasnip.enable = true;
-    plugins.friendly-snippets.enable = true;
 
     extraPlugins = with pkgs.vimPlugins; [
       kanagawa-nvim
       neo-tree-nvim
-      nvim-web-devicons
       lualine-nvim
       nvim-autopairs
       telescope-nvim
-      nvim-treesitter
       plenary-nvim
       nui-nvim
     ];
 
+    plugins.web-devicons.enable = true;
+
     # === Kanagawa Colorscheme ===
     colorschemes.kanagawa = {
       enable = true;
-
       settings = {
         theme = "dragon";
-
         background = {
           dark = "dragon";
           light = "lotus";
         };
-
         compile = false;
         transparent = false;
         dimInactive = false;
-
-        commentStyle = {
-          italic = true;
-        };
-
-        keywordStyle = {
-          italic = false;
-        };
-
-        statementStyle = {
-          bold = false;
-        };
-
-        functionStyle = {
-          bold = false;
-        };
-
-        typeStyle = {
-          bold = false;
-        };
-
+        commentStyle = { italic = true; };
+        keywordStyle = { italic = false; };
+        statementStyle = { bold = false; };
+        functionStyle = { bold = false; };
+        typeStyle = { bold = false; };
         undercurl = true;
         terminalColors = true;
-
         colors = {
           palette = {
             lotusWhite0 = "#ffffff";
             lotusWhite1 = "#f7f7f7";
             lotusWhite2 = "#eeeeee";
           };
-
           theme = {
             all = {
               ui = {
                 bg_gutter = "none";
               };
             };
-
             lotus = {
               ui = {
                 bg = "#ffffff"; # true white background
@@ -327,22 +297,13 @@
                 bg_p1 = "#eeeeee";
                 bg_p2 = "#e6e6e6";
               };
-
               syn = {
                 comment = "#6f6f6f"; # neutral gray comments
               };
             };
-
             dragon = {
               ui = {
                 bg = "#0f0f14"; # slightly calmer than default
-                bg_gutter = "none";
-              };
-            };
-
-            wave = {
-              ui = {
-                bg_gutter = "none";
               };
             };
           };
@@ -401,7 +362,6 @@
           silent = true;
         };
       }
-
       # Scroll centering
       {
         mode = "n";
@@ -421,47 +381,6 @@
           silent = true;
         };
       }
-
-      # Save all buffers
-      {
-        mode = "n";
-        key = "<leader>w";
-        action = ":wa<CR>";
-        options = {
-          desc = "Save all buffers";
-          silent = true;
-        };
-      }
-
-      # LSP management keymaps
-      {
-        mode = "n";
-        key = "<leader>ls";
-        action = "<CMD>LspStart<CR>";
-        options = {
-          desc = "Start LSP";
-          silent = true;
-        };
-      }
-      {
-        mode = "n";
-        key = "<leader>lr";
-        action = "<CMD>LspRestart<CR>";
-        options = {
-          desc = "Restart LSP";
-          silent = true;
-        };
-      }
-      {
-        mode = "n";
-        key = "<leader>lx";
-        action = "<CMD>LspStop<CR>";
-        options = {
-          desc = "Stop LSP";
-          silent = true;
-        };
-      }
-
       # Diagnostics
       {
         mode = "n";
@@ -469,15 +388,6 @@
         action = "<CMD>Telescope diagnostics<CR>";
         options = {
           desc = "Show all diagnostics";
-          silent = true;
-        };
-      }
-      {
-        mode = "n";
-        key = "<leader>xb";
-        action = "<CMD>Telescope diagnostics bufnr=0<CR>";
-        options = {
-          desc = "Buffer diagnostics";
           silent = true;
         };
       }
@@ -493,30 +403,11 @@
         action = "<cmd>Telescope live_grep<cr>";
         options.desc = "Live grep";
       }
-
       {
         mode = "n";
         key = "<leader>q";
         action = "<cmd>bd<cr>";
         options.desc = "Close buffer";
-      }
-      {
-        mode = "n";
-        key = "<Tab>";
-        action = ":bnext<CR>";
-        options = {
-          desc = "Next buffer";
-          silent = true;
-        };
-      }
-      {
-        mode = "n";
-        key = "<S-Tab>";
-        action = ":bprevious<CR>";
-        options = {
-          desc = "Previous buffer";
-          silent = true;
-        };
       }
     ];
 
@@ -563,9 +454,6 @@
       nixGrammars = true;
       nixvimInjections = true;
       settings = {
-        auto_install = false;
-        sync_install = false;
-        parser_install_dir = "/home/skylark/.local/share/nvim/treesitter";
         ensure_installed = [
           "lua"
           "python"
@@ -579,25 +467,12 @@
           "c"
           "rust"
         ];
-        highlight = {
-          enable = true;
-          additional_vim_regex_highlighting = false;
-        };
-        indent = {
-          enable = true;
-        };
+        highlight = { enable = true; };
+        indent = { enable = true; };
       };
     };
 
     extraConfigLua = ''
-            vim.diagnostic.config({
-              virtual_text = false,
-              signs = true,
-              underline = true,
-              update_in_insert = false,
-              severity_sort = true,
-            })
-
             vim.api.nvim_create_autocmd({"InsertLeave", "TextChanged"}, {
               pattern = "*",
               callback = function()
@@ -649,41 +524,38 @@
               },
             })
 
-      	  -- LuaSnip setup
-            require("luasnip.loaders.from_vscode").lazy_load()
-            
       	  -- Highlight on yank
             vim.api.nvim_create_autocmd('TextYankPost', {
               desc = 'Highlight when yanking text',
               group = vim.api.nvim_create_augroup('highlight-yank', { clear = true }),
               callback = function() vim.hl.on_yank() end,
             })
-
-      	  -- Nvim-autopairs setup
-            require("nvim-autopairs").setup()
-
-      	  -- Autopairs integration to cmp
-            local cmp_autopairs = require('nvim-autopairs.completion.cmp')
-            local cmp = require('cmp')
-            cmp.event:on('confirm_done', cmp_autopairs.on_confirm_done())
-
-      	  -- Telescope setup
-            local telescope = require('telescope')
-            telescope.setup({
-              defaults = {
-                prompt_prefix = " ",
-                selection_caret = "➤ ",
-                sorting_strategy = "ascending",
-                layout_strategy = "flex",
-                layout_config = { width = 0.85, height = 0.85, preview_cutoff = 120 },
-              },
-            })
-
-
     '';
+
+    plugins.nvim-autopairs.enable = true;
+
+    plugins.nvim-autopairs.settings = {
+      disable_filetype = [ "TelescopePrompt" ];
+      map_cr = true;
+    };
+
+    plugins.telescope = {
+      enable = true;
+      settings = {
+        defaults = {
+          sorting_strategy = "ascending";
+          layout_strategy = "flex";
+          layout_config = {
+            width = 0.85;
+            height = 0.85;
+            preview_cutoff = 120;
+          };
+        };
+      };
+    };
+
     # === Editor options ===
     opts = {
-      linespace = 5;
       scrolloff = 8;
       sidescrolloff = 8;
       clipboard = "unnamedplus";
