@@ -249,12 +249,6 @@
 
     extraPlugins = with pkgs.vimPlugins; [
       kanagawa-nvim
-      neo-tree-nvim
-      lualine-nvim
-      nvim-autopairs
-      telescope-nvim
-      plenary-nvim
-      nui-nvim
     ];
 
     plugins.web-devicons.enable = true;
@@ -271,11 +265,21 @@
         compile = false;
         transparent = false;
         dimInactive = false;
-        commentStyle = { italic = true; };
-        keywordStyle = { italic = false; };
-        statementStyle = { bold = false; };
-        functionStyle = { bold = false; };
-        typeStyle = { bold = false; };
+        commentStyle = {
+          italic = true;
+        };
+        keywordStyle = {
+          italic = false;
+        };
+        statementStyle = {
+          bold = false;
+        };
+        functionStyle = {
+          bold = false;
+        };
+        typeStyle = {
+          bold = false;
+        };
         undercurl = true;
         terminalColors = true;
         colors = {
@@ -320,9 +324,9 @@
       {
         mode = "n";
         key = "<leader>e";
-        action = "<cmd>Neotree toggle<cr>";
+        action = "<cmd>lua MiniFiles.open()<CR>";
         options = {
-          desc = "Toggle Neo-tree";
+          desc = "Open file explorer";
           silent = true;
         };
       }
@@ -411,40 +415,40 @@
       }
     ];
 
-    plugins.lualine.enable = true;
-    plugins.lualine.settings = {
-      options = {
-        section_separators = "";
-        component_separators = "";
-        globalstatus = true;
-        disabled_filetypes = [
-          "neo-tree"
-          "neo-tree-popup"
-          "notify"
-        ];
-        icons_enabled = true;
-      };
-      sections = {
-        lualine_a = [ "mode" ];
-        lualine_b = [ "branch" ];
-        lualine_c = [
-          "filename"
-          "diff"
-        ];
-        lualine_x = [
-          "diagnostics"
-          "filetype"
-        ];
-        lualine_y = [ ];
-        lualine_z = [ "location" ];
-      };
-      inactive_sections = {
-        lualine_a = [ ];
-        lualine_b = [ "branch" ];
-        lualine_c = [ "filename" ];
-        lualine_x = [ "location" ];
-        lualine_y = [ ];
-        lualine_z = [ ];
+    plugins.lualine = {
+      enable = true;
+      settings = {
+        options = {
+          section_separators = "";
+          component_separators = "";
+          globalstatus = true;
+          disabled_filetypes = [
+            "minifiles"
+          ];
+          icons_enabled = true;
+        };
+        sections = {
+          lualine_a = [ "mode" ];
+          lualine_b = [ "branch" ];
+          lualine_c = [
+            "filename"
+            "diff"
+          ];
+          lualine_x = [
+            "diagnostics"
+            "filetype"
+          ];
+          lualine_y = [ ];
+          lualine_z = [ "location" ];
+        };
+        inactive_sections = {
+          lualine_a = [ ];
+          lualine_b = [ "branch" ];
+          lualine_c = [ "filename" ];
+          lualine_x = [ "location" ];
+          lualine_y = [ ];
+          lualine_z = [ ];
+        };
       };
     };
 
@@ -467,76 +471,70 @@
           "c"
           "rust"
         ];
-        highlight = { enable = true; };
-        indent = { enable = true; };
+        highlight = {
+          enable = true;
+        };
+        indent = {
+          enable = true;
+        };
       };
     };
 
     extraConfigLua = ''
-            vim.api.nvim_create_autocmd({"InsertLeave", "TextChanged"}, {
-              pattern = "*",
-              callback = function()
-                if vim.bo.modified and not vim.bo.readonly and vim.fn.expand("%") ~= "" and vim.bo.buftype == "" then
-                  vim.cmd("silent! write")
-                end
-              end,
-            })
-      	
-            -- Neo-tree setup
-            require("neo-tree").setup({
-              close_if_last_window = true,
-              enable_git_status = true,
-              enable_diagnostics = true,
-              sort_case_insensitive = true,
-              default_component_configs = {
-                icon = {
-                  folder_closed = "",
-                  folder_open = "",
-                  folder_empty = "ﰊ",
-                },
-                git_status = {
-                  symbols = { added = "+", modified = "~", deleted = "x" },
-                },
-              },
-              window = {
-                position = "right",
-                width = 35,
-                mappings = {
-                  ["o"] = "open",
-                  ["<CR>"] = "open",
-                  ["s"] = "split_with_window_picker",
-                  ["v"] = "vsplit_with_window_picker",
-                  ["t"] = "open_tabnew",
-                  ["h"] = "close_node",
-                  ["l"] = "open",
-                  ["R"] = "refresh",
-                  ["a"] = "add",
-                  ["d"] = "delete",
-                  ["r"] = "rename",
-                },
-              },
-              filesystem = {
-                filtered_items = {
-                  visible = true,
-                  hide_dotfiles = false,
-                  hide_gitignored = false,
-                },
-              },
-            })
-
-      	  -- Highlight on yank
-            vim.api.nvim_create_autocmd('TextYankPost', {
-              desc = 'Highlight when yanking text',
-              group = vim.api.nvim_create_augroup('highlight-yank', { clear = true }),
-              callback = function() vim.hl.on_yank() end,
-            })
+      vim.api.nvim_create_autocmd({"InsertLeave", "FocusLost"}, {
+        callback = function()
+          if
+            vim.bo.modified
+            and not vim.bo.readonly
+            and vim.bo.buftype == ""
+            and vim.bo.filetype ~= ""
+            and vim.fn.expand("%") ~= ""
+          then
+            vim.cmd("silent! write")
+          end
+        end,
+      })
+                  	
+      -- Highlight on yank
+      vim.api.nvim_create_autocmd('TextYankPost', {
+        desc = 'Highlight when yanking text',
+        group = vim.api.nvim_create_augroup('highlight-yank', { clear = true }),
+        callback = function() vim.hl.on_yank() end,
+      })
     '';
 
-    plugins.nvim-autopairs.enable = true;
+    plugins.mini-files = {
+      enable = true;
+      autoLoad = true;
 
-    plugins.nvim-autopairs.settings = {
-      disable_filetype = [ "TelescopePrompt" ];
-      map_cr = true;
+      settings = {
+        options = {
+          use_as_default_explorer = true;
+          permanent_delete = true;
+        };
+
+        windows = {
+          preview = false;
+          width_focus = 40;
+          width_nofocus = 20;
+        };
+
+        mappings = {
+          close = "q";
+          go_in = "l";
+          go_out = "h";
+          reset = "<BS>";
+          show_help = "g?";
+        };
+      };
+    };
+
+    plugins.nvim-autopairs = {
+      enable = true;
+      settings = {
+        disable_filetype = [ "TelescopePrompt" ];
+        map_cr = true;
+      };
     };
 
     plugins.telescope = {
