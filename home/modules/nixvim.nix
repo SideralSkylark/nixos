@@ -413,6 +413,18 @@
         action = "<cmd>bd<cr>";
         options.desc = "Close buffer";
       }
+      {
+        mode = [
+          "n"
+          "i"
+        ];
+        key = "<C-s>";
+        action = "<cmd>w<cr>";
+        options = {
+          desc = "Save file";
+          silent = true;
+        };
+      }
     ];
 
     plugins.lualine = {
@@ -568,6 +580,10 @@
       updatetime = 300;
       termguicolors = true;
       wrap = false;
+      undofile = true;
+      swapfile = false;
+      backup = false;
+      writebackup = false;
     };
   };
 }
