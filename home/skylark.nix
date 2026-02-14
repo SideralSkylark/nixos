@@ -70,7 +70,6 @@
     # SwayNC
     "swaync/config.json".source = ../dotfiles/swaync/.config/swaync/config.json;
     "swaync/style.css".source = ../dotfiles/swaync/.config/swaync/style.css;
-    "swaync/icons".source = ../dotfiles/swaync/.config/swaync/icons;
 
     # Waybar
     "waybar/config.jsonc".source = ../dotfiles/waybar/.config/waybar/config.jsonc;
