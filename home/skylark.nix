@@ -6,7 +6,7 @@
   home.stateVersion = "25.05";
 
   imports = [
-    ./modules   
+    ./modules
     nixvim.homeModules.nixvim
   ];
 
@@ -15,7 +15,7 @@
     imports = [ ./modules/nixvim.nix ];
   };
 
-    xdg = {
+  xdg = {
     enable = true;
 
     userDirs = {
@@ -40,9 +40,11 @@
   };
 
   xdg.configFile = {
+    # scripts
+    "bin/kn".source = ../dotfiles/bin/.local/bin/kn.sh;
     # Hyprland
     "hypr/hyprland.conf".source = ../dotfiles/hyprland/.config/hypr/hyprland.conf;
-    "hypr/startup.conf".source  = ../dotfiles/hyprland/.config/hypr/startup.conf;
+    "hypr/startup.conf".source = ../dotfiles/hyprland/.config/hypr/startup.conf;
     "hypr/scripts/random-wallpaper" = {
       source = ../dotfiles/hyprland/.config/hypr/scripts/random-wallpaper.sh;
       executable = true;
@@ -73,12 +75,11 @@
 
     # Waybar
     "waybar/config.jsonc".source = ../dotfiles/waybar/.config/waybar/config.jsonc;
-    "waybar/style.css".source    = ../dotfiles/waybar/.config/waybar/style.css;
-    "waybar/scripts".source      = ../dotfiles/waybar/.config/waybar/scripts;
+    "waybar/style.css".source = ../dotfiles/waybar/.config/waybar/style.css;
+    "waybar/scripts".source = ../dotfiles/waybar/.config/waybar/scripts;
 
     # tofi
     "tofi/config".source = ../dotfiles/tofi/.config/tofi/config;
     "tofi/power.conf".source = ../dotfiles/tofi/.config/tofi/power.conf;
   };
 }
-

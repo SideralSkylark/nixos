@@ -1,13 +1,20 @@
 {
-    programs.bash = {
-        enable = true;
+  programs.bat = {
+    enable = true;
+    config = {
+      paging = "never";
+      style = "numbers";
     };
+  };
 
-    programs.starship = {
-        enable = true;
+  programs.bash = {
+    enable = true;
+    shellAliases = {
+      kn = "~/.local/bin/kn";
     };
+  };
 
-    programs.zoxide = {
-        enable = true;
-    };
+  programs.starship.enable = true;
+
+  programs.zoxide.enable = true;
 }
