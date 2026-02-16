@@ -41,7 +41,7 @@
 
   xdg.configFile = {
     # scripts
-    "bin/kn".source = ../dotfiles/bin/.local/bin/kn.sh;
+    "bin/kn".source = ../dotfiles/bin/kn.sh;
     # Hyprland
     "hypr/hyprland.conf".source = ../dotfiles/hyprland/.config/hypr/hyprland.conf;
     "hypr/startup.conf".source = ../dotfiles/hyprland/.config/hypr/startup.conf;
