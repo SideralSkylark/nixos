@@ -22,12 +22,25 @@
     # C compiler
     ripgrep
     fd
-    (pkgs.writeShellScriptBin "kn" ''
-      rg --line-number --smart-case "$@" "$HOME/knowledge" | fzf \
-        --delimiter : \
-        --preview 'bat --style=numbers --color=always --paging=never {1} --highlight-line {2}' \
-        --preview-window right:60%
-    '')
+(pkgs.writeShellScriptBin "kn" ''
+  DIR="$HOME/knowledge"
+  [ -d "$DIR" ] || { echo "Directory $DIR not found"; exit 1; }
+  CLIP=${pkgs.wl-clipboard}/bin/wl-copy
+  fzf \
+    --ansi \
+    --delimiter : \
+    --layout reverse \
+    --preview 'bat --style=numbers --color=always --paging=never --highlight-line {2} {1}' \
+    --preview-window 'right:60%:wrap' \
+    --bind "start:reload:rg --line-number --smart-case --no-heading --color=always {q} $DIR 2>/dev/null || true" \
+    --bind "change:reload:rg --line-number --smart-case --no-heading --color=always {q} $DIR 2>/dev/null || true" \
+    --bind "ctrl-y:execute-silent(echo {3..} | $CLIP)" \
+    --bind "ctrl-f:change-preview(bat --style=plain --color=always --paging=never {1})" \
+    --bind "ctrl-r:change-preview(bat --style=numbers --color=always --paging=never --highlight-line {2} {1})" \
+    --bind "ctrl-p:toggle-preview" \
+    --header 'C-y:copy  C-f:file  C-r:reset  C-p:preview' \
+    --query "$*"
+'')
     fzf
     python3
   ];
