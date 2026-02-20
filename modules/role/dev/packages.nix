@@ -7,6 +7,7 @@
         vscode
 		zed-editor
         lazydocker
+        lazygit
         postman
         jdk21_headless
         nodejs_22

@@ -3,7 +3,7 @@
   programs.ssh = {
     startAgent = true;
 
-    # iclude github ssh key on boot
+    # include github ssh key on boot
     extraConfig = ''
       Host github.com
         HostName github.com
