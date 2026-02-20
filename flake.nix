@@ -20,56 +20,67 @@
     };
   };
 
-  outputs = { self, nixpkgs, home-manager, stylix, nixvim, ... }@inputs:
-  let
-    system = "x86_64-linux";
+  outputs =
+    {
+      self,
+      nixpkgs,
+      home-manager,
+      stylix,
+      nixvim,
+      ...
+    }@inputs:
+    let
+      system = "x86_64-linux";
 
-    mkHost = hostPath:
-      nixpkgs.lib.nixosSystem {
-        inherit system;
+      mkHost =
+        hostPath:
+        nixpkgs.lib.nixosSystem {
+          inherit system;
 
-        modules = [
-          hostPath
-          stylix.nixosModules.stylix
-          home-manager.nixosModules.home-manager
-          {
-            home-manager = {
-              useGlobalPkgs = true;
-              useUserPackages = true;
+          modules = [
+            hostPath
+            stylix.nixosModules.stylix
+            home-manager.nixosModules.home-manager
+            {
+              home-manager = {
+                useGlobalPkgs = true;
+                useUserPackages = true;
 
-              users.skylark = { ... }: {
-                imports = [
-                  ./home/skylark.nix
-                  ./home/modules/hyprland
-                ];
+                users.skylark =
+                  { ... }:
+                  {
+                    imports = [
+                      ./home/skylark.nix
+                      ./home/modules/hyprland
+                    ];
+                  };
+
+                backupFileExtension = "backup";
+                extraSpecialArgs = { inherit nixvim; };
               };
-
-              backupFileExtension = "backup";
-              extraSpecialArgs = { inherit nixvim; };
-            };
-          }
-        ];
+            }
+          ];
+        };
+    in
+    {
+      # -------- NixOS machines --------
+      nixosConfigurations = {
+        laptop = mkHost ./hosts/laptop/configuration.nix;
+        nixos = mkHost ./hosts/nixos/configuration.nix;
       };
-  in
-  {
-    # -------- NixOS machines --------
-    nixosConfigurations = {
-      laptop = mkHost ./hosts/laptop/configuration.nix;
-      nixos  = mkHost ./hosts/nixos/configuration.nix;
-    };
 
-    # -------- Fedora / Standalone HM --------
-    homeConfigurations = {
-      skylark = home-manager.lib.homeManagerConfiguration {
-        pkgs = nixpkgs.legacyPackages.${system};
+      # -------- Fedora / Standalone HM --------
+      homeConfigurations = {
+        skylark = home-manager.lib.homeManagerConfiguration {
+          pkgs = nixpkgs.legacyPackages.${system};
 
-        modules = [
-          ./home/skylark.nix
-          ./home/modules/kde   # futuro módulo KDE
-        ];
+          modules = [
+            ./home/skylark.nix
+            ./home/modules/kde
+          ];
 
-        extraSpecialArgs = { inherit nixvim; };
+          extraSpecialArgs = { inherit nixvim; };
+        };
       };
     };
-  };
 }
