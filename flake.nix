@@ -33,7 +33,12 @@
                         home-manager = {
                             useGlobalPkgs = true;
                             useUserPackages = true;
-                            users.skylark = import ./home/skylark.nix;
+                            users.skylark =  { ... }: {
+                                imports = [
+                                    ./home/skylark.nix
+                                    ./home/modules/hyprland
+                                ];
+                            };
                             backupFileExtension = "backup";
                             extraSpecialArgs = { inherit nixvim; };
                         };
@@ -51,7 +56,12 @@
                         home-manager = {
                             useGlobalPkgs = true;
                             useUserPackages = true;
-                            users.skylark = import ./home/skylark.nix;
+                            users.skylark =  { ... }: {
+                                imports = [
+                                    ./home/skylark.nix
+                                    ./home/modules/hyprland
+                                ];
+                            };
                             backupFileExtension = "backup";
                             extraSpecialArgs = { inherit nixvim; };
                         };

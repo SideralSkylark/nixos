@@ -1,30 +1,12 @@
 { pkgs, ... }:
 {
-    home.packages = with pkgs; [
-        swww
-        nwg-displays
-        pavucontrol
-        nautilus
-        grim
-        slurp
-        swappy
-        wl-clipboard
-        cliphist
-        swaybg
-        kitty
-        waybar
-        tofi
-        swaynotificationcenter
-        starship
-        hyprlock
-        hypridle
-        hyprsunset
-        brave
-        vlc
-        obsidian
-        anki
-        btop
-        fastfetch
-        nitch
-    ];
+  home.packages = with pkgs; [
+    kitty
+    brave
+    vlc
+    obsidian
+    anki
+    fastfetch
+    nitch
+  ];
 }
