@@ -1,7 +1,7 @@
 {
-    imports = [
-        ./docker.nix
-        ./packages.nix
-    ];
+  imports = [
+    ./docker.nix
+    ./packages.nix
+  ];
 
 }

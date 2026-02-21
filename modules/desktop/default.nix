@@ -1,7 +1,7 @@
 {
-    imports = [
-        ./packages.nix
-        ./session.nix
-        ./stylix.nix
-    ];
+  imports = [
+    ./packages.nix
+    ./session.nix
+    ./stylix.nix
+  ];
 }

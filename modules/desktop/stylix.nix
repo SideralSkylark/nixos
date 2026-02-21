@@ -1,7 +1,7 @@
 { pkgs, ... }:
 
 {
-    stylix = {
+  stylix = {
     enable = true;
 
     image = null;
@@ -49,7 +49,7 @@
     iconTheme = {
       enable = true;
       package = pkgs.papirus-icon-theme;
-      dark  = "Papirus-Dark";
+      dark = "Papirus-Dark";
       light = "Papirus-Light";
     };
   };
