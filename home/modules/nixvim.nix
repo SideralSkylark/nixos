@@ -247,10 +247,6 @@
     plugins.cmp-buffer.enable = true;
     plugins.cmp-path.enable = true;
 
-    extraPlugins = with pkgs.vimPlugins; [
-      kanagawa-nvim
-    ];
-
     plugins.web-devicons.enable = true;
 
     # === Kanagawa Colorscheme ===
@@ -471,13 +467,7 @@
       nixvimInjections = true;
       settings = {
         ensure_installed = [
-          "lua"
-          "python"
-          "javascript"
           "typescript"
-          "html"
-          "css"
-          "markdown"
           "java"
           "nix"
           "c"
