@@ -1,12 +1,9 @@
 "$schema" = 'https://starship.rs/config-schema.json'
 
 format = """
-[](bg:mantle fg:text)\
-$os\
-$username\
-[](bg:accent1 fg:mantle)\
+[](bg:mantle fg:surface0)\
 $directory\
-[](fg:accent1 bg:green)\
+[](fg:surface0 bg:green)\
 $git_branch\
 $git_status\
 [](fg:green bg:teal)\
@@ -14,45 +11,26 @@ $c\
 $rust\
 $golang\
 $python\
-[](fg:teal bg:blue)\
-$docker_context\
-[](fg:blue bg:accent2)\
-$time\
-[](fg:accent2)\
+[](fg:teal)\
 $line_break$character
 """
 
 palette = 'kanagawa'
 
 [palettes.kanagawa]
-# Paleta ajustada ao fundo #0F1419
-text      = "#DCD7BA"
-mantle    = "#0F1419"
-surface0  = "#1F1F28"
-
-accent1   = "#DCA561" # dourado quente
-accent2   = "#7E9CD8" # azul Kanagawa
-red       = "#C34043"
-green     = "#98BB6C"
-teal      = "#7AA89F"
-blue      = "#7FB4CA"
-purple    = "#938AA9"
-orange    = "#E6C384"
-
-[os]
-disabled = false
-style = "bg:mantle fg:text"
-format = "[$symbol ]($style)"
-
-[username]
-show_always = true
-style_user = "bg:mantle fg:text"
-style_root = "bg:mantle fg:red"
-format = '[ $user ]($style)'
+text     = "#DCD7BA"
+mantle   = "#0F1419"
+surface0 = "#1F1F28"
+green    = "#98BB6C"
+teal     = "#7AA89F"
+red      = "#C34043"
+blue     = "#7FB4CA"
+accent1  = "#DCA561"
+accent2  = "#7E9CD8"
 
 [directory]
-style = "fg:mantle bg:accent1"
-format = "[ $path ]($style)"
+style            = "fg:mantle bg:surface0"
+format           = "[ $path ]($style)"
 truncation_length = 3
 truncation_symbol = "…/"
 
