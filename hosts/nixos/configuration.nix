@@ -2,6 +2,7 @@
   imports = [
     ./boot.nix
     ./hardware-configuration.nix
+    ../../modules/role/dev
     ../common.nix
   ];
 
