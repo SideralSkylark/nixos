@@ -15,7 +15,6 @@
     swappy
     wl-clipboard
     cliphist
-    swaybg
     waybar
     tofi
     swaynotificationcenter
