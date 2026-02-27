@@ -27,10 +27,18 @@
 
   xdg.configFile = {
     # Hyprland
-    "hypr/hyprland.conf".source = ../../../dotfiles/hyprland/.config/hypr/hyprland.conf; 
+    "hypr/hyprland.conf".source = ../../../dotfiles/hyprland/.config/hypr/hyprland.conf;
     "hypr/startup.conf".source = ../../../dotfiles/hyprland/.config/hypr/startup.conf;
     "hypr/scripts/random-wallpaper" = {
       source = ../../../dotfiles/hyprland/.config/hypr/scripts/random-wallpaper.sh;
+      executable = true;
+    };
+    "hypr/scripts/audio" = {
+      source = ../../../dotfiles/hyprland/.config/hypr/scripts/audio.sh;
+      executable = true;
+    };
+    "hypr/scripts/brightness" = {
+      source = ../../../dotfiles/hyprland/.config/hypr/scripts/brightness.sh;
       executable = true;
     };
 

@@ -10,8 +10,8 @@
 
 * {
   font-family: "JetBrainsMono Nerd Font", monospace;
-  font-size: 13px;
-  transition: background 0.15s ease, color 0.15s ease, border-color 0.15s ease;
+  font-size: 12px;
+  transition: background 0.12s ease, color 0.12s ease, border-color 0.12s ease;
 }
 
 /* ── Transparent shells ─────────────────────────────── */
@@ -31,16 +31,12 @@ window,
 /* ── Control Center ─────────────────────────────────── */
 
 .control-center {
-  background: rgba(22, 22, 29, 0.97);
-  border-radius: 12px;
-  border: 1px solid rgba(114, 113, 105, 0.25);
-  padding: 10px;
+  background: rgba(22, 22, 29, 0.98);
+  border-radius: 6px;
+  border: 1px solid rgba(114, 113, 105, 0.18);
+  border-top: 1px solid rgba(114, 113, 105, 0.35); /* subtle top highlight */
+  padding: 8px;
   margin: 8px;
-}
-
-.control-center .notification-row:focus,
-.control-center .notification-row:hover {
-  background: transparent;
 }
 
 /* ── Floating Notifications ─────────────────────────── */
@@ -48,38 +44,32 @@ window,
 .floating-notifications.background
   .notification-row
   .notification-background {
-  background: rgba(22, 22, 29, 0.96);
-  border-radius: 10px;
-  border: 1px solid rgba(114, 113, 105, 0.2);
-  margin: 6px 10px;
-}
-
-.floating-notifications.background
-  .notification-row
-  .notification-background:hover {
-  border-color: rgba(114, 113, 105, 0.4);
+  background: rgba(22, 22, 29, 0.97);
+  border-radius: 4px;
+  border: none;
+  border-left: 2px solid @accent-teal;
+  margin: 5px 10px;
 }
 
 /* ── Notification ───────────────────────────────────── */
 
 .notification {
   background: transparent;
-  padding: 10px 12px;
-  border-radius: 8px;
-  animation: fade-in 0.2s ease;
+  padding: 8px 10px;
+  border-radius: 4px;
+  animation: fade-in 0.15s ease;
 }
 
 .notification.critical {
   border-left: 2px solid @accent-red;
-  background: rgba(195, 64, 67, 0.07);
 }
 
 .notification.low {
-  opacity: 0.8;
+  opacity: 0.7;
 }
 
 .notification.dismissed {
-  animation: fade-out 0.18s ease forwards;
+  animation: fade-out 0.15s ease forwards;
 }
 
 .notification-content {
@@ -87,126 +77,127 @@ window,
 }
 
 .summary {
-  font-weight: 600;
-  font-size: 13px;
+  font-weight: 700;
+  font-size: 12px;
   color: @fg-primary;
-  margin-bottom: 3px;
+  margin-bottom: 2px;
+  letter-spacing: 0.03em;
 }
 
 .body {
-  font-size: 12px;
+  font-size: 11px;
   color: @fg-secondary;
-  line-height: 1.5;
+  line-height: 1.4;
 }
 
 .time {
   font-size: 10px;
   color: @fg-dim;
-  margin-top: 4px;
+  margin-top: 3px;
 }
 
 .image {
-  border-radius: 6px;
-  margin: 6px;
+  border-radius: 2px; /* sharp — more retro */
+  margin: 4px;
 }
 
 /* ── Notification Actions ───────────────────────────── */
 
 .notification-action {
-  border-radius: 6px;
-  background: rgba(42, 42, 55, 0.5);
+  border-radius: 3px;
+  background: transparent;
   border: 1px solid rgba(114, 113, 105, 0.2);
   margin: 4px 3px 3px;
-  padding: 6px 12px;
-  font-size: 12px;
-  color: @fg-secondary;
-}
-
-.notification-action:hover {
-  background: rgba(42, 42, 55, 0.8);
-  color: @fg-primary;
+  padding: 5px 10px;
+  font-size: 11px;
+  color: @fg-dim;
 }
 
 /* ── Close Button ───────────────────────────────────── */
 
 .close-button {
-  margin: 6px;
-  padding: 4px;
-  border-radius: 4px;
+  margin: 4px;
+  padding: 3px;
+  border-radius: 2px;
   background: transparent;
   color: @fg-dim;
-  min-width: 18px;
-  min-height: 18px;
+  min-width: 16px;
+  min-height: 16px;
 }
 
 .close-button:hover {
-  background: rgba(195, 64, 67, 0.2);
-  color: @fg-primary;
+  background: rgba(195, 64, 67, 0.15);
+  color: @accent-red;
 }
 
 /* ── Progress ───────────────────────────────────────── */
 
 .notification progress {
   background: rgba(42, 42, 55, 0.4);
-  border-radius: 2px;
+  border-radius: 1px;
   min-height: 2px;
 }
 
-.notification progress::-webkit-progress-value {
+.notification progress trough {
   background: @accent-teal;
-  border-radius: 2px;
+  border-radius: 1px;
 }
 
-.notification.critical progress::-webkit-progress-value {
+.notification.critical progress trough {
   background: @accent-red;
 }
 
 /* ── Widget: Title ──────────────────────────────────── */
 
 .widget-title {
-  margin: 6px 6px 10px;
+  margin: 4px 6px 8px;
   font-size: 11px;
   font-weight: 700;
-  letter-spacing: 0.1em;
+  letter-spacing: 0.12em;
   text-transform: uppercase;
-  color: @fg-dim;
+  color: @accent-teal; /* colored title for retro flair */
 }
 
 .widget-title > button {
   background: transparent;
-  border: 1px solid rgba(114, 113, 105, 0.25);
-  border-radius: 6px;
-  padding: 5px 10px;
-  font-size: 11px;
+  border: 1px solid rgba(114, 113, 105, 0.2);
+  border-radius: 3px;
+  padding: 4px 10px;
+  font-size: 10px;
   color: @fg-dim;
   font-family: "JetBrainsMono Nerd Font", monospace;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
 }
 
 .widget-title > button:hover {
   color: @fg-primary;
-  border-color: rgba(114, 113, 105, 0.5);
+  border-color: @accent-red;
 }
 
 /* ── Widget: DND ────────────────────────────────────── */
 
 .widget-dnd {
-  margin: 6px;
-  padding: 10px 12px;
-  background: rgba(42, 42, 55, 0.35);
-  border: 1px solid rgba(114, 113, 105, 0.15);
-  border-radius: 8px;
-  font-size: 12px;
-  color: @fg-secondary;
+  margin: 4px 6px;
+  padding: 8px 10px;
+  background: transparent;
+  border: 1px solid rgba(114, 113, 105, 0.12);
+  border-radius: 4px;
+  font-size: 11px;
+  color: @fg-dim;
 }
 
 .widget-dnd > label {
   font-weight: 600;
-  color: @fg-primary;
+  color: @fg-secondary;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  font-size: 10px;
 }
 
 .widget-dnd > switch {
   background: rgba(22, 22, 29, 0.8);
-  border-radius: 10px;
+  border-radius: 2px; /* square switch — retro feel */
   border: 1px solid rgba(114, 113, 105, 0.2);
 }
 
@@ -217,105 +208,54 @@ window,
 
 .widget-dnd > switch slider {
   background: @fg-primary;
-  border-radius: 50%;
+  border-radius: 1px;
 }
 
 /* ── Widget: MPRIS ──────────────────────────────────── */
 
 .widget-mpris {
-  margin: 6px;
-  padding: 10px;
-  background: rgba(42, 42, 55, 0.3);
-  border: 1px solid rgba(114, 113, 105, 0.15);
-  border-radius: 8px;
+  margin: 4px 6px;
+  padding: 8px;
+  background: rgba(42, 42, 55, 0.2);
+  border: 1px solid rgba(114, 113, 105, 0.12);
+  border-radius: 4px;
 }
 
 .widget-mpris-title {
   font-weight: 700;
-  font-size: 13px;
+  font-size: 12px;
   color: @fg-primary;
+  letter-spacing: 0.02em;
 }
 
 .widget-mpris-subtitle {
-  font-size: 11px;
-  color: @fg-secondary;
+  font-size: 10px;
+  color: @fg-dim;
+  letter-spacing: 0.04em;
 }
 
 .widget-mpris > box > button {
   background: transparent;
-  border: 1px solid rgba(114, 113, 105, 0.2);
-  border-radius: 6px;
-  padding: 6px;
-  color: @fg-secondary;
-  margin: 3px;
+  border: 1px solid rgba(114, 113, 105, 0.15);
+  border-radius: 3px;
+  padding: 5px 8px;
+  color: @fg-dim;
+  margin: 2px;
 }
 
 .widget-mpris > box > button:hover {
-  color: @fg-primary;
-  border-color: rgba(114, 113, 105, 0.45);
-}
-
-/* ── Widget: Buttons Grid ───────────────────────────── */
-
-.widget-buttons-grid {
-  margin: 6px;
-  padding: 6px;
-  background: rgba(42, 42, 55, 0.25);
-  border: 1px solid rgba(114, 113, 105, 0.1);
-  border-radius: 8px;
-}
-
-.widget-buttons-grid > flowbox > flowboxchild > button {
-  background: rgba(22, 22, 29, 0.5);
-  border: 1px solid rgba(114, 113, 105, 0.15);
-  border-radius: 8px;
-  padding: 14px;
-  margin: 3px;
-  font-size: 18px;
-  color: @fg-dim;
-  min-width: 54px;
-  min-height: 54px;
-}
-
-.widget-buttons-grid > flowbox > flowboxchild > button:hover {
-  background: rgba(42, 42, 55, 0.7);
   color: @accent-teal;
-  border-color: rgba(122, 168, 159, 0.3);
-}
-
-.widget-buttons-grid > flowbox > flowboxchild > button:active {
-  background: rgba(122, 168, 159, 0.12);
-}
-
-/* ── Scrollbar ──────────────────────────────────────── */
-
-scrollbar {
-  background: transparent;
-  width: 6px;
-}
-
-scrollbar trough {
-  background: transparent;
-}
-
-scrollbar slider {
-  background: rgba(114, 113, 105, 0.3);
-  border-radius: 3px;
-  min-height: 24px;
-}
-
-scrollbar slider:hover {
-  background: rgba(114, 113, 105, 0.5);
+  border-color: rgba(122, 168, 159, 0.4);
 }
 
 /* ── Animations ─────────────────────────────────────── */
 
 @keyframes fade-in {
-  from { opacity: 0; transform: translateY(-6px); }
+  from { opacity: 0; transform: translateY(-4px); }
   to   { opacity: 1; transform: translateY(0); }
 }
 
 @keyframes fade-out {
   from { opacity: 1; transform: translateY(0); }
-  to   { opacity: 0; transform: translateY(-4px); }
+  to   { opacity: 0; transform: translateY(-3px); }
 }
