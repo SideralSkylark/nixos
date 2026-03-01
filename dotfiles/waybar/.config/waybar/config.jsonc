@@ -65,6 +65,8 @@
     "exec": "swaync-client -swb",
     "on-click": "sleep 0.1 && swaync-client -t -sw",
     "on-click-right": "swaync-client -d -sw",
+    "on-scroll-up": "",
+    "on-scroll-down": "",
     "escape": true
   },
   "clock": {
@@ -103,6 +105,8 @@
     "tooltip-format-connected": "{controller_alias} | Connected\n{device_enumerate}",
     "tooltip-format-enumerate-connected": "• {device_alias}",
     "on-click": "blueman-manager",
+    "on-scroll-up": "",
+    "on-scroll-down": "",
     "on-click-right": "bluetoothctl disconnect"
   },
 
@@ -118,6 +122,8 @@
     "format-full": "󰁹 Full",
     "format-alt": "{icon} {time}",
     "format-icons": ["󰁺", "󰁼", "󰁾", "󰂀", "󰁹"],
+    "on-scroll-up": "",
+    "on-scroll-down": "",
     "tooltip-format": "{timeTo} • {power}W"
   },
 
@@ -131,6 +137,8 @@
     "tooltip-format-ethernet": "{ifname} • {ipaddr}",
     "tooltip-format-disconnected": "WiFi disconected",
     "tooltip-format-disabled": "WiFi deactivated - Click to activate",
+    "on-scroll-up": "",
+    "on-scroll-down": "",
     "on-click": "~/.config/waybar/scripts/wifi-toggle.sh",
     "on-click-right": "~/.config/waybar/scripts/wifi-menu.sh"
   },
@@ -139,9 +147,9 @@
     "exec": "~/.config/waybar/scripts/reading-mode.sh display",
     "on-click": "~/.config/waybar/scripts/reading-mode.sh toggle",
     "interval": 5,
-    "tooltip": true,
-    "exec-tooltip": "~/.config/waybar/scripts/reading-mode.sh tooltip",
-    "return-type": "text"
+    "on-scroll-up": "",
+    "on-scroll-down": "",
+    "return-type": "json"
   },
 
 
@@ -175,6 +183,8 @@
       "deactivated": "󰾪"
     },
     "tooltip-format-activated": "Idle inhibitor active",
+    "on-scroll-up": "",
+    "on-scroll-down": "",
     "tooltip-format-deactivated": "Idle inhibitor inactive"
   },
 
@@ -184,12 +194,16 @@
     "interval": 5,
     "tooltip": true,
     "return-type": "json",
+    "on-scroll-up": "",
+    "on-scroll-down": "",
     "format": "{text}"
   },
 
   "custom/power": {
     "format": "󰐥",
     "tooltip": "Power Menu",
+    "on-scroll-up": "",
+    "on-scroll-down": "",
     "on-click": "~/.config/waybar/scripts/power-menu.sh"
   },
 
