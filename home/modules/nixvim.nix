@@ -301,11 +301,6 @@
                 comment = "#6f6f6f"; # neutral gray comments
               };
             };
-            dragon = {
-              ui = {
-                bg = "#0f0f14"; # slightly calmer than default
-              };
-            };
           };
         };
       };
