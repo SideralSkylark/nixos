@@ -1,5 +1,4 @@
 #!/usr/bin/env bash
-# export PATH="/run/current-system/sw/bin:/etc/profiles/per-user/$USER/bin:$PATH"
 
 ACTION=$1
 

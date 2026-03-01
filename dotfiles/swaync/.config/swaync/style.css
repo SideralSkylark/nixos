@@ -1,4 +1,3 @@
-@define-color bg-deep       #16161D;
 @define-color bg-base       #1F1F28;
 @define-color bg-surface    #2A2A37;
 @define-color fg-primary    #DCD7BA;
@@ -132,18 +131,24 @@ window,
 
 /* ── Progress ───────────────────────────────────────── */
 
-.notification progress {
-  background: rgba(42, 42, 55, 0.4);
-  border-radius: 1px;
-  min-height: 2px;
+.notification progressbar {
+  margin-top: 6px;
+  min-height: 6px;
 }
 
-.notification progress trough {
+.notification progressbar trough {
+  background: rgba(42, 42, 55, 0.6);
+  border-radius: 2px;
+  min-height: 6px;
+}
+
+.notification progressbar progress {
   background: @accent-teal;
-  border-radius: 1px;
+  border-radius: 2px;
+  min-height: 6px;
 }
 
-.notification.critical progress trough {
+.notification.critical progressbar progress {
   background: @accent-red;
 }
 
