@@ -1,5 +1,5 @@
 {
-  services.openssh.enable = true;
+  services.openssh.enable = false;
   programs.ssh = {
     startAgent = true;
 

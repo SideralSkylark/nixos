@@ -7,8 +7,8 @@
   security.sudo.enable = true;
 
   #### shh protection ####
-  services.fail2ban = {
-    enable = true;
+  services.sshguard = {
+    enable = false;
   };
 
   security.polkit.enable = true;
