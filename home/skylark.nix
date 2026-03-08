@@ -1,4 +1,4 @@
-{ config, nixvim, ... }:
+{ config, pkgs, nixvim, zen-browser, ... }:
 
 {
   home.username = "skylark";
@@ -8,6 +8,11 @@
   imports = [
     ./modules
     nixvim.homeModules.nixvim
+  ];
+
+  home.packages = [
+    # ... pacotes existentes ...
+    zen-browser.packages.${pkgs.stdenv.hostPlatform.system}.default
   ];
 
   programs.nixvim = {

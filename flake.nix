@@ -18,6 +18,11 @@
       url = "github:nix-community/nixvim/nixos-25.11";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+
+    zen-browser = {     
+      url = "github:youwen5/zen-browser-flake";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
   outputs =
@@ -27,6 +32,7 @@
       home-manager,
       stylix,
       nixvim,
+      zen-browser,
       ...
     }@inputs:
     let
@@ -56,7 +62,7 @@
                   };
 
                 backupFileExtension = "backup";
-                extraSpecialArgs = { inherit nixvim; };
+                extraSpecialArgs = { inherit nixvim zen-browser; };
               };
             }
           ];
