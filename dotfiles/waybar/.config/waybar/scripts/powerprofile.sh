@@ -21,6 +21,7 @@ toggle_profile() {
     performance) set_profile power-saver ;;
     *)           set_profile balanced ;;
   esac
+  pkill -RTMIN+9 waybar  
 }
 
 icon_for() {

@@ -128,7 +128,7 @@
   },
 
   "network": {
-    "interval": 3,
+    "interval": 10,
     "format-wifi": "󰤨 {signalStrength}%",
     "format-ethernet": "󰈀",
     "format-disconnected": "󰤭",
@@ -146,7 +146,8 @@
   "custom/reading-mode": {
     "exec": "~/.config/waybar/scripts/reading-mode.sh display",
     "on-click": "~/.config/waybar/scripts/reading-mode.sh toggle",
-    "interval": 5,
+    "interval": "once",
+    "signal": 8,
     "on-scroll-up": "",
     "on-scroll-down": "",
     "return-type": "json"
@@ -191,7 +192,8 @@
   "custom/powerprofile": {
     "exec": "~/.config/waybar/scripts/powerprofile.sh",
     "on-click": "~/.config/waybar/scripts/powerprofile.sh toggle",
-    "interval": 5,
+    "interval": "once",
+    "signal": 9,
     "tooltip": true,
     "return-type": "json",
     "on-scroll-up": "",

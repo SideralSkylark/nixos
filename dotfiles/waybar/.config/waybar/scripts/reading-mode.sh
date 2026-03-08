@@ -12,6 +12,7 @@ toggle() {
         hyprsunset -t "$TEMP" &
     fi
     sleep 0.2
+    pkill -RTMIN+8 waybar  
 }
 
 case "$1" in

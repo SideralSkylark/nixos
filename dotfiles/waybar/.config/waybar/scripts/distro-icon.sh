@@ -1,28 +1,24 @@
 #!/usr/bin/env bash
 
-# Detectar a distribuição e retornar o ícone apropriado
 if [ -f /etc/os-release ]; then
     . /etc/os-release
     case $ID in
         nixos)
-            echo ""  # Ícone do NixOS
+            echo "" 
             ;;
         fedora)
-            echo ""  # Ícone do Fedora
+            echo ""  
             ;;
         arch|endeavouros|manjaro)
-            echo ""  # Ícone do Arch Linux
+            echo "" 
             ;;
         ubuntu|debian|pop|linuxmint)
-            echo ""  # Ícone do Debian/Ubuntu
-            ;;
-        opensuse*|suse*)
-            echo ""  # Ícone do openSUSE
+            echo ""  
             ;;
         *)
-            echo ""  # Ícone genérico do Linux
+            echo ""  
             ;;
     esac
 else
-    echo ""  # Fallback para ícone genérico
+    echo ""  
 fi
