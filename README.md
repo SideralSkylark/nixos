@@ -82,7 +82,7 @@ Each host declares which roles it needs. Shared base configuration is imported f
 
 ### laptop
 - Uses Fedora's GRUB to boot NixOS (NixOS GRUB disabled)
-- Roles: `hyprland`, `dev`, `office`
+- Roles: `hyprland`, `dev`, `printing`
 
 ### nixos
 - Desktop machine
