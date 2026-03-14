@@ -1,5 +1,4 @@
 # NixOS Configuration
-
 Personal NixOS setup using flakes and Home Manager, focused on a minimal Hyprland desktop and role-based system configuration.
 
 ---
@@ -17,80 +16,112 @@ Personal NixOS setup using flakes and Home Manager, focused on a minimal Hyprlan
 
 ---
 
+## Structure
+```
+.
+├── flake.nix
+├── hosts/
+│   ├── laptop/
+│   └── nixos/
+├── modules/
+│   ├── role/
+│   │   ├── dev/
+│   │   ├── hyprland/
+│   │   ├── office/
+│   │   └── gaming/
+│   ├── services/
+│   └── system/
+├── home/
+│   ├── skylark.nix
+│   └── modules/
+│       ├── default.nix   # camada 1 — core
+│       ├── wayland/      # camada 2 — Wayland genérico
+│       ├── hyprland/     # camada 3 — compositor
+│       └── kde/          # camada 3 — alternativa Fedora
+└── dotfiles/
+```
+
+---
+
 ## Home Manager
 
-Home Manager configuration lives under the `home/` directory.
+Home Manager configuration lives under `home/`.
 
-- All home modules are imported from a single entry file
-- Modules are located in `home/modules/`
+### Three-layer architecture
 
-### Hyprland & Dotfiles
-- The system uses **Hyprland**
-- Desktop ricing (bar, terminal, etc.) lives in `dotfiles/`
-- These configs are imported via `home/skylark.nix`
-- Dotfiles are **not written in Nix** (intentionally, for now)
+Configuration is split into three independent layers. Each layer only depends on the ones below it.
+
+| Layer | Location | Contents |
+|-------|----------|----------|
+| 1 — Core | `home/skylark.nix` + `home/modules/` | git, nixvim, shell, starship, xdg dirs. No GUI, no Wayland. |
+| 2 — Wayland | `home/modules/wayland/` | kitty, waybar, swaync, tofi. Compositor-agnostic. |
+| 3 — Compositor | `home/modules/hyprland/` or `kde/` | Imports layer 2. Only entry point the flake touches. |
+
+The flake imports only layer 3. Layer 3 imports layer 2. Layer 1 has no knowledge of Wayland or Hyprland.
 
 ### Neovim
-- Neovim is configured using **nixvim**
-- Chosen mainly for easier **LSP configuration**
-- Located under Home Manager modules
+- Configured via **nixvim**
+- Chosen mainly for easier LSP configuration
+- Stylix control over nixvim is **disabled** — themed manually
 
 ### Theming
-- **Stylix** is used for system-wide theming
-- Stylix control over nixvim is **disabled**
-  - Recommended if you theme nixvim manually
+- **Stylix** handles system-wide theming
+- Fonts declared in Stylix are not duplicated in `system/fonts.nix`
+- Only `noto-fonts-cjk-sans` is declared separately (not covered by Stylix)
+
+### Dotfiles
+- Desktop ricing (bar, waybar, hyprland, etc.) lives in `dotfiles/`
+- Dotfiles are **not written in Nix** (intentionally, for now)
+- Imported via `xdg.configFile` in the relevant Home Manager module
 
 ---
 
 ## Hosts
 
-The `hosts/` directory contains configurations for different machines.
-
-Each host may include:
-- `boot.nix` – bootloader configuration
-- `configuration.nix` – host-specific imports and roles
-- `hardware-configuration.nix` – hardware-specific settings
-
-Shared configuration is imported from:
-- `hosts/common.nix`
-
-### Roles
-- Roles are reusable sets of configuration
-- Examples:
-  - `dev` – development setup
-  - `gaming` – gaming-related configuration
-- Roles are imported by each host as needed
-
----
+Each host declares which roles it needs. Shared base configuration is imported from `modules/`.
 
 ### laptop
-
-Configuration tailored for my laptop.
-
-- Uses Fedora’s GRUB to boot NixOS
-  - NixOS GRUB is disabled
-- Used mainly for:
-  - Development
-  - Light gaming
-- Imports the appropriate roles accordingly
-
----
+- Uses Fedora's GRUB to boot NixOS (NixOS GRUB disabled)
+- Roles: `hyprland`, `dev`, `office`
 
 ### nixos
-
-Desktop configuration and default host.
-
+- Desktop machine
 - Serves as a base for new machines
-- `configuration.nix` may need to be replaced with the one generated during installation on a new system
+- `hardware-configuration.nix` should be replaced on a new system
 
 ---
 
 ## Modules
 
-System-wide modules live under `modules/`.
+System-wide NixOS modules live under `modules/`.
 
-They are organized into:
-- `desktop/` – window manager and desktop-related config
-- `services/` – system services
-- `system/` – core system configuration
-- `roles/` – role-based configs for specific use cases
+### `modules/system/`
+Core system configuration: nix settings, networking, fonts, timezone, security, packages, gc.
+
+- Networking uses **iwd** for WiFi and **systemd-networkd** for Ethernet
+- No NetworkManager
+
+### `modules/services/`
+System services: audio, bluetooth, power, printing, scanning, ssh, storage.
+
+### `modules/role/`
+Reusable role-based configurations. Each host imports only the roles it needs.
+
+| Role | Contents |
+|------|----------|
+| `hyprland` | `programs.hyprland`, greetd, Qt/GTK Wayland libs, Stylix |
+| `dev` | Docker daemon, development tools |
+| `printing` | Printing (CUPS, hplip, epson) and scanning (SANE) |
+| `gaming` | Gaming-related configuration |
+
+---
+
+## Flake Inputs
+
+| Input | Channel |
+|-------|---------|
+| nixpkgs | nixos-25.11 |
+| home-manager | release-25.11 |
+| stylix | release-25.11 |
+| nixvim | nixos-25.11 |
+| zen-browser | latest |
