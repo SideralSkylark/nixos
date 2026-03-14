@@ -1,11 +1,14 @@
 #!/usr/bin/env bash
-STATE=$(iwctl station wlan0 show | awk '/Powered/ {print $2}')
+IFACE="wlan0"
+ADAPTER="phy0"
+STATE=$(iwctl device "$IFACE" show | awk '/Powered/ {print $NF}')
+
 if [ "$STATE" = "on" ]; then
-    iwctl station wlan0 disconnect && \
-    iwctl adapter wlan0 set-property Powered off && \
+    iwctl station "$IFACE" disconnect && \
+    iwctl adapter "$ADAPTER" set-property Powered off && \
     notify-send "WiFi" "WiFi disabled" -i network-wireless-off
 else
-    iwctl adapter wlan0 set-property Powered on && \
-    iwctl station wlan0 scan && \
+    iwctl adapter "$ADAPTER" set-property Powered on && \
+    iwctl station "$IFACE" scan && \
     notify-send "WiFi" "WiFi enabled" -i network-wireless
 fi
