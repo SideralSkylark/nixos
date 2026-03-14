@@ -35,9 +35,9 @@ Personal NixOS setup using flakes and Home Manager, focused on a minimal Hyprlan
 │   ├── skylark.nix
 │   └── modules/
 │       ├── default.nix   # camada 1 — core
-│       ├── wayland/      # camada 2 — Wayland genérico
+│       ├── wayland/      # camada 2 — Wayland 
 │       ├── hyprland/     # camada 3 — compositor
-│       └── kde/          # camada 3 — alternativa Fedora
+│       └── kde/          # camada 3 — Fedora HM
 └── dotfiles/
 ```
 
