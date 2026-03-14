@@ -1,8 +1,9 @@
 {
   imports = [
+    ../../modules
+    ../../modules/role/hyprland
     ./boot.nix
     ./hardware-configuration.nix
-    ../../modules
   ];
 
   networking.hostName = "nixos";

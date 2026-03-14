@@ -15,5 +15,6 @@
     waybar
     tofi
     swaynotificationcenter
+    impala
   ];
 }

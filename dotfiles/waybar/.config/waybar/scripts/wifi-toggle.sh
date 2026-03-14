@@ -1,10 +1,11 @@
 #!/usr/bin/env bash
-
-STATE=$(nmcli -t -f WIFI g | cut -d: -f2)
-
-if [ "$STATE" = "enabled" ]; then
-    nmcli radio wifi off && notify-send "WiFi" "WiFi disabled" -i network-wireless-off
+STATE=$(iwctl station wlan0 show | awk '/Powered/ {print $2}')
+if [ "$STATE" = "on" ]; then
+    iwctl station wlan0 disconnect && \
+    iwctl adapter wlan0 set-property Powered off && \
+    notify-send "WiFi" "WiFi disabled" -i network-wireless-off
 else
-    nmcli radio wifi on && notify-send "WiFi" "WiFi enabled" -i network-wireless
-    nmcli device wifi rescan >/dev/null 2>&1 &
+    iwctl adapter wlan0 set-property Powered on && \
+    iwctl station wlan0 scan && \
+    notify-send "WiFi" "WiFi enabled" -i network-wireless
 fi
