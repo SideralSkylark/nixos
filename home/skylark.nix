@@ -1,18 +1,14 @@
-{ config, pkgs, nixvim, zen-browser, ... }:
+{ config, nixvim, ... }:
 
 {
   home.username = "skylark";
   home.homeDirectory = "/home/skylark";
   home.stateVersion = "25.05";
 
+
   imports = [
     ./modules
     nixvim.homeModules.nixvim
-  ];
-
-  home.packages = [
-    # ... pacotes existentes ...
-    zen-browser.packages.${pkgs.stdenv.hostPlatform.system}.default
   ];
 
   programs.nixvim = {
@@ -32,7 +28,6 @@
       pictures = "${config.home.homeDirectory}/Pictures";
       videos = "${config.home.homeDirectory}/Videos";
 
-      # disable dirs you don't want
       desktop = null;
       music = null;
       publicShare = null;
@@ -45,10 +40,6 @@
   };
 
   xdg.configFile = {
-    # Kitty
-    "kitty/kitty.conf".source = ../dotfiles/kitty/.config/kitty/kitty.conf;
-    "kitty/current-theme.conf".source = ../dotfiles/kitty/.config/kitty/current-theme.conf;
-
     # fastfetch
     "fastfetch/config.jsonc".source = ../dotfiles/fastfetch/.config/fastfetch/config.jsonc;
 

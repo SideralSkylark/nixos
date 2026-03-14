@@ -1,10 +1,10 @@
 {
   imports = [
-    ./boot.nix
-    ../common.nix
-    ./hardware-configuration.nix
+    ../../modules
     ../../modules/role/dev
-    # ../../modules/role/gaming
+    ../../modules/role/hyprland
+    ./boot.nix
+    ./hardware-configuration.nix
   ];
 
   networking.hostName = "laptop";

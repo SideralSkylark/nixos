@@ -79,12 +79,10 @@
       homeConfigurations = {
         skylark = home-manager.lib.homeManagerConfiguration {
           pkgs = nixpkgs.legacyPackages.${system};
-
           modules = [
             ./home/skylark.nix
             ./home/modules/kde
           ];
-
           extraSpecialArgs = { inherit nixvim; };
         };
       };

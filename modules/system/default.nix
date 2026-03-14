@@ -7,5 +7,6 @@
     ./packages.nix
     ./fonts.nix
     ./security.nix
+    ./stylix.nix
   ];
 }

@@ -1,12 +1,25 @@
 { pkgs, ... }:
 {
   home.packages = with pkgs; [
-    kitty
-    brave
-    vlc
-    obsidian
-    anki
     fastfetch
     nitch
+
+    btop
+
+    git
+    ripgrep
+    fd
+    fzf
+
+    curl
+    wget
+
+    zip
+    unzip
+    p7zip
+    unrar
+
+    openssh
+    man-pages
   ];
 }
