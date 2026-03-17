@@ -5,4 +5,14 @@
     qt6.qtwayland
     gtk3
   ];
+
+  programs.thunar = {
+    enable = true;
+    plugins = with pkgs.xfce; [
+      thunar-volman # auto-mount drives
+      thunar-archive-plugin # context menu for zip/tar/etc
+    ];
+  };
+
+  services.tumbler.enable = true;
 }

@@ -16,5 +16,6 @@
     tofi
     swaynotificationcenter
     impala
+    yazi
   ];
 }

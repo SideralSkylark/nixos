@@ -13,6 +13,8 @@
     nodejs_22
     rustc
     cargo
+    gcc
+    python3
 
     (pkgs.writeShellScriptBin "java-stable" ''
       export JAVA_HOME=${pkgs.jdk21_headless}

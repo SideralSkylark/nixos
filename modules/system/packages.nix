@@ -5,12 +5,7 @@
     usbutils
     parted
     gparted
-    cups
-    gcc
-    python3
     iw # Network
-    xdg-utils
-    xdg-user-dirs
     libnotify
   ];
 }

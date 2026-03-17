@@ -1,4 +1,4 @@
-{ pkgs, zen-browser, ... }:
+{ pkgs, ... }:
 {
   imports = [
     ../wayland
@@ -10,19 +10,16 @@
     swww
     nwg-displays
     pavucontrol
-    nautilus
     hyprlock
     hypridle
     hyprsunset
     xdg-desktop-portal-hyprland
     brave
-    vlc
+    mpv
     obsidian
     anki
     simple-scan
     libreoffice-fresh
-    blueman # Bluethooh
-    zen-browser.packages.${pkgs.stdenv.hostPlatform.system}.default
   ];
 
   xdg.configFile = {
