@@ -1,20 +1,17 @@
 #!/usr/bin/env bash
 TEMP=4000
-
 is_active() {
-    pgrep -x hyprsunset >/dev/null && echo "on" || echo "off"
+    pgrep -x wlsunset >/dev/null && echo "on" || echo "off"
 }
-
 toggle() {
     if [ "$(is_active)" = "on" ]; then
-        pkill -x hyprsunset
+        pkill -x wlsunset
     else
-        hyprsunset -t "$TEMP" &
+        wlsunset -t "$TEMP" -T 6500 &
     fi
     sleep 0.2
-    pkill -RTMIN+8 waybar  
+    pkill -RTMIN+8 waybar
 }
-
 case "$1" in
     toggle) toggle ;;
     display|"")

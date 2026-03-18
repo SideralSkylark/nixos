@@ -10,9 +10,9 @@
     swww
     nwg-displays
     pavucontrol
-    hyprlock
-    hypridle
-    hyprsunset
+    swaylock-effects
+    swayidle
+    wlsunset
     xdg-desktop-portal-hyprland
     brave
     mpv
@@ -39,13 +39,67 @@
       executable = true;
     };
 
-    # Hyprlock
-    "hypr/hyprlock.conf".source = ../../../dotfiles/hyprlock/.config/hypr/hyprlock.conf;
+    "hypr/scripts/idle" = {
+      source = ../../../dotfiles/hyprland/.config/hypr/scripts/idle.sh;
+      executable = true;
+    };
 
-    #Hypridle
-    "hypr/hypridle.conf".source = ../../../dotfiles/hypridle/.config/hypr/hypridle.conf;
+    "swaylock/config".text = ''
+      # Background
+      screenshot
+      effect-pixelate=12
+      effect-vignette=0.3:0.7
 
-    # Hyprsunset
-    "hypr/hyprsunset.conf".source = ../../../dotfiles/hyprsunset/.config/hypr/hyprsunset.conf;
+      # Colors — Kanagawa
+      color=1F1F28ee
+      inside-color=2A2A3700
+      inside-clear-color=2A2A3700
+      inside-ver-color=16161D00
+      inside-wrong-color=43242B00
+
+      ring-color=7AA89F
+      ring-clear-color=7AA89F
+      ring-ver-color=7E9CD8
+      ring-wrong-color=C4746E
+
+      key-hl-color=98BB6C
+      bs-hl-color=C4746E
+
+      text-color=DCD7BA
+      text-clear-color=C8C093
+      text-ver-color=7E9CD8
+      text-wrong-color=C4746E
+      text-caps-lock-color=E6C384
+
+      line-color=00000000
+      line-clear-color=00000000
+      line-ver-color=00000000
+      line-wrong-color=00000000
+      separator-color=00000000
+
+      # Ring
+      indicator-radius=70
+      indicator-thickness=4
+
+      # Font
+      font=JetBrainsMono Nerd Font
+      font-size=14
+
+      # Clock
+      clock
+      timestr=%H:%M
+      datestr=%a, %d %b
+      indicator
+
+      # Caps lock
+      ring-caps-lock-color=E6C384
+      inside-caps-lock-color=2A2A3700
+      text-caps-lock-color=E6C384
+      indicator-caps-lock
+
+      # Misc
+      ignore-empty-password
+      show-failed-attempts
+    '';
   };
 }
