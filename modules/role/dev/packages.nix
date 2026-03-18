@@ -5,17 +5,15 @@
     docker
     docker-compose
     vscode
-    zed-editor
     lazydocker
     lazygit
-    postman
+    hoppscotch
     jdk21_headless
     nodejs_22
     rustc
     cargo
     gcc
     python3
-
     (pkgs.writeShellScriptBin "java-stable" ''
       export JAVA_HOME=${pkgs.jdk21_headless}
       exec ${pkgs.jdk21_headless}/bin/java "$@"

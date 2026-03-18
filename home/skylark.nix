@@ -5,7 +5,6 @@
   home.homeDirectory = "/home/skylark";
   home.stateVersion = "25.05";
 
-
   imports = [
     ./modules
     nixvim.homeModules.nixvim

@@ -9,6 +9,7 @@
     grim
     slurp
     swappy
+    imv # image viewer
     wl-clipboard
     cliphist
 
