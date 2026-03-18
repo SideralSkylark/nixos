@@ -15,7 +15,7 @@
     wlsunset
     xdg-desktop-portal-hyprland
     brave
-    mpv
+    vlc
     obsidian
     anki
     simple-scan
