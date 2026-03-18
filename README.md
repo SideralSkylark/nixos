@@ -25,7 +25,7 @@ Personal NixOS setup using flakes and Home Manager, focused on a minimal Hyprlan
 │   └── nixos/
 ├── modules/
 │   ├── role/
-|   |   |_ bluetooth/
+│   │   ├── bluetooth/
 │   │   ├── dev/
 │   │   ├── hyprland/
 │   │   ├── printing/
