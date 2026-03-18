@@ -125,3 +125,4 @@ Reusable role-based configurations. Each host imports only the roles it needs.
 | stylix | release-25.11 |
 | nixvim | nixos-25.11 |
 | zen-browser | latest |
+

@@ -3,6 +3,7 @@
     ../../modules
     ../../modules/role/dev
     ../../modules/role/hyprland
+    ../../modules/role/bluetooth
     ./boot.nix
     ./hardware-configuration.nix
   ];
