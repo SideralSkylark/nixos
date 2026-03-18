@@ -25,19 +25,20 @@ Personal NixOS setup using flakes and Home Manager, focused on a minimal Hyprlan
 │   └── nixos/
 ├── modules/
 │   ├── role/
+|   |   |_ bluetooth/
 │   │   ├── dev/
 │   │   ├── hyprland/
-│   │   ├── office/
+│   │   ├── printing/
 │   │   └── gaming/
 │   ├── services/
 │   └── system/
 ├── home/
 │   ├── skylark.nix
 │   └── modules/
-│       ├── default.nix   # camada 1 — core
-│       ├── wayland/      # camada 2 — Wayland 
-│       ├── hyprland/     # camada 3 — compositor
-│       └── kde/          # camada 3 — Fedora HM
+│       ├── default.nix   # layer 1 — core
+│       ├── wayland/      # layer 2 — Wayland 
+│       ├── hyprland/     # layer 3 — compositor
+│       └── kde/          # layer 3 — Fedora HM
 └── dotfiles/
 ```
 
@@ -82,7 +83,7 @@ Each host declares which roles it needs. Shared base configuration is imported f
 
 ### laptop
 - Uses Fedora's GRUB to boot NixOS (NixOS GRUB disabled)
-- Roles: `hyprland`, `dev`, `printing`
+- Roles: `hyprland`, `dev`, `printing`, and `bluetooth`
 
 ### nixos
 - Desktop machine
@@ -98,11 +99,11 @@ System-wide NixOS modules live under `modules/`.
 ### `modules/system/`
 Core system configuration: nix settings, networking, fonts, timezone, security, packages, gc.
 
-- Networking uses **iwd** for WiFi and **systemd-networkd** for Ethernet
-- No NetworkManager
+- Networking uses **NetworkManager** and **iwd** for the WiFi backend
+- Had issues with dns and container on **iwd** and systemd network
 
 ### `modules/services/`
-System services: audio, bluetooth, power, printing, scanning, ssh, storage.
+System services: audio, power, printing, scanning, ssh, storage.
 
 ### `modules/role/`
 Reusable role-based configurations. Each host imports only the roles it needs.
@@ -111,6 +112,7 @@ Reusable role-based configurations. Each host imports only the roles it needs.
 |------|----------|
 | `hyprland` | `programs.hyprland`, greetd, Qt/GTK Wayland libs, Stylix |
 | `dev` | Docker daemon, development tools |
+| `bluetooth` | enables bluetooth and blueman for GUI |
 | `printing` | Printing (CUPS, hplip, epson) and scanning (SANE) |
 | `gaming` | Gaming-related configuration |
 
@@ -124,5 +126,4 @@ Reusable role-based configurations. Each host imports only the roles it needs.
 | home-manager | release-25.11 |
 | stylix | release-25.11 |
 | nixvim | nixos-25.11 |
-| zen-browser | latest |
 
