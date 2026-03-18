@@ -55,7 +55,7 @@ Configuration is split into three independent layers. Each layer only depends on
 | Layer | Location | Contents |
 |-------|----------|----------|
 | 1 — Core | `home/skylark.nix` + `home/modules/` | git, nixvim, shell, starship, xdg dirs. No GUI, no Wayland. |
-| 2 — Wayland | `home/modules/wayland/` | kitty, waybar, swaync, tofi. Compositor-agnostic. |
+| 2 — Wayland | `home/modules/wayland/` | kitty, waybar, swaync, fuzzel. Compositor-agnostic. |
 | 3 — Compositor | `home/modules/hyprland/` or `kde/` | Imports layer 2. Only entry point the flake touches. |
 
 The flake imports only layer 3. Layer 3 imports layer 2. Layer 1 has no knowledge of Wayland or Hyprland.

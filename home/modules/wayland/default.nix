@@ -2,7 +2,7 @@
   imports = [
     ./packages.nix
     ./kitty.nix
-    ./tofi.nix
+    ./fuzzel.nix
     ./swaync.nix
     ./waybar.nix
   ];

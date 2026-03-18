@@ -4,7 +4,7 @@
     qt5.qtwayland
     qt6.qtwayland
     gtk3
-    file-roller # thunar dosent com with an archiver
+    mate.engrampa #thunar dosent come with file archiver
   ];
 
   programs.thunar = {

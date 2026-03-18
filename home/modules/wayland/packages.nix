@@ -13,7 +13,7 @@
     cliphist
 
     waybar
-    tofi
+    fuzzel
     swaynotificationcenter
     impala
     yazi
