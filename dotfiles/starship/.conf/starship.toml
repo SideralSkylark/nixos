@@ -1,17 +1,12 @@
 "$schema" = 'https://starship.rs/config-schema.json'
 
 format = """
-[](bg:mantle fg:surface0)\
+[](fg:surface0)\
 $directory\
 [](fg:surface0 bg:green)\
 $git_branch\
 $git_status\
-[](fg:green bg:teal)\
-$c\
-$rust\
-$golang\
-$python\
-[](fg:teal)\
+[](fg:green)\
 $line_break$character
 """
 
@@ -29,55 +24,38 @@ accent1  = "#DCA561"
 accent2  = "#7E9CD8"
 
 [directory]
-style            = "fg:mantle bg:surface0"
-format           = "[ $path ]($style)"
+style             = "fg:text bg:surface0"
+format            = "[ $path ]($style)"
 truncation_length = 3
-truncation_symbol = "…/"
+truncation_symbol = ".../"
 
 [git_branch]
-symbol = ""
-style = "bg:green"
+symbol = ""
+style  = "bg:green"
 format = '[[ $symbol $branch ](fg:mantle bg:green)]($style)'
 
 [git_status]
-style = "bg:green"
-format = '[[ $all_status$ahead_behind ](fg:mantle bg:green)]($style)'
+style  = "bg:green"
+format = '[[$all_status$ahead_behind ](fg:mantle bg:green)]($style)'
 
 [c]
-symbol = ""
-style = "bg:teal"
-format = '[[ $symbol( $version) ](fg:mantle bg:teal)]($style)'
+format = ''
 
 [rust]
-symbol = ""
-style = "bg:teal"
-format = '[[ $symbol( $version) ](fg:mantle bg:teal)]($style)'
+format = ''
 
 [golang]
-symbol = ""
-style = "bg:teal"
-format = '[[ $symbol( $version) ](fg:mantle bg:teal)]($style)'
+format = ''
 
 [python]
-symbol = ""
-style = "bg:teal"
-format = '[[ $symbol( $version) ](fg:mantle bg:teal)]($style)'
+format = ''
 
 [docker_context]
-symbol = ""
-style = "bg:blue"
-format = '[[ $symbol $context ](fg:mantle bg:blue)]($style)'
-only_with_files = true
-
-[time]
-time_format = "%R"
-style = "bg:accent2"
-format = '[[  $time ](fg:mantle bg:accent2)]($style)'
+format = ''
 
 [line_break]
-disabled = true
+disabled = false
 
 [character]
-disabled = false
-success_symbol = '[](bold fg:green)'
-error_symbol = '[](bold fg:red)'
+success_symbol = '[❯](bold fg:green)'
+error_symbol   = '[❯](bold fg:red)'

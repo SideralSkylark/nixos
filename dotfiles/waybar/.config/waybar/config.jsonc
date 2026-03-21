@@ -15,8 +15,8 @@
     "interval": "once",
     "restart-interval": 0,
     "tooltip": false,
-    "on-click": "wofi --show drun",
-    "on-click-right": "wofi --show run"
+    "on-click": "fuzzel",
+    "on-click-right": ""
   },
 
   "hyprland/workspaces": {
