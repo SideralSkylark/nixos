@@ -26,6 +26,10 @@
             "type": "os"
         },
         {
+            "key": "│ {#34}󰏖 pkgs    {#keys}│",
+            "type": "packages"
+        },
+        {
             "key": "│ {#35} kernel  {#keys}│",
             "type": "kernel"
         },
