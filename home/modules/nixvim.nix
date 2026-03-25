@@ -210,6 +210,10 @@
           action = "hover";
           desc = "Hover docs";
         };
+        "<C-k>" = {
+          action = "signature_help";
+          desc = "Show signature";
+        };
         "<leader>rn" = {
           action = "rename";
           desc = "Rename symbol";
@@ -253,52 +257,44 @@
     colorschemes.kanagawa = {
       enable = true;
       settings = {
-        theme = "dragon";
+        theme = "wave";
+
         background = {
-          dark = "dragon";
+          dark = "wave";
           light = "lotus";
         };
-        compile = false;
+
+        compile = true;
         transparent = false;
         dimInactive = false;
-        commentStyle = {
-          italic = true;
-        };
-        keywordStyle = {
-          italic = false;
-        };
-        statementStyle = {
-          bold = false;
-        };
-        functionStyle = {
-          bold = false;
-        };
-        typeStyle = {
-          bold = false;
-        };
+
+        commentStyle.italic = true;
+        keywordStyle.italic = false;
+        statementStyle.bold = false;
+        functionStyle.bold = false;
+        typeStyle.bold = false;
+
         undercurl = true;
         terminalColors = true;
+
         colors = {
-          palette = {
-            lotusWhite0 = "#ffffff";
-            lotusWhite1 = "#f7f7f7";
-            lotusWhite2 = "#eeeeee";
-          };
           theme = {
             all = {
               ui = {
                 bg_gutter = "none";
               };
             };
+
             lotus = {
               ui = {
-                bg = "#ffffff"; # true white background
-                bg_dim = "#f7f7f7"; # subtle inactive background
+                bg = "#ffffff";
+                bg_dim = "#f7f7f7";
                 bg_p1 = "#eeeeee";
                 bg_p2 = "#e6e6e6";
               };
+
               syn = {
-                comment = "#6f6f6f"; # neutral gray comments
+                comment = "#6f6f6f";
               };
             };
           };
@@ -540,11 +536,6 @@
         defaults = {
           sorting_strategy = "ascending";
           layout_strategy = "flex";
-          layout_config = {
-            width = 0.85;
-            height = 0.85;
-            preview_cutoff = 120;
-          };
         };
       };
     };
@@ -555,6 +546,8 @@
       sidescrolloff = 8;
       clipboard = "unnamedplus";
       showmode = false;
+      ignorecase = true;
+      smartcase = true;
       number = true;
       relativenumber = true;
       signcolumn = "yes";
