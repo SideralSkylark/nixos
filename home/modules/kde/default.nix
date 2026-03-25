@@ -5,7 +5,7 @@
     vscode
     lazydocker
     lazygit
-    postman
+    hoppscotch
     jdk21_headless
     nodejs_22
     rustc
