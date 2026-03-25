@@ -4,7 +4,7 @@
     ../../modules/role/dev
     ../../modules/role/hyprland
     ../../modules/role/bluetooth
-    ../../modules/role/printing
+    # ../../modules/role/printing
     ./boot.nix
     ./hardware-configuration.nix
   ];
