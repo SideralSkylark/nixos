@@ -264,7 +264,7 @@
           light = "lotus";
         };
 
-        compile = true;
+        compile = false;
         transparent = false;
         dimInactive = false;
 

@@ -15,6 +15,7 @@
     wlsunset
     xdg-desktop-portal-hyprland
     brave
+    librewolf
     vlc
     obsidian
     anki
