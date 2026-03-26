@@ -6,9 +6,8 @@ OPTIONS="\
 󰍃  Logout"
 
 CHOICE=$(echo "$OPTIONS" | fuzzel --dmenu \
-  --width=20 \
   --lines=4 \
-  --prompt="  ")
+  --prompt="> ")
 
 case "$CHOICE" in
   *Shutdown) systemctl poweroff ;;
