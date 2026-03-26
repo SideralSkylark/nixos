@@ -12,7 +12,7 @@
     pavucontrol
     swaylock-effects
     swayidle
-    wlsunset
+    hyprsunset
     xdg-desktop-portal-hyprland
     brave
     librewolf
@@ -44,6 +44,25 @@
       source = ../../../dotfiles/hyprland/.config/hypr/scripts/idle.sh;
       executable = true;
     };
+
+    # Hyprsunset configuration
+    "hypr/hyprsunset.conf".text = ''
+      max-gamma = 150
+
+      # Profile for daytime (default)
+      profile {
+          time = 07:30
+          temperature = 6500
+          gamma = 1.0
+      }
+
+      # Profile for night
+      profile {
+          time = 21:00
+          temperature = 4000
+          gamma = 0.9
+      }
+    '';
 
     "swaylock/config".text = ''
       # Background
