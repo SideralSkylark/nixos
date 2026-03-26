@@ -11,7 +11,6 @@ lines=6
 horizontal-pad=24
 vertical-pad=16
 inner-pad=12
-corner-radius=6
 
 [colors]
 background=1F1F28FF      # escuro suave

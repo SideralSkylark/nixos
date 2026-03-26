@@ -1,15 +1,16 @@
 #!/usr/bin/env bash
-
 TEMP=4000
 HYPRSUNSET_CMD="hyprsunset -t $TEMP"
 
 notify() {
-    notify-send -a "Reading Mode" -u low "$1" "$2"
+    notify-send \
+        -a "Reading Mode" \
+        -u low \
+        -t 3000 \
+        "$1" "$2"
 }
 
-is_active() {
-    pgrep -x hyprsunset >/dev/null
-}
+is_active() { pgrep -x hyprsunset >/dev/null; }
 
 toggle() {
     if is_active; then
@@ -17,9 +18,8 @@ toggle() {
         notify "󰃟 Reading Mode" "Manual OFF"
     else
         $HYPRSUNSET_CMD &
-        notify "󰃞 Reading Mode" "Manual ON ($TEMP K)"
+        notify "󰃞 Reading Mode" "Manual ON (${TEMP} K)"
     fi
-
     sleep 0.1
     pkill -RTMIN+8 waybar
 }

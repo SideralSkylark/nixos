@@ -1,10 +1,9 @@
 #!/usr/bin/env bash
-
 ACTION=$1
 
 case $ACTION in
-  up)   brightnessctl set +5% ;;
-  down) brightnessctl set 5%- ;;
+    up)   brightnessctl set +5% ;;
+    down) brightnessctl set 5%- ;;
 esac
 
 MAX=$(brightnessctl max)
@@ -17,7 +16,10 @@ elif (( PERCENT <= 75 )); then ICON="󰃠"
 else                           ICON="󰃠"
 fi
 
-notify-send -a "system" \
-  -h string:x-canonical-private-synchronous:brightness \
-  -h int:value:$PERCENT \
-  "$ICON Brightness  $PERCENT%" "" -t 1500
+notify-send \
+    -a "system" \
+    -u low \
+    -t 1500 \
+    -h string:x-canonical-private-synchronous:brightness \
+    -h int:value:$PERCENT \
+    "${ICON} Brightness" "$PERCENT%"

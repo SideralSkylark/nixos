@@ -47,28 +47,17 @@
     "spacing": 8,
     "show-passive-items": false
   },
-  "custom/swaync": {
-    "tooltip":true,
-    "format": "{icon} {text}",
-    "format-icons": {
-      "notification": "<span foreground='red'><sup></sup></span>",
-      "none": "",
-      "dnd-notification": "󰂛<span foreground='red'><sup></sup></span>",
-      "dnd-none": "󰂛",
-      "inhibited-notification": "󱅫<span foreground='red'><sup></sup></span>",
-      "inhibited-none": "󱅫",
-      "dnd-inhibited-notification": "󰂛<span foreground='red'><sup></sup></span>",
-      "dnd-inhibited-none": "󰂛"
-    },
-    "return-type": "json",
-    "exec-if": "which swaync-client",
-    "exec": "swaync-client -swb",
-    "on-click": "sleep 0.1 && swaync-client -t -sw",
-    "on-click-right": "swaync-client -d -sw",
-    "on-scroll-up": "",
-    "on-scroll-down": "",
-    "escape": true
-  },
+"custom/dunst": {
+  "exec": "~/.config/waybar/scripts/dunst-status.sh",
+  "on-click": "dunstctl set-paused toggle && pkill -RTMIN+7 waybar",
+  "on-click-right": "~/.config/waybar/scripts/dunst-history.sh",
+  "on-scroll-up": "",
+  "on-scroll-down": "",
+  "interval": 3,
+  "signal": 7,
+  "return-type": "json",
+  "tooltip": true
+},
   "clock": {
     "interval": 60,
     "format": "{:%H:%M}",
@@ -216,7 +205,7 @@
       "transition-left-to-right": false
     },
     "modules": [
-      "custom/swaync",
+      "custom/dunst",
       "pulseaudio",
       "backlight",
       "bluetooth",

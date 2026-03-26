@@ -14,6 +14,7 @@
     swayidle
     hyprsunset
     xdg-desktop-portal-hyprland
+    jq
     brave
     librewolf
     vlc
