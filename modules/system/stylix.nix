@@ -8,22 +8,22 @@
 
     base16Scheme = "${pkgs.base16-schemes}/share/themes/kanagawa.yaml";
     # override = {
-    #   base00 = "181616"; # dragonBlack3  — bg principal
-    #   base01 = "0D0C0C"; # dragonBlack0  — bg mais escuro
-    #   base02 = "1a1a19"; # dragonBlack2  — overlay
-    #   base03 = "282727"; # dragonBlack5  — superfície
-    #   base04 = "625E5A"; # dragonGray    — muted/comentários
-    #   base05 = "C5C9C5"; # dragonWhite   — foreground
-    #   base06 = "A6A69C"; # oldWhite      — foreground dim
-    #   base07 = "C8C093"; # fujiWhite     — bright text
-    #   base08 = "C4746E"; # dragonRed     — red/error
-    #   base09 = "B6927B"; # dragonOrange  — orange
-    #   base0A = "C4B28A"; # dragonYellow  — yellow
-    #   base0B = "8A9A7B"; # dragonGreen   — green
-    #   base0C = "8EA4A2"; # dragonTeal    — cyan
-    #   base0D = "8BA4B0"; # dragonBlue2   — blue
-    #   base0E = "A292A3"; # dragonViolet  — purple
-    #   base0F = "E46876"; # peachRed      — bright red
+    #   base00 = "181616"; # dragonBlack3  
+    #   base01 = "0D0C0C"; # dragonBlack0 
+    #   base02 = "1a1a19"; # dragonBlack2 
+    #   base03 = "282727"; # dragonBlack5
+    #   base04 = "625E5A"; # dragonGray 
+    #   base05 = "C5C9C5"; # dragonWhite 
+    #   base06 = "A6A69C"; # oldWhite   
+    #   base07 = "C8C093"; # fujiWhite  
+    #   base08 = "C4746E"; # dragonRed 
+    #   base09 = "B6927B"; # dragonOrange
+    #   base0A = "C4B28A"; # dragonYellow 
+    #   base0B = "8A9A7B"; # dragonGreen 
+    #   base0C = "8EA4A2"; # dragonTeal 
+    #   base0D = "8BA4B0"; # dragonBlue2 
+    #   base0E = "A292A3"; # dragonViolet 
+    #   base0F = "E46876"; # peachRed    
     # };
 
     fonts = {
