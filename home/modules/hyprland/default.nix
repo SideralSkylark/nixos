@@ -14,7 +14,7 @@
     swayidle
     hyprsunset
     xdg-desktop-portal-hyprland
-    jq
+    jq # parses json fron dunst to fuzzel menu
     brave
     librewolf
     vlc
@@ -67,31 +67,24 @@
 
     "swaylock/config".text = ''
       # Background
-      screenshot
-      effect-pixelate=12
-      effect-vignette=0.3:0.7
+      color=16161D
 
       # Colors — Kanagawa
-      color=1F1F28ee
-      inside-color=2A2A3700
-      inside-clear-color=2A2A3700
-      inside-ver-color=16161D00
+      inside-color=1F1F2800
+      inside-clear-color=1F1F2800
+      inside-ver-color=1F1F2800
       inside-wrong-color=43242B00
-
-      ring-color=7AA89F
+      ring-color=363646
       ring-clear-color=7AA89F
       ring-ver-color=7E9CD8
       ring-wrong-color=C4746E
-
       key-hl-color=98BB6C
       bs-hl-color=C4746E
-
       text-color=DCD7BA
       text-clear-color=C8C093
       text-ver-color=7E9CD8
       text-wrong-color=C4746E
       text-caps-lock-color=E6C384
-
       line-color=00000000
       line-clear-color=00000000
       line-ver-color=00000000
@@ -99,12 +92,12 @@
       separator-color=00000000
 
       # Ring
-      indicator-radius=70
-      indicator-thickness=4
+      indicator-radius=80
+      indicator-thickness=6
 
       # Font
       font=JetBrainsMono Nerd Font
-      font-size=14
+      font-size=16
 
       # Clock
       clock
@@ -114,7 +107,7 @@
 
       # Caps lock
       ring-caps-lock-color=E6C384
-      inside-caps-lock-color=2A2A3700
+      inside-caps-lock-color=1F1F2800
       text-caps-lock-color=E6C384
       indicator-caps-lock
 

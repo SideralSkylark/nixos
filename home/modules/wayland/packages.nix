@@ -15,8 +15,6 @@
 
     waybar
     fuzzel
-    # swaynotificationcenter
-    # mako
     impala
     yazi
   ];

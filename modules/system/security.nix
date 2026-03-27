@@ -19,5 +19,6 @@
     login.fprintAuth = lib.mkForce false;
     sudo.fprintAuth = lib.mkForce true;
     polkit-1.fprintAuth = lib.mkForce true;
+    swaylock.fprintAuth = lib.mkForce false;
   };
 }
