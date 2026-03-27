@@ -1,23 +1,26 @@
 #!/usr/bin/env bash
 
-if ! command -v jq &>/dev/null; then
-    echo '{"text":"󰂜","tooltip":"jq not installed","class":"error"}'
-    exit 1
-fi
-
 PAUSED=$(dunstctl is-paused)
 COUNT=$(dunstctl count waiting)
 
+CLASS="idle"
+ICON="󰂚"
+TEXT="$ICON"
+
 if [[ "$PAUSED" == "true" ]]; then
+    CLASS="dnd"
+    ICON="󰂛"
+
     if (( COUNT > 0 )); then
-        echo "{\"text\":\"󰂛\",\"tooltip\":\"DND · $COUNT waiting\",\"class\":\"dnd\"}"
+        TEXT="$ICON $COUNT"
     else
-        echo "{\"text\":\"󰂛\",\"tooltip\":\"Do not disturb\",\"class\":\"dnd\"}"
+        TEXT="$ICON"
     fi
 else
     if (( COUNT > 0 )); then
-        echo "{\"text\":\"󰂚\",\"tooltip\":\"$COUNT notification(s)\",\"class\":\"notification\"}"
-    else
-        echo "{\"text\":\"󰂜\",\"tooltip\":\"No notifications\",\"class\":\"none\"}"
+        CLASS="has-notifications"
+        TEXT="$ICON $COUNT"
     fi
 fi
+
+echo "{\"text\":\"$TEXT\",\"class\":\"$CLASS\",\"tooltip\":\"Notifications: $COUNT\"}"

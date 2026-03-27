@@ -123,6 +123,15 @@ window#waybar {
     color: #727169;
 }
 
+#custom-dunst.has-notifications {
+    color: #C8C093;
+}
+
+/* DND → mais apagado */
+#custom-dunst.dnd {
+    color: #54546D;
+}
+
 #pulseaudio {
     color: #727169;
 }

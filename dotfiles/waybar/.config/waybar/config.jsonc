@@ -47,7 +47,7 @@
     "spacing": 8,
     "show-passive-items": false
   },
-"custom/dunst": {
+  "custom/dunst": {
   "exec": "~/.config/waybar/scripts/dunst-status.sh",
   "on-click": "dunstctl set-paused toggle && pkill -RTMIN+7 waybar",
   "on-click-right": "~/.config/waybar/scripts/dunst-history.sh",
