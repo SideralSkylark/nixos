@@ -8,7 +8,7 @@
   "margin-right": 0,
   "modules-left": ["custom/distro-icon", "hyprland/workspaces", "hyprland/window"],
   "modules-center": ["clock"],
-  "modules-right": ["tray", "group/system", "group/power"],
+  "modules-right": ["tray", "battery", "group/system", "group/power"],
 
   "custom/distro-icon": {
     "exec": "~/.config/waybar/scripts/distro-icon.sh",
@@ -113,7 +113,7 @@
     "format-icons": ["󰁺", "󰁼", "󰁾", "󰂀", "󰁹"],
     "on-scroll-up": "",
     "on-scroll-down": "",
-    "tooltip-format": "{timeTo} • {power}W"
+    "tooltip-format": "{timeTo}\n{capacity}% • {power}W"
   },
 
   "network": {
@@ -223,7 +223,6 @@
     "modules": [
       "idle_inhibitor",
       "custom/powerprofile",
-      "battery",
       "custom/power"
     ]
   }

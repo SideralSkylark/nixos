@@ -173,6 +173,9 @@ window#waybar {
 }
 
 #battery {
+    border-left: 1px solid #2A2A37;
+    padding: 0px 12px;
+    margin: 0px 0px 0px 0px;
     color: #727169;
 }
 
@@ -185,7 +188,15 @@ window#waybar {
 }
 
 #battery.charging {
+    color: #7FB4CA;
+}
+
+#battery.full {
     color: #98BB6C;
+}
+
+#battery.plugged {
+    color: #7FB4CA;
 }
 
 #custom-power {
