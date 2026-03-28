@@ -522,13 +522,7 @@
       };
     };
 
-    plugins.nvim-autopairs = {
-      enable = true;
-      settings = {
-        disable_filetype = [ "TelescopePrompt" ];
-        map_cr = true;
-      };
-    };
+    plugins.mini-pairs.enable = true;
 
     plugins.telescope = {
       enable = true;

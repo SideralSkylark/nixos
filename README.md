@@ -129,6 +129,4 @@ Reusable role-based configurations. Each host imports only the roles it needs.
 
 ---
 ## TODOS
-- fix wlsunset to work as a toogle and or automatically
-- fix fuzzel layout
-- remove swaync for dunst
+-- make sure the screen can be projected
