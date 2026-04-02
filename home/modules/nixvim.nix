@@ -210,10 +210,6 @@
           action = "hover";
           desc = "Hover docs";
         };
-        "<C-k>" = {
-          action = "signature_help";
-          desc = "Show signature";
-        };
         "<leader>rn" = {
           action = "rename";
           desc = "Rename symbol";
@@ -379,6 +375,35 @@
         action = "<CMD>Telescope diagnostics<CR>";
         options = {
           desc = "Show all diagnostics";
+          silent = true;
+        };
+      }
+      # Quickfixes
+      {
+        mode = "n";
+        key = "]q";
+        action = "<cmd>cnext<cr>";
+        options.desc = "Next quickfix";
+      }
+      {
+        mode = "n";
+        key = "[q";
+        action = "<cmd>cprev<cr>";
+        options.desc = "Prev quickfix";
+      }
+      {
+        mode = "n";
+        key = "<leader>xq";
+        action = "<cmd>copen<cr>";
+        options.desc = "Open quickfix list";
+      }
+      # signature_help
+      {
+        mode = "i";
+        key = "<C-k>";
+        action = "<cmd>lua vim.lsp.buf.signature_help()<cr>";
+        options = {
+          desc = "Signature help";
           silent = true;
         };
       }
