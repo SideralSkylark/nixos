@@ -20,7 +20,6 @@
     vlc
     obsidian
     anki
-    simple-scan
     libreoffice-fresh
   ];
 

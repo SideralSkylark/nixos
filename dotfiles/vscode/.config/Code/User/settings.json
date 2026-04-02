@@ -1,5 +1,5 @@
 {
-    "workbench.colorTheme": "Catppuccin Mocha",
+    "workbench.colorTheme": "Kanagawa Wave",
     "workbench.iconTheme": "catppuccin-mocha",
     "editor.fontFamily": "JetBrains Mono",
     "editor.fontSize": 14,
@@ -46,9 +46,6 @@
     "workbench.layoutControl.enabled": false,
     "window.menuBarVisibility":"compact",
     "workbench.preferredDarkColorTheme": "Catppuccin Mocha",
-    "remote.SSH.remotePlatform": {
-        "mint-desktop": "linux"
-    },
     "typescript.updateImportsOnFileMove.enabled": "always",
     "github.copilot.enable": {
         "*": false
