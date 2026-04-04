@@ -5,6 +5,7 @@
     docker
     docker-compose
     vscode
+    gemini-cli
     lazydocker
     lazygit
     hoppscotch
