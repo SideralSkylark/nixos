@@ -17,7 +17,6 @@
     jq # parses json fron dunst to fuzzel menu
     brave
     librewolf
-    vlc
     obsidian
     anki
     libreoffice-fresh
