@@ -1,5 +1,6 @@
 # NixOS Configuration
-Personal NixOS setup using flakes and Home Manager, focused on a minimal Hyprland desktop and role-based system configuration.
+
+This repository contains a modular NixOS configuration based on Nix Flakes and Home Manager. It is designed with a role-based system architecture and a layered user environment, primarily focused on a minimal and aesthetically pleasing Hyprland desktop experience.
 
 ---
 
@@ -8,125 +9,121 @@ Personal NixOS setup using flakes and Home Manager, focused on a minimal Hyprlan
 ### Desktop (Hyprland + Stylix)
 ![Desktop](assets/screenshots/desktop.png)
 
-### Terminal
+### Terminal (Fastfetch + Starship)
 ![Terminal](assets/screenshots/fetch.png)
 
-### Editor (Neovim / nixvim)
+### Editor (Neovim via nixvim)
 ![Editor](assets/screenshots/editor.png)
 
 ---
 
-## Structure
-```
+## Architecture Overview
+
+The configuration is built around two main principles: **Modular System Roles** and **Layered User Environments**.
+
+### Role-Based System Configuration
+NixOS system modules are organized into reusable roles located in `modules/role/`. Each host (machine) selects the roles it requires, ensuring a lean and focused installation while sharing common system settings.
+
+### Three-Layer Home Manager Architecture
+The user environment is split into three independent layers to ensure modularity and clean separation of concerns:
+
+| Layer | Location | Description |
+| :--- | :--- | :--- |
+| **Layer 1: Core** | `home/skylark.nix` | Fundamental CLI tools, Git, Nixvim, Starship, and XDG directories. No GUI dependencies. |
+| **Layer 2: Wayland** | `home/modules/wayland/` | Shared Wayland utilities like Kitty, Waybar, SwayNC, and Fuzzel. Compositor-agnostic. |
+| **Layer 3: Compositor** | `home/modules/hyprland/` | The entry point for the desktop environment. Imports Layer 2 and defines compositor-specific logic. |
+
+---
+
+## Directory Structure
+
+```text
 .
-├── flake.nix
-├── hosts/
-│   ├── laptop/
-│   └── nixos/
-├── modules/
-│   ├── role/
-│   │   ├── bluetooth/
-│   │   ├── dev/
-│   │   ├── hyprland/
-│   │   ├── printing/
-│   │   └── gaming/
-│   ├── services/
-│   └── system/
-├── home/
-│   ├── skylark.nix
-│   └── modules/
-│       ├── default.nix   # layer 1 — core
-│       ├── wayland/      # layer 2 — Wayland 
-│       ├── hyprland/     # layer 3 — compositor
-│       └── kde/          # layer 3 — Fedora HM
-└── dotfiles/
+├── flake.nix             # Flake entry point and host definitions
+├── hosts/                # Machine-specific configurations
+│   ├── laptop/           # Laptop-specific setup (e.g., power management)
+│   └── nixos/            # General desktop base configuration
+├── modules/              # NixOS system-level modules
+│   ├── role/             # Bundled features (gaming, dev, hyprland, etc.)
+│   ├── services/         # System services (audio, ssh, power)
+│   └── system/           # Core system settings (fonts, networking, nix)
+├── home/                 # Home Manager configurations
+│   └── modules/          # Layered user environment modules
+│       ├── nixvim/       # Modular Neovim configuration
+│       ├── wayland/      # Compositor-agnostic Wayland setup
+│       └── hyprland/     # Hyprland-specific modules
+├── dotfiles/             # External configuration files symlinked via Home Manager
+└── assets/               # Screenshots and wallpapers
 ```
 
 ---
 
-## Home Manager
+## Systems & Roles
 
-Home Manager configuration lives under `home/`.
+### Configured Hosts
+- **laptop**: Optimized for mobile use with specific power management and hardware support. Uses external GRUB.
+- **nixos**: A standard desktop configuration serving as a template for new installations.
 
-### Three-layer architecture
+### Available Roles
+- **hyprland**: Tiling window manager, greetd login manager, and GTK/Qt Wayland compatibility.
+- **dev**: Development environment including Docker and essential build tools.
+- **gaming**: Steam and performance optimizations for gaming.
+- **bluetooth**: Bluetooth stack and Blueman for graphical management.
+- **printing**: CUPS service with HP and Epson drivers, plus SANE scanning support.
 
-Configuration is split into three independent layers. Each layer only depends on the ones below it.
+---
 
-| Layer | Location | Contents |
-|-------|----------|----------|
-| 1 — Core | `home/skylark.nix` + `home/modules/` | git, nixvim, shell, starship, xdg dirs. No GUI, no Wayland. |
-| 2 — Wayland | `home/modules/wayland/` | kitty, waybar, swaync, fuzzel. Compositor-agnostic. |
-| 3 — Compositor | `home/modules/hyprland/` or `kde/` | Imports layer 2. Only entry point the flake touches. |
+## Key Features
 
-The flake imports only layer 3. Layer 3 imports layer 2. Layer 1 has no knowledge of Wayland or Hyprland.
+### Theming with Stylix
+System-wide theming is handled by **Stylix**, ensuring a consistent color scheme, font selection, and wallpaper across the entire system. Fonts are managed centrally via Stylix to avoid duplication.
 
-### Neovim
-- Configured via **nixvim**
-- Chosen mainly for easier LSP configuration
-- Stylix control over nixvim is **disabled** — themed manually
+### Neovim (nixvim)
+The editor is configured using **nixvim**, allowing for a fully declarative Neovim setup. The configuration is modularized into `options.nix`, `keymaps.nix`, `plugins.nix`, and `lsp.nix` for better maintainability.
+
+### Dotfile Management
+While the system is managed by Nix, specific application configurations (like Hyprland scripts and Waybar styles) are kept in their native formats within the `dotfiles/` directory. These are symlinked to their respective locations using `xdg.configFile`, allowing for easier testing and portability.
+
+---
+
+## Installation & Usage
+
+### Applying Configuration
+To apply the configuration for a specific host:
+```bash
+sudo nixos-rebuild switch --flake .#<hostname>
+```
+
+### Standalone Home Manager
+For non-NixOS systems (like Fedora), apply the Home Manager configuration:
+```bash
+home-manager switch --flake .#skylark
+```
+
+---
+
+## Technical Notes
+
+### Networking
+Networking is managed by **NetworkManager** with **iwd** as the WiFi backend. This configuration was chosen to resolve issues encountered with standard `wpa_supplicant` and certain container/DNS configurations.
+
+### Boot Management
+- **laptop**: Designed to coexist with other operating systems. The NixOS-managed GRUB is disabled, relying on an external bootloader (e.g., Fedora's GRUB) to handle boot entries.
+- **nixos**: Standard EFI boot with systemd-boot.
 
 ### Theming
-- **Stylix** handles system-wide theming
-- Fonts declared in Stylix are not duplicated in `system/fonts.nix`
-- Only `noto-fonts-cjk-sans` is declared separately (not covered by Stylix)
-
-### Dotfiles
-- Desktop ricing (bar, waybar, hyprland, etc.) lives in `dotfiles/`
-- Dotfiles are **not written in Nix** (intentionally, for now)
-- Imported via `xdg.configFile` in the relevant Home Manager module
+**Stylix** control over **nixvim** is explicitly disabled. This allows for manual control over editor-specific color schemes and UI components while maintaining system-wide consistency for other applications.
 
 ---
 
-## Hosts
+## Maintenance
 
-Each host declares which roles it needs. Shared base configuration is imported from `modules/`.
+Update flake inputs:
+```bash
+nix flake update
+```
 
-### laptop
-- Uses Fedora's GRUB to boot NixOS (NixOS GRUB disabled)
-- Roles: `hyprland`, `dev`, `printing`, and `bluetooth`
-
-### nixos
-- Desktop machine
-- Serves as a base for new machines
-- `hardware-configuration.nix` should be replaced on a new system
-
----
-
-## Modules
-
-System-wide NixOS modules live under `modules/`.
-
-### `modules/system/`
-Core system configuration: nix settings, networking, fonts, timezone, security, packages, gc.
-
-- Networking uses **NetworkManager** and **iwd** for the WiFi backend
-- Had issues with dns and container on **iwd** and systemd network
-
-### `modules/services/`
-System services: audio, power, printing, scanning, ssh, storage.
-
-### `modules/role/`
-Reusable role-based configurations. Each host imports only the roles it needs.
-
-| Role | Contents |
-|------|----------|
-| `hyprland` | `programs.hyprland`, greetd, Qt/GTK Wayland libs, Stylix |
-| `dev` | Docker daemon, development tools |
-| `bluetooth` | enables bluetooth and blueman for GUI |
-| `printing` | Printing (CUPS, hplip, epson) and scanning (SANE) |
-| `gaming` | Gaming-related configuration |
-
----
-
-## Flake Inputs
-
-| Input | Channel |
-|-------|---------|
-| nixpkgs | nixos-25.11 |
-| home-manager | release-25.11 |
-| stylix | release-25.11 |
-| nixvim | nixos-25.11 |
-
----
-## TODOS
--- make sure the screen can be projected
+Garbage collection:
+```bash
+nix-collect-garbage -d
+```

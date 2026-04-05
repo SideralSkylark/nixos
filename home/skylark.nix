@@ -12,7 +12,7 @@
 
   programs.nixvim = {
     enable = true;
-    imports = [ ./modules/nixvim.nix ];
+    imports = [ ./modules/nixvim ];
   };
 
   xdg = {
