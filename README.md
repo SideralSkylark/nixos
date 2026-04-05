@@ -116,14 +116,19 @@ Networking is managed by **NetworkManager** with **iwd** as the WiFi backend. Th
 
 ---
 
-## Maintenance
+## TODOs
 
-Update flake inputs:
-```bash
-nix flake update
-```
+### Resource Usage & Lean Alternatives
+- Replace `swww` with `wbg` for a lighter, more focused wallpaper daemon.
+- Evaluate `waybar` optimization to reduce polling frequency on battery.
 
-Garbage collection:
-```bash
-nix-collect-garbage -d
-```
+### Quality of Life & Workflow
+- Integrate `direnv` + `nix-direnv` for automatic per-project development shells.
+- Implement `sops-nix` or `agenix` for secure management of secrets and API keys.
+- Add `nix-index` for command-not-found functionality in the shell.
+- Configure `zoxide` for smarter directory navigation (enabled in config but needs shell alias/integration).
+
+### System & Maintenance
+- Standardize configuration formatting using `nixfmt` or `alejandra`.
+- Implement a pre-commit hook to validate Nix syntax before pushing changes.
+- Explore `nh` (Nix Helper) for a cleaner CLI experience for rebuilds and GC.
