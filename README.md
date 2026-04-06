@@ -119,7 +119,6 @@ Networking is managed by **NetworkManager** with **iwd** as the WiFi backend. Th
 ## TODOs
 
 ### Resource Usage & Lean Alternatives
-- Evaluate `waybar` optimization to reduce polling frequency on battery.
 
 ### Quality of Life & Workflow
 - Integrate `direnv` + `nix-direnv` for automatic per-project development shells.
