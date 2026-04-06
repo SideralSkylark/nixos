@@ -7,7 +7,7 @@
   ];
 
   home.packages = with pkgs; [
-    swww
+    wbg
     nwg-displays
     pavucontrol
     swaylock-effects
