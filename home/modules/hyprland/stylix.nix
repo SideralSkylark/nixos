@@ -8,6 +8,7 @@
     kitty.enable = false;
     nixvim.enable = false;
     swaylock.enable = false;
+    hyprlock.enable = false;
   };
 
   gtk.enable = true;
