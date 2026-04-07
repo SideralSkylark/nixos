@@ -32,6 +32,7 @@ The user environment is split into three independent layers to ensure modularity
 | **Layer 1: Core** | `home/skylark.nix` | Fundamental CLI tools, Git, Nixvim, Starship, and XDG directories. No GUI dependencies. |
 | **Layer 2: Wayland** | `home/modules/wayland/` | Shared Wayland utilities like Kitty, Waybar, SwayNC, and Fuzzel. Compositor-agnostic. |
 | **Layer 3: Compositor** | `home/modules/hyprland/` | The entry point for the desktop environment. Imports Layer 2 and defines compositor-specific logic. |
+| **Layer 3: Standalone** | `home/modules/standalone/` | A standalone system agnostic module with my dev tools. |
 
 ---
 
@@ -51,7 +52,8 @@ The user environment is split into three independent layers to ensure modularity
 │   └── modules/          # Layered user environment modules
 │       ├── nixvim/       # Modular Neovim configuration
 │       ├── wayland/      # Compositor-agnostic Wayland setup
-│       └── hyprland/     # Hyprland-specific modules
+│       ├── hyprland/     # Hyprland-specific modules
+│       └── standalone/   # Generic desktop-agnostic tools for non-NixOS
 ├── dotfiles/             # External configuration files symlinked via Home Manager
 └── assets/               # Screenshots and wallpapers
 ```
@@ -118,15 +120,3 @@ Networking is managed by **NetworkManager** with **iwd** as the WiFi backend. Th
 
 ## TODOs
 
-### Resource Usage & Lean Alternatives
-
-### Quality of Life & Workflow
-- Integrate `direnv` + `nix-direnv` for automatic per-project development shells.
-- Implement `sops-nix` or `agenix` for secure management of secrets and API keys.
-- Add `nix-index` for command-not-found functionality in the shell.
-- Configure `zoxide` for smarter directory navigation (enabled in config but needs shell alias/integration).
-
-### System & Maintenance
-- Standardize configuration formatting using `nixfmt` or `alejandra`.
-- Implement a pre-commit hook to validate Nix syntax before pushing changes.
-- Explore `nh` (Nix Helper) for a cleaner CLI experience for rebuilds and GC.
