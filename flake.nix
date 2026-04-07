@@ -75,7 +75,7 @@
           pkgs = nixpkgs.legacyPackages.${system};
           modules = [
             ./home/skylark.nix
-            ./home/modules/kde
+            ./home/modules/standalone
           ];
           extraSpecialArgs = { inherit nixvim; };
         };

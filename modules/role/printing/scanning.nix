@@ -1,6 +1,16 @@
 { pkgs, ... }:
 {
-  # hardware.sane.enable = true;
-  # services.udev.packages = [ pkgs.sane-backends ];
-  # users.users.skylark.extraGroups = [ "scanner" ]; # add in the hosts config
+  hardware.sane = {
+    enable = true;
+    extraBackends = [
+      pkgs.hplip        # HP multifunction
+      pkgs.epkowa       # Epson multifunction
+    ];
+  };
+
+  services.udev.packages = [ pkgs.sane-backends ];
+
+  environment.systemPackages = with pkgs; [
+    skanlite   # ou 
+  ];
 }

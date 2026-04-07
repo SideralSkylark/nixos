@@ -6,15 +6,164 @@
     ./stylix.nix
   ];
 
+  services.hyprsunset = {
+    enable = true;
+    settings = {
+      max-gamma = 150;
+      profile = [
+        {
+          # Daytime — neutral color temperature
+          time = "07:30";
+          temperature = 6500;
+          gamma = 1.0;
+        }
+        {
+          # Night — warm temperature to reduce eye strain
+          time = "21:00";
+          temperature = 4000;
+          gamma = 0.9;
+        }
+      ];
+    };
+  };
+
+  services.hypridle = {
+    enable = true;
+    settings = {
+      general = {
+        # Use loginctl to trigger lock_cmd reliably before sleep
+        before_sleep_cmd = "loginctl lock-session";
+        # Turn display back on after resume
+        after_sleep_cmd = "hyprctl dispatch dpms on";
+        # Prevent duplicate hyprlock instances via pidof check
+        lock_cmd = "pidof hyprlock || ${pkgs.hyprlock}/bin/hyprlock";
+      };
+      listener = [
+        {
+          # Lock session after 5 minutes — fires lock_cmd above
+          timeout = 300;
+          on-timeout = "loginctl lock-session";
+        }
+        {
+          # Turn displays off 30s after locking — gives hyprlock
+          # time to fully initialize before blanking the screen
+          timeout = 330;
+          on-timeout = "hyprctl dispatch dpms off";
+          on-resume = "hyprctl dispatch dpms on";
+        }
+        {
+          # Suspend after 30 minutes of total inactivity
+          timeout = 1800;
+          on-timeout = "systemctl suspend";
+        }
+      ];
+    };
+  };
+
+  programs.hyprlock = {
+    enable = true;
+    settings = {
+      general = {
+        hide_cursor = true;
+        ignore_empty_input = true;
+        # Render immediately — no waiting for resources
+        immediate_render = true;
+      };
+
+      auth = {
+        # Standard PAM authentication
+        "pam:enabled" = true;
+        "pam:module" = "hyprlock";
+        # Fingerprint disabled — not wanted
+        "fingerprint:enabled" = false;
+      };
+
+      animations = {
+        # Disable all animations — instant transitions
+        enabled = false;
+      };
+
+      background = [
+        {
+          monitor = "";
+          # Solid Kanagawa sumiInk0 — no image, no blur
+          color = "rgba(16161Dff)";
+          blur_passes = 0;
+        }
+      ];
+
+      label = [
+        {
+          # Clock — dominant element, warm fujiWhite
+          monitor = "";
+          # $TIME built-in — more efficient than shell command
+          text = "$TIME";
+          color = "rgba(C8C093ff)";
+          font_size = 120;
+          font_family = "JetBrainsMono Nerd Font";
+          position = "0, 160";
+          halign = "center";
+          valign = "center";
+        }
+        {
+          # Date — muted fujiGray, secondary hierarchy
+          monitor = "";
+          # Update every minute — no need for per-second refresh
+          text = ''cmd[update:60000] echo "$(date +"%A, %d %B %Y")"'';
+          color = "rgba(727169ff)";
+          font_size = 13;
+          font_family = "JetBrainsMono Nerd Font";
+          position = "0, 60";
+          halign = "center";
+          valign = "center";
+        }
+        {
+          # Retro prompt — sumiInk4, intentionally barely visible
+          monitor = "";
+          text = "ENTER PASSWORD";
+          color = "rgba(54546Dff)";
+          font_size = 9;
+          font_family = "JetBrainsMono Nerd Font";
+          position = "0, -100";
+          halign = "center";
+          valign = "center";
+        }
+      ];
+
+      input-field = [
+        {
+          monitor = "";
+          size = "280, 36";
+          # Sharp corners — terminal aesthetic, no rounding
+          rounding = 0;
+          outline_thickness = 1;
+          inner_color = "rgba(1F1F2800)";
+          outer_color = "rgba(54546Dff)";  # sumiInk4 — idle border
+          check_color = "rgba(7E9CD8ff)";  # crystalBlue — verifying
+          fail_color = "rgba(C4746Eff)";   # autumnRed — wrong password
+          font_color = "rgba(C8C093ff)";   # fujiWhite — typed text
+          font_family = "JetBrainsMono Nerd Font";
+          # Dashes instead of dots — retro terminal feel
+          dots_text_format = "-";
+          dots_size = 0.3;
+          dots_spacing = 0.2;
+          fade_on_empty = false;
+          placeholder_text = "";
+          fail_text = "[ $ATTEMPTS failed attempts ]";
+          position = "0, -140";
+          halign = "center";
+          valign = "center";
+        }
+      ];
+    };
+  };
+
   home.packages = with pkgs; [
     wbg
     nwg-displays
     pavucontrol
-    swaylock-effects
-    swayidle
-    hyprsunset
     xdg-desktop-portal-hyprland
-    jq # parses json fron dunst to fuzzel menu
+    jq # clipboard json parsing for dunst/fuzzel menu
     brave
     librewolf
     obsidian
@@ -23,7 +172,6 @@
   ];
 
   xdg.configFile = {
-    # Hyprland
     "hypr/hyprland.conf".source = ../../../dotfiles/hyprland/.config/hypr/hyprland.conf;
     "hypr/startup.conf".source = ../../../dotfiles/hyprland/.config/hypr/startup.conf;
     "hypr/scripts/random-wallpaper" = {
@@ -38,80 +186,5 @@
       source = ../../../dotfiles/hyprland/.config/hypr/scripts/brightness.sh;
       executable = true;
     };
-
-    "hypr/scripts/idle" = {
-      source = ../../../dotfiles/hyprland/.config/hypr/scripts/idle.sh;
-      executable = true;
-    };
-
-    # Hyprsunset configuration
-    "hypr/hyprsunset.conf".text = ''
-      max-gamma = 150
-
-      # Profile for daytime (default)
-      profile {
-          time = 07:30
-          temperature = 6500
-          gamma = 1.0
-      }
-
-      # Profile for night
-      profile {
-          time = 21:00
-          temperature = 4000
-          gamma = 0.9
-      }
-    '';
-
-    "swaylock/config".text = ''
-      # Background
-      color=16161D
-
-      # Colors — Kanagawa
-      inside-color=1F1F2800
-      inside-clear-color=1F1F2800
-      inside-ver-color=1F1F2800
-      inside-wrong-color=43242B00
-      ring-color=363646
-      ring-clear-color=7AA89F
-      ring-ver-color=7E9CD8
-      ring-wrong-color=C4746E
-      key-hl-color=98BB6C
-      bs-hl-color=C4746E
-      text-color=DCD7BA
-      text-clear-color=C8C093
-      text-ver-color=7E9CD8
-      text-wrong-color=C4746E
-      text-caps-lock-color=E6C384
-      line-color=00000000
-      line-clear-color=00000000
-      line-ver-color=00000000
-      line-wrong-color=00000000
-      separator-color=00000000
-
-      # Ring
-      indicator-radius=80
-      indicator-thickness=6
-
-      # Font
-      font=JetBrainsMono Nerd Font
-      font-size=16
-
-      # Clock
-      clock
-      timestr=%H:%M
-      datestr=%a, %d %b
-      indicator
-
-      # Caps lock
-      ring-caps-lock-color=E6C384
-      inside-caps-lock-color=1F1F2800
-      text-caps-lock-color=E6C384
-      indicator-caps-lock
-
-      # Misc
-      ignore-empty-password
-      show-failed-attempts
-    '';
   };
 }
