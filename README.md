@@ -119,4 +119,4 @@ Networking is managed by **NetworkManager** with **iwd** as the WiFi backend. Th
 ---
 
 ## TODOs
-
+- Test screen projection

@@ -19,7 +19,8 @@
       "audio"
       "video"
       "docker"
-      "lpadmin"
+      # "lpadmin"
+      # "scanner"
     ];
   };
 }
