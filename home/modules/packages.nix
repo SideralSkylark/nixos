@@ -1,6 +1,7 @@
 { pkgs, ... }:
 {
   home.packages = with pkgs; [
+    vim #fallback
     fastfetch #info fetcher
     btop #process monitor
     git #version controll
