@@ -4,30 +4,124 @@ let
     #!/usr/bin/env bash
     set -euo pipefail
 
-    # Wait a moment for monitor detection and Hyprland socket readiness
-    sleep 1
+    # --- Defaults ---
+    WORKSPACE_NUM="5"
+    MODE="extend"        # extend | mirror | off
+    TARGET_MONITOR=""    # Optional: specific monitor name
+    DRY_RUN=false
+    RETRY_COUNT=5
+    RETRY_DELAY=0.5
 
-    # Look for the first monitor that is NOT the laptop display (eDP)
-    EXTERNAL=$(hyprctl monitors -j | jq -r '.[] | select(.name | contains("eDP") | not) |.name' | head -n 1)
+    # --- Helpers ---
+    log() { echo -e "[\033[1;34mINFO\033[0m] $*"; }
+    warn() { echo -e "[\033[1;33mWARN\033[0m] $*" >&2; }
+    error() { echo -e "[\033[1;31mERROR\033[0m] $*" >&2; exit 1; }
 
-    if [ -z "$EXTERNAL" ] || [ "$EXTERNAL" == "null" ]; then
-      echo "[!] No external monitor detected"
-      exit 1
+    usage() {
+      cat <<EOF
+    Usage: $(basename "$0") [options]
+    Options:
+      -w <num>    Workspace number (default: $WORKSPACE_NUM)
+      -m <mode>   Mode: extend (default), mirror, off
+      -s <name>   Specific monitor name to target
+      -d          Dry run (print commands instead of executing)
+      -h          Show this help
+    EOF
+      exit 0
+    }
+
+    run_hyprctl() {
+      if [ "$DRY_RUN" = true ]; then
+        echo "[DRY-RUN] hyprctl $*"
+      else
+        hyprctl "$@" > /dev/null
+      fi
+    }
+
+    # --- Parse Args ---
+    while getopts "w:m:s:dh" opt; do
+      case "$opt" in
+        w) WORKSPACE_NUM="$OPTARG" ;;
+        m) MODE="$OPTARG" ;;
+        s) TARGET_MONITOR="$OPTARG" ;;
+        d) DRY_RUN=true ;;
+        h) usage ;;
+        *) usage ;;
+      esac
+    done
+
+    # --- Discovery ---
+    get_monitors() { hyprctl monitors all -j | jq -c '.'; }
+    get_active_monitors() { hyprctl monitors -j | jq -c '.'; }
+
+    # Identify primary (eDP)
+    MONITORS_JSON=$(get_monitors)
+    PRIMARY=$(echo "$MONITORS_JSON" | jq -r '.[] | select(.name | test("eDP-[0-9]+")) | .name' | head -n 1)
+    [ -z "$PRIMARY" ] && warn "Could not detect primary eDP monitor"
+
+    find_external() {
+      local json="$1"
+      if [ -n "$TARGET_MONITOR" ]; then
+        echo "$json" | jq -r ".[] | select(.name == \"$TARGET_MONITOR\") | .name"
+      else
+        # Pick the first non-eDP monitor
+        echo "$json" | jq -r '.[] | select(.name | test("eDP-[0-9]+") | not) | .name' | head -n 1
+      fi
+    }
+
+    # Retry loop for hotplug
+    EXTERNAL=""
+    for i in $(seq 1 $RETRY_COUNT); do
+      EXTERNAL=$(find_external "$(get_monitors)")
+      if [ -n "$EXTERNAL" ] && [ "$EXTERNAL" != "null" ]; then
+        break
+      fi
+      log "Waiting for external monitor detection (attempt $i/$RETRY_COUNT)..."
+      sleep "$RETRY_DELAY"
+    done
+
+    # --- Action Logic ---
+    if [ "$MODE" = "off" ] || [ -z "$EXTERNAL" ] || [ "$EXTERNAL" = "null" ]; then
+      if [ "$MODE" = "off" ] && [ -n "$EXTERNAL" ] && [ "$EXTERNAL" != "null" ]; then
+        log "Disabling monitor: $EXTERNAL"
+        run_hyprctl keyword monitor "$EXTERNAL, disable"
+      fi
+      
+      log "Ensuring workspace $WORKSPACE_NUM is on primary: $PRIMARY"
+      run_hyprctl dispatch moveworkspacetomonitor "$WORKSPACE_NUM" "$PRIMARY"
+      exit 0
     fi
 
-    echo "[>] Configuring monitor: $EXTERNAL"
+    log "Targeting external monitor: $EXTERNAL (Mode: $MODE)"
 
-    # 1. Enable the monitor (Preferred resolution, auto position, scale 1)
-    hyprctl keyword monitor "$EXTERNAL, preferred, auto, 1"
+    # State Awareness: Check if monitor is already active
+    IS_ACTIVE=$(get_active_monitors | jq -r ".[] | select(.name == \"$EXTERNAL\") | .name")
+    
+    case "$MODE" in
+      mirror)
+        run_hyprctl keyword monitor "$EXTERNAL, preferred, auto, 1, mirror, $PRIMARY"
+        ;;
+      extend)
+        # Only re-enable if not active or if we want to force preferred settings
+        run_hyprctl keyword monitor "$EXTERNAL, preferred, auto, 1"
+        ;;
+      *) error "Invalid mode: $MODE" ;;
+    esac
 
-    # 2. Move workspace 5 to the external monitor
-    hyprctl dispatch moveworkspacetomonitor 5 "$EXTERNAL"
+    # State Awareness: Check workspace location
+    CURRENT_MONITOR=$(hyprctl workspaces -j | jq -r ".[] | select(.id == $WORKSPACE_NUM) | .monitor" || echo "")
+    if [ "$CURRENT_MONITOR" != "$EXTERNAL" ]; then
+      log "Moving workspace $WORKSPACE_NUM to $EXTERNAL"
+      run_hyprctl dispatch moveworkspacetomonitor "$WORKSPACE_NUM" "$EXTERNAL"
+    else
+      log "Workspace $WORKSPACE_NUM is already on $EXTERNAL"
+    fi
 
-    # 3. Focus the new monitor and switch to workspace 5
-    hyprctl dispatch focusmonitor "$EXTERNAL"
-    hyprctl dispatch workspace 5
+    # Final Focus
+    run_hyprctl dispatch focusmonitor "$EXTERNAL"
+    run_hyprctl dispatch workspace "$WORKSPACE_NUM"
 
-    echo "[+] Ready to present!"
+    log "[+] Setup complete!"
   '';
 in
 {
