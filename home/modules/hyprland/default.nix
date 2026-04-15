@@ -1,4 +1,35 @@
 { pkgs, ... }:
+let
+  projector = pkgs.writeShellScriptBin "projector" ''
+    #!/usr/bin/env bash
+    set -euo pipefail
+
+    # Wait a moment for monitor detection and Hyprland socket readiness
+    sleep 1
+
+    # Look for the first monitor that is NOT the laptop display (eDP)
+    EXTERNAL=$(hyprctl monitors -j | jq -r '.[] | select(.name | contains("eDP") | not) |.name' | head -n 1)
+
+    if [ -z "$EXTERNAL" ] || [ "$EXTERNAL" == "null" ]; then
+      echo "[!] No external monitor detected"
+      exit 1
+    fi
+
+    echo "[>] Configuring monitor: $EXTERNAL"
+
+    # 1. Enable the monitor (Preferred resolution, auto position, scale 1)
+    hyprctl keyword monitor "$EXTERNAL, preferred, auto, 1"
+
+    # 2. Move workspace 5 to the external monitor
+    hyprctl dispatch moveworkspacetomonitor 5 "$EXTERNAL"
+
+    # 3. Focus the new monitor and switch to workspace 5
+    hyprctl dispatch focusmonitor "$EXTERNAL"
+    hyprctl dispatch workspace 5
+
+    echo "[+] Ready to present!"
+  '';
+in
 {
   imports = [
     ../wayland
@@ -159,6 +190,7 @@
   };
 
   home.packages = with pkgs; [
+    projector
     wbg
     nwg-displays
     pavucontrol
