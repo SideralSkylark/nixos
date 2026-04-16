@@ -124,10 +124,58 @@ let
 
     log "[+] Setup complete!"
   '';
+
+  screenshot = pkgs.writeShellScriptBin "screenshot" ''
+    DIR="$HOME/Pictures/screenshots"
+    NAME="screenshot_$(date +%F_%T).png"
+    FILE="$DIR/$NAME"
+    TMP_FILE="/tmp/screenshot_pending.png"
+
+    mkdir -p "$DIR"
+
+    notify_view() {
+        ${pkgs.libnotify}/bin/notify-send \
+            -a "system" \
+            -u low \
+            -t 3000 \
+            -i "$1" \
+            "Screenshot Captured" "Saved to $DIR"
+    }
+
+    case $1 in
+        edit)
+            SEL=$(${pkgs.slurp}/bin/slurp)
+            if [ -z "$SEL" ]; then
+                exit 0
+            fi
+            
+            ${pkgs.grim}/bin/grim -g "$SEL" "$TMP_FILE"
+            ${pkgs.swappy}/bin/swappy -f "$TMP_FILE" -o "$FILE"
+            
+            if [ -f "$FILE" ]; then
+                ${pkgs.wl-clipboard}/bin/wl-copy < "$FILE"
+                notify_view "$FILE"
+                rm -f "$TMP_FILE"
+            fi
+            ;;
+        screen)
+            ${pkgs.grim}/bin/grim "$FILE"
+            if [ -f "$FILE" ]; then
+                ${pkgs.wl-clipboard}/bin/wl-copy < "$FILE"
+                notify_view "$FILE"
+            fi
+            ;;
+        *)
+            echo "Usage: screenshot {edit|screen}"
+            exit 1
+            ;;
+    esac
+  '';
 in
 {
   home.packages = with pkgs; [
     projector
+    screenshot
     wbg
     nwg-displays
     pavucontrol
@@ -155,5 +203,8 @@ in
       source = ../../../dotfiles/hyprland/.config/hypr/scripts/brightness.sh;
       executable = true;
     };
+
+    # swappy
+    "swappy/config".source = ../../../dotfiles/swappy/.config/swappy/config;
   };
 }
