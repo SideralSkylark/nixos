@@ -8,13 +8,14 @@ let
     WORKSPACE_NUM="5"
     MODE="extend"        # extend | mirror | off
     TARGET_MONITOR=""    # Optional: specific monitor name
+    SCALE="1"
     DRY_RUN=false
     RETRY_COUNT=5
     RETRY_DELAY=0.5
 
     # --- Helpers ---
-    log() { echo -e "[\033[1;34mINFO\033[0m] $*"; }
-    warn() { echo -e "[\033[1;33mWARN\033[0m] $*" >&2; }
+    log()   { echo -e "[\033[1;34mINFO\033[0m] $*"; }
+    warn()  { echo -e "[\033[1;33mWARN\033[0m] $*" >&2; }
     error() { echo -e "[\033[1;31mERROR\033[0m] $*" >&2; exit 1; }
 
     usage() {
@@ -24,6 +25,7 @@ let
       -w <num>    Workspace number (default: $WORKSPACE_NUM)
       -m <mode>   Mode: extend (default), mirror, off
       -s <name>   Specific monitor name to target
+      -k <scale>  Output scale (default: 1)
       -d          Dry run (print commands instead of executing)
       -h          Show this help
     EOF
@@ -39,20 +41,28 @@ let
     }
 
     # --- Parse Args ---
-    while getopts "w:m:s:dh" opt; do
+    while getopts "w:m:s:k:dh" opt; do
       case "$opt" in
         w) WORKSPACE_NUM="$OPTARG" ;;
         m) MODE="$OPTARG" ;;
         s) TARGET_MONITOR="$OPTARG" ;;
+        k) SCALE="$OPTARG" ;;
         d) DRY_RUN=true ;;
         h) usage ;;
         *) usage ;;
       esac
     done
 
+    # --- Early Validation ---
+    [[ "$WORKSPACE_NUM" =~ ^[0-9]+$ ]] || error "Workspace number must be a positive integer"
+    case "$MODE" in
+      extend|mirror|off) ;;
+      *) error "Invalid mode: '$MODE'. Must be one of: extend, mirror, off" ;;
+    esac
+
     # --- Discovery ---
-    get_monitors() { hyprctl monitors all -j | jq -c '.'; }
-    get_active_monitors() { hyprctl monitors -j | jq -c '.'; }
+    get_monitors()        { hyprctl monitors all -j | jq -c '.'; }
+    get_active_monitors() { hyprctl monitors -j     | jq -c '.'; }
 
     # Identify primary (eDP)
     MONITORS_JSON=$(get_monitors)
@@ -64,15 +74,13 @@ let
       if [ -n "$TARGET_MONITOR" ]; then
         echo "$json" | jq -r ".[] | select(.name == \"$TARGET_MONITOR\") | .name"
       else
-        # Pick the first non-eDP monitor
         echo "$json" | jq -r '.[] | select(.name | test("eDP-[0-9]+") | not) | .name' | head -n 1
       fi
     }
 
     # Retry loop for hotplug
     EXTERNAL=""
-    for i in $(seq 1 $RETRY_COUNT);
-    do
+    for i in $(seq 1 $RETRY_COUNT); do
       EXTERNAL=$(find_external "$(get_monitors)")
       if [ -n "$EXTERNAL" ] && [ "$EXTERNAL" != "null" ]; then
         break
@@ -87,40 +95,46 @@ let
         log "Disabling monitor: $EXTERNAL"
         run_hyprctl keyword monitor "$EXTERNAL, disable"
       fi
-      
+
       log "Ensuring workspace $WORKSPACE_NUM is on primary: $PRIMARY"
       run_hyprctl dispatch moveworkspacetomonitor "$WORKSPACE_NUM" "$PRIMARY"
       exit 0
     fi
 
-    log "Targeting external monitor: $EXTERNAL (Mode: $MODE)"
+    log "Targeting external monitor: $EXTERNAL (Mode: $MODE, Scale: $SCALE)"
 
-    # State Awareness: Check if monitor is already active
+    # State awareness: check if monitor is already active
     IS_ACTIVE=$(get_active_monitors | jq -r ".[] | select(.name == \"$EXTERNAL\") | .name")
-    
+
     case "$MODE" in
       mirror)
-        run_hyprctl keyword monitor "$EXTERNAL, preferred, auto, 1, mirror, $PRIMARY"
+        # Move workspace back to primary first — prevents it becoming orphaned
+        # when the external monitor loses its independent display in mirror mode
+        log "Returning workspace $WORKSPACE_NUM to primary before mirroring"
+        run_hyprctl dispatch moveworkspacetomonitor "$WORKSPACE_NUM" "$PRIMARY"
+        run_hyprctl keyword monitor "$EXTERNAL, preferred, auto, $SCALE, mirror, $PRIMARY"
+        # Switch primary to the workspace so the TV mirrors it immediately
+        run_hyprctl dispatch workspace "$WORKSPACE_NUM"
         ;;
       extend)
-        # Only re-enable if not active or if we want to force preferred settings
-        run_hyprctl keyword monitor "$EXTERNAL, preferred, auto, 1"
+        # Only re-enable if not already active to avoid unnecessary re-layout flicker
+        if [ -z "$IS_ACTIVE" ]; then
+          run_hyprctl keyword monitor "$EXTERNAL, preferred, auto, $SCALE"
+        fi
+
+        # Move workspace to external if not already there
+        CURRENT_MONITOR=$(hyprctl workspaces -j | jq -r ".[] | select(.id == $WORKSPACE_NUM) | .monitor // empty" 2>/dev/null) || CURRENT_MONITOR=""
+        if [ "$CURRENT_MONITOR" != "$EXTERNAL" ]; then
+          log "Moving workspace $WORKSPACE_NUM to $EXTERNAL"
+          run_hyprctl dispatch moveworkspacetomonitor "$WORKSPACE_NUM" "$EXTERNAL"
+        else
+          log "Workspace $WORKSPACE_NUM is already on $EXTERNAL"
+        fi
+
+        run_hyprctl dispatch focusmonitor "$EXTERNAL"
+        run_hyprctl dispatch workspace "$WORKSPACE_NUM"
         ;;
-      *) error "Invalid mode: $MODE" ;;
     esac
-
-    # State Awareness: Check workspace location
-    CURRENT_MONITOR=$(hyprctl workspaces -j | jq -r ".[] | select(.id == $WORKSPACE_NUM) | .monitor" || echo "")
-    if [ "$CURRENT_MONITOR" != "$EXTERNAL" ]; then
-      log "Moving workspace $WORKSPACE_NUM to $EXTERNAL"
-      run_hyprctl dispatch moveworkspacetomonitor "$WORKSPACE_NUM" "$EXTERNAL"
-    else
-      log "Workspace $WORKSPACE_NUM is already on $EXTERNAL"
-    fi
-
-    # Final Focus
-    run_hyprctl dispatch focusmonitor "$EXTERNAL"
-    run_hyprctl dispatch workspace "$WORKSPACE_NUM"
 
     log "[+] Setup complete!"
   '';
@@ -148,10 +162,10 @@ let
             if [ -z "$SEL" ]; then
                 exit 0
             fi
-            
+
             ${pkgs.grim}/bin/grim -g "$SEL" "$TMP_FILE"
             ${pkgs.swappy}/bin/swappy -f "$TMP_FILE" -o "$FILE"
-            
+
             if [ -f "$FILE" ]; then
                 ${pkgs.wl-clipboard}/bin/wl-copy < "$FILE"
                 notify_view "$FILE"
@@ -180,7 +194,7 @@ in
     nwg-displays
     pavucontrol
     xdg-desktop-portal-hyprland
-    jq # clipboard json parsing for dunst/fuzzel menu
+    jq
     brave
     librewolf
     obsidian
@@ -204,7 +218,6 @@ in
       executable = true;
     };
 
-    # swappy
     "swappy/config".source = ../../../dotfiles/swappy/.config/swappy/config;
   };
 }
