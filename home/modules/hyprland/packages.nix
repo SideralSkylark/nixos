@@ -202,6 +202,23 @@ in
     libreoffice-fresh
   ];
 
+  programs.swappy = {
+    enable = true;
+    settings = {
+      config = {
+        save_dir = "$HOME/Pictures/screenshots";
+        save_filename_format = "screenshot_%Y%m%d_%H%M%S.png";
+        show_panel = false;
+        line_size = 5;
+        text_size = 20;
+        text_font = "sans-serif";
+        paint_mode = "brush";
+        early_exit = true;
+        fill_shape = false;
+      };
+    };
+  };
+
   xdg.configFile = {
     "hypr/hyprland.conf".source = ../../../dotfiles/hyprland/.config/hypr/hyprland.conf;
     "hypr/startup.conf".source = ../../../dotfiles/hyprland/.config/hypr/startup.conf;
@@ -217,7 +234,5 @@ in
       source = ../../../dotfiles/hyprland/.config/hypr/scripts/brightness.sh;
       executable = true;
     };
-
-    "swappy/config".source = ../../../dotfiles/swappy/.config/swappy/config;
   };
 }
