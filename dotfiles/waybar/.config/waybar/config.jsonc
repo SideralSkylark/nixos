@@ -47,17 +47,17 @@
     "spacing": 8,
     "show-passive-items": false
   },
+
   "custom/dunst": {
-  "exec": "~/.config/waybar/scripts/dunst-status.sh",
-  "on-click": "dunstctl set-paused toggle && pkill -RTMIN+7 waybar",
-  "on-click-right": "~/.config/waybar/scripts/dunst-history.sh",
-  "on-scroll-up": "",
-  "on-scroll-down": "",
-  "interval": 3,
-  "signal": 7,
-  "return-type": "json",
-  "tooltip": true
-},
+    "exec": "~/.config/waybar/scripts/dunst-status.sh",
+    "on-click": "dunstctl set-paused toggle && pkill -RTMIN+7 waybar",
+    "on-click-right": "~/.config/waybar/scripts/dunst-history.sh",
+    "interval": "once",
+    "signal": 7,
+    "return-type": "json",
+    "tooltip": true
+  },
+
   "clock": {
     "interval": 60,
     "format": "{:%H:%M}",
@@ -94,8 +94,6 @@
     "tooltip-format-connected": "{controller_alias} | Connected\n{device_enumerate}",
     "tooltip-format-enumerate-connected": "• {device_alias}",
     "on-click": "blueman-manager",
-    "on-scroll-up": "",
-    "on-scroll-down": "",
     "on-click-right": "bluetoothctl disconnect"
   },
 
@@ -111,8 +109,6 @@
     "format-full": "󰁹 Full",
     "format-alt": "{icon} {time}",
     "format-icons": ["󰁺", "󰁼", "󰁾", "󰂀", "󰁹"],
-    "on-scroll-up": "",
-    "on-scroll-down": "",
     "tooltip-format": "{timeTo}\n{capacity}% • {power}W"
   },
 
@@ -124,24 +120,18 @@
     "format-disabled": "󰤮",
     "tooltip-format-wifi": "{essid} • {signalStrength}% • {frequency}MHz",
     "tooltip-format-ethernet": "{ifname} • {ipaddr}",
-    "tooltip-format-disconnected": "WiFi disconected",
+    "tooltip-format-disconnected": "WiFi disconnected",
     "tooltip-format-disabled": "WiFi deactivated - Click to activate",
-    "on-scroll-up": "",
-    "on-scroll-down": "",
     "on-click": "~/.config/waybar/scripts/wifi-toggle.sh",
     "on-click-right": "~/.config/waybar/scripts/wifi-menu.sh"
   },
 
   "custom/reading-mode": {
-    "exec": "~/.config/waybar/scripts/reading-mode.sh display",
-    "on-click": "~/.config/waybar/scripts/reading-mode.sh toggle",
+    "exec": "~/.config/waybar/scripts/reading-mode.sh",
     "interval": "once",
     "signal": 8,
-    "on-scroll-up": "",
-    "on-scroll-down": "",
     "return-type": "json"
   },
-
 
   "pulseaudio": {
     "format": "{icon} {volume}%",
@@ -158,9 +148,7 @@
   },
 
   "backlight": {
-    "device": "intel_backlight",
     "format": "󰃠 {percent}%",
-    "format-alt": "󰃠",
     "tooltip-format": "{percent}%",
     "on-scroll-up": "brightnessctl set +5%",
     "on-scroll-down": "brightnessctl set 5%-"
@@ -173,8 +161,6 @@
       "deactivated": "󰾪"
     },
     "tooltip-format-activated": "Idle inhibitor active",
-    "on-scroll-up": "",
-    "on-scroll-down": "",
     "tooltip-format-deactivated": "Idle inhibitor inactive"
   },
 
@@ -183,18 +169,12 @@
     "on-click": "~/.config/waybar/scripts/powerprofile.sh toggle",
     "interval": "once",
     "signal": 9,
-    "tooltip": true,
-    "return-type": "json",
-    "on-scroll-up": "",
-    "on-scroll-down": "",
-    "format": "{text}"
+    "return-type": "json"
   },
 
   "custom/power": {
     "format": "󰐥",
-    "tooltip": "Power Menu",
-    "on-scroll-up": "",
-    "on-scroll-down": "",
+    "tooltip-text": "Power Menu",
     "on-click": "~/.config/waybar/scripts/power-menu.sh"
   },
 
@@ -227,5 +207,3 @@
     ]
   }
 }
-
-

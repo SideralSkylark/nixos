@@ -1,32 +1,17 @@
 #!/usr/bin/env bash
-
-HISTORY=$(dunstctl history)
-
-# Check if history is empty
-COUNT=$(echo "$HISTORY" | jq '.data[0] | length')
+COUNT=$(dunstctl count history)
 if (( COUNT == 0 )); then
     notify-send -a "dunst" -u low "󰂜 No history" "Notification history is empty"
     exit 0
 fi
 
-# Build fuzzel input: "icon  summary — body" per entry, newest first
-ENTRIES=$(echo "$HISTORY" | jq -r '
+ENTRIES=$(dunstctl history | jq -r '
   .data[0][] |
-  [
-    .appname.data,
-    .summary.data,
-    .body.data
-  ] | 
-  "\(.[0])  \(.[1])\(if .[2] != "" then " — \(.[2])" else "" end)"
+  "\(.appname.data)  \(.summary.data)\(if .body.data != "" then " — \(.body.data)" else "" end)"
 ' | head -20)
 
-# Show in fuzzel
-CHOICE=$(echo "$ENTRIES" | fuzzel \
-    --dmenu \
-    --prompt "history › " \
-    --lines 10)
+echo "$ENTRIES" | fuzzel --dmenu --prompt "history › " --lines 10 > /dev/null
 
-# If something was selected, pop it back (shows the most recent matching)
-if [[ -n "$CHOICE" ]]; then
+if (( $? == 0 )); then
     dunstctl history-pop
 fi

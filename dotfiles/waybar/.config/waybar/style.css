@@ -11,15 +11,12 @@ window#waybar {
 }
 
 /* === LEFT === */
-
 #custom-distro-icon {
     background: transparent;
     padding: 0px 14px 0px 12px;
-    margin: 0px;
     color: #957FB8;
     font-size: 18px;
 }
-
 #custom-distro-icon:hover {
     color: #C8C093;
 }
@@ -27,25 +24,19 @@ window#waybar {
 #workspaces {
     background: transparent;
     padding: 0px 12px;
-    margin: 0px;
 }
-
 #workspaces button {
     background: transparent;
     color: #54546D;
     font-size: 18px;
     padding: 0px 6px;
-    margin: 0px;
 }
-
 #workspaces button:hover {
     color: #727169;
 }
-
 #workspaces button.active {
     color: #DCA561;
 }
-
 #workspaces button.urgent {
     color: #C34043;
 }
@@ -60,22 +51,18 @@ window#waybar {
 }
 
 /* === CENTER === */
-
 #clock {
     background: transparent;
     font-size: 14px;
     padding: 0px 20px;
-    margin: 0px;
     color: #7E9CD8;
     letter-spacing: 2px;
 }
-
 #clock:hover {
     color: #A3D4D5;
 }
 
 /* === RIGHT === */
-
 #tray,
 #custom-dunst,
 #pulseaudio,
@@ -86,20 +73,11 @@ window#waybar {
 #custom-power,
 #custom-powerprofile,
 #idle_inhibitor,
-#custom-volume,
 #custom-reading-mode {
     background: transparent;
     padding: 0px 10px;
-    margin: 0px;
     color: #727169;
     font-size: 14px;
-}
-
-#group-audio-net,
-#group-power-batt {
-    background: transparent;
-    padding: 0px 4px;
-    margin: 0px 8px;
 }
 
 #tray {
@@ -107,105 +85,38 @@ window#waybar {
     margin: 0px 4px;
 }
 
-/* === SEPARATORS === */
-
-#group-audio-net {
-    border-left: 1px solid #2A2A37;
-}
-
-#group-power-batt {
-    border-left: 1px solid #2A2A37;
-}
-
-/* === MODULE STATES === */
-
-#custom-dunst {
-    color: #727169;
-}
-
-#custom-dunst.has-notifications {
-    color: #C8C093;
-}
-
-/* DND → mais apagado */
-#custom-dunst.dnd {
-    color: #54546D;
-}
-
-#pulseaudio {
-    color: #727169;
-}
-
-#pulseaudio.muted {
-    color: #54546D;
-}
-
-#backlight {
-    color: #727169;
-}
-
-#bluetooth {
-    color: #727169;
-}
-
-#bluetooth.off {
-    color: #54546D;
-}
-
-#network {
-    color: #727169;
-}
-
-#network.disconnected {
-    color: #54546D;
-}
-
-#custom-reading-mode {
-    color: #727169;
-}
-
-#idle_inhibitor {
-    color: #727169;
-}
-
-#custom-powerprofile {
-    color: #727169;
-}
-
 #battery {
     border-left: 1px solid #2A2A37;
     padding: 0px 12px;
-    margin: 0px 0px 0px 0px;
     color: #727169;
 }
 
-#battery.warning {
-    color: #DCA561;
+/* === GROUPS === */
+#group-system {
+    border-left: 1px solid #2A2A37;
+    padding: 0px 4px;
+    margin: 0px 8px;
+}
+#group-power {
+    border-left: 1px solid #2A2A37;
+    padding: 0px 4px;
+    margin: 0px 8px;
 }
 
-#battery.critical {
-    color: #C34043;
-}
+/* === MODULE STATES === */
+#custom-dunst.has-notifications { color: #C8C093; }
+#custom-dunst.dnd               { color: #54546D; }
+#pulseaudio.muted               { color: #54546D; }
+#bluetooth.off                  { color: #54546D; }
+#network.disconnected           { color: #54546D; }
 
-#battery.charging {
-    color: #7FB4CA;
-}
-
-#battery.full {
-    color: #98BB6C;
-}
-
-#battery.plugged {
-    color: #7FB4CA;
-}
-
-#custom-power {
-    color: #727169;
-    padding: 0px 12px 0px 8px;
-}
+#battery.warning  { color: #DCA561; }
+#battery.critical { color: #C34043; }
+#battery.charging { color: #7FB4CA; }
+#battery.full     { color: #98BB6C; }
+#battery.plugged  { color: #7FB4CA; }
 
 /* === HOVER === */
-
 #custom-dunst:hover,
 #pulseaudio:hover,
 #bluetooth:hover,
@@ -214,17 +125,14 @@ window#waybar {
 #network:hover,
 #battery:hover,
 #custom-reading-mode:hover,
-#custom-volume:hover,
 #custom-powerprofile:hover {
     color: #C8C093;
 }
-
 #custom-power:hover {
     color: #C34043;
 }
 
 /* === TOOLTIP === */
-
 tooltip {
     background: #1F1F28;
     border: 1px solid #2A2A37;
@@ -232,7 +140,6 @@ tooltip {
     padding: 8px 12px;
     font-size: 14px;
 }
-
 tooltip label,
 tooltip * {
     color: #C8C093;
