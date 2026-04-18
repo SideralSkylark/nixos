@@ -8,4 +8,6 @@
   };
 
   security.rtkit.enable = true;
+
+  users.groups.audio = { };
 }

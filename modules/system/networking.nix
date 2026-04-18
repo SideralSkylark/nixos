@@ -12,4 +12,6 @@
     allowedTCPPorts = [ ];
     allowedUDPPorts = [ ];
   };
+
+  users.groups.networkmanager = { };
 }

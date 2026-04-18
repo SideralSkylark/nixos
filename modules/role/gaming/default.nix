@@ -1,20 +1,13 @@
 { pkgs, ... }:
-
 {
-  imports = [
-    ./packages.nix
-  ];
+  imports = [ ./packages.nix ];
 
   hardware.graphics = {
     enable = true;
     enable32Bit = true;
-
     extraPackages = with pkgs; [
-      mesa
-      vulkan-loader
-      vulkan-validation-layers
-      libva-vdpau-driver
-      libvdpau-va-gl
+      intel-media-driver   # Intel VA-API (iGPU hardware decode)
+      libva-vdpau-driver   # keep for Intel VDPAU compat
     ];
   };
 

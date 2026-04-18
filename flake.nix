@@ -33,7 +33,7 @@
       system = "x86_64-linux";
 
       mkHost =
-        hostPath:
+        { hostPath, hmModules ? [ ] }:
         nixpkgs.lib.nixosSystem {
           inherit system;
 
@@ -49,10 +49,7 @@
                 users.skylark =
                   { ... }:
                   {
-                    imports = [
-                      ./home/skylark.nix
-                      ./home/modules/hyprland
-                    ];
+                    imports = [ ./home/skylark.nix ] ++ hmModules;
                   };
 
                 backupFileExtension = "backup";
@@ -65,8 +62,14 @@
     {
       # -------- NixOS machines --------
       nixosConfigurations = {
-        laptop = mkHost ./hosts/laptop/configuration.nix;
-        nixos = mkHost ./hosts/nixos/configuration.nix;
+        laptop = mkHost {
+          hostPath = ./hosts/laptop/configuration.nix;
+          hmModules = [ ./home/modules/hyprland ];
+        };
+        nixos = mkHost {
+          hostPath = ./hosts/nixos/configuration.nix;
+          hmModules = [ ./home/modules/hyprland ];
+        };
       };
 
       # -------- Fedora / Standalone HM --------

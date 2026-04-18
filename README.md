@@ -119,4 +119,9 @@ Networking is managed by **NetworkManager** with **iwd** as the WiFi backend. Th
 ---
 
 ## TODOs
-- Test screen projection
+
+### Lean & Mean Improvements
+- [ ] **Deduplicate Packages**: Remove `gemini-cli` and `nodejs` from host-specific configs where they overlap with the `dev` role.
+- [x] **Refactor Flake Outputs**: Update `mkHost` in `flake.nix` to allow per-host Home Manager module selection instead of hardcoding Hyprland.
+- [x] **Dynamic User Groups**: Link `extraGroups` (like `docker`, `lpadmin`) to the activation of their respective roles/services.
+- [ ] **Optimize System Layer**: Move `libnotify`, `iw`, and `usbutils` from the core system profile to more specific roles where appropriate.

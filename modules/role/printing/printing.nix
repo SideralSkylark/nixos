@@ -7,4 +7,6 @@
       pkgs.epson-escpr
     ];
   };
+
+  users.groups.lpadmin = { };
 }
