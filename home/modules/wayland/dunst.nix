@@ -12,7 +12,7 @@
         monitor = 0;
         follow = "none";
         # ── Geometry ──────────────────────────────
-        width = "(260, 400)";       # bumped min slightly — 240 clips longer summaries
+        width = "(260, 400)";   
         height = 150;
         origin = "top-right";
         offset = "14x14";
@@ -25,22 +25,22 @@
         icon_position = "left";
         min_icon_size = 24;
         max_icon_size = 32;
-        icon_corner_radius = 4;    # softened slightly — retro but not fully harsh
+        icon_corner_radius = 4;  
         enable_recursive_icon_lookup = true;
         # ── Border ────────────────────────────────
-        corner_radius = 0;         # sharp = retro terminal feel, keep this
+        corner_radius = 0;      
         frame_width = 1;
         frame_color = "#2A2A37";
         separator_height = 1;
-        separator_color = "frame"; # inherits per-urgency frame_color — more cohesive
+        separator_color = "frame"; 
         # ── Typography ────────────────────────────
-        font = "JetBrainsMono Nerd Font 11"; # 12 runs wide in the min-width range; 11 breathes better
+        font = "JetBrainsMono Nerd Font 11"; 
         markup = "full";
         # cleaner hierarchy: bold summary, dimmed app name, normal body
         format = "<b>%s</b>\n<span foreground='#3D3D52' size='small'>%a</span>\n<span foreground='#9E9B8E'>%b</span>";
         alignment = "left";
         vertical_alignment = "center";
-        line_height = 1;           # 2 adds too much gap between app name and body; 1 tightens it
+        line_height = 1;         
         word_wrap = true;
         ellipsize = "end";
         show_age_threshold = 60;
@@ -71,27 +71,27 @@
       # waveAqua2 — barely-there, quiet
       urgency_low = {
         background = "#1F1F28";
-        foreground = "#C8C093";    # fujiWhite dimmed
-        frame_color = "#2A2A37";   # invisible border — blends in
-        highlight = "#7AA89F";     # waveAqua2
-        timeout = 4;               # 3 is too quick for slow glancers
+        foreground = "#C8C093";  
+        frame_color = "#2A2A37"; 
+        highlight = "#7AA89F";   
+        timeout = 4;            
       };
 
       # crystalBlue — present, readable
       urgency_normal = {
         background = "#1F1F28";
-        foreground = "#DCD7BA";    # fujiWhite
-        frame_color = "#7E9CD8";   # crystalBlue border accent
+        foreground = "#DCD7BA";  
+        frame_color = "#7E9CD8"; 
         highlight = "#7E9CD8";
-        timeout = 6;               # bumped from 5 — typical read time
+        timeout = 6;            
       };
 
       # peachRed — urgent, eyes drawn immediately
       urgency_critical = {
-        background = "#1F1F28";    # keep bg consistent — the border does the work
-        foreground = "#E46876";    # peachRed
+        background = "#1F1F28";  
+        foreground = "#E46876"; 
         frame_color = "#E46876";
-        highlight = "#FF5D62";     # samuraiRed for progress bar
+        highlight = "#FF5D62";  
         timeout = 0;
       };
     };

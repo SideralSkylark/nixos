@@ -13,13 +13,13 @@ vertical-pad=16
 inner-pad=12
 
 [colors]
-background=1F1F28FF      # escuro suave
-text=DCD7BAFF            # off-white Kanagawa
-match=7AA89FFF            # azul pastel para highlight
-selection=2A2A37FF       # seleção fundo escuro
-selection-text=DCD7BAFF  # texto na seleção
-selection-match=7AA89FFF # match highlight
-border=3B3B4DFF          # contorno discreto
+background=1F1F28FF   
+text=DCD7BAFF         
+match=7AA89FFF        
+selection=2A2A37FF   
+selection-text=DCD7BAFF 
+selection-match=7AA89FFF 
+border=3B3B4DFF         
 
 [border]
 width=2
