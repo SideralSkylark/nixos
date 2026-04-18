@@ -18,9 +18,8 @@
       "wheel"
       "audio"
       "video"
+      "networkmanager"
       "docker"
-      # "lpadmin"
-      # "scanner"
     ];
   };
 }

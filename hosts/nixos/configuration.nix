@@ -21,8 +21,7 @@
       "wheel"
       "audio"
       "video"
-      "docker"
-      "lpadmin"
+      "networkmanager"
     ];
   };
 }

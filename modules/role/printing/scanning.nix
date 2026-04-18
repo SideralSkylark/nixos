@@ -13,4 +13,7 @@
   environment.systemPackages = with pkgs; [
     skanlite   # ou 
   ];
+
+  users.groups.scanner = { };
+  users.groups.lp = { };
 }

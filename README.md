@@ -122,10 +122,10 @@ Networking is managed by **NetworkManager** with **iwd** as the WiFi backend. Th
 
 ### Lean & Mean Improvements
 - [ ] **Deduplicate Packages**: Remove `gemini-cli` and `nodejs` from host-specific configs where they overlap with the `dev` role.
-- [ ] **Refactor Flake Outputs**: Update `mkHost` in `flake.nix` to allow per-host Home Manager module selection instead of hardcoding Hyprland.
+- [x] **Refactor Flake Outputs**: Update `mkHost` in `flake.nix` to allow per-host Home Manager module selection instead of hardcoding Hyprland.
 - [ ] **Modularize Gaming**: Split heavy dependencies like `wineWowPackages.full` into a `gaming-extended` role to keep the base `gaming` role light.
 - [ ] **Clean up Fallbacks**: Evaluate if `vim` is still needed as a fallback in `home/modules/packages.nix` given the robust `nixvim` setup.
-- [ ] **Dynamic User Groups**: Link `extraGroups` (like `docker`, `lpadmin`) to the activation of their respective roles/services.
+- [x] **Dynamic User Groups**: Link `extraGroups` (like `docker`, `lpadmin`) to the activation of their respective roles/services.
 - [ ] **Centralize Dev Tool Versions**: Standardize on specific versions for `nodejs`, `jdk`, etc., across all modules to avoid environment drift.
 - [ ] **Optimize System Layer**: Move `libnotify`, `iw`, and `usbutils` from the core system profile to more specific roles where appropriate.
 - [ ] **Consolidate CLI Utils**: Group common utilities (archives, downloaders) into a dedicated `core-utils` Home Manager module.
