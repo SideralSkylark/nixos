@@ -4,7 +4,8 @@
     ../../modules/role/dev
     ../../modules/role/hyprland
     ../../modules/role/bluetooth
-    # ../../modules/role/printing
+    ../../modules/role/printing
+    # ../../modules/role/gaming
     ./boot.nix
     ./hardware-configuration.nix
   ];
@@ -18,6 +19,8 @@
       "wheel"
       "audio"
       "video"
+      "lpadmin"
+      "scanner"
       "networkmanager"
       "docker"
     ];

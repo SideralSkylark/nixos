@@ -4,10 +4,10 @@
     kitty
     pamixer
     playerctl # Audio
-    brightnessctl
-    grim
-    slurp
-    swappy
+    brightnessctl #backlight
+    grim # screenshots
+    slurp # screenshots
+    swappy # screenshots
     imv # image viewer
     wl-clipboard
     cliphist
