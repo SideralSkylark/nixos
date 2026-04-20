@@ -45,7 +45,6 @@
       colors = {
         theme = {
           all.ui.bg_gutter = "none";
->>>>>>> 6310fc4 (fix: light theme)
         };
       };
     };
