@@ -2,13 +2,13 @@
 
 {
   home.packages = with pkgs; [
-    vscode
-    lazydocker
-    lazygit
-    bruno #api tests
-    jdk21_headless
-    nodejs_22
-    rustc
-    cargo
+    vscode # Visual Studio Code editor
+    lazydocker # TUI for docker
+    lazygit # TUI for git
+    bruno # Open-source API client
+    jdk21_headless # Java Development Kit
+    nodejs_22 # Node.js runtime
+    rustc # Rust compiler
+    cargo # Rust package manager
   ];
 }

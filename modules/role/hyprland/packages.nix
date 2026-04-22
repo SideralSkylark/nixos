@@ -1,10 +1,10 @@
 { pkgs, ... }:
 {
   environment.systemPackages = with pkgs; [
-    qt5.qtwayland
-    qt6.qtwayland
-    gtk3
-    mate.engrampa #thunar dosent come with file archiver
+    qt5.qtwayland # Wayland support for Qt 5
+    qt6.qtwayland # Wayland support for Qt 6
+    gtk3 # GTK 3 toolkit
+    mate.engrampa # Archive manager (GUI)
   ];
 
   programs.thunar = {
@@ -15,5 +15,5 @@
     ];
   };
 
-  services.tumbler.enable = true;
+  services.tumbler.enable = true; # D-Bus thumbnailing service
 }

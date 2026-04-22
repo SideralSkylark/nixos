@@ -5,7 +5,7 @@
     enableDefaultPackages = true;
     fontconfig.enable = true;
     packages = with pkgs; [
-      noto-fonts-cjk-sans
+      noto-fonts-cjk-sans # Google Noto Sans CJK fonts
     ];
   };
 }

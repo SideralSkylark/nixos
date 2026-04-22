@@ -11,7 +11,7 @@
   services.udev.packages = [ pkgs.sane-backends ];
 
   environment.systemPackages = with pkgs; [
-    kdePackages.skanlite
+    kdePackages.skanlite # Image scanning application
   ];
 
   users.groups.scanner = { };

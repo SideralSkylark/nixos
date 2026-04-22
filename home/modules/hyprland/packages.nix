@@ -188,18 +188,18 @@ let
 in
 {
   home.packages = with pkgs; [
-    projector
-    screenshot
-    wbg
-    nwg-displays
-    pavucontrol
-    xdg-desktop-portal-hyprland
-    jq
-    brave
-    librewolf
-    obsidian
-    anki
-    libreoffice-fresh
+    projector # Custom script for monitor management
+    screenshot # Custom script for taking screenshots
+    wbg # Wallpaper setter for Wayland
+    nwg-displays # GUI for monitor configuration
+    pavucontrol # PulseAudio volume control (GUI)
+    xdg-desktop-portal-hyprland # Hyprland-specific XDG portal
+    jq # Command-line JSON processor
+    brave # Web browser
+    librewolf # Privacy-focused web browser
+    obsidian # Markdown-based knowledge base
+    anki # Flashcard application
+    libreoffice-fresh # Productivity suite (fresh version)
   ];
 
   programs.swappy = {

@@ -8,8 +8,8 @@
   ];
 
    environment.systemPackages = with pkgs; [
-        gemini-cli
-        nodejs_24
+        gemini-cli # Gemini AI CLI tool
+        nodejs_24 # Node.js runtime (v24)
     ];
 
   networking.hostName = "nixos";
