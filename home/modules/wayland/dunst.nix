@@ -12,7 +12,7 @@
         monitor = 0;
         follow = "none";
         # ── Geometry ──────────────────────────────
-        width = "(260, 400)";   
+        width = "(260, 400)";
         height = 150;
         origin = "top-right";
         offset = "14x14";
@@ -25,26 +25,27 @@
         icon_position = "left";
         min_icon_size = 24;
         max_icon_size = 32;
-        icon_corner_radius = 4;  
+        icon_corner_radius = 2;   
         enable_recursive_icon_lookup = true;
         # ── Border ────────────────────────────────
-        corner_radius = 0;      
+        corner_radius = 2;       
         frame_width = 1;
-        frame_color = "#2A2A37";
+        frame_color = "#363646";  
         separator_height = 1;
-        separator_color = "frame"; 
+        separator_color = "frame";
         # ── Typography ────────────────────────────
-        font = "JetBrainsMono Nerd Font 11"; 
+        font = "JetBrainsMono Nerd Font 11";
         markup = "full";
-        # cleaner hierarchy: bold summary, dimmed app name, normal body
-        format = "<b>%s</b>\n<span foreground='#3D3D52' size='small'>%a</span>\n<span foreground='#9E9B8E'>%b</span>";
+        # bold summary / fujiGray app name / oldWhite body
+        format = "<b>%s</b>\n<span foreground='#727169' size='small'>%a</span>\n<span foreground='#C8C093'>%b</span>";
         alignment = "left";
         vertical_alignment = "center";
-        line_height = 1;         
+        line_height = 2;
         word_wrap = true;
         ellipsize = "end";
         show_age_threshold = 60;
-        # ── Colors (Kanagawa — sumiInk base) ──────
+        # ── Colors ────────────────────────────────
+        # sumiInk3 bg / fujiWhite fg / springBlue highlight
         background = "#1F1F28";
         foreground = "#DCD7BA";
         highlight = "#7E9CD8";
@@ -67,31 +68,28 @@
         mouse_middle_click = "close_all";
         mouse_right_click = "close_current";
       };
-
-      # waveAqua2 — barely-there, quiet
+      # low — waveAqua, barely-there
       urgency_low = {
-        background = "#1F1F28";
-        foreground = "#C8C093";  
-        frame_color = "#2A2A37"; 
-        highlight = "#7AA89F";   
-        timeout = 4;            
+        background = "#1F1F28";       # sumiInk3
+        foreground = "#C8C093";       # oldWhite
+        frame_color = "#363646";      # sumiInk6 — was orphan #2A2A37
+        highlight = "#7AA89F";        # waveAqua
+        timeout = 4;
       };
-
-      # crystalBlue — present, readable
+      # normal — springBlue, present and readable
       urgency_normal = {
-        background = "#1F1F28";
-        foreground = "#DCD7BA";  
-        frame_color = "#7E9CD8"; 
-        highlight = "#7E9CD8";
-        timeout = 6;            
+        background = "#1F1F28";       # sumiInk3
+        foreground = "#DCD7BA";       # fujiWhite
+        frame_color = "#7E9CD8";      # springBlue
+        highlight = "#7E9CD8";        # springBlue
+        timeout = 6;
       };
-
-      # peachRed — urgent, eyes drawn immediately
+      # critical — peachRed, immediately draws the eye
       urgency_critical = {
-        background = "#1F1F28";  
-        foreground = "#E46876"; 
-        frame_color = "#E46876";
-        highlight = "#FF5D62";  
+        background = "#1F1F28";       # sumiInk3
+        foreground = "#E46876";       # sakuraPink
+        frame_color = "#E46876";      # sakuraPink
+        highlight = "#E82424";        # peachRed — was off-palette #FF5D62
         timeout = 0;
       };
     };
