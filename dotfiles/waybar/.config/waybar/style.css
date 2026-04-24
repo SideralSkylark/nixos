@@ -1,122 +1,172 @@
+/* ============================================================
+   KANAGAWA WAVE — WAYBAR STYLESHEET
+   NOTE: GTK CSS does not support true CSS custom properties.
+   Colors are centralized here at the top as a reference map.
+   Use find/replace to update palette-wide.
+
+   PALETTE
+   ────────────────────────────────────────────────────────────
+   bg-base:      #16161D   — bar background
+   bg-surface:   #1F1F28   — tooltip / elevated surfaces
+   bg-overlay:   #2A2A37   — borders, dividers
+   bg-muted:     #363646   — subtle separators
+
+   fg-default:   #DCD7BA   — primary text
+   fg-muted:     #727169   — inactive / dimmed
+   fg-subtle:    #54546D   — disabled / off states
+   fg-dim:       #938AA9   — secondary text (window title)
+
+   accent-blue:  #7E9CD8   — clock
+   accent-cyan:  #A3D4D5   — clock hover
+   accent-gold:  #DCA561   — active workspace / battery warning
+   accent-purple:#957FB8   — distro icon
+   accent-green: #98BB6C   — battery full
+   accent-red:   #C34043   — urgent / power hover / battery critical
+   accent-sky:   #7FB4CA   — battery charging / plugged
+   fg-warm:      #C8C093   — hover states / active text
+   ============================================================ */
+
+
+/* ── RESET ─────────────────────────────────────────────── */
+
 * {
     font-family: "JetBrainsMono Nerd Font", monospace;
-    font-size: 12px;
-    min-height: 0px;
+    font-size: 13px;
+    min-height: 0;
     border: none;
+    padding: 0;
+    margin: 0;
 }
+
+
+/* ── BAR ────────────────────────────────────────────────── */
 
 window#waybar {
-    color: #DCD7BA;
     background: #16161D;
+    color: #DCD7BA;
+    border-bottom: 1px solid #2A2A37;
 }
 
-/* === LEFT === */
+
+/* ── LEFT ───────────────────────────────────────────────── */
+
 #custom-distro-icon {
-    background: transparent;
-    padding: 0px 14px 0px 12px;
     color: #957FB8;
     font-size: 18px;
+    padding: 0 14px 0 12px;
 }
+
 #custom-distro-icon:hover {
     color: #C8C093;
 }
 
 #workspaces {
-    background: transparent;
-    padding: 0px 12px;
+    padding: 0 8px;
 }
+
 #workspaces button {
-    background: transparent;
     color: #54546D;
-    font-size: 18px;
-    padding: 0px 6px;
+    font-size: 14px;
+    padding: 0 5px;
+    background: transparent;
 }
+
 #workspaces button:hover {
     color: #727169;
+    background: transparent;
+    box-shadow: none;
 }
+
 #workspaces button.active {
     color: #DCA561;
 }
+
 #workspaces button.urgent {
     color: #C34043;
 }
 
 #window {
-    background: transparent;
     color: #938AA9;
-    font-size: 14px;
-    padding: 0px 14px;
-    margin: 0px 4px;
-    border-left: 1px solid #363646;
+    font-size: 13px;
+    padding: 0 12px;
+    margin: 0 4px;
+    border-left: 1px solid #2A2A37;
 }
 
-/* === CENTER === */
+
+/* ── CENTER ─────────────────────────────────────────────── */
+
 #clock {
-    background: transparent;
-    font-size: 14px;
-    padding: 0px 20px;
     color: #7E9CD8;
+    font-size: 13px;
     letter-spacing: 2px;
+    padding: 0 20px;
 }
+
 #clock:hover {
     color: #A3D4D5;
 }
 
-/* === RIGHT === */
+
+/* ── RIGHT — base style for all modules ─────────────────── */
+
 #tray,
+#battery,
 #custom-dunst,
 #pulseaudio,
 #bluetooth,
 #network,
 #backlight,
-#battery,
 #custom-power,
 #custom-powerprofile,
 #idle_inhibitor,
 #custom-reading-mode {
-    background: transparent;
-    padding: 0px 10px;
     color: #727169;
-    font-size: 14px;
+    font-size: 13px;
+    padding: 0 10px;
+    background: transparent;
 }
 
 #tray {
-    padding: 0px 12px;
-    margin: 0px 4px;
+    padding: 0 12px;
+    margin: 0 4px;
 }
 
 #battery {
-    border-left: 1px solid #2A2A37;
-    padding: 0px 12px;
     color: #727169;
+    padding: 0 12px;
+    border-left: 1px solid #2A2A37;
 }
 
-/* === GROUPS === */
-#group-system {
-    border-left: 1px solid #2A2A37;
-    padding: 0px 4px;
-    margin: 0px 8px;
-}
+
+/* ── GROUPS ─────────────────────────────────────────────── */
+
+#group-system,
 #group-power {
     border-left: 1px solid #2A2A37;
-    padding: 0px 4px;
-    margin: 0px 8px;
+    padding: 0 4px;
+    margin: 0 6px;
 }
 
-/* === MODULE STATES === */
+
+/* ── MODULE STATES ──────────────────────────────────────── */
+
 #custom-dunst.has-notifications { color: #C8C093; }
 #custom-dunst.dnd               { color: #54546D; }
+
 #pulseaudio.muted               { color: #54546D; }
 #bluetooth.off                  { color: #54546D; }
 #network.disconnected           { color: #54546D; }
 
-#battery.warning  { color: #DCA561; }
-#battery.critical { color: #C34043; }
-#battery.charging { color: #7FB4CA; }
-#battery.full     { color: #98BB6C; }
-#battery.plugged  { color: #7FB4CA; }
+#battery.warning                { color: #DCA561; }
+#battery.critical               { color: #C34043; }
+#battery.charging               { color: #7FB4CA; }
+#battery.full                   { color: #98BB6C; }
+#battery.plugged                { color: #7FB4CA; }
 
-/* === HOVER === */
+
+/* ── HOVER ──────────────────────────────────────────────── */
+
 #custom-dunst:hover,
 #pulseaudio:hover,
 #bluetooth:hover,
@@ -128,18 +178,22 @@ window#waybar {
 #custom-powerprofile:hover {
     color: #C8C093;
 }
+
 #custom-power:hover {
     color: #C34043;
 }
 
-/* === TOOLTIP === */
+
+/* ── TOOLTIP ────────────────────────────────────────────── */
+
 tooltip {
     background: #1F1F28;
     border: 1px solid #2A2A37;
     color: #C8C093;
     padding: 8px 12px;
-    font-size: 14px;
+    font-size: 13px;
 }
+
 tooltip label,
 tooltip * {
     color: #C8C093;
