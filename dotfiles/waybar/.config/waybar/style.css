@@ -1,29 +1,26 @@
 /* ============================================================
-   KANAGAWA WAVE — WAYBAR STYLESHEET
-   NOTE: GTK CSS does not support true CSS custom properties.
-   Colors are centralized here at the top as a reference map.
-   Use find/replace to update palette-wide.
+   EVERFOREST HARD DARK — WAYBAR STYLESHEET
 
    PALETTE
    ────────────────────────────────────────────────────────────
-   bg-base:      #16161D   — bar background
-   bg-surface:   #1F1F28   — tooltip / elevated surfaces
-   bg-overlay:   #2A2A37   — borders, dividers
-   bg-muted:     #363646   — subtle separators
+   bg-base:      #272E33   — bar background
+   bg-surface:   #2E383C   — tooltip / elevated surfaces
+   bg-overlay:   #374145   — borders, dividers
+   bg-muted:     #3A464C   — subtle separators
 
-   fg-default:   #DCD7BA   — primary text
-   fg-muted:     #727169   — inactive / dimmed
-   fg-subtle:    #54546D   — disabled / off states
-   fg-dim:       #938AA9   — secondary text (window title)
+   fg-default:   #D3C6AA   — primary text
+   fg-muted:     #7A8478   — inactive / dimmed
+   fg-subtle:    #525C5A   — disabled / off states
+   fg-dim:       #9DA9A0   — secondary text (window title)
 
-   accent-blue:  #7E9CD8   — clock
-   accent-cyan:  #A3D4D5   — clock hover
-   accent-gold:  #DCA561   — active workspace / battery warning
-   accent-purple:#957FB8   — distro icon
-   accent-green: #98BB6C   — battery full
-   accent-red:   #C34043   — urgent / power hover / battery critical
-   accent-sky:   #7FB4CA   — battery charging / plugged
-   fg-warm:      #C8C093   — hover states / active text
+   accent-blue:  #7FBBB3   — clock
+   accent-cyan:  #83C092   — clock hover
+   accent-gold:  #E69875   — active workspace / battery warning
+   accent-purple:#D699B6   — distro icon
+   accent-green: #A7C080   — battery full
+   accent-red:   #E67E80   — urgent / power hover / battery critical
+   accent-sky:   #7FBBB3   — battery charging / plugged
+   fg-warm:      #D3C6AA   — hover states / active text
    ============================================================ */
 
 
@@ -42,22 +39,22 @@
 /* ── BAR ────────────────────────────────────────────────── */
 
 window#waybar {
-    background: #16161D;
-    color: #DCD7BA;
-    border-bottom: 1px solid #2A2A37;
+    background: #1E2326;
+    color: #D3C6AA;
+    border-bottom: 1px solid #272E33;
 }
 
 
 /* ── LEFT ───────────────────────────────────────────────── */
 
 #custom-distro-icon {
-    color: #957FB8;
+    color: #A7C080;       
     font-size: 18px;
     padding: 0 14px 0 12px;
 }
 
 #custom-distro-icon:hover {
-    color: #C8C093;
+    color: #E69875;      
 }
 
 #workspaces {
@@ -65,46 +62,46 @@ window#waybar {
 }
 
 #workspaces button {
-    color: #54546D;
+    color: #525C5A;
     font-size: 14px;
     padding: 0 5px;
     background: transparent;
 }
 
 #workspaces button:hover {
-    color: #727169;
+    color: #7A8478;
     background: transparent;
     box-shadow: none;
 }
 
 #workspaces button.active {
-    color: #DCA561;
+    color: #A7C080;
 }
 
 #workspaces button.urgent {
-    color: #C34043;
+    color: #E67E80;
 }
 
 #window {
-    color: #938AA9;
+    color: #9DA9A0;
     font-size: 13px;
     padding: 0 12px;
     margin: 0 4px;
-    border-left: 1px solid #2A2A37;
+    border-left: 1px solid #374145;
 }
 
 
 /* ── CENTER ─────────────────────────────────────────────── */
 
 #clock {
-    color: #7E9CD8;
+    color: #7FBBB3;
     font-size: 13px;
     letter-spacing: 2px;
     padding: 0 20px;
 }
 
 #clock:hover {
-    color: #A3D4D5;
+    color: #83C092;
 }
 
 
@@ -121,7 +118,7 @@ window#waybar {
 #custom-powerprofile,
 #idle_inhibitor,
 #custom-reading-mode {
-    color: #727169;
+    color: #7A8478;
     font-size: 13px;
     padding: 0 10px;
     background: transparent;
@@ -133,9 +130,9 @@ window#waybar {
 }
 
 #battery {
-    color: #727169;
+    color: #7A8478;
     padding: 0 12px;
-    border-left: 1px solid #2A2A37;
+    border-left: 1px solid #374145;
 }
 
 
@@ -143,7 +140,7 @@ window#waybar {
 
 #group-system,
 #group-power {
-    border-left: 1px solid #2A2A37;
+    border-left: 1px solid #374145;
     padding: 0 4px;
     margin: 0 6px;
 }
@@ -151,18 +148,18 @@ window#waybar {
 
 /* ── MODULE STATES ──────────────────────────────────────── */
 
-#custom-dunst.has-notifications { color: #C8C093; }
-#custom-dunst.dnd               { color: #54546D; }
+#custom-dunst.has-notifications { color: #D3C6AA; }
+#custom-dunst.dnd               { color: #525C5A; }
 
-#pulseaudio.muted               { color: #54546D; }
-#bluetooth.off                  { color: #54546D; }
-#network.disconnected           { color: #54546D; }
+#pulseaudio.muted               { color: #525C5A; }
+#bluetooth.off                  { color: #525C5A; }
+#network.disconnected           { color: #525C5A; }
 
-#battery.warning                { color: #DCA561; }
-#battery.critical               { color: #C34043; }
-#battery.charging               { color: #7FB4CA; }
-#battery.full                   { color: #98BB6C; }
-#battery.plugged                { color: #7FB4CA; }
+#battery.warning                { color: #E69875; }
+#battery.critical               { color: #E67E80; }
+#battery.charging               { color: #7FBBB3; }
+#battery.full                   { color: #A7C080; }
+#battery.plugged                { color: #7FBBB3; }
 
 
 /* ── HOVER ──────────────────────────────────────────────── */
@@ -176,25 +173,25 @@ window#waybar {
 #battery:hover,
 #custom-reading-mode:hover,
 #custom-powerprofile:hover {
-    color: #C8C093;
+    color: #D3C6AA;
 }
 
 #custom-power:hover {
-    color: #C34043;
+    color: #E67E80;
 }
 
 
 /* ── TOOLTIP ────────────────────────────────────────────── */
 
 tooltip {
-    background: #1F1F28;
-    border: 1px solid #2A2A37;
-    color: #C8C093;
+    background: #2E383C;
+    border: 1px solid #374145;
+    color: #D3C6AA;
     padding: 8px 12px;
     font-size: 13px;
 }
 
 tooltip label,
 tooltip * {
-    color: #C8C093;
+    color: #D3C6AA;
 }

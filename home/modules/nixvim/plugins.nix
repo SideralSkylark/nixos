@@ -16,37 +16,27 @@
       ];
     };
   };
-
   plugins.cmp-nvim-lsp.enable = true;
   plugins.cmp-buffer.enable = true;
   plugins.cmp-path.enable = true;
-
   plugins.web-devicons.enable = true;
 
   # === Colorscheme ===
-  colorschemes.kanagawa = {
+  colorschemes.everforest = {
     enable = true;
     settings = {
-      theme = "wave";
-      background = {
-        dark = "wave";
-        light = "lotus";
-      };
-      compile = false;
-      transparent = false;
-      dimInactive = false;
-      commentStyle.italic = true;
-      keywordStyle.italic = false;
-      statementStyle.bold = false;
-      functionStyle.bold = false;
-      typeStyle.bold = false;
-      undercurl = true;
-      terminalColors = true;
-      colors = {
-        theme = {
-          all.ui.bg_gutter = "none";
-        };
-      };
+      background = "hard";
+      enable_italic = 1;
+      disable_italic_comment = 0;
+      sign_column_background = "none";
+      diagnostic_text_highlight = 0;
+      inlay_hints_background = "none";
+      float_style = "bright";
+      ui_contrast = "high";
+      dim_inactive_windows = 0;
+      show_eob = 1;
+      spell_foreground = "none";
+      transparent_background = 0;
     };
   };
 
@@ -55,8 +45,15 @@
     enable = true;
     settings = {
       options = {
-        section_separators = "";
-        component_separators = "";
+        section_separators = {
+          left = "";
+          right = "";
+        };
+        component_separators = {
+          left = "|";
+          right = "|";
+        };
+        theme = "everforest";
         globalstatus = true;
         disabled_filetypes = [ "minifiles" ];
         icons_enabled = true;
@@ -118,7 +115,6 @@
       };
     };
   };
-
   plugins.mini-pairs.enable = true;
 
   # === Fuzzy Finder ===

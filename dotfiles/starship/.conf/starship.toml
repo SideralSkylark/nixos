@@ -1,5 +1,4 @@
 "$schema" = 'https://starship.rs/config-schema.json'
-
 format = """
 [](fg:surface0)\
 $directory\
@@ -9,19 +8,18 @@ $git_status\
 [](fg:green)\
 $line_break$character
 """
+palette = 'everforest'
 
-palette = 'kanagawa'
-
-[palettes.kanagawa]
-text     = "#DCD7BA"
-mantle   = "#0F1419"
-surface0 = "#1F1F28"
-green    = "#98BB6C"
-teal     = "#7AA89F"
-red      = "#C34043"
-blue     = "#7FB4CA"
-accent1  = "#DCA561"
-accent2  = "#7E9CD8"
+[palettes.everforest]
+text     = "#D3C6AA"
+mantle   = "#1E2326"
+surface0 = "#272E33"
+green    = "#A7C080"
+teal     = "#83C092"
+red      = "#E67E80"
+blue     = "#7FBBB3"
+accent1  = "#E69875"
+accent2  = "#DBBC7F"
 
 [directory]
 style             = "fg:text bg:surface0"
@@ -40,19 +38,14 @@ format = '[[$all_status$ahead_behind ](fg:mantle bg:green)]($style)'
 
 [c]
 format = ''
-
 [rust]
 format = ''
-
 [golang]
 format = ''
-
 [python]
 format = ''
-
 [docker_context]
 format = ''
-
 [line_break]
 disabled = false
 

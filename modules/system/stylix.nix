@@ -1,13 +1,9 @@
 { pkgs, ... }:
-
 {
   stylix = {
     enable = true;
-
     image = null;
-
-    base16Scheme = "${pkgs.base16-schemes}/share/themes/kanagawa.yaml";
-
+    base16Scheme = "${pkgs.base16-schemes}/share/themes/everforest-dark-hard.yaml";
     fonts = {
       monospace = {
         package = pkgs.nerd-fonts.jetbrains-mono;
@@ -32,20 +28,17 @@
         popups = 10;
       };
     };
-
     opacity = {
       applications = 1.0;
       terminal = 1.0;
       desktop = 1.0;
       popups = 1.0;
     };
-
     cursor = {
       package = pkgs.bibata-cursors;
       name = "Bibata-Modern-Classic";
       size = 24;
     };
-
     iconTheme = {
       enable = true;
       package = pkgs.papirus-icon-theme;
