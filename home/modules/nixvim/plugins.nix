@@ -31,10 +31,10 @@
       sign_column_background = "none";
       diagnostic_text_highlight = 0;
       inlay_hints_background = "none";
-      float_style = "bright";
-      ui_contrast = "high";
+      float_style = "dim";
+      ui_contrast = "low";
       dim_inactive_windows = 0;
-      show_eob = 1;
+      show_eob = 0;
       spell_foreground = "none";
       transparent_background = 0;
     };
