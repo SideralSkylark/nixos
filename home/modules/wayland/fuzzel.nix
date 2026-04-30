@@ -30,7 +30,7 @@
     border=374145ff          # bg-overlay   — unified with Hyprland / Waybar / dunst
     [border]
     width=2
-    radius=2
+    radius=0
     [dmenu]
     exit-immediately-if-empty=yes
   '';

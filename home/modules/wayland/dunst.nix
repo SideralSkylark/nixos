@@ -28,7 +28,7 @@
         icon_corner_radius = 2;
         enable_recursive_icon_lookup = true;
         # ── Border ────────────────────────────────
-        corner_radius    = 2;
+        corner_radius    = 0;
         frame_width      = 2;
         frame_color      = "#374145";
         separator_height = 1;
