@@ -185,10 +185,11 @@ window#waybar {
 
 tooltip {
     background: #2E383C;
-    border: 1px solid #374145;
+    border: 1px solid #4C565C;
     color: #D3C6AA;
     padding: 8px 12px;
     font-size: 13px;
+    border-radius: 0px;
 }
 
 tooltip label,
