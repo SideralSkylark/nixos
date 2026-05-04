@@ -16,7 +16,9 @@
     "restart-interval": 0,
     "tooltip": false,
     "on-click": "fuzzel",
-    "on-click-right": ""
+    "on-click-right": "",
+    "on-scroll-up": "",
+    "on-scroll-down": ""
   },
 
   "hyprland/workspaces": {
@@ -55,7 +57,9 @@
     "interval": "once",
     "signal": 7,
     "return-type": "json",
-    "tooltip": true
+    "tooltip": true,
+    "on-scroll-up": "",
+    "on-scroll-down": ""
   },
 
   "clock": {
@@ -94,7 +98,9 @@
     "tooltip-format-connected": "{controller_alias} | Connected\n{device_enumerate}",
     "tooltip-format-enumerate-connected": "• {device_alias}",
     "on-click": "blueman-manager",
-    "on-click-right": "bluetoothctl disconnect"
+    "on-click-right": "bluetoothctl disconnect",
+    "on-scroll-up": "",
+    "on-scroll-down": ""
   },
 
   "battery": {
@@ -109,7 +115,9 @@
     "format-full": "󰁹 Full",
     "format-alt": "{icon} {time}",
     "format-icons": ["󰁺", "󰁼", "󰁾", "󰂀", "󰁹"],
-    "tooltip-format": "{timeTo}\n{capacity}% • {power}W"
+    "tooltip-format": "{timeTo}\n{capacity}% • {power}W",
+    "on-scroll-up": "",
+    "on-scroll-down": ""
   },
 
   "network": {
@@ -123,14 +131,18 @@
     "tooltip-format-disconnected": "WiFi disconnected",
     "tooltip-format-disabled": "WiFi deactivated - Click to activate",
     "on-click": "~/.config/waybar/scripts/wifi-toggle.sh",
-    "on-click-right": "~/.config/waybar/scripts/wifi-menu.sh"
+    "on-click-right": "~/.config/waybar/scripts/wifi-menu.sh",
+    "on-scroll-up": "",
+    "on-scroll-down": ""
   },
 
   "custom/reading-mode": {
     "exec": "~/.config/waybar/scripts/reading-mode.sh",
     "interval": "once",
     "signal": 8,
-    "return-type": "json"
+    "return-type": "json",
+    "on-scroll-up": "",
+    "on-scroll-down": ""
   },
 
   "pulseaudio": {
@@ -161,7 +173,9 @@
       "deactivated": "󰾪"
     },
     "tooltip-format-activated": "Idle inhibitor active",
-    "tooltip-format-deactivated": "Idle inhibitor inactive"
+    "tooltip-format-deactivated": "Idle inhibitor inactive",
+    "on-scroll-up": "",
+    "on-scroll-down": ""
   },
 
   "custom/powerprofile": {
