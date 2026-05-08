@@ -210,10 +210,10 @@
           action = "code_action";
           desc = "Code actions";
         };
-        "<leader>f" = {
-          action = "format";
-          desc = "Format buffer";
-        };
+        # "<leader>f" = {
+        #   action = "format";
+        #   desc = "Format buffer";
+        # };
       };
     };
   };

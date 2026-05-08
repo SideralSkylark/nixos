@@ -1,3 +1,4 @@
+{ pkgs, ... }:
 {
   # === AUTOCOMPLETION ===
   plugins.cmp = {
@@ -92,6 +93,31 @@
       indent.enable = true;
     };
   };
+
+  plugins.conform-nvim = {
+    enable = true;
+    settings = {
+      format_on_save = {
+        timeout_ms = 500;
+        lsp_fallback = true;
+      };
+      formatters_by_ft = {
+        typescript = [ "prettier" ];
+        typescriptreact = [ "prettier" ];
+        javascript = [ "prettier" ];
+        javascriptreact = [ "prettier" ];
+        vue = [ "prettier" ];
+        rust = [ "rustfmt" ];
+        nix = [ "nixfmt" ];
+      };
+    };
+  };
+
+  extraPackages = with pkgs; [
+    nodePackages.prettier
+    rustfmt
+    nixfmt-rfc-style
+  ];
 
   # === File Explorer ===
   plugins.mini-files = {

@@ -93,16 +93,6 @@
       action = "<cmd>copen<cr>";
       options.desc = "Open quickfix list";
     }
-    # signature_help
-    {
-      mode = "i";
-      key = "<C-k>";
-      action = "<cmd>lua vim.lsp.buf.signature_help()<cr>";
-      options = {
-        desc = "Signature help";
-        silent = true;
-      };
-    }
     {
       mode = "n";
       key = "<leader>ff";
@@ -120,6 +110,12 @@
       key = "<leader>q";
       action = "<cmd>bd<cr>";
       options.desc = "Close buffer";
+    }
+    {
+      mode = "n";
+      key = "<leader>f";
+      action = "<cmd>lua require('conform').format({ async = true, lsp_fallback = true })<cr>";
+      options.desc = "Format buffer";
     }
     {
       mode = [
