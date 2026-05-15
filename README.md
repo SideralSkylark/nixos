@@ -117,4 +117,6 @@ Networking is managed by **NetworkManager** with **iwd** as the WiFi backend. Th
 **Stylix** control over **nixvim** is explicitly disabled. This allows for manual control over editor-specific color schemes and UI components while maintaining system-wide consistency for other applications.
 
 ---
-
+TODO:
+- [ ] add projects folder on next update to 26.05 with xdg.
+- [ ] compact nix config
