@@ -118,5 +118,6 @@ Networking is managed by **NetworkManager** with **iwd** as the WiFi backend. Th
 
 ---
 TODO:
+- [x] wallpaper on boot sometimes fails (fix the script)
 - [ ] add projects folder on next update to 26.05 with xdg.
 - [ ] compact nix config
