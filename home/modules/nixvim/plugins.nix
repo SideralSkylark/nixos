@@ -20,7 +20,6 @@
   plugins.cmp-nvim-lsp.enable = true;
   plugins.cmp-buffer.enable = true;
   plugins.cmp-path.enable = true;
-  plugins.web-devicons.enable = true;
 
   # === Colorscheme ===
   colorschemes.everforest = {
@@ -38,41 +37,6 @@
       show_eob = 0;
       spell_foreground = "none";
       transparent_background = 0;
-    };
-  };
-
-  # === Statusline ===
-  plugins.lualine = {
-    enable = true;
-    settings = {
-      options = {
-        section_separators = {
-          left = "";
-          right = "";
-        };
-        component_separators = {
-          left = "|";
-          right = "|";
-        };
-        theme = "everforest";
-        globalstatus = true;
-        disabled_filetypes = [ "minifiles" ];
-        icons_enabled = true;
-      };
-      sections = {
-        lualine_a = [ "mode" ];
-        lualine_b = [ "branch" ];
-        lualine_c = [
-          "filename"
-          "diff"
-        ];
-        lualine_x = [
-          "diagnostics"
-          "filetype"
-        ];
-        lualine_y = [ ];
-        lualine_z = [ "location" ];
-      };
     };
   };
 
@@ -118,6 +82,13 @@
     rustfmt
     nixfmt-rfc-style
   ];
+
+  plugins.mini-icons = {
+    enable = true;
+    mockDevIcons = true;
+  };
+
+  plugins.mini-diff.enable = true;
 
   # === File Explorer ===
   plugins.mini-files = {

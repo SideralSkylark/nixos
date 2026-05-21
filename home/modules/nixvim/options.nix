@@ -3,7 +3,7 @@
     scrolloff = 8;
     sidescrolloff = 8;
     clipboard = "unnamedplus";
-    showmode = false;
+    laststatus = 3;
     ignorecase = true;
     smartcase = true;
     number = true;
