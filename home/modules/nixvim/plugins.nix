@@ -90,6 +90,12 @@
 
   plugins.mini-diff.enable = true;
 
+  plugins.mini-notify = {
+    enable = true;
+
+    settings.lsp_progress.enable = false;
+  };
+
   # === File Explorer ===
   plugins.mini-files = {
     enable = true;
