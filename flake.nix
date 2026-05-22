@@ -33,7 +33,10 @@
       system = "x86_64-linux";
 
       mkHost =
-        { hostPath, hmModules ? [ ] }:
+        {
+          hostPath,
+          hmModules ? [ ],
+        }:
         nixpkgs.lib.nixosSystem {
           inherit system;
 

@@ -90,12 +90,6 @@
 
   plugins.mini-diff.enable = true;
 
-  plugins.mini-notify = {
-    enable = true;
-
-    settings.lsp_progress.enable = false;
-  };
-
   # === File Explorer ===
   plugins.mini-files = {
     enable = true;
@@ -120,14 +114,12 @@
   };
   plugins.mini-pairs.enable = true;
 
-  # === Fuzzy Finder ===
-  plugins.telescope = {
+  plugins.fzf-lua = {
     enable = true;
+
     settings = {
-      defaults = {
-        sorting_strategy = "ascending";
-        layout_strategy = "flex";
-      };
+      winopts.fullscreen = true;
+      grep.rg_opts = "--column --line-number --no-heading --color=always --smart-case";
     };
   };
 }

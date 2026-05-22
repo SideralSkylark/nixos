@@ -68,9 +68,9 @@
     {
       mode = "n";
       key = "<leader>xx";
-      action = "<CMD>Telescope diagnostics<CR>";
+      action = "<cmd>FzfLua diagnostics_workspace<cr>";
       options = {
-        desc = "Show all diagnostics";
+        desc = "Workspace diagnostics";
         silent = true;
       };
     }
@@ -96,13 +96,13 @@
     {
       mode = "n";
       key = "<leader>ff";
-      action = "<cmd>Telescope find_files<cr>";
+      action = "<cmd>FzfLua files<cr>";
       options.desc = "Find files";
     }
     {
       mode = "n";
       key = "<leader>fg";
-      action = "<cmd>Telescope live_grep<cr>";
+      action = "<cmd>FzfLua live_grep<cr>";
       options.desc = "Live grep";
     }
     {
