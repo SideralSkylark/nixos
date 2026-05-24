@@ -3,7 +3,7 @@
   stylix = {
     enable = true;
     image = null;
-    base16Scheme = "${pkgs.base16-schemes}/share/themes/everforest-dark-hard.yaml";
+    base16Scheme = "${pkgs.base16-schemes}/share/themes/everforest-dark-medium.yaml";
     fonts = {
       monospace = {
         package = pkgs.nerd-fonts.jetbrains-mono;

@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
-TEMP=4000
-HYPRSUNSET_CMD="hyprsunset -t $TEMP"
+
+OVERRIDE_TEMP=3500
 
 notify() {
     notify-send \
@@ -10,15 +10,19 @@ notify() {
         "$1" "$2"
 }
 
-is_active() { pgrep -x hyprsunset >/dev/null; }
+is_manual_active() { pgrep -f "hyprsunset -t $OVERRIDE_TEMP" >/dev/null; }
 
 toggle() {
-    if is_active; then
-        pkill -x hyprsunset
-        notify "󰃟 Reading Mode" "Manual OFF"
+    if is_manual_active; then
+        pkill -f "hyprsunset -t $OVERRIDE_TEMP"
+        
+        systemctl --user start hyprsunset.service
+        notify "󰃟 Reading Mode" "System Schedule Restored"
     else
-        $HYPRSUNSET_CMD &
-        notify "󰃞 Reading Mode" "Manual ON (${TEMP} K)"
+        systemctl --user stop hyprsunset.service
+        
+        hyprsunset -t $OVERRIDE_TEMP &
+        notify "󰃞 Reading Mode" "Deep Focus ON (${OVERRIDE_TEMP}K)"
     fi
     sleep 0.1
     pkill -RTMIN+8 waybar
@@ -27,10 +31,10 @@ toggle() {
 case "$1" in
     toggle) toggle ;;
     display|"")
-        if is_active; then
-            printf '{"text":"󰃞","tooltip":"Reading Mode: ON (Manual)"}\n'
+        if is_manual_active; then
+            printf '{"text":"󰃞","tooltip":"Reading Mode: Focus Override (%sK)"}\n' "$OVERRIDE_TEMP"
         else
-            printf '{"text":"󰃟","tooltip":"Reading Mode: OFF / Auto"}\n'
+            printf '{"text":"󰃟","tooltip":"Reading Mode: Nix Schedule Active"}\n'
         fi
         ;;
 esac
