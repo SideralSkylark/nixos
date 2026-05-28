@@ -23,9 +23,9 @@
       };
       sizes = {
         applications = 12;
-        terminal = 13;
-        desktop = 11;
-        popups = 10;
+        terminal = 14;
+        desktop = 12;
+        popups = 11;
       };
     };
     opacity = {
