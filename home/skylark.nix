@@ -1,4 +1,4 @@
-{ config, nixvim, ... }:
+{ config, ... }:
 
 {
   home.username = "skylark";
@@ -7,13 +7,7 @@
 
   imports = [
     ./modules
-    nixvim.homeModules.nixvim
   ];
-
-  programs.nixvim = {
-    enable = true;
-    imports = [ ./modules/nixvim ];
-  };
 
   xdg = {
     enable = true;

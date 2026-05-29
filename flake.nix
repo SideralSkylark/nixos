@@ -67,11 +67,17 @@
       nixosConfigurations = {
         laptop = mkHost {
           hostPath = ./hosts/laptop/configuration.nix;
-          hmModules = [ ./home/modules/hyprland ];
+          hmModules = [
+            ./home/modules/hyprland
+            ./home/modules/nixvim
+          ];
         };
         nixos = mkHost {
           hostPath = ./hosts/nixos/configuration.nix;
-          hmModules = [ ./home/modules/hyprland ];
+          hmModules = [
+            ./home/modules/hyprland
+            ./home/modules/nixvim
+          ];
         };
       };
 
