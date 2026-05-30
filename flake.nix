@@ -84,7 +84,10 @@
       # -------- Fedora / Standalone HM --------
       homeConfigurations = {
         skylark = home-manager.lib.homeManagerConfiguration {
-          pkgs = nixpkgs.legacyPackages.${system};
+          pkgs = import nixpkgs {
+	    inherit system;
+	    config.allowUnfree = true;
+	  };
           modules = [
             ./home/skylark.nix
             ./home/modules/standalone

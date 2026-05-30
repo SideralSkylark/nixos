@@ -1,5 +1,7 @@
 { pkgs, ... }:
 {
+  imports = [ ./shell.nix ];
+
   home.packages = with pkgs; [
     lazydocker # TUI for docker
     lazygit # TUI for git
