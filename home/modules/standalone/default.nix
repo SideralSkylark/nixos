@@ -207,10 +207,18 @@ in
     nwg-displays # GUI for monitor configuration
     pavucontrol # PulseAudio volume control (GUI)
     grim # Wayland screenshot tool
+    imv
     slurp # Select a region in a Wayland compositor
     wl-clipboard # Command-line copy/paste utilities for Wayland
     cliphist # Wayland clipboard manager
     yazi # Terminal file manager
+    jdt-language-server
+    lua-language-server
+    typescript-language-server
+    vue-language-server
+    clang-tools
+    nil
+    google-java-format
   ];
 
     programs.swappy = {
