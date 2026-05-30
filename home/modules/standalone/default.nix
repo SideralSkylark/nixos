@@ -203,7 +203,6 @@ in
     lazygit # TUI for git
     bruno # Open-source API client
     nerd-fonts.jetbrains-mono
-
     wbg # Wallpaper setter for Wayland
     nwg-displays # GUI for monitor configuration
     pavucontrol # PulseAudio volume control (GUI)
