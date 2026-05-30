@@ -2,20 +2,20 @@
   description = "NixOS & Home Manager configuration";
 
   inputs = {
-    nixpkgs.url = "nixpkgs/nixos-25.11";
+    nixpkgs.url = "github:NixOS/nixpkgs/nixos-26.05";
 
     home-manager = {
-      url = "github:nix-community/home-manager/release-25.11";
+      url = "github:nix-community/home-manager/release-26.05";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
     stylix = {
-      url = "github:nix-community/stylix/release-25.11";
+      url = "github:nix-community/stylix";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
     nixvim = {
-      url = "github:nix-community/nixvim/nixos-25.11";
+      url = "github:nix-community/nixvim";
       inputs.nixpkgs.follows = "nixpkgs";
     };
   };
@@ -85,9 +85,9 @@
       homeConfigurations = {
         skylark = home-manager.lib.homeManagerConfiguration {
           pkgs = import nixpkgs {
-	    inherit system;
-	    config.allowUnfree = true;
-	  };
+            inherit system;
+            config.allowUnfree = true;
+          };
           modules = [
             ./home/skylark.nix
             ./home/modules/standalone
