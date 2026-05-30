@@ -164,8 +164,8 @@
 
   "custom/powerprofile": {
     "exec": "~/.config/waybar/scripts/powerprofile.sh",
-    "on-click": "~/.config/waybar/scripts/powerprofile.sh toggle",
-    "interval": "once",
+    "on-click": "TUNED_SWITCHER_FORCE_GUI=1 tuned-switcher",
+    "interval": 30,
     "signal": 9,
     "return-type": "json"
   },
