@@ -120,22 +120,6 @@
     "on-scroll-down": ""
   },
 
-  "network": {
-    "interval": 10,
-    "format-wifi": "󰤨 {signalStrength}%",
-    "format-ethernet": "󰈀",
-    "format-disconnected": "󰤭",
-    "format-disabled": "󰤮",
-    "tooltip-format-wifi": "{essid} • {signalStrength}% • {frequency}MHz",
-    "tooltip-format-ethernet": "{ifname} • {ipaddr}",
-    "tooltip-format-disconnected": "WiFi disconnected",
-    "tooltip-format-disabled": "WiFi deactivated - Click to activate",
-    "on-click": "~/.config/waybar/scripts/wifi-toggle.sh",
-    "on-click-right": "~/.config/waybar/scripts/wifi-menu.sh",
-    "on-scroll-up": "",
-    "on-scroll-down": ""
-  },
-
   "custom/reading-mode": {
     "exec": "~/.config/waybar/scripts/reading-mode.sh",
     "interval": "once",
@@ -203,7 +187,6 @@
       "pulseaudio",
       "backlight",
       "bluetooth",
-      "network",
       "custom/reading-mode"
     ]
   },

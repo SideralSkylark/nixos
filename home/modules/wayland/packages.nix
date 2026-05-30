@@ -13,7 +13,6 @@
     cliphist # Wayland clipboard manager
     waybar # Highly customizable Wayland bar
     fuzzel # Wayland-native application launcher
-    impala # TUI for managing wifi on Linux
     yazi # Terminal file manager
   ];
 }
