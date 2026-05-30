@@ -2,6 +2,7 @@
 programs.mpv = {
   enable = true;
   config = {
+  gpu-context = "wayland";
     # Hardware decoding disabled — avoids color space and decoding bugs
     # on certain GPU drivers; software decoding is more predictable
     hwdec = "no";
