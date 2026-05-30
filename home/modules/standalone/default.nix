@@ -205,12 +205,10 @@ in
     nerd-fonts.jetbrains-mono
 
     wbg # Wallpaper setter for Wayland
-    blueman
     nwg-displays # GUI for monitor configuration
     pavucontrol # PulseAudio volume control (GUI)
     grim # Wayland screenshot tool
     slurp # Select a region in a Wayland compositor
-    imv # Image viewer for Wayland
     wl-clipboard # Command-line copy/paste utilities for Wayland
     cliphist # Wayland clipboard manager
     yazi # Terminal file manager

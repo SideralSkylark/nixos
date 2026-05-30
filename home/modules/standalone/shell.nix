@@ -6,5 +6,10 @@
     if [ -e "$HOME/.nix-profile/etc/profile.d/hm-session-vars.sh" ]; then
       . "$HOME/.nix-profile/etc/profile.d/hm-session-vars.sh"
     fi
+
+    # Rust
+  if [ -e "$HOME/.cargo/env" ]; then
+    . "$HOME/.cargo/env"
+  fi
   '';
 }
