@@ -187,13 +187,13 @@ let
   '';
 in
 {
-  imports = [ 
-  ./shell.nix 
-  ../wayland/fuzzel.nix
-  ../wayland/kitty.nix
-  ../wayland/waybar.nix
-  ../wayland/dunst.nix
-  ../wayland/mpv.nix
+  imports = [
+    ./shell.nix
+    ../wayland/fuzzel.nix
+    ../wayland/kitty.nix
+    ../wayland/waybar.nix
+    ../wayland/dunst.nix
+    ../wayland/mpv.nix
   ];
 
   home.packages = with pkgs; [
@@ -214,14 +214,11 @@ in
     yazi # Terminal file manager
     jdt-language-server
     lua-language-server
-    typescript-language-server
-    vue-language-server
     clang-tools
     nil
-    google-java-format
   ];
 
-    programs.swappy = {
+  programs.swappy = {
     enable = true;
     settings = {
       config = {
@@ -239,9 +236,15 @@ in
   };
 
   xdg.configFile = {
-    "hypr/hypridle.conf" = { source = ../../../dotfiles/hyprland/.config/hypr/hypridle.conf; };
-    "hypr/hyprlock.conf" = { source = ../../../dotfiles/hyprland/.config/hypr/hyprlock.conf; };
-    "hypr/hyprsunset.conf" = { source = ../../../dotfiles/hyprland/.config/hypr/hyprsunset.conf; };
+    "hypr/hypridle.conf" = {
+      source = ../../../dotfiles/hyprland/.config/hypr/hypridle.conf;
+    };
+    "hypr/hyprlock.conf" = {
+      source = ../../../dotfiles/hyprland/.config/hypr/hyprlock.conf;
+    };
+    "hypr/hyprsunset.conf" = {
+      source = ../../../dotfiles/hyprland/.config/hypr/hyprsunset.conf;
+    };
     "hypr/scripts/random-wallpaper" = {
       source = ../../../dotfiles/hyprland/.config/hypr/scripts/random-wallpaper.sh;
       executable = true;
