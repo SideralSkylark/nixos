@@ -14,21 +14,19 @@
 
     userDirs = {
       enable = true;
+      setSessionVariables = true;
       createDirectories = true;
 
       download = "${config.home.homeDirectory}/Downloads";
       documents = "${config.home.homeDirectory}/Documents";
       pictures = "${config.home.homeDirectory}/Pictures";
       videos = "${config.home.homeDirectory}/Videos";
+      projects = "${config.home.homeDirectory}/Projects";
 
       desktop = null;
       music = null;
       publicShare = null;
       templates = null;
-
-      extraConfig = {
-        XDG_PROJECTS_DIR = "${config.home.homeDirectory}/Projects";
-      };
     };
   };
 
