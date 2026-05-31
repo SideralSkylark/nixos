@@ -1,205 +1,208 @@
 {
-  "layer": "top",
-  "position": "top",
-  "height": 47,
-  "spacing": 0,
-  "margin-top": 0,
-  "margin-left": 0,
-  "margin-right": 0,
-  "modules-left": ["custom/distro-icon", "hyprland/workspaces", "hyprland/window"],
-  "modules-center": ["clock"],
-  "modules-right": ["tray", "battery", "group/system", "group/power"],
+    "layer": "top",
+    "position": "top",
+    "height": 47,
+    "spacing": 0,
+    "margin-top": 0,
+    "margin-left": 0,
+    "margin-right": 0,
+    "modules-left": ["custom/distro-icon", "hyprland/workspaces", "hyprland/window"],
+    "modules-center": ["clock"],
+    "modules-right": ["tray", "battery", "group/system", "group/power"],
 
-  "custom/distro-icon": {
-    "exec": "~/.config/waybar/scripts/distro-icon.sh",
-    "interval": "once",
-    "restart-interval": 0,
-    "tooltip": false,
-    "on-click": "fuzzel",
-    "on-click-right": "",
-    "on-scroll-up": "",
-    "on-scroll-down": ""
-  },
-
-  "hyprland/workspaces": {
-    "disable-scroll": true,
-    "all-outputs": true,
-    "icon": true,
-    "format": " ",
-    "persistent-workspaces": {
-      "*": 5
+    "custom/distro-icon": {
+        "exec": "~/.config/waybar/scripts/distro-icon.sh",
+        "interval": "once",
+        "restart-interval": 0,
+        "tooltip": false,
+        "on-click": "fuzzel",
+        "on-click-right": "",
+        "on-scroll-up": "",
+        "on-scroll-down": ""
     },
-    "show-special": false
-  },
 
-  "hyprland/window": {
-    "format": "{title}",
-    "max-length": 45,
-    "icon": true,
-    "separate-outputs": true,
-    "rewrite": {
-      "(.*) - Visual Studio Code": " $1",
-      "(.*) - vim": " $1",
-      "": "Desktop"
+    "hyprland/workspaces": {
+        "disable-scroll": true,
+        "all-outputs": true,
+        "icon": true,
+        "format": " ",
+        "persistent-workspaces": {
+            "*": 5
+        },
+        "show-special": false
+    },
+
+    "hyprland/window": {
+        "format": "{title}",
+        "max-length": 45,
+        "icon": true,
+        "separate-outputs": true,
+        "rewrite": {
+            "(.*) - Visual Studio Code": " $1",
+            "(.*) - vim": " $1",
+            "": "Desktop"
+        }
+    },
+
+    "tray": {
+        "icon-size": 16,
+        "spacing": 8,
+        "show-passive-items": false
+    },
+
+    "custom/dunst": {
+        "exec": "~/.config/waybar/scripts/dunst-status.sh",
+        "on-click": "dunstctl set-paused toggle && pkill -RTMIN+7 waybar",
+        "on-click-right": "~/.config/waybar/scripts/dunst-history.sh",
+        "interval": "once",
+        "signal": 7,
+        "return-type": "json",
+        "tooltip": true,
+        "on-scroll-up": "",
+        "on-scroll-down": ""
+    },
+
+    "clock": {
+        "interval": 60,
+        "format": "{:%H:%M}",
+        "format-alt": "{:%a %d %b}",
+        "tooltip-format": "<tt><small>{calendar}</small></tt>",
+        "calendar": {
+            "mode": "year",
+            "mode-mon-col": 3,
+            "weeks-pos": "right",
+            "on-scroll": 1,
+            "format": {
+                "months": "<span color='#ffead3'><b>{}</b></span>",
+                "days": "<span color='#ecc6d9'><b>{}</b></span>",
+                "weeks": "<span color='#99ffdd'><b>W{}</b></span>",
+                "weekdays": "<span color='#ffcc66'><b>{}</b></span>",
+                "today": "<span color='#ff6699'><b><u>{}</u></b></span>"
+            }
+        },
+        "actions": {
+            "on-click-right": "mode",
+            "on-scroll-up": "shift_up",
+            "on-scroll-down": "shift_down"
+        }
+    },
+
+    "bluetooth": {
+        "format": "{icon}",
+        "format-no-controller": "󰂲",
+        "format-disabled": "󰂲",
+        "format-off": "󰂲",
+        "format-on": "󰂯",
+        "format-connected": "󰂱 {num_connections}",
+        "tooltip-format": "{controller_alias} | {status}",
+        "tooltip-format-connected": "{controller_alias} | Connected\n{device_enumerate}",
+        "tooltip-format-enumerate-connected": "• {device_alias}",
+        "on-click": "blueman-manager",
+        "on-click-right": "bluetoothctl disconnect",
+        "on-scroll-up": "",
+        "on-scroll-down": ""
+    },
+
+    "battery": {
+        "interval": 30,
+        "states": {
+            "warning": 25,
+            "critical": 10
+        },
+        "format": "{icon} {capacity}%",
+        "format-charging": "󰂄 {capacity}%",
+        "format-plugged": "󱘖 {capacity}%",
+        "format-full": "󰁹 Full",
+        "format-alt": "{icon} {time}",
+        "format-icons": ["󰁺", "󰁼", "󰁾", "󰂀", "󰁹"],
+        "tooltip-format": "{timeTo}\n{capacity}% • {power}W",
+        "on-scroll-up": "",
+        "on-scroll-down": ""
+    },
+
+    "custom/reading-mode": {
+        "exec": "~/.config/waybar/scripts/reading-mode.sh",
+        "interval": "once",
+        "signal": 8,
+        "return-type": "json",
+        "on-click": "~/.config/waybar/scripts/reading-mode.sh toggle",
+        "on-scroll-up": "",
+        "on-scroll-down": ""
+    },
+
+    "pulseaudio": {
+        "format": "{icon} {volume}%",
+        "format-muted": "󰝟",
+        "format-icons": {
+            "headphone": "󰋋",
+            "headset": "󰋎",
+            "default": ["󰕿", "󰖀", "󰕾"]
+        },
+        "tooltip-format": "{volume}% • {desc}",
+        "on-click": "pavucontrol",
+        "on-click-right": "pactl set-sink-mute @DEFAULT_SINK@ toggle",
+        "scroll-step": 5
+    },
+
+    "backlight": {
+        "format": "󰃠 {percent}%",
+        "tooltip-format": "{percent}%",
+        "on-scroll-up": "brightnessctl set +5%",
+        "on-scroll-down": "brightnessctl set 5%-"
+    },
+
+    "idle_inhibitor": {
+        "format": "{icon}",
+        "format-icons": {
+            "activated": "󰅶",
+            "deactivated": "󰾪"
+        },
+        "tooltip-format-activated": "Idle inhibitor active",
+        "tooltip-format-deactivated": "Idle inhibitor inactive",
+        "on-scroll-up": "",
+        "on-scroll-down": ""
+    },
+
+    "custom/powerprofile": {
+        "exec": "~/.config/waybar/scripts/powerprofile.sh",
+        "on-click": "~/.config/waybar/scripts/powerprofile.sh pick",
+        "on-click-right": "~/.config/waybar/scripts/powerprofile.sh cycle",
+        "interval": 30,
+        "signal": 9,
+        "return-type": "json"
+    },
+
+    "custom/power": {
+        "format": "󰐥",
+        "tooltip-text": "Power Menu",
+        "on-click": "~/.config/waybar/scripts/power-menu.sh"
+    },
+
+    "group/system": {
+        "orientation": "horizontal",
+        "drawer": {
+            "transition-duration": 300,
+            "transition-left-to-right": false
+        },
+        "modules": [
+            "custom/dunst",
+            "pulseaudio",
+            "backlight",
+            "bluetooth",
+            "custom/reading-mode"
+        ]
+    },
+
+    "group/power": {
+        "orientation": "horizontal",
+        "drawer": {
+            "transition-duration": 300,
+            "transition-left-to-right": false
+        },
+        "modules": [
+            "idle_inhibitor",
+            "custom/powerprofile",
+            "custom/power"
+        ]
     }
-  },
-
-  "tray": {
-    "icon-size": 16,
-    "spacing": 8,
-    "show-passive-items": false
-  },
-
-  "custom/dunst": {
-    "exec": "~/.config/waybar/scripts/dunst-status.sh",
-    "on-click": "dunstctl set-paused toggle && pkill -RTMIN+7 waybar",
-    "on-click-right": "~/.config/waybar/scripts/dunst-history.sh",
-    "interval": "once",
-    "signal": 7,
-    "return-type": "json",
-    "tooltip": true,
-    "on-scroll-up": "",
-    "on-scroll-down": ""
-  },
-
-  "clock": {
-    "interval": 60,
-    "format": "{:%H:%M}",
-    "format-alt": "{:%a %d %b}",
-    "tooltip-format": "<tt><small>{calendar}</small></tt>",
-    "calendar": {
-      "mode": "year",
-      "mode-mon-col": 3,
-      "weeks-pos": "right",
-      "on-scroll": 1,
-      "format": {
-        "months": "<span color='#ffead3'><b>{}</b></span>",
-        "days": "<span color='#ecc6d9'><b>{}</b></span>",
-        "weeks": "<span color='#99ffdd'><b>W{}</b></span>",
-        "weekdays": "<span color='#ffcc66'><b>{}</b></span>",
-        "today": "<span color='#ff6699'><b><u>{}</u></b></span>"
-      }
-    },
-    "actions": {
-      "on-click-right": "mode",
-      "on-scroll-up": "shift_up",
-      "on-scroll-down": "shift_down"
-    }
-  },
-
-  "bluetooth": {
-    "format": "{icon}",
-    "format-no-controller": "󰂲",
-    "format-disabled": "󰂲",
-    "format-off": "󰂲",
-    "format-on": "󰂯",
-    "format-connected": "󰂱 {num_connections}",
-    "tooltip-format": "{controller_alias} | {status}",
-    "tooltip-format-connected": "{controller_alias} | Connected\n{device_enumerate}",
-    "tooltip-format-enumerate-connected": "• {device_alias}",
-    "on-click": "blueman-manager",
-    "on-click-right": "bluetoothctl disconnect",
-    "on-scroll-up": "",
-    "on-scroll-down": ""
-  },
-
-  "battery": {
-    "interval": 30,
-    "states": {
-      "warning": 25,
-      "critical": 10
-    },
-    "format": "{icon} {capacity}%",
-    "format-charging": "󰂄 {capacity}%",
-    "format-plugged": "󱘖 {capacity}%",
-    "format-full": "󰁹 Full",
-    "format-alt": "{icon} {time}",
-    "format-icons": ["󰁺", "󰁼", "󰁾", "󰂀", "󰁹"],
-    "tooltip-format": "{timeTo}\n{capacity}% • {power}W",
-    "on-scroll-up": "",
-    "on-scroll-down": ""
-  },
-
-  "custom/reading-mode": {
-    "exec": "~/.config/waybar/scripts/reading-mode.sh",
-    "interval": "once",
-    "signal": 8,
-    "return-type": "json",
-    "on-scroll-up": "",
-    "on-scroll-down": ""
-  },
-
-  "pulseaudio": {
-    "format": "{icon} {volume}%",
-    "format-muted": "󰝟",
-    "format-icons": {
-      "headphone": "󰋋",
-      "headset": "󰋎",
-      "default": ["󰕿", "󰖀", "󰕾"]
-    },
-    "tooltip-format": "{volume}% • {desc}",
-    "on-click": "pavucontrol",
-    "on-click-right": "pactl set-sink-mute @DEFAULT_SINK@ toggle",
-    "scroll-step": 5
-  },
-
-  "backlight": {
-    "format": "󰃠 {percent}%",
-    "tooltip-format": "{percent}%",
-    "on-scroll-up": "brightnessctl set +5%",
-    "on-scroll-down": "brightnessctl set 5%-"
-  },
-
-  "idle_inhibitor": {
-    "format": "{icon}",
-    "format-icons": {
-      "activated": "󰅶",
-      "deactivated": "󰾪"
-    },
-    "tooltip-format-activated": "Idle inhibitor active",
-    "tooltip-format-deactivated": "Idle inhibitor inactive",
-    "on-scroll-up": "",
-    "on-scroll-down": ""
-  },
-
-  "custom/powerprofile": {
-    "exec": "~/.config/waybar/scripts/powerprofile.sh",
-    "on-click": "TUNED_SWITCHER_FORCE_GUI=1 tuned-switcher",
-    "signal": 9,
-    "return-type": "json"
-  },
-
-  "custom/power": {
-    "format": "󰐥",
-    "tooltip-text": "Power Menu",
-    "on-click": "~/.config/waybar/scripts/power-menu.sh"
-  },
-
-  "group/system": {
-    "orientation": "horizontal",
-    "drawer": {
-      "transition-duration": 300,
-      "transition-left-to-right": false
-    },
-    "modules": [
-      "custom/dunst",
-      "pulseaudio",
-      "backlight",
-      "bluetooth",
-      "custom/reading-mode"
-    ]
-  },
-
-  "group/power": {
-    "orientation": "horizontal",
-    "drawer": {
-      "transition-duration": 300,
-      "transition-left-to-right": false
-    },
-    "modules": [
-      "idle_inhibitor",
-      "custom/powerprofile",
-      "custom/power"
-    ]
-  }
 }

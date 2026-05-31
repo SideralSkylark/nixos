@@ -1,40 +1,45 @@
 #!/usr/bin/env bash
 
-update() {
-    cur=$(tuned-adm active | awk -F': ' '{print $2}' | head -n1)
-
-    icon_for() {
-        case "$1" in
-            powersave) echo "󰾆" ;;
-            balanced) echo "󰾅" ;;
-            throughput-performance|latency-performance|performance) echo "󰓅" ;;
-            *) echo "󰾅" ;;
-        esac
-    }
-
-    tooltip_for() {
-        case "$1" in
-            powersave) echo "Tuned Profile: Powersave\nBattery saving mode" ;;
-            balanced) echo "Tuned Profile: Balanced\nDefault mode" ;;
-            throughput-performance) echo "Tuned Profile: Throughput Performance" ;;
-            latency-performance) echo "Tuned Profile: Latency Performance" ;;
-            *) echo "Tuned Profile: $1" ;;
-        esac
-    }
-
-    icon=$(icon_for "$cur")
-    tooltip=$(tooltip_for "$cur")
-
-    printf '{"text":"%s","tooltip":"%s"}\n' "$icon" "$tooltip"
+icon_for() {
+    case "$1" in
+        powersave)              echo "󰾆" ;;
+        balanced)               echo "󰾅" ;;
+        throughput-performance|\
+        latency-performance|\
+        performance)            echo "󰓅" ;;
+        *)                      echo "󰾅" ;;
+    esac
 }
 
-# Waybar signal support
-if [[ "$1" == "signal" ]]; then
-    update
-    exit
-fi
+tooltip_for() {
+    case "$1" in
+        powersave)              echo "Tuned: Powersave" ;;
+        balanced)               echo "Tuned: Balanced" ;;
+        throughput-performance) echo "Tuned: Throughput Performance" ;;
+        latency-performance)    echo "Tuned: Latency Performance" ;;
+        *)                      echo "Tuned: $1" ;;
+    esac
+}
 
-while true; do
-    update
-    sleep 30
-done
+case "$1" in
+    cycle)
+        profiles=(powersave balanced throughput-performance)
+        cur=$(tuned-adm active 2>/dev/null | awk -F': ' '{print $2}' | tr -d '[:space:]')
+        for i in "${!profiles[@]}"; do
+            if [[ "${profiles[$i]}" == "$cur" ]]; then
+                next="${profiles[$(( (i+1) % ${#profiles[@]} ))]}"
+                sudo tuned-adm profile "$next"
+                pkill -RTMIN+9 waybar
+                exit
+            fi
+        done
+        ;;
+    pick)
+        chosen=$(printf '%s\n' powersave balanced throughput-performance | fuzzel --dmenu)
+        [[ -n "$chosen" ]] && sudo tuned-adm profile "$chosen" && pkill -RTMIN+9 waybar
+        ;;
+    *)
+        cur=$(tuned-adm active 2>/dev/null | awk -F': ' '{print $2}' | tr -d '[:space:]')
+        printf '{"text":"%s","tooltip":"%s"}\n' "$(icon_for "$cur")" "$(tooltip_for "$cur")"
+        ;;
+esac

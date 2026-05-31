@@ -214,6 +214,7 @@ in
     yazi # Terminal file manager
     jdt-language-server
     lua-language-server
+    google-java-format
     clang-tools
     nil
   ];
