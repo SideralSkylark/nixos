@@ -78,9 +78,10 @@
   };
 
   extraPackages = with pkgs; [
-    nodePackages.prettier
+    prettier
     rustfmt
     nixfmt-rfc-style
+    google-java-format
   ];
 
   plugins.mini-icons = {

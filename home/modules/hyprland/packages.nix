@@ -220,8 +220,8 @@ in
   };
 
   xdg.configFile = {
-    "hypr/hyprland.conf".source = ../../../dotfiles/hyprland/.config/hypr/hyprland.conf;
-    "hypr/startup.conf".source = ../../../dotfiles/hyprland/.config/hypr/startup.conf;
+    "hypr/hyprland.lua".source = ../../../dotfiles/hyprland/.config/hypr/hyprland.lua;
+    "hypr/startup.lua".source = ../../../dotfiles/hyprland/.config/hypr/startup.lua;
     "hypr/scripts/random-wallpaper" = {
       source = ../../../dotfiles/hyprland/.config/hypr/scripts/random-wallpaper.sh;
       executable = true;
