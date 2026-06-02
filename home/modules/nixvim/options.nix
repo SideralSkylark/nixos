@@ -20,6 +20,8 @@
     swapfile = false;
     backup = false;
     writebackup = false;
+    splitright = true;
+    splitbelow = true;
   };
 
   globals = {

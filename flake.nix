@@ -15,8 +15,7 @@
     };
 
     nixvim = {
-      url = "github:nix-community/nixvim";
-      inputs.nixpkgs.follows = "nixpkgs";
+      url = "github:nix-community/nixvim/nixos-26.05";
     };
   };
 
@@ -91,6 +90,7 @@
           modules = [
             ./home/skylark.nix
             ./home/modules/standalone
+            ./home/modules/nixvim
           ];
           extraSpecialArgs = { inherit nixvim; };
         };

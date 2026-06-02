@@ -1,25 +1,43 @@
 { pkgs, ... }:
 {
   # === AUTOCOMPLETION ===
-  plugins.cmp = {
+  plugins.blink-cmp = {
     enable = true;
     settings = {
-      mapping = {
-        "<C-n>" = "cmp.mapping.select_next_item()";
-        "<C-p>" = "cmp.mapping.select_prev_item()";
-        "<C-Space>" = "cmp.mapping.complete()";
-        "<CR>" = "cmp.mapping.confirm({ select = true })";
+      keymap = {
+        preset = "none";
+        "<C-Space>" = [
+          "show"
+          "fallback"
+        ];
+        "<C-n>" = [
+          "select_next"
+          "fallback"
+        ];
+        "<C-p>" = [
+          "select_prev"
+          "fallback"
+        ];
+        "<CR>" = [
+          "accept"
+          "fallback"
+        ];
+        "<C-e>" = [
+          "cancel"
+          "fallback"
+        ];
       };
-      sources = [
-        { name = "nvim_lsp"; }
-        { name = "path"; }
-        { name = "buffer"; }
+      sources.default = [
+        "lsp"
+        "path"
+        "buffer"
       ];
+      completion.documentation = {
+        auto_show = true;
+        auto_show_delay_ms = 200;
+      };
     };
   };
-  plugins.cmp-nvim-lsp.enable = true;
-  plugins.cmp-buffer.enable = true;
-  plugins.cmp-path.enable = true;
 
   # === Colorscheme ===
   colorschemes.everforest = {
@@ -80,7 +98,7 @@
   extraPackages = with pkgs; [
     prettier
     rustfmt
-    nixfmt-rfc-style
+    nixfmt
     google-java-format
   ];
 
