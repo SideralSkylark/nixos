@@ -212,6 +212,8 @@ in
     wl-clipboard # Command-line copy/paste utilities for Wayland
     cliphist # Wayland clipboard manager
     yazi # Terminal file manager
+    nodejs_24
+    google-java-format
   ];
 
   programs.swappy = {

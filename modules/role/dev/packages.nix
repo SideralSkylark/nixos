@@ -10,7 +10,8 @@
     lazygit # TUI for git
     bruno # Open-source API client (Postman alternative)
     jdk21_headless # Java Development Kit 21
-    nodejs_22 # Node.js runtime
+    nodejs_24 # Node.js runtime
+    google-java-format
     rustc # Rust compiler
     cargo # Rust package manager
     gcc # GNU Compiler Collection

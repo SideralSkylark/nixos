@@ -99,7 +99,6 @@
     prettier
     rustfmt
     nixfmt
-    google-java-format
   ];
 
   plugins.mini-icons = {

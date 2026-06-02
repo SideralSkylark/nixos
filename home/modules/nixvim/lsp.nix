@@ -26,7 +26,6 @@
         };
       };
 
-      # TypeScript / JavaScript
       ts_ls = {
         enable = true;
         package = pkgs.typescript-language-server;
@@ -35,24 +34,31 @@
           "typescriptreact"
           "javascript"
           "javascriptreact"
-          "vue"
+          "vue" # keep this
         ];
-        rootMarkers = [
-          "package.json"
-          "tsconfig.json"
-          "jsconfig.json"
-          ".git"
-        ];
+        extraOptions = {
+          init_options = lib.nixvim.mkRaw ''
+            {
+              plugins = {
+                {
+                  name = "@vue/typescript-plugin",
+                  location = "${pkgs.vue-language-server}/lib/node_modules/@vue/language-server",
+                  languages = { "vue" },
+                },
+              },
+            }
+          '';
+        };
       };
 
-      # Vue
       vue_ls = {
         enable = true;
         package = pkgs.vue-language-server;
         filetypes = [ "vue" ];
         settings = {
           typescript = {
-            tsdk = "node_modules/typescript/lib";
+            # Point to the nix store path instead of a relative node_modules
+            tsdk = "${pkgs.typescript}/lib/node_modules/typescript/lib";
           };
         };
       };
