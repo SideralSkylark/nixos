@@ -6,6 +6,5 @@
     ./fuzzel.nix
     ./mpv.nix
     ./waybar.nix
-    ./network.nix
   ];
 }
