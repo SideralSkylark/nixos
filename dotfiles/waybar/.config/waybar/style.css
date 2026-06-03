@@ -48,13 +48,13 @@ window#waybar {
 /* ── LEFT ───────────────────────────────────────────────── */
 
 #custom-distro-icon {
-    color: #A7C080;       
+    color: #A7C080;
     font-size: 18px;
     padding: 0 14px 0 12px;
 }
 
 #custom-distro-icon:hover {
-    color: #E69875;      
+    color: #E69875;
 }
 
 #workspaces {
@@ -107,7 +107,6 @@ window#waybar {
 
 /* ── RIGHT — base style for all modules ─────────────────── */
 
-#tray,
 #battery,
 #custom-dunst,
 #pulseaudio,
@@ -124,25 +123,12 @@ window#waybar {
     background: transparent;
 }
 
-#tray {
-    padding: 0 12px;
-    margin: 0 4px;
-}
-
+#custom-dunst,
+#idle_inhibitor,
 #battery {
     color: #7A8478;
     padding: 0 12px;
     border-left: 1px solid #374145;
-}
-
-
-/* ── GROUPS ─────────────────────────────────────────────── */
-
-#group-system,
-#group-power {
-    border-left: 1px solid #374145;
-    padding: 0 4px;
-    margin: 0 6px;
 }
 
 
@@ -152,8 +138,12 @@ window#waybar {
 #custom-dunst.dnd               { color: #525C5A; }
 
 #pulseaudio.muted               { color: #525C5A; }
+
 #bluetooth.off                  { color: #525C5A; }
+#bluetooth.disabled             { color: #525C5A; }
+
 #network.disconnected           { color: #525C5A; }
+#network.disabled               { color: #525C5A; }
 
 #battery.warning                { color: #E69875; }
 #battery.critical               { color: #E67E80; }
@@ -167,9 +157,9 @@ window#waybar {
 #custom-dunst:hover,
 #pulseaudio:hover,
 #bluetooth:hover,
+#network:hover,
 #backlight:hover,
 #idle_inhibitor:hover,
-#network:hover,
 #battery:hover,
 #custom-reading-mode:hover,
 #custom-powerprofile:hover {

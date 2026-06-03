@@ -1,5 +1,6 @@
 hl.on("hyprland.start", function()
     hl.exec_cmd("waybar")
+    hl.exec_cmd("nm-applet --indicator")
     hl.exec_cmd("systemctl --user start hypridle.service")
     hl.exec_cmd("systemctl --user start hyprsunset.service")
     hl.exec_cmd("systemctl --user start polkit-gnome-authentication-agent-1")

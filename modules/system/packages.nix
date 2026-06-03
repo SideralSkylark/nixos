@@ -5,7 +5,7 @@
     usbutils # Tools for working with USB devices
     parted # Partitioning tool
     gparted # GUI partition manager
-    iw # Tool for configuring wireless devices
+    networkmanagerapplet
     libnotify # Desktop notifications library
   ];
 }

@@ -202,6 +202,7 @@ in
     lazydocker # TUI for docker
     lazygit # TUI for git
     bruno # Open-source API client
+    bluetui
     nerd-fonts.jetbrains-mono
     wbg # Wallpaper setter for Wayland
     nwg-displays # GUI for monitor configuration
