@@ -46,15 +46,7 @@ hl.config({
     decoration = {
         rounding = 0,
         blur = {
-            enabled           = true,
-            size              = 6,
-            passes            = 2,
-            new_optimizations = true,
-            xray              = false,
-            noise             = 0.01,
-            contrast          = 1.1,
-            brightness        = 1.0,
-            popups            = false,
+            enabled = false,
         }
     }
 })
@@ -145,7 +137,7 @@ hl.bind("SUPER + return", hl.dsp.exec_cmd(terminal))
 hl.bind("SUPER + space", hl.dsp.exec_cmd(menu))
 hl.bind("SUPER + F", hl.dsp.exec_cmd(fileManager))
 hl.bind("SUPER + SHIFT + N", hl.dsp.exec_cmd("/home/skylark/.config/waybar/scripts/reading-mode.sh toggle"))
-hl.bind("SUPER + SHIFT + L", hl.dsp.exec_cmd("hyprlock"))
+hl.bind("SUPER + SHIFT + ESCAPE", hl.dsp.exec_cmd("hyprlock"))
 hl.bind("SUPER + W", hl.dsp.exec_cmd("~/.config/hypr/scripts/random-wallpaper"))
 
 -- Clipboard
@@ -186,3 +178,25 @@ hl.bind("SUPER + 0",
 
 hl.bind("SUPER + SHIFT + 0",
     hl.dsp.window.move({ workspace = 10 }))
+
+-- -- window rules
+
+hl.window_rule({
+    match  = {
+        class = "nm-connection-editor",
+    },
+
+    float  = true,
+    center = true,
+    size   = { 900, 700 },
+})
+
+hl.window_rule({
+    match  = {
+        title = "bluetu[iI]",
+    },
+
+    float  = true,
+    center = true,
+    size   = { 900, 600 },
+})
