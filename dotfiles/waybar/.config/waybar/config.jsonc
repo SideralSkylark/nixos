@@ -79,8 +79,10 @@
         "format-wifi": "󰤨 {essid}",
         "format-ethernet": "󰈀 eth",
         "format-disconnected": "WIF off",
+        "format-disabled": "WIF off",
         "tooltip-format": "{ipaddr}",
-        "on-click": "nmrs-gui"
+        "on-click": "nmcli radio wifi $(nmcli radio wifi | grep -q 'enabled' && echo 'off' || echo 'on')",
+        "on-click-right": "nm-connection-editor"
     },
 
     "bluetooth": {
@@ -88,8 +90,10 @@
         "format-disabled": "BLU off",
         "format-connected": "󰂱 {num_connections}",
         "tooltip-format": "{controller_alias}\n{device_enumerate}",
-        "on-click": "kitty --title bluetui -e bluetui"
+        "on-click": "bluetoothctl show | grep -q 'Powered: yes' && bluetoothctl power off || bluetoothctl power on",
+        "on-click-right": "kitty --title bluetui -e bluetui"
     },
+
 
     "battery": {
         "interval": 30,

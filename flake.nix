@@ -55,7 +55,9 @@
                   };
 
                 backupFileExtension = "backup";
-                extraSpecialArgs = { inherit nixvim; };
+                extraSpecialArgs = {
+                  inherit nixvim;
+                };
               };
             }
           ];
@@ -92,7 +94,9 @@
             ./home/modules/standalone
             ./home/modules/nixvim
           ];
-          extraSpecialArgs = { inherit nixvim; };
+          extraSpecialArgs = {
+            inherit nixvim;
+          };
         };
       };
     };

@@ -28,7 +28,7 @@ case "$1" in
         if is_manual_active; then
             printf '{"text":"READ ON","tooltip":"Reading Mode: Focus Override (%sK)"}\n' "$OVERRIDE_TEMP"
         else
-            printf '{"text":"READ OFF","tooltip":"Reading Mode: Nix Schedule Active"}\n'
+            printf '{"text":"READ OFF","tooltip":"Reading Mode: Schedule Active"}\n'
         fi
         ;;
 esac
