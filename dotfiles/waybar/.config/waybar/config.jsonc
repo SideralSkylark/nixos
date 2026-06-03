@@ -1,70 +1,58 @@
 {
     "layer": "top",
     "position": "top",
-    "height": 47,
+    "height": 38,
     "spacing": 0,
     "margin-top": 0,
     "margin-left": 0,
     "margin-right": 0,
-    "modules-left": ["custom/distro-icon", "hyprland/workspaces", "hyprland/window"],
+    "modules-left": ["custom/distro-icon", "custom/sep", "hyprland/workspaces", "custom/sep", "hyprland/window"],
     "modules-center": ["clock"],
     "modules-right": ["battery", "custom/sep", "group/system", "custom/sep", "group/power"],
-
-    "custom/sep": {
-        "format": "·",
-        "tooltip": false
-    },
 
     "custom/distro-icon": {
         "exec": "~/.config/waybar/scripts/distro-icon.sh",
         "interval": "once",
-        "restart-interval": 0,
         "tooltip": false,
         "on-click": "fuzzel",
-        "on-click-right": "",
-        "on-scroll-up": "",
-        "on-scroll-down": ""
+        "format": "<span size='130%'>{}</span>"
     },
 
     "hyprland/workspaces": {
         "disable-scroll": true,
         "all-outputs": true,
-        "icon": true,
-        "format": " ",
+        "format": "{icon}",
         "persistent-workspaces": {
             "*": 5
         },
-        "show-special": false
-    },
-
-    "hyprland/window": {
-        "format": "{title}",
-        "max-length": 45,
-        "icon": true,
-        "separate-outputs": true,
-        "rewrite": {
-            "(.*) - Visual Studio Code": " $1",
-            "(.*) - vim": " $1",
-            "": "Desktop"
+        "format-icons": {
+            "default": "󰄰",
+            "active": "󰄯",
+            "urgent": "󰀨"
         }
     },
 
-    "custom/dunst": {
-        "exec": "~/.config/waybar/scripts/dunst-status.sh",
-        "on-click": "dunstctl set-paused toggle && pkill -RTMIN+7 waybar",
-        "on-click-right": "~/.config/waybar/scripts/dunst-history.sh",
-        "interval": "once",
-        "signal": 7,
-        "return-type": "json",
-        "tooltip": true,
-        "on-scroll-up": "",
-        "on-scroll-down": ""
+    "hyprland/window": {
+        "format": "{}",
+        "max-length": 45,
+        "icon": false,
+        "separate-outputs": true,
+        "rewrite": {
+            "(.*) - Visual Studio Code": "$1",
+            "(.*) - vim": "$1",
+            "": "sh"
+        }
+    },
+
+    "custom/sep": {
+        "format": "|",
+        "tooltip": false
     },
 
     "clock": {
         "interval": 60,
         "format": "{:%H:%M}",
-        "format-alt": "{:%a %d %b}",
+        "format-alt": "| {:%a %d %b} |",
         "tooltip-format": "<tt><small>{calendar}</small></tt>",
         "calendar": {
             "mode": "year",
@@ -88,32 +76,19 @@
 
     "network": {
         "interval": 30,
-        "format-wifi": "󰤨 {essid} {signalStrength}%",
+        "format-wifi": "󰤨 {essid}",
         "format-ethernet": "󰈀 eth",
-        "format-disconnected": "󰤭",
-        "format-disabled": "󰤭",
-        "tooltip-format-wifi": "{essid}\n{ipaddr} • {signalStrength}%\n{frequency} GHz",
-        "tooltip-format-ethernet": "{ifname}\n{ipaddr}",
-        "tooltip-format-disconnected": "Disconnected",
-        "on-click": "nmrs-gui",
-        "on-scroll-up": "",
-        "on-scroll-down": ""
+        "format-disconnected": "WIF off",
+        "tooltip-format": "{ipaddr}",
+        "on-click": "nmrs-gui"
     },
 
     "bluetooth": {
-        "format": "{icon}",
-        "format-no-controller": "󰂲",
-        "format-disabled": "󰂲",
-        "format-off": "󰂲",
-        "format-on": "󰂯",
+        "format": "󰂯 {status}",
+        "format-disabled": "BLU off",
         "format-connected": "󰂱 {num_connections}",
-        "tooltip-format": "{controller_alias} | {status}",
-        "tooltip-format-connected": "{controller_alias} | Connected\n{device_enumerate}",
-        "tooltip-format-enumerate-connected": "• {device_alias}",
-        "on-click": "kitty --title bluetui -e bluetui",
-        "on-click-right": "bluetoothctl disconnect",
-        "on-scroll-up": "",
-        "on-scroll-down": ""
+        "tooltip-format": "{controller_alias}\n{device_enumerate}",
+        "on-click": "kitty --title bluetui -e bluetui"
     },
 
     "battery": {
@@ -125,12 +100,34 @@
         "format": "{icon} {capacity}%",
         "format-charging": "󰂄 {capacity}%",
         "format-plugged": "󱘖 {capacity}%",
-        "format-full": "󰁹 Full",
-        "format-alt": "{icon} {time}",
-        "format-icons": ["󰁺", "󰁼", "󰁾", "󰂀", "󰁹"],
-        "tooltip-format": "{timeTo}\n{capacity}% • {power}W",
-        "on-scroll-up": "",
-        "on-scroll-down": ""
+        "format-full": "󰁹 {capacity}%",
+        "format-icons": ["󰁺", "󰁼", "󰁾", "󰂀", "󰁹"]
+    },
+
+    "pulseaudio": {
+        "format": "󰕾 {volume}%",
+        "format-muted": "VOL mute",
+        "on-click": "pavucontrol"
+    },
+
+    "backlight": {
+        "format": "BRI {percent}%"
+    },
+
+    "idle_inhibitor": {
+        "format": "{icon}",
+        "format-icons": {
+            "activated": "IDLE ON",
+            "deactivated": "IDLE OFF"
+        }
+    },
+
+    "custom/dunst": {
+        "exec": "~/.config/waybar/scripts/dunst-status.sh",
+        "on-click": "dunstctl set-paused toggle && pkill -RTMIN+7 waybar",
+        "interval": "once",
+        "signal": 7,
+        "return-type": "json"
     },
 
     "custom/reading-mode": {
@@ -138,48 +135,12 @@
         "interval": "once",
         "signal": 8,
         "return-type": "json",
-        "on-click": "~/.config/waybar/scripts/reading-mode.sh toggle",
-        "on-scroll-up": "",
-        "on-scroll-down": ""
-    },
-
-    "pulseaudio": {
-        "format": "{icon} {volume}%",
-        "format-muted": "󰝟",
-        "format-icons": {
-            "headphone": "󰋋",
-            "headset": "󰋎",
-            "default": ["󰕿", "󰖀", "󰕾"]
-        },
-        "tooltip-format": "{volume}% • {desc}",
-        "on-click": "pavucontrol",
-        "on-click-right": "pactl set-sink-mute @DEFAULT_SINK@ toggle",
-        "scroll-step": 5
-    },
-
-    "backlight": {
-        "format": "󰃠 {percent}%",
-        "tooltip-format": "{percent}%",
-        "on-scroll-up": "brightnessctl set +5%",
-        "on-scroll-down": "brightnessctl set 5%-"
-    },
-
-    "idle_inhibitor": {
-        "format": "{icon}",
-        "format-icons": {
-            "activated": "󰅶",
-            "deactivated": "󰾪"
-        },
-        "tooltip-format-activated": "Idle inhibitor active",
-        "tooltip-format-deactivated": "Idle inhibitor inactive",
-        "on-scroll-up": "",
-        "on-scroll-down": ""
+        "on-click": "~/.config/waybar/scripts/reading-mode.sh toggle"
     },
 
     "custom/powerprofile": {
         "exec": "~/.config/waybar/scripts/powerprofile.sh",
         "on-click": "~/.config/waybar/scripts/powerprofile.sh pick",
-        "on-click-right": "~/.config/waybar/scripts/powerprofile.sh cycle",
         "interval": 30,
         "signal": 9,
         "return-type": "json"
@@ -187,7 +148,6 @@
 
     "custom/power": {
         "format": "󰐥",
-        "tooltip-text": "Power Menu",
         "on-click": "~/.config/waybar/scripts/power-menu.sh"
     },
 

@@ -1,60 +1,38 @@
 /* ============================================================
-   EVERFOREST HARD DARK — WAYBAR STYLESHEET
+   EVERFOREST HARD DARK — UNIX STATUS LINE
 
-   PALETTE
-   ────────────────────────────────────────────────────────────
-   bg-base:      #272E33   — bar background
-   bg-surface:   #2E383C   — tooltip / elevated surfaces
-   bg-overlay:   #374145   — borders, dividers
-   bg-muted:     #3A464C   — subtle separators
-
-   fg-default:   #D3C6AA   — primary text
-   fg-muted:     #7A8478   — inactive / dimmed
-   fg-subtle:    #525C5A   — disabled / off states
-   fg-dim:       #9DA9A0   — secondary text (window title)
-
-   accent-blue:  #7FBBB3   — clock
-   accent-cyan:  #83C092   — clock hover
-   accent-gold:  #E69875   — active workspace / battery warning
-   accent-purple:#D699B6   — distro icon
-   accent-green: #A7C080   — battery full
-   accent-red:   #E67E80   — urgent / power hover / battery critical
-   accent-sky:   #7FBBB3   — battery charging / plugged
-   fg-warm:      #D3C6AA   — hover states / active text
+   A minimalist, semantic, text-driven status bar inspired by 
+   classic terminal and tmux status lines.
    ============================================================ */
-
-
-/* ── RESET ─────────────────────────────────────────────── */
 
 * {
     font-family: "JetBrainsMono Nerd Font", monospace;
-    font-size: 13px;
+    font-size: 15px;
+    font-weight: 500;
     min-height: 0;
     border: none;
     padding: 0;
     margin: 0;
 }
 
-
-/* ── BAR ────────────────────────────────────────────────── */
-
 window#waybar {
-    background: #1E2326;
-    color: #D3C6AA;
+    background: #1E2326; /* Everforest Bg0 */
+    color: #D3C6AA;      /* Everforest Fg */
     border-bottom: 1px solid #272E33;
 }
 
+/* ── HELPERS ────────────────────────────────────────────── */
+
+#custom-sep {
+    color: #4C565C; /* Muted separator color */
+    padding: 0 6px;
+}
 
 /* ── LEFT ───────────────────────────────────────────────── */
 
 #custom-distro-icon {
-    color: #A7C080;
-    font-size: 18px;
-    padding: 0 14px 0 12px;
-}
-
-#custom-distro-icon:hover {
-    color: #E69875;
+    color: #A7C080; /* Green icon */
+    padding: 0 12px;
 }
 
 #workspaces {
@@ -62,71 +40,36 @@ window#waybar {
 }
 
 #workspaces button {
-    color: #525C5A;
-    font-size: 14px;
-    padding: 0 5px;
+    color: #525C5A; /* Dimmed */
+    padding: 0 6px;
     background: transparent;
-}
-
-#workspaces button:hover {
-    color: #7A8478;
-    background: transparent;
-    box-shadow: none;
 }
 
 #workspaces button.active {
-    color: #A7C080;
+    color: #A7C080; /* Green active */
 }
 
-#workspaces button.urgent {
-    color: #E67E80;
+#workspaces button:hover {
+    box-shadow: none;
+    text-shadow: none;
+    background: transparent;
 }
 
 #window {
-    color: #9DA9A0;
-    font-size: 13px;
-    padding: 0 12px;
-    margin: 0 4px;
-    border-left: 1px solid #374145;
+    color: #9DA9A0; /* Dimmed text */
+    padding-left: 12px;
 }
 
 /* ── CENTER ─────────────────────────────────────────────── */
 
 #clock {
-    color: #7FBBB3;
-    font-family: "JetBrainsMono Nerd Font", monospace;
-    font-size: 14px;
+    color: #7FBBB3; /* Blue/Cyan clock */
     font-weight: bold;
-    padding: 0 20px;
+    padding: 0 24px;
 }
 
-#clock:hover {
-    color: #83C092;
-}
+/* ── RIGHT ──────────────────────────────────────────────── */
 
-
-/* ── RIGHT — Clean Retro Status Line ─────────────────── */
-
-.modules-right {
-    padding-right: 12px;
-}
-
-/* Main groups spacing */
-#battery,
-.group-system,
-.group-power {
-    margin: 0;
-    padding: 0;
-}
-
-/* The new subtle dot separator */
-#custom-sep {
-    color: #525C5A;
-    font-size: 14px;
-    padding: 0 4px;
-}
-
-/* Individual modules - terminal status style */
 #battery,
 #custom-dunst,
 #pulseaudio,
@@ -138,58 +81,23 @@ window#waybar {
 #idle_inhibitor,
 #custom-reading-mode {
     color: #D3C6AA;
-    font-family: "JetBrainsMono Nerd Font", monospace;
-    font-size: 13px;
-    padding: 0 8px;
+    padding: 0 10px;
 }
 
-/* Color accents for a lively retro look */
-#battery.charging { color: #7FBBB3; }
-#pulseaudio       { color: #A7C080; }
-#network          { color: #D699B6; }
-#backlight        { color: #DBBC7F; }
-#custom-power     { color: #E67E80; }
+/* Functional states only */
+#battery.warning, #battery.critical { color: #E67E80; }
+#battery.charging { color: #A7C080; }
 
+#custom-dunst.dnd { color: #525C5A; }
+#custom-dunst.has-notifications { color: #DBBC7F; }
 
+#idle_inhibitor.activated { color: #DBBC7F; }
+#custom-reading-mode.active { color: #DBBC7F; }
 
-/* ── MODULE STATES ──────────────────────────────────────── */
-
-#custom-dunst.has-notifications { color: #D3C6AA; }
-#custom-dunst.dnd               { color: #525C5A; }
-
-#pulseaudio.muted               { color: #525C5A; }
-
-#bluetooth.off                  { color: #525C5A; }
-#bluetooth.disabled             { color: #525C5A; }
-
-#network.disconnected           { color: #525C5A; }
-#network.disabled               { color: #525C5A; }
-
-#battery.warning                { color: #E69875; }
-#battery.critical               { color: #E67E80; }
-#battery.charging               { color: #7FBBB3; }
-#battery.full                   { color: #A7C080; }
-#battery.plugged                { color: #7FBBB3; }
-
-
-/* ── HOVER ──────────────────────────────────────────────── */
-
-#custom-dunst:hover,
-#pulseaudio:hover,
-#bluetooth:hover,
-#network:hover,
-#backlight:hover,
-#idle_inhibitor:hover,
-#battery:hover,
-#custom-reading-mode:hover,
-#custom-powerprofile:hover {
-    color: #D3C6AA;
-}
-
-#custom-power:hover {
+#custom-power {
     color: #E67E80;
+    padding-left: 12px;
 }
-
 
 /* ── TOOLTIP ────────────────────────────────────────────── */
 
@@ -198,11 +106,5 @@ tooltip {
     border: 1px solid #4C565C;
     color: #D3C6AA;
     padding: 8px 12px;
-    font-size: 13px;
     border-radius: 0px;
-}
-
-tooltip label,
-tooltip * {
-    color: #D3C6AA;
 }

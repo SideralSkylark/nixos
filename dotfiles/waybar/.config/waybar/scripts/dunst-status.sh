@@ -9,17 +9,20 @@ TEXT="$ICON"
 
 if [[ "$PAUSED" == "true" ]]; then
     CLASS="dnd"
-    ICON="󰂛"
+    ICON="DND ON"
 
     if (( COUNT > 0 )); then
-        TEXT="$ICON $COUNT"
+        TEXT="$ICON ($COUNT)"
     else
         TEXT="$ICON"
     fi
 else
+    ICON="NOTIF ON"
     if (( COUNT > 0 )); then
         CLASS="has-notifications"
-        TEXT="$ICON $COUNT"
+        TEXT="$ICON ($COUNT)"
+    else
+        TEXT="$ICON"
     fi
 fi
 

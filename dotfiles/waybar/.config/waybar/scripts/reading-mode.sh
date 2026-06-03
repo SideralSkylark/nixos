@@ -26,9 +26,9 @@ case "$1" in
     toggle) toggle ;;
     display|"")
         if is_manual_active; then
-            printf '{"text":"󰃞","tooltip":"Reading Mode: Focus Override (%sK)"}\n' "$OVERRIDE_TEMP"
+            printf '{"text":"READ ON","tooltip":"Reading Mode: Focus Override (%sK)"}\n' "$OVERRIDE_TEMP"
         else
-            printf '{"text":"󰃟","tooltip":"Reading Mode: Nix Schedule Active"}\n'
+            printf '{"text":"READ OFF","tooltip":"Reading Mode: Nix Schedule Active"}\n'
         fi
         ;;
 esac
