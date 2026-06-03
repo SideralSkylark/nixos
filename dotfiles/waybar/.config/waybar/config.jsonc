@@ -21,14 +21,15 @@
     "hyprland/workspaces": {
         "disable-scroll": true,
         "all-outputs": true,
-        "format": "{icon}",
         "persistent-workspaces": {
             "*": 5
         },
+        "show-special": false,
+        "format": "{name}",
         "format-icons": {
-            "default": "󰄰",
-            "active": "󰄯",
-            "urgent": "󰀨"
+            "active": "[{name}]",
+            "urgent": "[!]",
+            "default": "{name}"
         }
     },
 
@@ -81,7 +82,7 @@
         "format-disconnected": "WIF off",
         "format-disabled": "WIF off",
         "tooltip-format": "{ipaddr}",
-        "on-click": "nmcli radio wifi $(nmcli radio wifi | grep -q 'enabled' && echo 'off' || echo 'on')",
+        "on-click": "~/.config/waybar/scripts/wifi-toggle.sh",
         "on-click-right": "nm-connection-editor"
     },
 
@@ -90,7 +91,7 @@
         "format-disabled": "BLU off",
         "format-connected": "󰂱 {num_connections}",
         "tooltip-format": "{controller_alias}\n{device_enumerate}",
-        "on-click": "bluetoothctl show | grep -q 'Powered: yes' && bluetoothctl power off || bluetoothctl power on",
+        "on-click": "~/.config/waybar/scripts/bl-toggle.sh",
         "on-click-right": "kitty --title bluetui -e bluetui"
     },
 

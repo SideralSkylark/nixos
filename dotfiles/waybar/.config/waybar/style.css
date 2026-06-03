@@ -41,12 +41,16 @@ window#waybar {
 
 #workspaces button {
     color: #525C5A; /* Dimmed */
-    padding: 0 6px;
+    padding: 0 4px;
     background: transparent;
 }
 
 #workspaces button.active {
-    color: #A7C080; /* Green active */
+    color: #A7C080;
+}
+
+#workspaces button.urgent {
+    color: #E67E80;
 }
 
 #workspaces button:hover {
