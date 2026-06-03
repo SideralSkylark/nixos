@@ -90,13 +90,13 @@ window#waybar {
     border-left: 1px solid #374145;
 }
 
-
 /* ── CENTER ─────────────────────────────────────────────── */
 
 #clock {
     color: #7FBBB3;
-    font-size: 13px;
-    letter-spacing: 2px;
+    font-family: "JetBrainsMono Nerd Font", monospace;
+    font-size: 14px;
+    font-weight: bold;
     padding: 0 20px;
 }
 
@@ -105,8 +105,28 @@ window#waybar {
 }
 
 
-/* ── RIGHT — base style for all modules ─────────────────── */
+/* ── RIGHT — Clean Retro Status Line ─────────────────── */
 
+.modules-right {
+    padding-right: 12px;
+}
+
+/* Main groups spacing */
+#battery,
+.group-system,
+.group-power {
+    margin: 0;
+    padding: 0;
+}
+
+/* The new subtle dot separator */
+#custom-sep {
+    color: #525C5A;
+    font-size: 14px;
+    padding: 0 4px;
+}
+
+/* Individual modules - terminal status style */
 #battery,
 #custom-dunst,
 #pulseaudio,
@@ -117,19 +137,19 @@ window#waybar {
 #custom-powerprofile,
 #idle_inhibitor,
 #custom-reading-mode {
-    color: #7A8478;
+    color: #D3C6AA;
+    font-family: "JetBrainsMono Nerd Font", monospace;
     font-size: 13px;
-    padding: 0 10px;
-    background: transparent;
+    padding: 0 8px;
 }
 
-#custom-dunst,
-#idle_inhibitor,
-#battery {
-    color: #7A8478;
-    padding: 0 12px;
-    border-left: 1px solid #374145;
-}
+/* Color accents for a lively retro look */
+#battery.charging { color: #7FBBB3; }
+#pulseaudio       { color: #A7C080; }
+#network          { color: #D699B6; }
+#backlight        { color: #DBBC7F; }
+#custom-power     { color: #E67E80; }
+
 
 
 /* ── MODULE STATES ──────────────────────────────────────── */

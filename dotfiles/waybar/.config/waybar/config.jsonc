@@ -8,7 +8,12 @@
     "margin-right": 0,
     "modules-left": ["custom/distro-icon", "hyprland/workspaces", "hyprland/window"],
     "modules-center": ["clock"],
-    "modules-right": ["battery", "group/system", "group/power"],
+    "modules-right": ["battery", "custom/sep", "group/system", "custom/sep", "group/power"],
+
+    "custom/sep": {
+        "format": "·",
+        "tooltip": false
+    },
 
     "custom/distro-icon": {
         "exec": "~/.config/waybar/scripts/distro-icon.sh",
