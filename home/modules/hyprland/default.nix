@@ -7,6 +7,7 @@
   ];
 
   wayland.manageKittyPackage = true;
+  wayland.manageWaybarPackage = true;
   wayland.manageBrightnessctl = true;
   wayland.manageClipboard = true;
 
