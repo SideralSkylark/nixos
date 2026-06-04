@@ -189,32 +189,26 @@ in
 {
   imports = [
     ./shell.nix
-    ../wayland/fuzzel.nix
-    ../wayland/kitty.nix
-    ../wayland/waybar.nix
-    ../wayland/dunst.nix
-    ../wayland/mpv.nix
+    ../wayland
   ];
+  wayland.manageWaybarPackage = true;
+  wayland.manageKittyPackage = false;
+  wayland.manageBrightnessctl = false;
+  wayland.manageClipboard = false;
 
   home.packages = with pkgs; [
     projector
     screenshot
-    lazydocker # TUI for docker
-    lazygit # TUI for git
-    bruno # Open-source API client
-    bluetui
-    nerd-fonts.jetbrains-mono
     wbg # Wallpaper setter for Wayland
     nwg-displays # GUI for monitor configuration
     pavucontrol # PulseAudio volume control (GUI)
-    grim # Wayland screenshot tool
-    imv
-    slurp # Select a region in a Wayland compositor
-    wl-clipboard # Command-line copy/paste utilities for Wayland
-    cliphist # Wayland clipboard manager
-    yazi # Terminal file manager
+
     nodejs_24
     google-java-format
+    nerd-fonts.jetbrains-mono
+    lazydocker # TUI for docker
+    lazygit # TUI for git
+    bruno # Open-source API client
   ];
 
   programs.swappy = {

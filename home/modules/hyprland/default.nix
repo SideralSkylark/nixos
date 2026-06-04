@@ -21,6 +21,7 @@
     nixvim.enable = false;
     swaylock.enable = false;
     hyprlock.enable = false;
+    fuzzel.enable = false;
   };
 
   gtk.enable = true;

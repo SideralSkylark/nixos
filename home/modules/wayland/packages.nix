@@ -18,6 +18,7 @@
       grim
       slurp
       swappy
+      bluetui
       imv
       cliphist
       yazi
