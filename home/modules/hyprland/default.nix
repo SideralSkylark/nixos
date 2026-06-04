@@ -2,7 +2,9 @@
   imports = [
     ../wayland
     ./packages.nix
+    ./scripts.nix
     ./services.nix
+    ./swappy.nix
     ./hyprlock.nix
   ];
 
