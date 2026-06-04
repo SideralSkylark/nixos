@@ -9,6 +9,8 @@
     ./waybar.nix
   ];
 
-  options.wayland.manageKittyPackage = lib.mkEnableOption "Install kitty via Nix";
-  options.wayland.manageWaybarPackage = lib.mkEnableOption "Install waybar via Nix";
+  options.wayland = {
+    manageKittyPackage = lib.mkEnableOption "Install kitty via Nix";
+    manageWaybarPackage = lib.mkEnableOption "Install waybar via Nix";
+  };
 }
