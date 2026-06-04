@@ -6,6 +6,10 @@
     ./hyprlock.nix
   ];
 
+  wayland.manageKittyPackage = true;
+  wayland.manageBrightnessctl = true;
+  wayland.manageClipboard = true;
+
   stylix.targets = {
     dunst.enable = false;
     gtk.enable = true;

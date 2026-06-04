@@ -1,18 +1,27 @@
-{ pkgs, ... }:
 {
-  home.packages = with pkgs; [
-    kitty # Terminal emulator
-    pamixer # PulseAudio mixer for CLI
-    playerctl # Controller for media players
-    brightnessctl # Tool to read and control device brightness
-    grim # Wayland screenshot tool
-    slurp # Select a region in a Wayland compositor
-    swappy # Wayland native snapshot editing tool
-    imv # Image viewer for Wayland
-    wl-clipboard # Command-line copy/paste utilities for Wayland
-    cliphist # Wayland clipboard manager
-    waybar # Highly customizable Wayland bar
-    fuzzel # Wayland-native application launcher
-    yazi # Terminal file manager
-  ];
+  pkgs,
+  lib,
+  config,
+  ...
+}:
+{
+  options.wayland = {
+    manageBrightnessctl = lib.mkEnableOption "Install brightnessctl via Nix";
+    manageClipboard = lib.mkEnableOption "Install clipboard tools via Nix";
+  };
+
+  config.home.packages =
+    with pkgs;
+    [
+      pamixer
+      playerctl
+      grim
+      slurp
+      swappy
+      imv
+      cliphist
+      yazi
+    ]
+    ++ lib.optionals config.wayland.manageBrightnessctl [ brightnessctl ]
+    ++ lib.optionals config.wayland.manageClipboard [ wl-clipboard ];
 }
