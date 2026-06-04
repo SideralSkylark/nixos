@@ -4,12 +4,12 @@
     qt5.qtwayland # Wayland support for Qt 5
     qt6.qtwayland # Wayland support for Qt 6
     gtk3 # GTK 3 toolkit
-    mate.engrampa # Archive manager (GUI)
+    engrampa # Archive manager (GUI)
   ];
 
   programs.thunar = {
     enable = true;
-    plugins = with pkgs.xfce; [
+    plugins = with pkgs; [
       thunar-volman # auto-mount drives
       thunar-archive-plugin # context menu for zip/tar/etc
     ];
