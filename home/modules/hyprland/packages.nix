@@ -1,6 +1,8 @@
 { pkgs, ... }:
 {
   home.packages = with pkgs; [
+    hypridle
+    hyprsunset
     wbg # Wallpaper setter for Wayland
     nwg-displays # GUI for monitor configuration
     pavucontrol # PulseAudio volume control (GUI)
