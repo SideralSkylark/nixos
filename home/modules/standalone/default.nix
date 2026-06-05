@@ -3,6 +3,7 @@
   imports = [
     ./shell.nix
     ../hyprland/scripts.nix
+    ../hyprland/swappy.nix
     ../wayland
   ];
   wayland.manageWaybarPackage = true;
