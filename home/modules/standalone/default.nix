@@ -17,6 +17,7 @@
     pavucontrol # PulseAudio volume control (GUI)
     jq
     nodejs_24
+    jdk25
     google-java-format
     nerd-fonts.jetbrains-mono
     lazydocker # TUI for docker
