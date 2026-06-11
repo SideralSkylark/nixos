@@ -26,28 +26,31 @@
         };
       };
 
-      ts_ls = {
+      vtsls = {
         enable = true;
-        package = pkgs.typescript-language-server;
+        package = pkgs.vtsls;
+
         filetypes = [
           "typescript"
           "typescriptreact"
           "javascript"
           "javascriptreact"
-          "vue" # keep this
+          "vue"
         ];
-        extraOptions = {
-          init_options = lib.nixvim.mkRaw ''
-            {
-              plugins = {
+
+        settings = {
+          vtsls = {
+            tsserver = {
+              globalPlugins = [
                 {
-                  name = "@vue/typescript-plugin",
-                  location = "${pkgs.vue-language-server}/lib/node_modules/@vue/language-server",
-                  languages = { "vue" },
-                },
-              },
-            }
-          '';
+                  name = "@vue/typescript-plugin";
+                  location = "${pkgs.vue-language-server}/lib/node_modules/@vue/language-server";
+                  languages = [ "vue" ];
+                  configNamespace = "typescript";
+                }
+              ];
+            };
+          };
         };
       };
 
