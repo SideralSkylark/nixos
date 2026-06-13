@@ -73,3 +73,10 @@ home-manager switch --flake .#skylark
 
 ### Editor
 ![Editor](assets/screenshots/editor.png)
+
+--- 
+
+## Todo 
+- fix waybar power script options (logout dosent work at the moment)
+- clean up old hyprland configs 
+
