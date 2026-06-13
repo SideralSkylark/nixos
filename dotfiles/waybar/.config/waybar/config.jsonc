@@ -27,15 +27,15 @@
         "show-special": false,
         "format": "{name}",
         "format-icons": {
-            "active": "[{name}]",
-            "urgent": "[!]",
+            "active": "{name}",
+            "urgent": "!",
             "default": "{name}"
         }
     },
 
     "hyprland/window": {
         "format": "{}",
-        "max-length": 45,
+        "max-length": 30,
         "icon": false,
         "separate-outputs": true,
         "rewrite": {
@@ -52,8 +52,8 @@
 
     "clock": {
         "interval": 60,
-        "format": "{:%H:%M}",
-        "format-alt": "| {:%a %d %b} |",
+        "format": "{:%a %H:%M}",
+        "format-alt": "{:%a %d %b}",
         "tooltip-format": "<tt><small>{calendar}</small></tt>",
         "calendar": {
             "mode": "year",
@@ -81,7 +81,7 @@
         "format-ethernet": "󰈀 eth",
         "format-disconnected": "WIF off",
         "format-disabled": "WIF off",
-        "tooltip-format": "{ipaddr}",
+        "tooltip-format": "{ipaddr}\n↓ {bandwidthDownBytes} ↑ {bandwidthUpBytes} ",
         "on-click": "~/.config/waybar/scripts/wifi-toggle.sh",
         "on-click-right": "nm-connection-editor"
     },
@@ -135,22 +135,6 @@
         "return-type": "json"
     },
 
-    "custom/reading-mode": {
-        "exec": "~/.config/waybar/scripts/reading-mode.sh",
-        "interval": "once",
-        "signal": 8,
-        "return-type": "json",
-        "on-click": "~/.config/waybar/scripts/reading-mode.sh toggle"
-    },
-
-    "custom/powerprofile": {
-        "exec": "~/.config/waybar/scripts/powerprofile.sh",
-        "on-click": "~/.config/waybar/scripts/powerprofile.sh pick",
-        "interval": 30,
-        "signal": 9,
-        "return-type": "json"
-    },
-
     "custom/power": {
         "format": "󰐥",
         "on-click": "~/.config/waybar/scripts/power-menu.sh"
@@ -159,12 +143,11 @@
     "group/system": {
         "orientation": "horizontal",
         "modules": [
-            "custom/dunst",
-            "pulseaudio",
-            "backlight",
             "network",
             "bluetooth",
-            "custom/reading-mode"
+            "pulseaudio",
+            "backlight",
+            "custom/dunst",
         ]
     },
 
@@ -172,7 +155,6 @@
         "orientation": "horizontal",
         "modules": [
             "idle_inhibitor",
-            "custom/powerprofile",
             "custom/power"
         ]
     }

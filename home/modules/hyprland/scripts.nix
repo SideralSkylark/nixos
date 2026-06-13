@@ -205,5 +205,13 @@ in
       source = ../../../dotfiles/hyprland/.config/hypr/scripts/brightness.sh;
       executable = true;
     };
+    "hypr/scripts/reading-mode" = {
+      source = ../../../dotfiles/hyprland/.config/hypr/scripts/reading_mode.sh;
+      executable = true;
+    };
+    "hypr/scripts/dunst-history" = {
+      source = ../../../dotfiles/hyprland/.config/hypr/scripts/dunst-history.sh;
+      executable = true;
+    };
   };
 }

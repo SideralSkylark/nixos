@@ -3,27 +3,17 @@
 PAUSED=$(dunstctl is-paused)
 COUNT=$(dunstctl count waiting)
 
-CLASS="idle"
-ICON="󰂚"
-TEXT="$ICON"
-
 if [[ "$PAUSED" == "true" ]]; then
     CLASS="dnd"
-    ICON="DND ON"
-
-    if (( COUNT > 0 )); then
-        TEXT="$ICON ($COUNT)"
-    else
-        TEXT="$ICON"
-    fi
+    TEXT="DND"
+    [[ $COUNT -gt 0 ]] && TEXT="DND ($COUNT)"
 else
-    ICON="NOTIF ON"
+    CLASS="idle"
+    TEXT="󰂚"
     if (( COUNT > 0 )); then
         CLASS="has-notifications"
-        TEXT="$ICON ($COUNT)"
-    else
-        TEXT="$ICON"
+        TEXT="󰂚 $COUNT"
     fi
 fi
 
-echo "{\"text\":\"$TEXT\",\"class\":\"$CLASS\",\"tooltip\":\"Notifications: $COUNT\"}"
+echo "{\"text\":\"$TEXT\",\"class\":\"$CLASS\",\"tooltip\":\"$(dunstctl count waiting) waiting\"}"

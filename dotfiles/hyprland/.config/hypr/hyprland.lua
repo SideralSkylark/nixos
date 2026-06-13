@@ -136,7 +136,7 @@ hl.bind("SUPER + Print", hl.dsp.exec_cmd("screenshot edit"))
 hl.bind("SUPER + return", hl.dsp.exec_cmd(terminal))
 hl.bind("SUPER + space", hl.dsp.exec_cmd(menu))
 hl.bind("SUPER + F", hl.dsp.exec_cmd(fileManager))
-hl.bind("SUPER + SHIFT + N", hl.dsp.exec_cmd("/home/skylark/.config/waybar/scripts/reading-mode.sh toggle"))
+hl.bind("SUPER + SHIFT + N", hl.dsp.exec_cmd("/home/skylark/.config/hypr/scripts/reading-mode toggle"))
 hl.bind("SUPER + SHIFT + ESCAPE", hl.dsp.exec_cmd("hyprlock"))
 hl.bind("SUPER + W", hl.dsp.exec_cmd("~/.config/hypr/scripts/random-wallpaper"))
 
@@ -144,7 +144,7 @@ hl.bind("SUPER + W", hl.dsp.exec_cmd("~/.config/hypr/scripts/random-wallpaper"))
 hl.bind("SUPER + V", hl.dsp.exec_cmd("cliphist list | fuzzel --dmenu | cliphist decode | wl-copy"))
 
 -- Notifications
-hl.bind("SUPER + N", hl.dsp.exec_cmd("~/.config/waybar/scripts/dunst-history.sh"))
+hl.bind("SUPER + N", hl.dsp.exec_cmd("~/.config/hypr/scripts/dunst-history"))
 
 -- Window management
 hl.bind("SUPER + Q", hl.dsp.window.close())

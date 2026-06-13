@@ -1,10 +1,3 @@
-/* ============================================================
-   EVERFOREST HARD DARK — UNIX STATUS LINE
-
-   A minimalist, semantic, text-driven status bar inspired by 
-   classic terminal and tmux status lines.
-   ============================================================ */
-
 * {
     font-family: "JetBrainsMono Nerd Font", monospace;
     font-size: 15px;
@@ -81,9 +74,7 @@ window#waybar {
 #network,
 #backlight,
 #custom-power,
-#custom-powerprofile,
-#idle_inhibitor,
-#custom-reading-mode {
+#idle_inhibitor {
     color: #D3C6AA;
     padding: 0 10px;
 }
