@@ -11,6 +11,8 @@
   wayland.manageBrightnessctl = false;
   wayland.manageClipboard = false;
 
+  fonts.fontconfig.enable = true;
+
   home.packages = with pkgs; [
     wbg # Wallpaper setter for Wayland
     nwg-displays # GUI for monitor configuration
