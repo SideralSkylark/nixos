@@ -77,7 +77,6 @@ home-manager switch --flake .#skylark
 --- 
 
 ## Todo 
-- fix waybar power script options (logout dosent work at the moment)
 - mini files should keep track of were in the dir tree i am when 
 jumping arround
 - clean up old hyprland configs 

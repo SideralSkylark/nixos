@@ -13,5 +13,5 @@ case "$CHOICE" in
   *Shutdown) systemctl poweroff ;;
   *Reboot)   systemctl reboot ;;
   *Suspend)  systemctl suspend ;;
-  *Logout)   hyprctl dispatch exit ;;
+  *Logout) loginctl terminate-user "$USER" ;;
 esac
