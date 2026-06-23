@@ -77,5 +77,6 @@ home-manager switch --flake .#skylark
 --- 
 
 ## Todo 
-- clean up old hyprland configs 
+- better nvim experience whatever that means
+- consider removing tools that i didnot use in the past 3 months from the config
 
