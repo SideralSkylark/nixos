@@ -7,6 +7,8 @@
     # ---- Nix (standalone install fix) ----
     export PATH="$HOME/.nix-profile/bin:$PATH"
 
+    export PATH="$HOME/.local/bin:$PATH"
+
     # Home Manager session vars
     if [ -e "$HOME/.nix-profile/etc/profile.d/hm-session-vars.sh" ]; then
       . "$HOME/.nix-profile/etc/profile.d/hm-session-vars.sh"
