@@ -77,7 +77,5 @@ home-manager switch --flake .#skylark
 --- 
 
 ## Todo 
-- mini files should keep track of were in the dir tree i am when 
-jumping arround
 - clean up old hyprland configs 
 

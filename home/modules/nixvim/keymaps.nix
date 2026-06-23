@@ -3,6 +3,15 @@
     {
       mode = "n";
       key = "<leader>e";
+      action = ''<cmd>lua local p = vim.api.nvim_buf_get_name(0); require("mini.files").open(p ~= "" and p or vim.uv.cwd(), true)<CR>'';
+      options = {
+        desc = "Open file explorer (buffer dir)";
+        silent = true;
+      };
+    }
+    {
+      mode = "n";
+      key = "<leader>E";
       action = "<cmd>lua MiniFiles.open()<CR>";
       options = {
         desc = "Open file explorer";
