@@ -132,6 +132,9 @@ hl.bind("XF86MonBrightnessDown", hl.dsp.exec_cmd("~/.config/hypr/scripts/brightn
 hl.bind("Print", hl.dsp.exec_cmd("screenshot screen"))
 hl.bind("SUPER + Print", hl.dsp.exec_cmd("screenshot edit"))
 
+-- power profile toggle
+hl.bind("SUPER + SHIFT + P", hl.dsp.exec_cmd("~/.config/hypr/scripts/power-toggle"))
+
 -- Launch
 hl.bind("SUPER + return", hl.dsp.exec_cmd(terminal))
 hl.bind("SUPER + space", hl.dsp.exec_cmd(menu))

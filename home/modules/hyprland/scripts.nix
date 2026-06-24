@@ -197,6 +197,10 @@ in
       source = ../../../dotfiles/hyprland/.config/hypr/scripts/random-wallpaper.sh;
       executable = true;
     };
+    "hypr/scripts/power-toggle" = {
+      source = ../../../dotfiles/hyprland/.config/hypr/scripts/power-toggle.sh;
+      executable = true;
+    };
     "hypr/scripts/audio" = {
       source = ../../../dotfiles/hyprland/.config/hypr/scripts/audio.sh;
       executable = true;
