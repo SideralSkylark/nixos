@@ -1,3 +1,0 @@
-{
-  time.timeZone = "Africa/Maputo";
-}
