@@ -78,6 +78,8 @@ home-manager switch --flake .#skylark
 
 ## Todo 
 - better nvim experience whatever that means
-- consider removing tools that i didnot use in the past 3 months from the config
+- consider removing tools that i didnot use in the past 3 months from the config:
+    - lazydocker: No real benefit for a tui over cli commands
+    - gemini CLI
 
 
