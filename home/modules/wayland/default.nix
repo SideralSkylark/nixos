@@ -3,14 +3,14 @@
   imports = [
     ./dunst.nix
     ./packages.nix
-    ./kitty.nix
+    ./foot.nix
     ./fuzzel.nix
     ./mpv.nix
     ./waybar.nix
   ];
 
   options.wayland = {
-    manageKittyPackage = lib.mkEnableOption "Install kitty via Nix";
+    manageFootPackage = lib.mkEnableOption "Install foot via Nix";
     manageWaybarPackage = lib.mkEnableOption "Install waybar via Nix";
   };
 }

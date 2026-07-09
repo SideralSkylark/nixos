@@ -17,7 +17,7 @@ Hosts select from reusable roles to ensure lean installations:
 ### User Layers (`home/`)
 Modular Home Manager environment:
 - **Core**: Fundamental CLI tools, Git, Starship, and XDG directories.
-- **Wayland**: Compositor-agnostic utilities (Kitty, Waybar, Dunst, Fuzzel).
+- **Wayland**: Compositor-agnostic utilities (Foot, Waybar, Dunst, Fuzzel).
 - **Compositor**: Hyprland-specific logic and scripts.
 - **Nixvim**: Modular Neovim configuration via `nixvim`.
 - **Standalone**: Desktop-agnostic tools for non-NixOS systems.
@@ -26,7 +26,7 @@ Modular Home Manager environment:
 
 ## Key Features
 
-- **Theming**: **Stylix** manages the base color palette (Everforest) and fonts centrally. Manual control is retained for Dunst, Kitty, Fuzzel, and Nixvim for granular styling.
+- **Theming**: **Stylix** manages the base color palette (Everforest) and fonts centrally. Manual control is retained for Dunst, Foot, Fuzzel, and Nixvim for granular styling.
 - **Declarative Editor**: Neovim is configured via **nixvim**, split into logical modules (`plugins.nix`, `lsp.nix`, etc.).
 - **Hybrid Configuration**: Core system state is managed by Nix, while specific application styles (Waybar CSS, Hyprland scripts) are symlinked from `dotfiles/` for portability.
 - **Boot Management**: 

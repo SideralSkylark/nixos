@@ -8,7 +8,7 @@
     ../wayland
   ];
   wayland.manageWaybarPackage = true;
-  wayland.manageKittyPackage = false;
+  wayland.manageFootPackage = false;
   wayland.manageBrightnessctl = false;
   wayland.manageClipboard = false;
 

@@ -8,7 +8,7 @@
     ./hyprlock.nix
   ];
 
-  wayland.manageKittyPackage = true;
+  wayland.manageFootPackage = true;
   wayland.manageWaybarPackage = true;
   wayland.manageBrightnessctl = true;
   wayland.manageClipboard = true;
@@ -19,7 +19,7 @@
     gtk.colors.enable = true;
     qt.enable = true;
     hyprland.enable = true;
-    kitty.enable = false;
+    foot.enable = false;
     nixvim.enable = false;
     swaylock.enable = false;
     hyprlock.enable = false;

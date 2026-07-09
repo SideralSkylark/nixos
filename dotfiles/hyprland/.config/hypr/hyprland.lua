@@ -1,7 +1,7 @@
 require("startup")
 
 -- ── PROGRAMS ────────────────────────────────────────────────
-local terminal    = "kitty"
+local terminal    = "footclient || foot"
 local menu        = "fuzzel"
 local fileManager = "thunar"
 local mainMod     = "SUPER"
@@ -25,7 +25,6 @@ hl.config({
 local colors = {
     active_border   = { colors = { "rgba(A7C080dd)" } },
     inactive_border = { colors = { "rgba(3A464Caa)" } },
-    kitty_border    = { colors = { "rgba(A7C080ff)", "rgba(83C092ff)" }, angle = 90 },
 }
 
 -- ── GENERAL ─────────────────────────────────────────────────

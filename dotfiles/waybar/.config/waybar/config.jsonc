@@ -92,7 +92,7 @@
         "format-connected": "󰂱 {num_connections}",
         "tooltip-format": "{controller_alias}\n{device_enumerate}",
         "on-click": "~/.config/waybar/scripts/bl-toggle.sh",
-        "on-click-right": "kitty --title bluetui -e bluetui"
+        "on-click-right": "footclient -T bluetui bluetui || foot -T bluetui bluetui"
     },
 
 

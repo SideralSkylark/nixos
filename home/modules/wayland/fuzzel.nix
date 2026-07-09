@@ -7,7 +7,7 @@
         font = "JetBrainsMono Nerd Font Mono:size=14";
         icon-theme = "Papirus-Dark";
         icons-enabled = true;
-        terminal = "kitty";
+        terminal = "footclient";
         layer = "overlay";
         width = 40;
         lines = 8;
