@@ -82,7 +82,7 @@
         "format-disconnected": "WIF off",
         "format-disabled": "WIF off",
         "tooltip-format": "{ipaddr}\n↓ {bandwidthDownBytes} ↑ {bandwidthUpBytes} ",
-        "on-click": "~/.config/waybar/scripts/wifi-toggle.sh",
+        "on-click": "footclient -T nmtui nmtui",
         "on-click-right": "nm-connection-editor"
     },
 
