@@ -1,54 +1,39 @@
 "$schema" = 'https://starship.rs/config-schema.json'
-format = """
-[](fg:surface0)\
-$directory\
-[](fg:surface0 bg:green)\
-$git_branch\
-$git_status\
-[](fg:green)\
-$line_break$character
-"""
-palette = 'everforest'
 
-[palettes.everforest]
-text     = "#D3C6AA"
-mantle   = "#1E2326"
-surface0 = "#272E33"
-green    = "#A7C080"
-teal     = "#83C092"
-red      = "#E67E80"
-blue     = "#7FBBB3"
-accent1  = "#E69875"
-accent2  = "#DBBC7F"
-
-[directory]
-style             = "fg:text bg:surface0"
-format            = "[ $path ]($style)"
-truncation_length = 3
-truncation_symbol = ".../"
-
-[git_branch]
-symbol = ""
-style  = "bg:green"
-format = '[[ $symbol $branch ](fg:mantle bg:green)]($style)'
-
-[git_status]
-style  = "bg:green"
-format = '[[$all_status$ahead_behind ](fg:mantle bg:green)]($style)'
-
-[c]
-format = ''
-[rust]
-format = ''
-[golang]
-format = ''
-[python]
-format = ''
-[docker_context]
-format = ''
-[line_break]
-disabled = false
+add_newline     = true
+command_timeout = 500
+format          = "[$directory$git_branch$git_status$cmd_duration]($style)$character"
 
 [character]
-success_symbol = '[❯](bold fg:green)'
-error_symbol   = '[❯](bold fg:red)'
+success_symbol = "[❯](bold cyan)"
+error_symbol   = "[✗](bold cyan)"
+
+[directory]
+style             = "bold cyan"
+truncation_length = 2
+truncation_symbol = "…/"
+repo_root_style   = "bold cyan"
+repo_root_format  = "[$repo_root]($repo_root_style)[$path]($style)[$read_only]($read_only_style) "
+
+[git_branch]
+format = "[$branch]($style) "
+style  = "italic cyan"
+
+[git_status]
+format     = '[$all_status$ahead_behind]($style)'
+style      = "cyan"
+ahead      = "⇡${count} "
+diverged   = "⇕⇡${ahead_count}⇣${behind_count} "
+behind     = "⇣${count} "
+conflicted = " "
+up_to_date = "✓ "
+untracked  = "? "
+modified   = " "
+stashed    = ""
+staged     = ""
+renamed    = ""
+deleted    = ""
+
+[cmd_duration]
+format = "[$duration]($style) "
+style  = "yellow"

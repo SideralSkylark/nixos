@@ -28,7 +28,7 @@
 
   xdg.configFile = {
     "fastfetch/config.jsonc".source = ../dotfiles/fastfetch/.config/fastfetch/config.jsonc;
-    "starship/starship.toml".source = ../dotfiles/starship/.conf/starship.toml;
+    "starship.toml".source = ../dotfiles/starship/.conf/starship.toml;
   };
 
   programs.git = {
@@ -62,6 +62,10 @@
       VISUAL = "nvim";
       EDITOR = "nvim";
     };
+
+    initExtra = ''
+      set -o vi
+    '';
   };
 
   programs.starship.enable = true;
