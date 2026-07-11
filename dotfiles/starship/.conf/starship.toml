@@ -6,7 +6,7 @@ format          = "[$directory$git_branch$git_status$cmd_duration]($style)$chara
 
 [character]
 success_symbol = "[❯](bold cyan)"
-error_symbol   = "[✗](bold cyan)"
+error_symbol   = "[❯](bold red)"
 
 [directory]
 style             = "bold cyan"
@@ -21,7 +21,7 @@ style  = "italic cyan"
 
 [git_status]
 format     = '[$all_status$ahead_behind]($style)'
-style      = "cyan"
+style      = "bold cyan"
 ahead      = "⇡${count} "
 diverged   = "⇕⇡${ahead_count}⇣${behind_count} "
 behind     = "⇣${count} "
