@@ -9,7 +9,6 @@
     docker-compose # Multi-container orchestration
     vscode # Visual Studio Code editor
     gemini-cli # Gemini AI CLI tool
-    lazydocker # TUI for docker
     lazygit # TUI for git
     bruno # Open-source API client (Postman alternative)
     jdk21_headless # Java Development Kit 21
