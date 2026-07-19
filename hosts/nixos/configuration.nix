@@ -3,6 +3,7 @@
     ../../modules
     ../../modules/role/hyprland
     ../../modules/role/gaming
+    ../../modules/role/dev
     ./hardware-configuration.nix
   ];
 
