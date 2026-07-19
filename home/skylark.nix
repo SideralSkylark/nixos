@@ -28,7 +28,6 @@
 
   xdg.configFile = {
     "fastfetch/config.jsonc".source = ../dotfiles/fastfetch/.config/fastfetch/config.jsonc;
-    "starship.toml".source = ../dotfiles/starship/.conf/starship.toml;
   };
 
   programs.git = {
@@ -68,7 +67,48 @@
     '';
   };
 
-  programs.starship.enable = true;
+  programs.starship = {
+    enable = true;
+
+    settings = {
+      "$schema" = "https://starship.rs/config-schema.json";
+
+      add_newline = true;
+      command_timeout = 500;
+      format = "[$directory$git_branch$git_status$cmd_duration]($style)$character";
+
+      character = {
+        success_symbol = "[❯](bold cyan)";
+        error_symbol = "[❯](bold red)";
+      };
+
+      directory = {
+        style = "bold cyan";
+        truncation_length = 2;
+        truncation_symbol = "…/";
+        repo_root_style = "bold cyan";
+        repo_root_format = "[$repo_root]($repo_root_style)[$path]($style)[$read_only]($read_only_style) ";
+      };
+
+      git_branch = {
+        format = "[$branch]($style) ";
+        style = "italic cyan";
+      };
+
+      git_status = {
+        format = "[$all_status$ahead_behind]($style)";
+        style = "bold cyan";
+        ahead = "⇡\${count} ";
+        diverged = "⇕⇡\${ahead_count}⇣\${behind_count} ";
+        behind = "⇣\${count} ";
+      };
+
+      cmd_duration = {
+        format = "[$duration]($style) ";
+        style = "yellow";
+      };
+    };
+  };
 
   programs.zoxide.enable = true;
 }
