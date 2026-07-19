@@ -81,5 +81,6 @@ home-manager switch --flake .#skylark
 - consider removing tools that i didnot use in the past 3 months from the config:
     - lazydocker: No real benefit for a tui over cli commands
     - gemini CLI
+    - update java wrapper
 
 

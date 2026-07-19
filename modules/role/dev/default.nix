@@ -7,6 +7,7 @@
 
   environment.systemPackages = with pkgs; [
     docker-compose # Multi-container orchestration
+    android-tools
     vscode # Visual Studio Code editor
     gemini-cli # Gemini AI CLI tool
     lazygit # TUI for git
