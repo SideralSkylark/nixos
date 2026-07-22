@@ -8,7 +8,6 @@
     hypridle
     hyprsunset
     xdg-desktop-portal-hyprland # Hyprland-specific XDG portal
-    brave # Web browser
     firefox # Web browser
     librewolf # Privacy-focused web browser
     obsidian # Markdown-based knowledge base

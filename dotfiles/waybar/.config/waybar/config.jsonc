@@ -83,7 +83,7 @@
         "format-disabled": "WIF off",
         "tooltip-format": "{ipaddr}\n↓ {bandwidthDownBytes} ↑ {bandwidthUpBytes} ",
         "on-click": "footclient -T nmtui nmtui",
-        "on-click-right": "nm-connection-editor"
+        "on-click-right": ""
     },
 
     "bluetooth": {
