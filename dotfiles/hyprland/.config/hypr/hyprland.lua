@@ -2,7 +2,7 @@ require("startup")
 
 -- ── PROGRAMS ────────────────────────────────────────────────
 -- local terminal    = "footclient"
-local terminal    = "footclient"
+local terminal    = "ghostty"
 local fileManager = "thunar"
 local mainMod     = "SUPER"
 local ipc         = "noctalia msg "
