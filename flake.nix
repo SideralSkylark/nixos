@@ -1,23 +1,27 @@
 {
   description = "NixOS & Home Manager configuration";
-
+  nixConfig = {
+    extra-substituters = [ "https://noctalia.cachix.org" ];
+    extra-trusted-public-keys = [
+      "noctalia.cachix.org-1:pCOR47nnMEo5thcxNDtzWpOxNFQsBRglJzxWPp3dkU4="
+    ];
+  };
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-26.05";
-
     home-manager = {
       url = "github:nix-community/home-manager/release-26.05";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-
     stylix = {
       url = "github:nix-community/stylix/release-26.05";
     };
-
     nixvim = {
       url = "github:nix-community/nixvim/nixos-26.05";
     };
+    noctalia = {
+      url = "github:noctalia-dev/noctalia";
+    };
   };
-
   outputs =
     {
       self,
@@ -25,11 +29,11 @@
       home-manager,
       stylix,
       nixvim,
+      noctalia,
       ...
     }@inputs:
     let
       system = "x86_64-linux";
-
       mkHost =
         {
           hostPath,
@@ -37,7 +41,7 @@
         }:
         nixpkgs.lib.nixosSystem {
           inherit system;
-
+          specialArgs = { inherit inputs; };
           modules = [
             hostPath
             stylix.nixosModules.stylix
@@ -46,16 +50,14 @@
               home-manager = {
                 useGlobalPkgs = true;
                 useUserPackages = true;
-
                 users.skylark =
                   { ... }:
                   {
                     imports = [ ./home/skylark.nix ] ++ hmModules;
                   };
-
                 backupFileExtension = "backup";
                 extraSpecialArgs = {
-                  inherit nixvim;
+                  inherit nixvim noctalia;
                 };
               };
             }
@@ -75,12 +77,11 @@
         nixos = mkHost {
           hostPath = ./hosts/nixos/configuration.nix;
           hmModules = [
-            ./home/modules/hyprland
+            ./home/modules/noctalia.nix
             ./home/modules/nixvim
           ];
         };
       };
-
       # -------- Fedora / Standalone HM --------
       homeConfigurations = {
         skylark = home-manager.lib.homeManagerConfiguration {
