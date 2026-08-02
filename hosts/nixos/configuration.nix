@@ -11,6 +11,7 @@
 
   environment.systemPackages = with pkgs; [
     ghostty
+    firefox
   ];
 
   networking.hostName = "nixos";
