@@ -54,7 +54,7 @@
       dim_inactive_windows = 0;
       show_eob = 0;
       spell_foreground = "none";
-      transparent_background = 0;
+      transparent_background = 1;
     };
   };
 

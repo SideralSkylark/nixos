@@ -1,6 +1,7 @@
 require("startup")
 
 -- ── PROGRAMS ────────────────────────────────────────────────
+-- local terminal    = "footclient"
 local terminal    = "footclient"
 local fileManager = "thunar"
 local mainMod     = "SUPER"
