@@ -2,15 +2,7 @@
 {
   imports = [
     ./shell.nix
-    ../hyprland/hyprland-base.nix
-    ../hyprland/scripts.nix
-    ../hyprland/swappy.nix
-    ../wayland
   ];
-  wayland.manageWaybarPackage = true;
-  wayland.manageFootPackage = false;
-  wayland.manageBrightnessctl = false;
-  wayland.manageClipboard = false;
 
   fonts.fontconfig.enable = true;
 
@@ -23,4 +15,9 @@
     lazygit # TUI for git
     bruno # Open-source API client
   ];
+
+  xdg.configFile = {
+    "hypr/hyprland.lua".source = ../../../dotfiles/hyprland/.config/hypr/hyprland.lua;
+    "hypr/startup.lua".source = ../../../dotfiles/hyprland/.config/hypr/startup.lua;
+  };
 }

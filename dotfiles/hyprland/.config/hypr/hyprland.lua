@@ -2,9 +2,9 @@ require("startup")
 
 -- ── PROGRAMS ────────────────────────────────────────────────
 local terminal    = "footclient"
-local menu        = "fuzzel"
 local fileManager = "thunar"
 local mainMod     = "SUPER"
+local ipc         = "noctalia msg "
 
 -- ── MONITOR ─────────────────────────────────────────────────
 hl.monitor({ output = "", mode = "preferred", position = "auto", scale = 1 })
@@ -119,34 +119,34 @@ hl.config({
 
 -- ── KEYBINDS ────────────────────────────────────────────────
 
--- Media
-hl.bind("XF86AudioRaiseVolume", hl.dsp.exec_cmd("~/.config/hypr/scripts/audio up"))
-hl.bind("XF86AudioLowerVolume", hl.dsp.exec_cmd("~/.config/hypr/scripts/audio down"))
-hl.bind("XF86AudioMute", hl.dsp.exec_cmd("~/.config/hypr/scripts/audio mute"))
-hl.bind("XF86AudioMicMute", hl.dsp.exec_cmd("~/.config/hypr/scripts/audio mic"))
-hl.bind("XF86MonBrightnessUp", hl.dsp.exec_cmd("~/.config/hypr/scripts/brightness up"))
-hl.bind("XF86MonBrightnessDown", hl.dsp.exec_cmd("~/.config/hypr/scripts/brightness down"))
+-- Media (kept as your own scripts — switch to `ipc .. "volume-up"` etc.
+-- if you want Noctalia's OSD to appear on these keys)
+hl.bind("XF86AudioRaiseVolume", hl.dsp.exec_cmd(ipc .. "volume-up"))
+hl.bind("XF86AudioLowerVolume", hl.dsp.exec_cmd(ipc .. "volume-down"))
+hl.bind("XF86AudioMute", hl.dsp.exec_cmd(ipc .. "volume-mute"))
+hl.bind("XF86AudioMicMute", hl.dsp.exec_cmd(ipc .. "mic-mute"))
+hl.bind("XF86MonBrightnessUp", hl.dsp.exec_cmd(ipc .. "brightness-up"))
+hl.bind("XF86MonBrightnessDown", hl.dsp.exec_cmd(ipc .. "brightness-down"))
 
 -- Screenshots
-hl.bind("Print", hl.dsp.exec_cmd("screenshot screen"))
-hl.bind("SUPER + Print", hl.dsp.exec_cmd("screenshot edit"))
+hl.bind("Print", hl.dsp.exec_cmd(ipc .. "screenshot-fullscreen"))
+hl.bind("SUPER + Print", hl.dsp.exec_cmd(ipc .. "screenshot-region"))
 
--- power profile toggle
+-- power profile toggle (your own script, no Noctalia equivalent)
 hl.bind("SUPER + SHIFT + P", hl.dsp.exec_cmd("~/.config/hypr/scripts/power-toggle"))
 
 -- Launch
 hl.bind("SUPER + return", hl.dsp.exec_cmd(terminal))
-hl.bind("SUPER + space", hl.dsp.exec_cmd(menu))
+hl.bind("SUPER + space", hl.dsp.exec_cmd(ipc .. "panel-toggle launcher"))
 hl.bind("SUPER + F", hl.dsp.exec_cmd(fileManager))
-hl.bind("SUPER + SHIFT + N", hl.dsp.exec_cmd("/home/skylark/.config/hypr/scripts/reading-mode toggle"))
-hl.bind("SUPER + SHIFT + ESCAPE", hl.dsp.exec_cmd("hyprlock"))
-hl.bind("SUPER + W", hl.dsp.exec_cmd("~/.config/hypr/scripts/random-wallpaper"))
+hl.bind("SUPER + SHIFT + ESCAPE", hl.dsp.exec_cmd(ipc .. "session lock"))
+hl.bind("SUPER + W", hl.dsp.exec_cmd(ipc .. "panel-toggle wallpaper"))
 
 -- Clipboard
-hl.bind("SUPER + V", hl.dsp.exec_cmd("cliphist list | fuzzel --dmenu | cliphist decode | wl-copy"))
+hl.bind("SUPER + V", hl.dsp.exec_cmd(ipc .. "panel-toggle clipboard"))
 
 -- Notifications
-hl.bind("SUPER + N", hl.dsp.exec_cmd("~/.config/hypr/scripts/dunst-history"))
+hl.bind("SUPER + N", hl.dsp.exec_cmd(ipc .. "panel-toggle control-center notifications"))
 
 -- Window management
 hl.bind("SUPER + Q", hl.dsp.window.close())
@@ -182,16 +182,6 @@ hl.bind("SUPER + SHIFT + 0",
     hl.dsp.window.move({ workspace = 10 }))
 
 -- -- window rules
-
-hl.window_rule({
-    match  = {
-        class = "nm-connection-editor",
-    },
-
-    float  = true,
-    center = true,
-    size   = { 900, 700 },
-})
 
 hl.window_rule({
     match  = {
