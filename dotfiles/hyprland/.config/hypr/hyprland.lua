@@ -22,6 +22,11 @@ hl.config({
     }
 })
 
+hl.device({
+    name = "synps/2-synaptics-touchpad",
+    enabled = false,
+})
+
 -- ── THEME — EVERFOREST HARD DARK ────────────────────────────
 local colors = {
     active_border   = { colors = { "rgba(A7C080dd)" } },
