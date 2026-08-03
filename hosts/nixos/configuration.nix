@@ -2,8 +2,8 @@
 {
   imports = [
     ../../modules/services.nix
-    ../../modules/system.nix.nix
-    ../../modules/role/hyprland.nix
+    ../../modules/system.nix
+    ../../modules/desktop.nix
     ../../modules/role/gaming.nix
     ../../modules/role/dev.nix
     ./hardware-configuration.nix

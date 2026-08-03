@@ -17,9 +17,6 @@
 
   services.tumbler.enable = true; # D-Bus thumbnailing service
 
-  services.dbus.enable = true;
-  security.polkit.enable = true;
-  services.udev.enable = true;
   services.xserver.enable = false;
 
   services.greetd = {

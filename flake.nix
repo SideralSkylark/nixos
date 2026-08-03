@@ -70,14 +70,14 @@
         laptop = mkHost {
           hostPath = ./hosts/laptop/configuration.nix;
           hmModules = [
-            ./home/modules/hyprland
+            ./home/modules/noctalia/default.nix
             ./home/modules/nixvim
           ];
         };
         nixos = mkHost {
           hostPath = ./hosts/nixos/configuration.nix;
           hmModules = [
-            ./home/modules/noctalia.nix
+            ./home/modules/noctalia/default.nix
             ./home/modules/nixvim
           ];
         };
@@ -92,6 +92,7 @@
           modules = [
             ./home/skylark.nix
             ./home/modules/standalone
+            ./home/modules/noctalia
             ./home/modules/nixvim
           ];
           extraSpecialArgs = {
