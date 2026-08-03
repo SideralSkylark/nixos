@@ -8,8 +8,7 @@
     google-java-format
     nerd-fonts.jetbrains-mono
     nerd-fonts.symbols-only
-    lazygit # TUI for git
-    bruno # Open-source API client
+    lazygit
   ];
 
   home.sessionVariables = {
