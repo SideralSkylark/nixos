@@ -5,6 +5,9 @@
     fontconfig.enable = true;
     packages = with pkgs; [
       noto-fonts-cjk-sans # Google Noto Sans CJK fonts
+      nerd-fonts.jetbrains-mono
+      noto-fonts-color-emoji
+
     ];
   };
 
@@ -40,7 +43,7 @@
     usbutils # Tools for working with USB devices
     parted # Partitioning tool
     gparted # GUI partition manager
-    libnotify # Desktop notifications library
+    libnotify
   ];
 
   # Disable login as root
@@ -63,46 +66,6 @@
     polkit-1.fprintAuth = lib.mkForce true;
     swaylock.fprintAuth = lib.mkForce false;
     hyprlock.fprintAuth = lib.mkForce false;
-  };
-
-  stylix = {
-    enable = true;
-    image = null;
-    fonts = {
-      monospace = {
-        package = pkgs.nerd-fonts.jetbrains-mono;
-        name = "JetBrainsMono Nerd Font Mono";
-      };
-      sansSerif = {
-        package = pkgs.roboto;
-        name = "Roboto";
-      };
-      serif = {
-        package = pkgs.noto-fonts;
-        name = "Noto Serif";
-      };
-      emoji = {
-        package = pkgs.noto-fonts-color-emoji;
-        name = "Noto Color Emoji";
-      };
-      sizes = {
-        applications = 12;
-        terminal = 14;
-        desktop = 12;
-        popups = 11;
-      };
-    };
-    cursor = {
-      package = pkgs.bibata-cursors;
-      name = "Bibata-Modern-Classic";
-      size = 24;
-    };
-    icons = {
-      enable = true;
-      package = pkgs.papirus-icon-theme;
-      dark = "Papirus-Dark";
-      light = "Papirus-Light";
-    };
   };
 
   time.timeZone = "Africa/Maputo";
