@@ -1,10 +1,11 @@
 { inputs, pkgs, ... }:
 {
   imports = [
-    ../../modules
-    ../../modules/role/hyprland
-    ../../modules/role/gaming
-    ../../modules/role/dev
+    ../../modules/services.nix
+    ../../modules/system.nix.nix
+    ../../modules/role/hyprland.nix
+    ../../modules/role/gaming.nix
+    ../../modules/role/dev.nix
     ./hardware-configuration.nix
     inputs.noctalia.nixosModules.default
   ];

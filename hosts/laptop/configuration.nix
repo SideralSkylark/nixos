@@ -1,11 +1,5 @@
 {
   imports = [
-    ../../modules
-    ../../modules/role/dev
-    ../../modules/role/hyprland
-    ../../modules/role/bluetooth
-    ../../modules/role/printing
-    # ../../modules/role/gaming
     ./hardware-configuration.nix
   ];
 
