@@ -58,12 +58,6 @@
     };
   };
 
-  extraPlugins = with pkgs.vimPlugins; [
-    rose-pine
-    catppuccin-nvim
-    kanagawa-nvim
-  ];
-
   # === Treesitter ===
   plugins.treesitter = {
     enable = true;
