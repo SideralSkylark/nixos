@@ -39,7 +39,7 @@
     };
   };
 
-  # === Colorscheme ===
+  # # === Colorscheme ===
   colorschemes.everforest = {
     enable = true;
     settings = {
@@ -57,6 +57,12 @@
       transparent_background = 1;
     };
   };
+
+  extraPlugins = with pkgs.vimPlugins; [
+    rose-pine
+    catppuccin-nvim
+    kanagawa-nvim
+  ];
 
   # === Treesitter ===
   plugins.treesitter = {
