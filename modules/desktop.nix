@@ -5,6 +5,9 @@
     qt6.qtwayland # Wayland support for Qt 6
     gtk3 # GTK 3 toolkit
     engrampa # Archive manager (GUI)
+    ghostty
+    alacritty
+    firefox
   ];
 
   programs.thunar = {

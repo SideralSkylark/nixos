@@ -17,6 +17,8 @@
 
   services.power-profiles-daemon.enable = true;
 
+  programs.localsend.enable = true;
+
   services.openssh.enable = false;
   programs.ssh = {
     startAgent = true;
