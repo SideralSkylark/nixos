@@ -10,6 +10,7 @@
     nerd-fonts.symbols-only
     lazygit
     tmux
+    obsidian
   ];
 
   home.sessionVariables = {
