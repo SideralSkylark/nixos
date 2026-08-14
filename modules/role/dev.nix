@@ -23,5 +23,9 @@
       export JAVA_HOME=${pkgs.jdk21_headless}
       exec ${pkgs.jdk21_headless}/bin/java "$@"
     '') # Helper script for stable Java environment
+
+    #tools for personal projects
+    tesseract
+    poppler-utils
   ];
 }
