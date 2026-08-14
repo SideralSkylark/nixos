@@ -6,7 +6,6 @@
     gtk3 # GTK 3 toolkit
     engrampa # Archive manager (GUI)
     ghostty
-    alacritty
     firefox
   ];
 
