@@ -15,6 +15,7 @@
 
   home.sessionVariables = {
     PATH = "$HOME/.nix-profile/bin:$PATH";
+    XDG_DATA_DIRS = "$HOME/.nix-profile/share:/usr/local/share:/usr/share";
   };
 
   programs.bash.initExtra = ''

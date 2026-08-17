@@ -12,9 +12,6 @@
       url = "github:nix-community/home-manager/release-26.05";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-    stylix = {
-      url = "github:nix-community/stylix/release-26.05";
-    };
     nixvim = {
       url = "github:nix-community/nixvim/nixos-26.05";
     };
@@ -27,7 +24,6 @@
       self,
       nixpkgs,
       home-manager,
-      stylix,
       nixvim,
       noctalia,
       ...
@@ -44,7 +40,6 @@
           specialArgs = { inherit inputs; };
           modules = [
             hostPath
-            stylix.nixosModules.stylix
             home-manager.nixosModules.home-manager
             {
               home-manager = {
