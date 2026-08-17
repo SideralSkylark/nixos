@@ -23,6 +23,7 @@
 
   home.sessionPath = [
     "$HOME/.local/bin"
+    "$HOME/.cargo/bin"
     "$HOME/.npm-global/bin"
     "$HOME/Apps/android-studio/jbr/bin"
     "$HOME/Android/Sdk/ndk/30.0.14904198/toolchains/llvm/prebuilt/linux-x86_64/bin"
