@@ -61,7 +61,6 @@
       VISUAL = "nvim";
       EDITOR = "nvim";
     };
-
     initExtra = ''
       set -o vi
     '';
