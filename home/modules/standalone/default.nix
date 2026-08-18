@@ -13,7 +13,6 @@
     lazygit
     tmux
     obsidian
-    bruno
   ];
 
   home.sessionVariables = {
