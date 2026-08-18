@@ -1,11 +1,13 @@
 require("startup")
 
 -- ── PROGRAMS ────────────────────────────────────────────────
--- local terminal    = "footclient"
-local terminal    = "ghostty"
-local fileManager = "thunar"
-local mainMod     = "SUPER"
-local ipc         = "noctalia msg "
+local terminal         = "ghostty"
+local fileManager      = "thunar"
+local mainMod          = "SUPER"
+local ipc              = "noctalia msg "
+
+local noctalia_pallete = require("noctalia")
+noctalia_pallete.apply_theme()
 
 -- ── MONITOR ─────────────────────────────────────────────────
 hl.monitor({ output = "", mode = "preferred", position = "auto", scale = 1 })
@@ -27,22 +29,14 @@ hl.device({
     enabled = false,
 })
 
--- ── THEME — EVERFOREST HARD DARK ────────────────────────────
-local colors = {
-    active_border   = { colors = { "rgba(A7C080dd)" } },
-    inactive_border = { colors = { "rgba(3A464Caa)" } },
-}
-
 -- ── GENERAL ─────────────────────────────────────────────────
 hl.config({
     general = {
-        border_size             = 2,
-        ["col.active_border"]   = colors.active_border,
-        ["col.inactive_border"] = colors.inactive_border,
-        gaps_in                 = 3,
-        gaps_out                = 6,
-        layout                  = "dwindle",
-        allow_tearing           = false,
+        border_size   = 3,
+        gaps_in       = 3,
+        gaps_out      = 6,
+        layout        = "dwindle",
+        allow_tearing = false,
     }
 })
 
@@ -148,6 +142,12 @@ hl.bind("SUPER + F", hl.dsp.exec_cmd(fileManager))
 hl.bind("SUPER + SHIFT + ESCAPE", hl.dsp.exec_cmd(ipc .. "session lock"))
 hl.bind("SUPER + W", hl.dsp.exec_cmd(ipc .. "panel-toggle wallpaper"))
 
+-- ── SESSION ─────────────────────────────────────────────────
+hl.bind("SUPER + SHIFT + R", hl.dsp.exec_cmd("hyprctl reload"))
+
+-- ── CYCLE WINDOWS (Alt-Tab, Noctalia window switcher) ────────
+hl.bind("ALT + Tab", hl.dsp.exec_cmd(ipc .. "window-switcher"))
+
 -- Clipboard
 hl.bind("SUPER + V", hl.dsp.exec_cmd(ipc .. "panel-toggle clipboard"))
 
@@ -190,10 +190,15 @@ hl.bind("SUPER + SHIFT + 0",
 -- -- window rules
 
 hl.window_rule({
+    match  = { title = "Open File|Save File|Select.*File" },
+    float  = true,
+    center = true,
+})
+
+hl.window_rule({
     match  = {
         title = "bluetu[iI]",
     },
-
     float  = true,
     center = true,
     size   = { 900, 600 },
