@@ -137,8 +137,6 @@ hl.config({
 
 -- ── KEYBINDS ────────────────────────────────────────────────
 
--- Media (kept as your own scripts — switch to `ipc .. "volume-up"` etc.
--- if you want Noctalia's OSD to appear on these keys)
 hl.bind("XF86AudioRaiseVolume", hl.dsp.exec_cmd(ipc .. "volume-up"), { locked = true, repeating = true })
 hl.bind("XF86AudioLowerVolume", hl.dsp.exec_cmd(ipc .. "volume-down"), { locked = true, repeating = true })
 hl.bind("XF86AudioMute", hl.dsp.exec_cmd(ipc .. "volume-mute"))
@@ -149,9 +147,6 @@ hl.bind("XF86MonBrightnessDown", hl.dsp.exec_cmd(ipc .. "brightness-down"), { lo
 -- Screenshots
 hl.bind("Print", hl.dsp.exec_cmd(ipc .. "screenshot-fullscreen"))
 hl.bind("SUPER + Print", hl.dsp.exec_cmd(ipc .. "screenshot-region"))
-
--- power profile toggle (your own script, no Noctalia equivalent)
-hl.bind("SUPER + SHIFT + P", hl.dsp.exec_cmd("~/.config/hypr/scripts/power-toggle"))
 
 -- Launch
 hl.bind("SUPER + return", hl.dsp.exec_cmd(terminal))
@@ -175,8 +170,6 @@ hl.bind("SUPER + N", hl.dsp.exec_cmd(ipc .. "panel-toggle control-center notific
 
 -- Window management
 hl.bind("SUPER + Q", hl.dsp.window.close())
-hl.bind("SUPER + SHIFT + V", hl.dsp.window.float({ action = "toggle" }))
-hl.bind("SUPER + P", hl.dsp.window.pseudo({ action = "toggle" }))
 hl.bind("SUPER + SHIFT + F", hl.dsp.window.fullscreen({ mode = "fullscreen", action = "toggle" }))
 
 -- Focus
