@@ -43,14 +43,11 @@ hl.config({
 -- ── DECORATION ──────────────────────────────────────────────
 hl.config({
     decoration = {
-        active_opacity   = 0.92,
-        inactive_opacity = 0.80,
+        active_opacity   = 1.0,
+        inactive_opacity = 1.0,
         rounding         = 0,
         blur             = {
-            enabled = true,
-            size    = 2,
-            passes  = 2,
-            noise   = 0.05,
+            enabled = false,
         }
     }
 })
@@ -170,9 +167,6 @@ hl.bind("SUPER + SHIFT + S", hl.dsp.window.move({ workspace = "special:magic" })
 -- ── SESSION ─────────────────────────────────────────────────
 hl.bind("SUPER + SHIFT + R", hl.dsp.exec_cmd("hyprctl reload"))
 
--- ── CYCLE WINDOWS (Alt-Tab, Noctalia window switcher) ────────
-hl.bind("ALT + Tab", hl.dsp.exec_cmd(ipc .. "window-switcher"))
-
 -- Clipboard
 hl.bind("SUPER + V", hl.dsp.exec_cmd(ipc .. "panel-toggle clipboard"))
 
@@ -213,6 +207,11 @@ hl.bind("SUPER + SHIFT + 0",
     hl.dsp.window.move({ workspace = 10 }))
 
 -- -- window rules
+
+hl.window_rule({
+    match = { workspace = "special:magic" },
+    opacity = "0.92 override 0.82 override",
+})
 
 hl.window_rule({
     match  = { title = "Open File|Save File|Select.*File" },
