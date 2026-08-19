@@ -43,9 +43,14 @@ hl.config({
 -- ── DECORATION ──────────────────────────────────────────────
 hl.config({
     decoration = {
-        rounding = 0,
-        blur = {
-            enabled = false,
+        active_opacity   = 0.92,
+        inactive_opacity = 0.80,
+        rounding         = 0,
+        blur             = {
+            enabled = true,
+            size    = 2,
+            passes  = 2,
+            noise   = 0.05,
         }
     }
 })
@@ -102,6 +107,22 @@ hl.animation({
     bezier = "snappyOut",
     style = "fade",
 })
+
+hl.curve("panelEngage", {
+    type = "bezier",
+    points = {
+        { 0.34, 1.56 },
+        { 0.64, 1.0 },
+    },
+})
+
+hl.animation({
+    leaf    = "specialWorkspace",
+    enabled = true,
+    speed   = 2.5,
+    bezier  = "panelEngage",
+    style   = "slidefadevert",
+})
 -- ── LAYOUT ──────────────────────────────────────────────────
 hl.config({
     dwindle = {
@@ -141,6 +162,10 @@ hl.bind("SUPER + space", hl.dsp.exec_cmd(ipc .. "panel-toggle launcher"))
 hl.bind("SUPER + F", hl.dsp.exec_cmd(fileManager))
 hl.bind("SUPER + SHIFT + ESCAPE", hl.dsp.exec_cmd(ipc .. "session lock"))
 hl.bind("SUPER + W", hl.dsp.exec_cmd(ipc .. "panel-toggle wallpaper"))
+
+-- ── SCRATCHPAD ──────────────────────────────────────────────
+hl.bind("SUPER + S", hl.dsp.workspace.toggle_special("magic"))
+hl.bind("SUPER + SHIFT + S", hl.dsp.window.move({ workspace = "special:magic" }))
 
 -- ── SESSION ─────────────────────────────────────────────────
 hl.bind("SUPER + SHIFT + R", hl.dsp.exec_cmd("hyprctl reload"))
