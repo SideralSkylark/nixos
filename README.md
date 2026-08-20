@@ -8,7 +8,6 @@ A modular NixOS and Home Manager configuration.
 
 ### System Roles (`modules/role/`)
 Hosts select from reusable roles to ensure lean installations:
-- **hyprland**: Tiling compositor, greetd (tuigreet), and Wayland compatibility.
 - **dev**: Docker, build tools, and essential CLI utilities.
 - **gaming**: Steam, Heroic, Lutris, and performance optimizations.
 - **bluetooth**: Bluetooth stack and management tools.
@@ -26,7 +25,6 @@ Modular Home Manager environment:
 
 ## Key Features
 
-- **Theming**: **Stylix** manages the base color palette (Everforest) and fonts centrally. Manual control is retained for Noctalia and Nixvim for granular styling.
 - **Unified Shell**: **Noctalia** consolidates the bar, notification daemon, and app launcher into a single configurable layer, cutting down on the number of moving parts compared to a Waybar/Dunst/Fuzzel setup.
 - **Terminal**: **Ghostty** is the primary terminal, configured via `dotfiles/ghostty`.
 - **Declarative Editor**: Neovim is configured via **nixvim**, split into logical modules (`plugins.nix`, `lsp.nix`, etc.).
