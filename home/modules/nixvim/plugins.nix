@@ -70,6 +70,7 @@
         "nix"
         "c"
         "rust"
+        "python"
       ];
       highlight.enable = true;
       indent.enable = true;
