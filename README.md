@@ -1,6 +1,6 @@
 # NixOS Configuration
 
-A modular NixOS and Home Manager configuration. 
+A modular NixOS and Home Manager configuration.
 
 ---
 
@@ -17,7 +17,7 @@ Hosts select from reusable roles to ensure lean installations:
 ### User Layers (`home/`)
 Modular Home Manager environment:
 - **Core**: Fundamental CLI tools, Git, Starship, and XDG directories.
-- **Wayland**: Compositor-agnostic utilities (Foot, Waybar, Dunst, Fuzzel).
+- **Noctalia**: Unified Wayland shell layer — bar, notifications, launcher, and session controls in one cohesive package, replacing the old Waybar/Dunst/Fuzzel stack.
 - **Compositor**: Hyprland-specific logic and scripts.
 - **Nixvim**: Modular Neovim configuration via `nixvim`.
 - **Standalone**: Desktop-agnostic tools for non-NixOS systems.
@@ -26,10 +26,12 @@ Modular Home Manager environment:
 
 ## Key Features
 
-- **Theming**: **Stylix** manages the base color palette (Everforest) and fonts centrally. Manual control is retained for Dunst, Foot, Fuzzel, and Nixvim for granular styling.
+- **Theming**: **Stylix** manages the base color palette (Everforest) and fonts centrally. Manual control is retained for Noctalia and Nixvim for granular styling.
+- **Unified Shell**: **Noctalia** consolidates the bar, notification daemon, and app launcher into a single configurable layer, cutting down on the number of moving parts compared to a Waybar/Dunst/Fuzzel setup.
+- **Terminal**: **Ghostty** is the primary terminal, configured via `dotfiles/ghostty`.
 - **Declarative Editor**: Neovim is configured via **nixvim**, split into logical modules (`plugins.nix`, `lsp.nix`, etc.).
-- **Hybrid Configuration**: Core system state is managed by Nix, while specific application styles (Waybar CSS, Hyprland scripts) are symlinked from `dotfiles/` for portability.
-- **Boot Management**: 
+- **Hybrid Configuration**: Core system state is managed by Nix, while specific application styles (Noctalia config, Hyprland scripts) are symlinked from `dotfiles/` for portability.
+- **Boot Management**:
   - **laptop**: Uses `systemd-boot` with EFI variable modifications disabled to coexist with external bootloaders.
   - **nixos**: Standard `systemd-boot` with full EFI management.
 
@@ -42,9 +44,9 @@ Modular Home Manager environment:
 ├── flake.nix             # Flake entry point and host definitions
 ├── hosts/                # Machine-specific configurations
 ├── modules/              # NixOS system-level modules (roles, services, system)
-├── home/                 # Home Manager modules (nixvim, wayland, hyprland)
-├── dotfiles/             # External configs symlinked via Home Manager
-└── assets/               # Screenshots 
+├── home/                 # Home Manager modules (nixvim, noctalia, standalone)
+├── dotfiles/              # External configs symlinked via Home Manager (fastfetch, ghostty, hyprland, noctalia, wallpapers)
+└── assets/               # Screenshots
 ```
 
 ---
@@ -74,5 +76,4 @@ home-manager switch --flake .#skylark
 ### Editor
 ![Editor](assets/screenshots/editor.png)
 
---- 
-
+---
