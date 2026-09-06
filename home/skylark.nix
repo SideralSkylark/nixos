@@ -5,6 +5,25 @@
   home.homeDirectory = "/home/skylark";
   home.stateVersion = "26.05";
 
+  fonts.fontconfig.enable = true;
+
+  gtk = {
+    enable = true;
+    iconTheme = {
+      package = pkgs.papirus-icon-theme;
+      name = "Papirus-Dark";
+    };
+  };
+
+  home.pointerCursor = {
+    package = pkgs.adwaita-icon-theme;
+    name = "Adwaita";
+    size = 24;
+    gtk.enable = true;
+    x11.enable = true;
+    hyprcursor.enable = true;
+  };
+
   xdg = {
     enable = true;
 
@@ -53,6 +72,8 @@
     p7zip # 7z compression utility
     unrar # RAR archive extractor
     man-pages # Linux manual pages
+    nerd-fonts.jetbrains-mono # nerd font
+    nerd-fonts.symbols-only # some symbols
   ];
 
   programs.bash = {

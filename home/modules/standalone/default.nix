@@ -1,15 +1,10 @@
 { pkgs, ... }:
 {
   targets.genericLinux.enable = true;
-
-  fonts.fontconfig.enable = true;
-
   home.packages = with pkgs; [
     nodejs_24
     jdk25
     google-java-format
-    nerd-fonts.jetbrains-mono
-    nerd-fonts.symbols-only
     lazygit
     tmux
     obsidian
