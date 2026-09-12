@@ -8,6 +8,9 @@ shadow = false
 start = [ "workspaces" ]
 widget_spacing = 14
 
+[battery]
+warning_threshold = 15
+
 [desktop_widgets]
 enabled = false
 schema_version = 2
@@ -49,14 +52,37 @@ behavior_order = [ "lock", "screen-off", "lock-and-suspend" ]
 address = "Maputo, Mozambique"
 
 [lockscreen_widgets]
-enabled = false
 schema_version = 2
-widget_order = [ "lockscreen-login-box@eDP-1" ]
+widget_order = [ "lockscreen-login-box@HDMI-A-1", "lockscreen-login-box@eDP-1" ]
 
     [lockscreen_widgets.grid]
     cell_size = 16
     major_interval = 4
     visible = true
+
+    [lockscreen_widgets.widget."lockscreen-login-box@HDMI-A-1"]
+    box_height = 229.0
+    box_width = 810.0
+    cx = 640.0
+    cy = 601.5
+    output = "HDMI-A-1"
+    rotation = 0.0
+    type = "login_box"
+
+        [lockscreen_widgets.widget."lockscreen-login-box@HDMI-A-1".settings]
+        background_color = "surface_variant"
+        background_opacity = 0.88
+        background_radius = 12.0
+        center_password_text = false
+        input_opacity = 1.0
+        input_radius = 6.0
+        layout = "regular"
+        show_caps_lock = true
+        show_keyboard_layout = true
+        show_login_button = true
+        show_media = true
+        show_session_buttons = true
+        show_weather = true
 
     [lockscreen_widgets.widget."lockscreen-login-box@eDP-1"]
     box_height = 229.0
@@ -96,8 +122,22 @@ popup_shadows = false
     categories = false
     sort_by_usage = false
 
+        [shell.launcher.providers.calculator]
+        prefix = ""
+
+    [shell.panel]
+    borders = false
+    polkit_position = "center_left"
+    shadow = false
+
+    [shell.screenshot]
+    directory = "/home/skylark/Pictures/screenshots"
+
     [shell.shadow]
     alpha = 0.0
+
+[system.monitor]
+enabled = false
 
 [theme]
 builtin = "Rosé Pine"
@@ -106,7 +146,7 @@ source = "community"
 wallpaper_scheme = "m3-content"
 
     [theme.templates]
-    builtin_ids = [ "foot", "gtk3", "gtk4", "ghostty", "hyprland", "qt", "starship" ]
+    builtin_ids = [ "gtk3", "gtk4", "ghostty", "hyprland", "qt" ]
 
 [wallpaper]
 directory = "/home/skylark/Pictures/Wallpapers"
@@ -123,6 +163,7 @@ transition = [ "fade" ]
 
 [weather]
 effects = false
+refresh_minutes = 120
 
 [widget.bluetooth]
 hide_when_no_connected_device = true
@@ -133,6 +174,7 @@ format = "{:%H:%M:%S}"
 scale = 1.1500000000000001
 
 [widget.media]
+art_size = 22
 hide_when_no_media = true
 
 [widget.workspaces]
