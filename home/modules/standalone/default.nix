@@ -10,6 +10,12 @@
     obsidian
   ];
 
+  programs.direnv = {
+    enable = true;
+    nix-direnv.enable = true;
+    enableBashIntegration = true;
+  };
+
   home.sessionVariables = {
     JAVA_HOME = "$HOME/Apps/android-studio/jbr";
     ANDROID_HOME = "$HOME/Android/Sdk";
