@@ -66,6 +66,11 @@
         };
       };
 
+      svelte = {
+        enable = true;
+        package = pkgs.svelte-language-server;
+      };
+
       # Python
       pyright = {
         enable = true;
