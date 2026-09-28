@@ -22,6 +22,7 @@
     writebackup = false;
     splitright = true;
     splitbelow = true;
+    winborder = "single";
   };
 
   globals = {

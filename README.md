@@ -75,3 +75,5 @@ home-manager switch --flake .#skylark
 ![Editor](assets/screenshots/editor.png)
 
 ---
+
+TODO: Add borders for nvim windows and pop ups
