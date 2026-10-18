@@ -1,4 +1,4 @@
-{ inputs, pkgs, ... }:
+{ inputs, ... }:
 {
   imports = [
     ../../modules/services.nix
@@ -8,11 +8,6 @@
     ../../modules/role/dev.nix
     ./hardware-configuration.nix
     inputs.noctalia.nixosModules.default
-  ];
-
-  environment.systemPackages = with pkgs; [
-    ghostty
-    firefox
   ];
 
   networking.hostName = "nixos";

@@ -9,6 +9,10 @@
     firefox
   ];
 
+  systemd.packages = [ pkgs.ghostty ];
+  systemd.user.services."app-com.mitchellh.ghostty".wantedBy = [ "graphical-session.target" ];
+  services.dbus.packages = [ pkgs.ghostty ]; # lets `ghostty +new-window` start it via D-Bus
+
   programs.thunar = {
     enable = true;
     plugins = with pkgs; [
