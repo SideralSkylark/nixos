@@ -3,7 +3,7 @@ hl.on("hyprland.start", function()
 end)
 
 -- ── PROGRAMS ────────────────────────────────────────────────
-local terminal         = "ghostty"
+local terminal         = "ghostty +new-window"
 local fileManager      = "thunar"
 local mainMod          = "SUPER"
 local ipc              = "noctalia msg "
