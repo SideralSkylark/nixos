@@ -1,4 +1,4 @@
-{ pkgs, ... }:
+{ pkgs, lib, ... }:
 {
   targets.genericLinux.enable = true;
   home.packages = with pkgs; [
@@ -23,10 +23,17 @@
   };
 
   home.sessionPath = [
+    "$HOME/.local/share/vite-plus/bin"
     "$HOME/.local/bin"
     "$HOME/.cargo/bin"
     "$HOME/.npm-global/bin"
     "$HOME/Apps/android-studio/jbr/bin"
     "$HOME/Android/Sdk/ndk/30.0.14904198/toolchains/llvm/prebuilt/linux-x86_64/bin"
   ];
+
+  programs.bash.initExtra = lib.mkAfter ''
+    if [ -f "$HOME/.config/vite-plus/env" ]; then
+      . "$HOME/.config/vite-plus/env"
+    fi
+  '';
 }
