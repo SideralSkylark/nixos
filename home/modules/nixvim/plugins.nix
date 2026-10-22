@@ -139,6 +139,29 @@
     settings = {
       winopts.fullscreen = true;
       grep.rg_opts = "--column --line-number --no-heading --color=always --smart-case";
+      previewers.builtin.extensions = {
+        png = [
+          "chafa"
+          "--dither=noise"
+          "{file}"
+        ];
+        jpg = [
+          "chafa"
+          "--dither=noise"
+          "{file}"
+        ];
+        jpeg = [
+          "chafa"
+          "--dither=noise"
+          "{file}"
+        ];
+        webp = [
+          "chafa"
+          "--dither=noise"
+          "{file}"
+        ];
+      };
+
     };
   };
 }

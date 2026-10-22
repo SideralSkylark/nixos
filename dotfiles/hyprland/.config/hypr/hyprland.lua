@@ -1,9 +1,11 @@
 hl.on("hyprland.start", function()
     hl.exec_cmd("noctalia --daemon")
+    hl.exec_cmd("alacritty --daemon")
 end)
 
 -- ── PROGRAMS ────────────────────────────────────────────────
-local terminal         = "ghostty +new-window"
+-- local terminal         = "ghostty +new-window"
+local terminal         = "alacritty msg create-window"
 local fileManager      = "thunar"
 local mainMod          = "SUPER"
 local ipc              = "noctalia msg "

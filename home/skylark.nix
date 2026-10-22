@@ -80,6 +80,8 @@
     man-pages # Linux manual pages
     nerd-fonts.jetbrains-mono # nerd font
     nerd-fonts.symbols-only # some symbols
+    chafa # image rendering protocol
+    imv # image viewer
   ];
 
   programs.bash = {

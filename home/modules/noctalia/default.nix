@@ -2,6 +2,7 @@
   xdg.configFile = {
     "hypr/hyprland.lua".source = ../../../dotfiles/hyprland/.config/hypr/hyprland.lua;
     "ghostty/config.ghostty".source = ../../../dotfiles/ghostty/config.ghostty;
+    "alacritty/alacritty.toml".source = ../../../dotfiles/alacritty/alacritty.toml;
   };
 
   programs.mpv = {
