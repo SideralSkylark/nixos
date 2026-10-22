@@ -6,12 +6,13 @@
     gtk3 # GTK 3 toolkit
     engrampa # Archive manager (GUI)
     ghostty
+    alacritty
     firefox
   ];
 
-  systemd.packages = [ pkgs.ghostty ];
-  systemd.user.services."app-com.mitchellh.ghostty".wantedBy = [ "graphical-session.target" ];
-  services.dbus.packages = [ pkgs.ghostty ]; # lets `ghostty +new-window` start it via D-Bus
+  # systemd.packages = [ pkgs.ghostty ];
+  # systemd.user.services."app-com.mitchellh.ghostty".wantedBy = [ "graphical-session.target" ];
+  # services.dbus.packages = [ pkgs.ghostty ]; # lets `ghostty +new-window` start it via D-Bus
 
   programs.thunar = {
     enable = true;
