@@ -8,21 +8,30 @@
     ];
   };
 
+  # Network printer and scanner discovery
+  services.avahi = {
+    enable = true;
+    nssmdns4 = true;
+    openFirewall = true;
+  };
+
   hardware.sane = {
     enable = true;
     extraBackends = [
-      pkgs.hplip # HP multifunction
-      pkgs.epkowa # Epson multifunction
+      pkgs.hplip
+      pkgs.epkowa
+      pkgs.sane-airscan
     ];
   };
 
-  services.udev.packages = [ pkgs.sane-backends ];
-
-  environment.systemPackages = with pkgs; [
-    kdePackages.skanlite # scanning frontend
+  services.udev.packages = [
+    pkgs.sane-backends
+    pkgs.sane-airscan
   ];
 
-  users.groups.scanner = { };
-  users.groups.lp = { };
-  users.groups.lpadmin = { };
+  environment.systemPackages = with pkgs; [
+    system-config-printer
+    simple-scan
+    sane-airscan
+  ];
 }
