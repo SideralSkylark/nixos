@@ -1,5 +1,7 @@
+{ lib, ... }:
 {
   keymaps = [
+    # Explorer
     {
       mode = "n";
       key = "<leader>e";
@@ -18,6 +20,8 @@
         silent = true;
       };
     }
+
+    # Windows
     {
       mode = "n";
       key = "<C-h>";
@@ -54,6 +58,7 @@
         silent = true;
       };
     }
+
     # Scroll centering
     {
       mode = "n";
@@ -73,35 +78,48 @@
         silent = true;
       };
     }
-    # Diagnostics
     {
       mode = "n";
-      key = "<leader>xx";
-      action = "<cmd>FzfLua diagnostics_workspace<cr>";
+      key = "n";
+      action = "nzzzv";
       options = {
-        desc = "Workspace diagnostics";
+        desc = "Next match (centered)";
         silent = true;
       };
     }
-    # Quickfixes
     {
       mode = "n";
-      key = "]q";
-      action = "<cmd>cnext<cr>";
-      options.desc = "Next quickfix";
+      key = "N";
+      action = "Nzzzv";
+      options = {
+        desc = "Previous match (centered)";
+        silent = true;
+      };
     }
+
+    # Search / editing
     {
       mode = "n";
-      key = "[q";
-      action = "<cmd>cprev<cr>";
-      options.desc = "Prev quickfix";
+      key = "<Esc>";
+      action = "<cmd>nohlsearch<CR>";
+      options = {
+        desc = "Clear search highlight";
+        silent = true;
+      };
     }
+
+    # Buffers
     {
       mode = "n";
-      key = "<leader>xq";
-      action = "<cmd>copen<cr>";
-      options.desc = "Open quickfix list";
+      key = "<leader>q";
+      action = "<cmd>lua MiniBufremove.delete()<CR>";
+      options = {
+        desc = "Close buffer (keep window layout)";
+        silent = true;
+      };
     }
+
+    # Find
     {
       mode = "n";
       key = "<leader>ff";
@@ -116,16 +134,74 @@
     }
     {
       mode = "n";
-      key = "<leader>q";
-      action = "<cmd>bd<cr>";
-      options.desc = "Close buffer";
+      key = "<leader>fs";
+      action = "<cmd>FzfLua lsp_document_symbols<cr>";
+      options.desc = "Symbols in file";
     }
     {
       mode = "n";
-      key = "<leader>f";
-      action = "<cmd>lua require('conform').format({ async = true, lsp_fallback = true })<cr>";
+      key = "<leader>fi";
+      action = lib.nixvim.mkRaw ''
+        function()
+          require("fzf-lua").files({
+            prompt = "Images> ",
+            file_icons = false,
+            git_icons = false,
+            cmd = "fd --type f --hidden --no-ignore --exclude .git --exclude node_modules --exclude target --exclude .direnv --extension png --extension jpg --extension jpeg --extension webp --extension gif",
+          })
+        end
+      '';
+      options.desc = "Find images (hidden + ignored dirs, opens in imv)";
+    }
+
+    # Diagnostics
+    {
+      mode = "n";
+      key = "<leader>xx";
+      action = "<cmd>FzfLua diagnostics_workspace<cr>";
+      options = {
+        desc = "Workspace diagnostics";
+        silent = true;
+      };
+    }
+
+    # Quickfix
+    {
+      mode = "n";
+      key = "<leader>xq";
+      action = "<cmd>copen<cr>";
+      options.desc = "Open quickfix list";
+    }
+
+    # LSP (same keys as the 0.12 built-ins, fzf UI)
+    {
+      mode = "n";
+      key = "grr";
+      action = "<cmd>FzfLua lsp_references<cr>";
+      options.desc = "References";
+    }
+    {
+      mode = "n";
+      key = "gri";
+      action = "<cmd>FzfLua lsp_implementations<cr>";
+      options.desc = "Implementations";
+    }
+
+    # Code
+    {
+      mode = "n";
+      key = "<leader>cf";
+      action = "<cmd>lua require('conform').format({ async = true })<cr>";
       options.desc = "Format buffer";
     }
+    {
+      mode = "n";
+      key = "<leader>u";
+      action = "<cmd>packadd nvim.undotree<cr><cmd>Undotree<cr>";
+      options.desc = "Undo tree";
+    }
+
+    # Save
     {
       mode = [
         "n"
@@ -134,13 +210,15 @@
       key = "<C-s>";
       action = "<cmd>w<cr>";
       options = {
-        desc = "Save file";
+        desc = "Save file (and format)";
         silent = true;
       };
     }
   ];
 
   extraConfigLua = ''
+    -- Autosave on leaving insert / losing focus.
+    -- The flag lets conform skip formatting for these saves (<C-s> and :w still format).
     vim.api.nvim_create_autocmd({"InsertLeave", "FocusLost"}, {
       callback = function()
         if
@@ -150,16 +228,31 @@
           and vim.bo.filetype ~= ""
           and vim.fn.expand("%") ~= ""
         then
+          vim.g.autosaving = true
           vim.cmd("silent! write")
+          vim.g.autosaving = false
         end
       end,
     })
-                	
+
     -- Highlight on yank
     vim.api.nvim_create_autocmd('TextYankPost', {
       desc = 'Highlight when yanking text',
       group = vim.api.nvim_create_augroup('highlight-yank', { clear = true }),
       callback = function() vim.hl.on_yank() end,
     })
+
+    -- Images open in imv instead of as binary buffers (fzf, mini-files, gf, CLI)
+    if vim.fn.executable("imv") == 1 then
+      vim.api.nvim_create_autocmd("BufReadCmd", {
+        pattern = { "*.png", "*.jpg", "*.jpeg", "*.gif", "*.webp" },
+        callback = function(ev)
+          vim.system({ "imv", vim.fn.fnamemodify(ev.match, ":p") }, { detach = true })
+          vim.schedule(function()
+            pcall(vim.api.nvim_buf_delete, ev.buf, { force = true })
+          end)
+        end,
+      })
+    end
   '';
 }

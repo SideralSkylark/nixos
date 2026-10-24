@@ -23,6 +23,7 @@
     splitright = true;
     splitbelow = true;
     winborder = "single";
+    breakindent = true;
   };
 
   globals = {

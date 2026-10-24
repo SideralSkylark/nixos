@@ -3,33 +3,21 @@
   plugins.lsp = {
     enable = true;
 
-    # === LSP SERVERS ===
     servers = {
       lua_ls = {
         enable = true;
         package = pkgs.lua-language-server;
-        settings = {
-          Lua = {
-            runtime = {
-              version = "LuaJIT";
-            };
-            diagnostics = {
-              globals = [ "vim" ];
-            };
-            workspace = {
-              checkThirdParty = false;
-            };
-            telemetry = {
-              enable = false;
-            };
-          };
+        settings.Lua = {
+          runtime.version = "LuaJIT";
+          diagnostics.globals = [ "vim" ];
+          workspace.checkThirdParty = false;
+          telemetry.enable = false;
         };
       };
 
       vtsls = {
         enable = true;
         package = pkgs.vtsls;
-
         filetypes = [
           "typescript"
           "typescriptreact"
@@ -37,193 +25,108 @@
           "javascriptreact"
           "vue"
         ];
-
-        settings = {
-          vtsls = {
-            tsserver = {
-              globalPlugins = [
-                {
-                  name = "@vue/typescript-plugin";
-                  location = "${pkgs.vue-language-server}/lib/node_modules/@vue/language-server";
-                  languages = [ "vue" ];
-                  configNamespace = "typescript";
-                }
-              ];
-            };
-          };
-        };
+        settings.vtsls.tsserver.globalPlugins = [
+          {
+            name = "@vue/typescript-plugin";
+            location = "${pkgs.vue-language-server}/lib/node_modules/@vue/language-server";
+            languages = [ "vue" ];
+            configNamespace = "typescript";
+            enableForWorkspaceTypeScriptVersions = true;
+          }
+        ];
       };
 
       vue_ls = {
         enable = true;
         package = pkgs.vue-language-server;
         filetypes = [ "vue" ];
-        settings = {
-          typescript = {
-            # Point to the nix store path instead of a relative node_modules
-            tsdk = "${pkgs.typescript}/lib/node_modules/typescript/lib";
-          };
-        };
+        settings.typescript.tsdk = "${pkgs.typescript}/lib/node_modules/typescript/lib";
       };
 
       svelte = {
         enable = true;
         package = pkgs.svelte-language-server;
       };
-
-      # Python
       pyright = {
         enable = true;
         package = pkgs.pyright;
       };
-
-      # C/C++
       clangd = {
         enable = true;
         package = pkgs.clang-tools;
       };
-
-      # Java
-      jdtls = {
-        enable = true;
-        package = pkgs.jdt-language-server;
-        extraOptions = {
-          cmd = lib.nixvim.mkRaw ''
-            (function()
-              local workspace_dir = vim.fn.stdpath("cache") .. "/jdtls-workspace/" .. vim.fn.fnamemodify(vim.fn.getcwd(), ":p:h:t")
-              vim.fn.mkdir(workspace_dir, "p")
-              
-              -- Find Jars
-              local function find_jar(artifact_id, group_path)
-                local possible_paths = {
-                  vim.fn.expand("~/.m2/repository/" .. (group_path or "")),
-                  vim.fn.expand("~/.gradle/caches/modules-2/files-2.1/" .. (group_path or "")),
-                  "/usr/share/java",
-                  "/run/current-system/sw/share/java",
-                }
-                for _, base_path in ipairs(possible_paths) do
-                  if vim.fn.isdirectory(base_path) == 1 then
-                    local pattern = string.format("**/%s*.jar", artifact_id)
-                    local jars = vim.fn.globpath(base_path, pattern, true, true)
-                    if #jars > 0 then
-                      table.sort(jars)
-                      return jars[#jars]
-                    end
-                  end
-                end
-                return nil
-              end
-              
-              local lombok_jar = find_jar("lombok", "org/projectlombok/lombok")
-              local cmd = { "jdtls", "-data", workspace_dir }
-              
-              if lombok_jar then
-                table.insert(cmd, "--jvm-arg=-javaagent:" .. lombok_jar)
-              end
-              
-              return cmd
-            end)()
-          '';
-        };
-        settings = {
-          java = {
-            eclipse.downloadSources = true;
-            configuration.updateBuildConfiguration = "interactive";
-            maven.downloadSources = true;
-            implementationsCodeLens.enabled = true;
-            referencesCodeLens.enabled = true;
-            references.includeDecompiledSources = true;
-            format.enabled = true;
-            signatureHelp.enabled = true;
-            completion = {
-              favoriteStaticMembers = [
-                "org.hamcrest.MatcherAssert.assertThat"
-                "org.hamcrest.Matchers.*"
-                "org.hamcrest.CoreMatchers.*"
-                "org.junit.jupiter.api.Assertions.*"
-                "java.util.Objects.requireNonNull"
-                "java.util.Objects.requireNonNullElse"
-                "org.mockito.Mockito.*"
-              ];
-              importOrder = [
-                "java"
-                "javax"
-                "com"
-                "org"
-              ];
-            };
-            sources.organizeImports = {
-              starThreshold = 9999;
-              staticStarThreshold = 9999;
-            };
-            codeGeneration = {
-              toString.template = "\${object.className}{\${member.name()}=\${member.value}, \${otherMembers}}";
-              useBlocks = true;
-            };
-          };
-        };
-      };
-
-      # Nix
       nil_ls = {
         enable = true;
         package = pkgs.nil;
       };
 
-      # Rust
       rust_analyzer = {
         enable = true;
         package = pkgs.rust-analyzer;
         installCargo = false;
         installRustc = false;
+        settings.check.command = "clippy";
+      };
+
+      jdtls = {
+        enable = true;
+        package = pkgs.jdt-language-server;
+        extraOptions.cmd = lib.nixvim.mkRaw ''
+          function(dispatchers, config)
+            local root = config.root_dir or vim.uv.cwd()
+            local ws = vim.fn.stdpath("cache") .. "/jdtls/"
+              .. vim.fn.fnamemodify(root, ":t") .. "-" .. vim.fn.sha256(root):sub(1, 8)
+            return vim.lsp.rpc.start({
+              "jdtls", "-data", ws,
+              "--jvm-arg=-javaagent:${pkgs.lombok}/share/java/lombok.jar",
+            }, dispatchers, { cwd = root })
+          end
+        '';
+        settings.java = {
+          eclipse.downloadSources = true;
+          configuration.updateBuildConfiguration = "automatic";
+          maven.downloadSources = true;
+          references.includeDecompiledSources = true;
+          format.enabled = true;
+          signatureHelp.enabled = true;
+          completion = {
+            favoriteStaticMembers = [
+              "org.hamcrest.MatcherAssert.assertThat"
+              "org.hamcrest.Matchers.*"
+              "org.hamcrest.CoreMatchers.*"
+              "org.junit.jupiter.api.Assertions.*"
+              "java.util.Objects.requireNonNull"
+              "java.util.Objects.requireNonNullElse"
+              "org.mockito.Mockito.*"
+            ];
+            importOrder = [
+              "java"
+              "javax"
+              "com"
+              "org"
+            ];
+          };
+          sources.organizeImports = {
+            starThreshold = 9999;
+            staticStarThreshold = 9999;
+          };
+          codeGeneration = {
+            toString.template = "\${object.className}{\${member.name()}=\${member.value}, \${otherMembers}}";
+            useBlocks = true;
+          };
+        };
       };
     };
 
-    # === LSP KEYMAPS ===
+    # Everything else (grn/gra/grr/gri/grt/gO/K/]d/[d) is built into 0.12
     keymaps = {
-      diagnostic = {
-        "[d" = {
-          action = "goto_prev";
-          desc = "Prev diagnostic";
-        };
-        "]d" = {
-          action = "goto_next";
-          desc = "Next diagnostic";
-        };
-        "gl" = {
-          action = "open_float";
-          desc = "Show line diagnostics";
-        };
+      diagnostic."gl" = {
+        action = "open_float";
+        desc = "Line diagnostics";
       };
-      lspBuf = {
-        "gd" = {
-          action = "definition";
-          desc = "Go to definition";
-        };
-        "gr" = {
-          action = "references";
-          desc = "Show references";
-        };
-        "gi" = {
-          action = "implementation";
-          desc = "Go to implementation";
-        };
-        "gt" = {
-          action = "type_definition";
-          desc = "Type definition";
-        };
-        "K" = {
-          action = "hover";
-          desc = "Hover docs";
-        };
-        "<leader>rn" = {
-          action = "rename";
-          desc = "Rename symbol";
-        };
-        "<leader>ca" = {
-          action = "code_action";
-          desc = "Code actions";
-        };
+      lspBuf."gd" = {
+        action = "definition";
+        desc = "Go to definition";
       };
     };
   };

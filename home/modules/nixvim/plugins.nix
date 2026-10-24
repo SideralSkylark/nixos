@@ -1,45 +1,27 @@
-{ pkgs, ... }:
+{ lib, pkgs, ... }:
 {
   # === AUTOCOMPLETION ===
   plugins.blink-cmp = {
     enable = true;
     settings = {
       keymap = {
-        preset = "none";
-        "<C-Space>" = [
-          "show"
-          "fallback"
-        ];
-        "<C-n>" = [
-          "select_next"
-          "fallback"
-        ];
-        "<C-p>" = [
-          "select_prev"
-          "fallback"
-        ];
-        "<CR>" = [
-          "accept"
-          "fallback"
-        ];
-        "<C-e>" = [
-          "cancel"
-          "fallback"
-        ];
+        # Enter accepts, <C-Space> shows, <C-n>/<C-p> select, <C-e> cancels,
+        # <Tab>/<S-Tab> jump through snippets, <C-b>/<C-f> scroll docs
+        preset = "enter";
       };
-      sources.default = [
-        "lsp"
-        "path"
-        "buffer"
-      ];
-      completion.documentation = {
-        auto_show = true;
-        auto_show_delay_ms = 200;
+      completion = {
+        list.selection.preselect = false;
+        documentation = {
+          auto_show = true;
+          auto_show_delay_ms = 200;
+        };
       };
+      # Auto-shows parameter hints while typing arguments
+      signature.enabled = true;
     };
   };
 
-  # # === Colorscheme ===
+  # === Colorscheme ===
   colorschemes.everforest = {
     enable = true;
     settings = {
@@ -63,33 +45,35 @@
     enable = true;
     nixGrammars = true;
     nixvimInjections = true;
-    settings = {
-      ensure_installed = [
-        "typescript"
-        "java"
-        "nix"
-        "c"
-        "rust"
-        "python"
-      ];
-      highlight.enable = true;
-      indent.enable = true;
-    };
+    highlight.enable = true;
+    indent.enable = true;
   };
 
+  # === Formatting ===
   plugins.conform-nvim = {
     enable = true;
     settings = {
-      format_on_save = {
-        timeout_ms = 500;
-        lsp_fallback = true;
+      default_format_opts = {
+        lsp_format = "fallback";
       };
+      format_on_save = lib.nixvim.mkRaw ''
+        function(bufnr)
+          if vim.g.autosaving then return end
+          -- jdtls (Eclipse) formatting can create noisy diffs: format Java manually
+          if vim.bo[bufnr].filetype == "java" then return end
+          return { timeout_ms = 2000 }
+        end
+      '';
       formatters_by_ft = {
         typescript = [ "prettier" ];
         typescriptreact = [ "prettier" ];
         javascript = [ "prettier" ];
         javascriptreact = [ "prettier" ];
         vue = [ "prettier" ];
+        json = [ "prettier" ];
+        css = [ "prettier" ];
+        html = [ "prettier" ];
+        yaml = [ "prettier" ];
         rust = [ "rustfmt" ];
         nix = [ "nixfmt" ];
       };
@@ -102,6 +86,7 @@
     nixfmt
   ];
 
+  # === Icons / Git signs ===
   plugins.mini-icons = {
     enable = true;
     mockDevIcons = true;
@@ -115,7 +100,7 @@
     settings = {
       options = {
         use_as_default_explorer = true;
-        permanent_delete = true;
+        permanent_delete = false;
       };
       windows = {
         preview = false;
@@ -131,37 +116,158 @@
       };
     };
   };
-  plugins.mini-pairs.enable = true;
 
+  # === Editing ===
+  plugins.mini-pairs.enable = true;
+  plugins.mini-surround.enable = true;
+  plugins.mini-ai.enable = true;
+  plugins.mini-bufremove.enable = true;
+
+  # === Key hints ===
+  plugins.mini-clue = {
+    enable = true;
+    settings = {
+      window = {
+        # Popup only appears if you pause; quick key sequences never show it
+        delay = 200;
+      };
+      triggers = [
+        # Leader
+        {
+          mode = "n";
+          keys = "<Leader>";
+        }
+        {
+          mode = "x";
+          keys = "<Leader>";
+        }
+        # [ and ] motions
+        {
+          mode = "n";
+          keys = "[";
+        }
+        {
+          mode = "n";
+          keys = "]";
+        }
+        # g and z
+        {
+          mode = "n";
+          keys = "g";
+        }
+        {
+          mode = "x";
+          keys = "g";
+        }
+        {
+          mode = "n";
+          keys = "z";
+        }
+        {
+          mode = "x";
+          keys = "z";
+        }
+        # Windows
+        {
+          mode = "n";
+          keys = "<C-w>";
+        }
+        # Marks
+        {
+          mode = "n";
+          keys = "'";
+        }
+        {
+          mode = "n";
+          keys = "`";
+        }
+        {
+          mode = "x";
+          keys = "'";
+        }
+        {
+          mode = "x";
+          keys = "`";
+        }
+        # Registers
+        {
+          mode = "n";
+          keys = "\"";
+        }
+        {
+          mode = "x";
+          keys = "\"";
+        }
+        {
+          mode = "i";
+          keys = "<C-r>";
+        }
+        {
+          mode = "c";
+          keys = "<C-r>";
+        }
+      ];
+      clues = [
+        # Group names for your <leader> prefixes
+        {
+          mode = "n";
+          keys = "<Leader>f";
+          desc = "+Find";
+        }
+        {
+          mode = "n";
+          keys = "<Leader>x";
+          desc = "+Diagnostics/Quickfix";
+        }
+        {
+          mode = "n";
+          keys = "<Leader>c";
+          desc = "+Code";
+        }
+        # Built-in descriptions for g, z, windows, marks, registers
+        (lib.nixvim.mkRaw "require('mini.clue').gen_clues.builtin_completion()")
+        (lib.nixvim.mkRaw "require('mini.clue').gen_clues.g()")
+        (lib.nixvim.mkRaw "require('mini.clue').gen_clues.marks()")
+        (lib.nixvim.mkRaw "require('mini.clue').gen_clues.registers()")
+        (lib.nixvim.mkRaw "require('mini.clue').gen_clues.windows()")
+        (lib.nixvim.mkRaw "require('mini.clue').gen_clues.z()")
+      ];
+    };
+  };
+
+  # === Fuzzy finder ===
   plugins.fzf-lua = {
     enable = true;
 
     settings = {
       winopts.fullscreen = true;
-      grep.rg_opts = "--column --line-number --no-heading --color=always --smart-case";
       previewers.builtin.extensions = {
         png = [
           "chafa"
-          "--dither=noise"
+          "--format=symbols"
           "{file}"
         ];
         jpg = [
           "chafa"
-          "--dither=noise"
+          "--format=symbols"
           "{file}"
         ];
         jpeg = [
           "chafa"
-          "--dither=noise"
+          "--format=symbols"
           "{file}"
         ];
         webp = [
           "chafa"
-          "--dither=noise"
+          "--format=symbols"
+          "{file}"
+        ];
+        gif = [
+          "chafa"
+          "--format=symbols"
           "{file}"
         ];
       };
-
     };
   };
 }
