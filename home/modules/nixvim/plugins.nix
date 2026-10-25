@@ -120,9 +120,6 @@
 
   # === Editing ===
   plugins.mini-pairs.enable = true;
-  plugins.mini-surround.enable = true;
-  plugins.mini-ai.enable = true;
-  plugins.mini-bufremove.enable = true;
 
   # === Key hints ===
   plugins.mini-clue = {

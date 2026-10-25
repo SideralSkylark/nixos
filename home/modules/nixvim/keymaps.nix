@@ -112,9 +112,9 @@
     {
       mode = "n";
       key = "<leader>q";
-      action = "<cmd>lua MiniBufremove.delete()<CR>";
+      action = "<cmd>bd<CR>";
       options = {
-        desc = "Close buffer (keep window layout)";
+        desc = "Close buffer";
         silent = true;
       };
     }
@@ -242,17 +242,24 @@
       callback = function() vim.hl.on_yank() end,
     })
 
-    -- Images open in imv instead of as binary buffers (fzf, mini-files, gf, CLI)
-    if vim.fn.executable("imv") == 1 then
-      vim.api.nvim_create_autocmd("BufReadCmd", {
-        pattern = { "*.png", "*.jpg", "*.jpeg", "*.gif", "*.webp" },
-        callback = function(ev)
-          vim.system({ "imv", vim.fn.fnamemodify(ev.match, ":p") }, { detach = true })
-          vim.schedule(function()
-            pcall(vim.api.nvim_buf_delete, ev.buf, { force = true })
-          end)
-        end,
-      })
-    end
+    -- Images open externally instead of as binary buffers (fzf, mini-files, gf, CLI)
+    vim.api.nvim_create_autocmd("BufReadCmd", {
+      pattern = { "*.png", "*.jpg", "*.jpeg", "*.gif", "*.webp" },
+      callback = function(ev)
+        local path = vim.fn.fnamemodify(ev.match, ":p")
+        if vim.fn.executable("imv") == 1 then
+          -- Start on this image, with the rest of its folder to scroll through
+          vim.system({ "imv", "-n", path, vim.fn.fnamemodify(path, ":h") }, { detach = true })
+        else
+          local _, err = vim.ui.open(path)
+          if err then
+            vim.notify("No image viewer found: " .. err, vim.log.levels.WARN)
+          end
+        end
+        vim.schedule(function()
+          pcall(vim.api.nvim_buf_delete, ev.buf, { force = true })
+        end)
+      end,
+    })
   '';
 }
