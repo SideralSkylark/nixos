@@ -13,17 +13,3 @@ blinking = "Never"
 
 [mouse]
 hide_when_typing = true
-
-[window]
-decorations = "None"
-class = { instance = "Alacritty", general = "Alacritty" }
-
-[scrolling]
-history = 10000
-
-[keyboard]
-bindings = [
-  { key = "Equals", mods = "Control", action = "IncreaseFontSize" },
-  { key = "Minus",  mods = "Control", action = "DecreaseFontSize" },
-  { key = "0",      mods = "Control", action = "ResetFontSize" },
-]
