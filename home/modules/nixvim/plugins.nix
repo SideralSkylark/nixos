@@ -5,18 +5,19 @@
     enable = true;
     settings = {
       keymap = {
-        # Enter accepts, <C-Space> shows, <C-n>/<C-p> select, <C-e> cancels,
-        # <Tab>/<S-Tab> jump through snippets, <C-b>/<C-f> scroll docs
-        preset = "enter";
+        preset = "super-tab";
       };
       completion = {
-        list.selection.preselect = false;
+        list.selection = {
+          preselect = true;
+          auto_insert = false;
+        };
+
         documentation = {
           auto_show = true;
           auto_show_delay_ms = 200;
         };
       };
-      # Auto-shows parameter hints while typing arguments
       signature.enabled = true;
     };
   };
