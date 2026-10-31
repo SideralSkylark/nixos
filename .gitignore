@@ -5,5 +5,7 @@ result
 .cache/
 
 # Ignore wallpaper gallery
-dotfiles/Wallpapers/
-
+dotfiles/Wallpapers/*
+!dotfiles/Wallpapers/pixel-prairie.jpg
+!dotfiles/Wallpapers/fuji.jpg
+!dotfiles/Wallpapers/stall.jpg
