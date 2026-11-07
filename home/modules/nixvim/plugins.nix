@@ -22,23 +22,17 @@
     };
   };
 
-  # === Colorscheme ===
-  colorschemes.everforest = {
+  # colorschemes.everforest = {
+  #   enable = true;
+  #   settings = {
+  #     background = "hard";
+  #     transparent_background = 0;
+  #     ui_contrast = "low";
+  #   };
+  # };
+
+  colorschemes.gruvbox-material = {
     enable = true;
-    settings = {
-      background = "hard";
-      enable_italic = 1;
-      disable_italic_comment = 0;
-      sign_column_background = "none";
-      diagnostic_text_highlight = 0;
-      inlay_hints_background = "none";
-      float_style = "dim";
-      ui_contrast = "low";
-      dim_inactive_windows = 0;
-      show_eob = 0;
-      spell_foreground = "none";
-      transparent_background = 1;
-    };
   };
 
   # === Treesitter ===
