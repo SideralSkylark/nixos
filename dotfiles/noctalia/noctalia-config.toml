@@ -198,11 +198,6 @@ scale = 1.1500000000000001
 [widget.control-center]
 glyph = "chevron-down"
 
-[widget.lb]
-capsule = false
-font_scale = 1.23
-interactive = false
-
 [widget.media]
 art_size = 22
 hide_when_no_media = true
