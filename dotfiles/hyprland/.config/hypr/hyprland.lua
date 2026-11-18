@@ -4,7 +4,6 @@ hl.on("hyprland.start", function()
 end)
 
 -- ── PROGRAMS ────────────────────────────────────────────────
--- local terminal         = "ghostty +new-window"
 local terminal         = "alacritty msg create-window"
 local fileManager      = "thunar"
 local mainMod          = "SUPER"

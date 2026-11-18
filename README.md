@@ -26,7 +26,7 @@ Modular Home Manager environment:
 ## Key Features
 
 - **Unified Shell**: **Noctalia** consolidates the bar, notification daemon, and app launcher into a single configurable layer, cutting down on the number of moving parts compared to a Waybar/Dunst/Fuzzel setup.
-- **Terminal**: **Ghostty** is the primary terminal, configured via `dotfiles/ghostty`.
+- **Terminal**: **Alacritty** is the primary terminal, configured via `dotfiles/alacritty`.
 - **Declarative Editor**: Neovim is configured via **nixvim**, split into logical modules (`plugins.nix`, `lsp.nix`, etc.).
 - **Hybrid Configuration**: Core system state is managed by Nix, while specific application styles (Noctalia config, Hyprland scripts) are symlinked from `dotfiles/` for portability.
 - **Boot Management**:
@@ -74,6 +74,3 @@ home-manager switch --flake .#skylark
 ### Editor
 ![Editor](assets/screenshots/editor.png)
 
----
-
-TODO: Add borders for nvim windows and pop ups

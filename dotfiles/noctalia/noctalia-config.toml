@@ -155,7 +155,7 @@ source = "community"
 wallpaper_scheme = "m3-content"
 
     [theme.templates]
-    builtin_ids = [ "alacritty", "gtk3", "gtk4", "ghostty", "hyprland", "qt" ]
+    builtin_ids = [ "alacritty", "gtk3", "gtk4", "hyprland", "qt" ]
 
 [wallpaper]
 directory = "/home/skylark/Pictures/Wallpapers"
