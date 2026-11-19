@@ -1,6 +1,7 @@
 {
   xdg.configFile = {
-    "hypr/hyprland.lua".source = ../../../dotfiles/hyprland/.config/hypr/hyprland.lua;
+    # "hypr/hyprland.lua".source = ../../../dotfiles/hyprland/.config/hypr/hyprland.lua;
+    "mango/config.conf".source = ../../../dotfiles/mango/.config/mango/config.conf;
     "alacritty/alacritty.toml".source = ../../../dotfiles/alacritty/alacritty.toml;
   };
 

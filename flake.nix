@@ -18,6 +18,10 @@
     noctalia = {
       url = "github:noctalia-dev/noctalia";
     };
+    mangowm = {
+      url = "github:mangowm/mango";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
   outputs =
     {
@@ -40,6 +44,7 @@
           specialArgs = { inherit inputs; };
           modules = [
             hostPath
+            inputs.mangowm.nixosModules.mango
             home-manager.nixosModules.home-manager
             {
               home-manager = {

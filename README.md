@@ -17,7 +17,7 @@ Hosts select from reusable roles to ensure lean installations:
 Modular Home Manager environment:
 - **Core**: Fundamental CLI tools, Git, Starship, and XDG directories.
 - **Noctalia**: Unified Wayland shell layer — bar, notifications, launcher, and session controls in one cohesive package, replacing the old Waybar/Dunst/Fuzzel stack.
-- **Compositor**: Hyprland-specific logic and scripts.
+- **Compositor**: MangoWM configuration, window management, keybindings, and desktop behaviour.
 - **Nixvim**: Modular Neovim configuration via `nixvim`.
 - **Standalone**: Desktop-agnostic tools for non-NixOS systems.
 
@@ -28,7 +28,7 @@ Modular Home Manager environment:
 - **Unified Shell**: **Noctalia** consolidates the bar, notification daemon, and app launcher into a single configurable layer, cutting down on the number of moving parts compared to a Waybar/Dunst/Fuzzel setup.
 - **Terminal**: **Alacritty** is the primary terminal, configured via `dotfiles/alacritty`.
 - **Declarative Editor**: Neovim is configured via **nixvim**, split into logical modules (`plugins.nix`, `lsp.nix`, etc.).
-- **Hybrid Configuration**: Core system state is managed by Nix, while specific application styles (Noctalia config, Hyprland scripts) are symlinked from `dotfiles/` for portability.
+- **Hybrid Configuration**: Core system state is managed by Nix, while specific application styles (Noctalia config, Mango config) are symlinked from `dotfiles/` for portability.
 - **Boot Management**:
   - **laptop**: Uses `systemd-boot` with EFI variable modifications disabled to coexist with external bootloaders.
   - **nixos**: Standard `systemd-boot` with full EFI management.
@@ -43,7 +43,7 @@ Modular Home Manager environment:
 ├── hosts/                # Machine-specific configurations
 ├── modules/              # NixOS system-level modules (roles, services, system)
 ├── home/                 # Home Manager modules (nixvim, noctalia, standalone)
-├── dotfiles/              # External configs symlinked via Home Manager (fastfetch, ghostty, hyprland, noctalia, wallpapers)
+├── dotfiles/             # External configs symlinked via Home Manager (fastfetch, alacritty, hyprland, mango, noctalia, wallpapers)
 └── assets/               # Screenshots
 ```
 
