@@ -24,6 +24,10 @@
     NDK_HOME = "$HOME/Android/Sdk/ndk/30.0.14904198";
   };
 
+  home.shellAliases = {
+    impactor = "flatpak run dev.khcrysalis.PlumeImpactor";
+  };
+
   home.sessionPath = [
     "$HOME/.local/share/vite-plus/bin"
     "$HOME/.local/bin"
